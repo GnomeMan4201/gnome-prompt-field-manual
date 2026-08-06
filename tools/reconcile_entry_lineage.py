@@ -606,6 +606,10 @@ def markdown_list(values: list[str]) -> str:
     return ", ".join(f"`{value}`" for value in values) if values else "_none_"
 
 
+def _escape_table(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ")
+
+
 def markdown_report(result: Reconciliation, failures: list[str]) -> str:
     summary = result.summary
     counts = summary.source_counts
@@ -628,7 +632,7 @@ def markdown_report(result: Reconciliation, failures: list[str]) -> str:
     excluded_rows = "\n".join(
         f"| `{item.token}` | {item.reason} | "
         f"{', '.join(map(str, item.page_indices))} | "
-        f"{(item.contexts[0] if item.contexts else '').replace('|', '\\|')} |"
+        f"{_escape_table(item.contexts[0] if item.contexts else '')} |"
         for item in result.excluded_tokens
     ) or "| — | — | — | — |"
 
