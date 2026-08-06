@@ -1,0 +1,76 @@
+name: Editorial Lineage
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'tools/audit_editorial_lineage.py'
+      - 'tests/test_audit_editorial_lineage.py'
+      - '.github/workflows/editorial-lineage.yml'
+      - 'docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'tools/audit_editorial_lineage.py'
+      - 'tests/test_audit_editorial_lineage.py'
+      - '.github/workflows/editorial-lineage.yml'
+      - 'docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: editorial-lineage-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Syntax check
+        run: python -m compileall -q tools/audit_editorial_lineage.py tests/test_audit_editorial_lineage.py
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -p 'test_audit_editorial_lineage.py' -v
+
+      - name: Generate editorial-lineage evidence
+        run: |
+          python tools/audit_editorial_lineage.py \
+            --input index.html \
+            --json editorial-lineage.json \
+            --markdown editorial-lineage.md
+
+      - name: Verify evidence outputs
+        run: test -s editorial-lineage.json && test -s editorial-lineage.md
+
+      - name: Publish audit summary
+        if: always()
+        run: |
+          if [[ -f editorial-lineage.md ]]; then
+            cat editorial-lineage.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: editorial-lineage-${{ github.sha }}
+          path: |
+            editorial-lineage.json
+            editorial-lineage.md
+          if-no-files-found: warn
+          retention-days: 30
