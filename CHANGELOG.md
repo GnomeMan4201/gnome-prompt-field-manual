@@ -6,39 +6,44 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Added
 
-- Deterministic, network-free structural validation for `index.html`.
-- Source-SHA-256-bound JSON and Markdown validation evidence.
-- Eight structural-validator unit tests.
-- Deterministic PTSP entry-lineage reconciliation with seven dedicated unit tests.
-- Enforced, read-only 22 pending / 70 drafted / 92 total / 315 page-card lineage baseline.
-- Explicit classification evidence for ID-shaped templates and embedded test-case identifiers.
+- Deterministic structural validation for `index.html`.
+- SHA-bound JSON and Markdown validation evidence.
+- Deterministic PTSP entry-lineage reconciliation.
+- Enforced read-only 22 pending / 70 drafted / 92 total / 315 page-card baseline.
+- Deterministic editorial-lineage audit for v3/v9 roles and R-06/R-07/R-10 evidence.
+- Structural, inventory, and editorial-lineage unit tests.
 - Read-only GitHub Actions quality gates with non-persistent checkout credentials.
-- Explicit release-quality, correction, evidence, and model/version-sensitivity requirements.
-- Bounded structural inventory tooling for the large embedded artifact.
-- Canonical identity and scope record.
-- Release-candidate version record.
+- Release-quality, correction, evidence, and model/version-sensitivity requirements.
+- Canonical identity, scope, lineage, and release-candidate records.
 
 ### Changed
 
-- Added a document description, one main landmark, one primary heading, and seven section headings without changing the underlying section text.
-- Replaced the placeholder README with an accurate production-workspace guide.
-- Clarified that the repository package version is distinct from the unresolved embedded-manual editorial version.
-- Replaced source-reported entry arithmetic with a reproducible 92-entry structural reconciliation.
+- Added document semantics and metadata without rewriting section content.
+- Replaced the placeholder README with an evidence-backed production-workspace guide.
+- Separated repository package version from manuscript and publication versions.
+- Replaced source-reported entry arithmetic with a reproducible 92-entry reconciliation.
+- Resolved v3 and v9 as different artifact roles rather than interchangeable version labels.
 
-### Verified lineage findings
+### Verified entry findings
 
-- The pending inventory contains 22 unique IDs and 22 matching drafting briefs.
-- The embedded reader contains 70 non-pending manual entry IDs.
-- The pending and embedded non-pending sets reconcile to exactly 92 manual entry IDs.
-- Eight additional ID-shaped tokens are non-entry structures: `AP-00`, `X-00`, and `EDT-01` through `EDT-06`.
-- Twenty-one pending IDs also occur in the embedded reader; occurrence does not override pending status.
-- `R-10` is absent under that number because the source records a numbering collision with an existing `R-07`.
+- 22 unique pending IDs have 22 matching drafting briefs.
+- 70 embedded non-pending IDs plus 22 pending IDs reconcile to 92 manual entries.
+- `AP-00`, `X-00`, and `EDT-01` through `EDT-06` are explicitly excluded non-entry tokens.
+- Twenty-one pending IDs already occur in the reader; occurrence does not override pending state.
 
-### Remaining lineage conflict
+### Resolved editorial lineage
 
-- The public artifact is **PTSP — Pending Entry Draft Plan**, combining a production workspace with an embedded GNOME Prompt Field Manual v9 reader.
-- The artifact also cites a v3 DOCX source.
-- The authoritative v3/v9 editorial lineage, final `R-07` / `R-10` identifier, pending-entry disposition, and public-product boundary remain unresolved.
+- The named v3 master is the editable manuscript and production-planning authority represented by PTSP instructions; the DOCX is not committed.
+- The embedded v9 reader is a rendered publication snapshot generated from a v9 PDF.
+- `1.0.0-rc.1` is the repository/package validation version.
+- Complete v3-to-v9 transformation history remains unprovable without the missing editable sources.
+
+### Frozen numbering decision
+
+- Competing Hypotheses Table: `R-06` → `R-07`.
+- Source-of-Truth Conflict Resolver: `R-07` → `R-10`.
+- R-10 is not a new entry and must not receive a duplicate body.
+- Physical renumbering and every affected cross-reference remain a dedicated release-blocking mutation pass.
 
 ### Validation baseline
 
@@ -55,7 +60,7 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Status
 
-This is an auditable release baseline, not the final stable release. Authoritative version lineage, source-grounded examples and counterexamples, technical-claim review, accessibility review, and browser-matrix validation remain open.
+This remains an auditable release candidate. Stable publication is blocked by the complete renumbering pass, remaining pending-entry disposition, final public-product boundary, accessibility/browser validation, and final release evidence.
 
 ## [0.1.0] - 2026-05-24
 
