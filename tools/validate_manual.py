@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import math
 import re
 import sys
 from collections import Counter, defaultdict
@@ -68,7 +67,7 @@ class ManualParser(HTMLParser):
         self.blank_targets: list[tuple[dict[str, str], int]] = []
         self.html_attrs: dict[str, str] = {}
         self.meta_tags: list[dict[str, str]] = []
-        self.main_lines: list[int] = []
+        self.main_landmark_lines: list[int] = []
         self.title_parts: list[str] = []
         self.in_title = False
         self.script_count = 0
@@ -104,14 +103,16 @@ class ManualParser(HTMLParser):
             self.in_title = True
         elif tag == "meta":
             self.meta_tags.append(values)
-        elif tag == "main":
-            self.main_lines.append(line)
         elif tag == "script":
             self.script_count += 1
         elif tag == "style":
             self.style_count += 1
         elif tag == "img":
             self.images.append((values, line))
+
+        role = values.get("role", "").strip().lower()
+        if tag == "main" or role == "main":
+            self.main_landmark_lines.append(line)
 
         if len(tag) == 2 and tag[0] == "h" and tag[1] in "123456":
             self.headings.append((int(tag[1]), line))
@@ -179,9 +180,16 @@ def validate(path: Path) -> ValidationResult:
     if not _meta_present(parser.meta_tags, "description"):
         findings.append(Finding("warning", "missing-description", 0, "meta description is recommended"))
 
-    if len(parser.main_lines) != 1:
-        line = parser.main_lines[0] if parser.main_lines else 0
-        findings.append(Finding("error", "main-count", line, f"expected one main; found {len(parser.main_lines)}"))
+    if len(parser.main_landmark_lines) != 1:
+        line = parser.main_landmark_lines[0] if parser.main_landmark_lines else 0
+        findings.append(
+            Finding(
+                "error",
+                "main-count",
+                line,
+                f"expected one main landmark; found {len(parser.main_landmark_lines)}",
+            )
+        )
     h1_lines = [line for level, line in parser.headings if level == 1]
     if len(h1_lines) != 1:
         line = h1_lines[0] if h1_lines else 0
