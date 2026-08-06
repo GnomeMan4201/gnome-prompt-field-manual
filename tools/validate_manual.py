@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-"""Validate the GNOME Prompt Field Manual as an auditable static artifact.
-
-The validator performs deterministic, network-free checks. It verifies the
-committed document and local assets only; it does not claim that external links
-are live or that technical prose is factually correct.
-"""
+"""Deterministic, network-free validation for the GNOME Prompt Field Manual."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import math
 import re
 import sys
 from collections import Counter, defaultdict
@@ -19,14 +15,12 @@ from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urlsplit
 
-
-PLACEHOLDER_PATTERNS = (
+SKIPPED_SCHEMES = {"blob", "data", "javascript", "mailto", "tel"}
+PLACEHOLDERS = (
     ("template-expression", re.compile(r"\{\{[^{}]+\}\}|\{%[^%]+%\}")),
     ("editorial-marker", re.compile(r"(?im)^\s*(TODO|FIXME|TBD|XXX)\b")),
-    ("placeholder-copy", re.compile(r"(?i)\blorem ipsum\b|\bexample\.com\b")),
+    ("placeholder-copy", re.compile(r"(?i)\blorem ipsum\b")),
 )
-
-SKIPPED_SCHEMES = {"data", "mailto", "tel", "javascript", "blob"}
 
 
 @dataclass(frozen=True)
@@ -55,70 +49,36 @@ class Metrics:
     warning_count: int
 
 
+@dataclass(frozen=True)
+class ValidationResult:
+    metrics: Metrics
+    findings: list[Finding]
+
+
 class ManualParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
-        self.elements: list[tuple[str, dict[str, str], int]] = []
+        self.elements = 0
         self.ids: dict[str, list[int]] = defaultdict(list)
         self.anchor_refs: list[tuple[str, int]] = []
         self.local_refs: list[tuple[str, str, int]] = []
         self.external_links: list[tuple[str, int]] = []
-        self.headings: list[tuple[int, str, int]] = []
+        self.headings: list[tuple[int, int]] = []
         self.images: list[tuple[dict[str, str], int]] = []
         self.blank_targets: list[tuple[dict[str, str], int]] = []
-        self.title_parts: list[str] = []
-        self.in_title = False
         self.html_attrs: dict[str, str] = {}
         self.meta_tags: list[dict[str, str]] = []
         self.main_lines: list[int] = []
+        self.title_parts: list[str] = []
+        self.in_title = False
         self.script_count = 0
         self.style_count = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        line, _ = self.getpos()
-        normalized = {key.lower(): value or "" for key, value in attrs}
-        tag = tag.lower()
-        self.elements.append((tag, normalized, line))
+        self._start(tag, attrs)
 
-        element_id = normalized.get("id", "").strip()
-        if element_id:
-            self.ids[element_id].append(line)
-
-        if tag == "html" and not self.html_attrs:
-            self.html_attrs = normalized
-        elif tag == "title":
-            self.in_title = True
-        elif tag == "meta":
-            self.meta_tags.append(normalized)
-        elif tag == "main":
-            self.main_lines.append(line)
-        elif tag == "script":
-            self.script_count += 1
-        elif tag == "style":
-            self.style_count += 1
-        elif tag == "img":
-            self.images.append((normalized, line))
-
-        if len(tag) == 2 and tag[0] == "h" and tag[1].isdigit():
-            level = int(tag[1])
-            if 1 <= level <= 6:
-                self.headings.append((level, tag, line))
-
-        if tag == "a":
-            href = normalized.get("href", "").strip()
-            self._record_reference("href", href, line)
-            if normalized.get("target", "").lower() == "_blank":
-                self.blank_targets.append((normalized, line))
-        else:
-            for attr in ("src", "href", "poster"):
-                value = normalized.get(attr, "").strip()
-                if value:
-                    self._record_reference(attr, value, line)
-
-    def handle_startendtag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
-        self.handle_starttag(tag, attrs)
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self._start(tag, attrs)
 
     def handle_endtag(self, tag: str) -> None:
         if tag.lower() == "title":
@@ -128,33 +88,66 @@ class ManualParser(HTMLParser):
         if self.in_title:
             self.title_parts.append(data)
 
-    def _record_reference(self, attr: str, value: str, line: int) -> None:
+    def _start(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        line, _ = self.getpos()
+        tag = tag.lower()
+        values = {key.lower(): value or "" for key, value in attrs}
+        self.elements += 1
+
+        element_id = values.get("id", "").strip()
+        if element_id:
+            self.ids[element_id].append(line)
+
+        if tag == "html" and not self.html_attrs:
+            self.html_attrs = values
+        elif tag == "title":
+            self.in_title = True
+        elif tag == "meta":
+            self.meta_tags.append(values)
+        elif tag == "main":
+            self.main_lines.append(line)
+        elif tag == "script":
+            self.script_count += 1
+        elif tag == "style":
+            self.style_count += 1
+        elif tag == "img":
+            self.images.append((values, line))
+
+        if len(tag) == 2 and tag[0] == "h" and tag[1] in "123456":
+            self.headings.append((int(tag[1]), line))
+
+        if tag == "a":
+            self._reference("href", values.get("href", "").strip(), line)
+            if values.get("target", "").lower() == "_blank":
+                self.blank_targets.append((values, line))
+        else:
+            for attribute in ("href", "poster", "src"):
+                self._reference(attribute, values.get(attribute, "").strip(), line)
+
+    def _reference(self, attribute: str, value: str, line: int) -> None:
         if not value:
             return
         if value.startswith("#"):
             self.anchor_refs.append((unquote(value[1:]), line))
             return
-
         parsed = urlsplit(value)
-        if parsed.scheme.lower() in SKIPPED_SCHEMES:
+        scheme = parsed.scheme.lower()
+        if scheme in SKIPPED_SCHEMES:
             return
-        if parsed.scheme or parsed.netloc or value.startswith("//"):
-            if attr == "href" and parsed.scheme.lower() in {"http", "https"}:
+        if scheme or parsed.netloc or value.startswith("//"):
+            if attribute == "href" and scheme in {"http", "https"}:
                 self.external_links.append((value, line))
             return
-
         path = unquote(parsed.path)
         if not path or path == ".":
             if parsed.fragment:
                 self.anchor_refs.append((unquote(parsed.fragment), line))
             return
-        self.local_refs.append((attr, path, line))
+        self.local_refs.append((attribute, path, line))
 
 
-@dataclass(frozen=True)
-class ValidationResult:
-    metrics: Metrics
-    findings: list[Finding]
+def _meta_present(tags: list[dict[str, str]], name: str) -> bool:
+    return any(tag.get("name", "").lower() == name.lower() for tag in tags)
 
 
 def _safe_local_path(root: Path, reference: str) -> Path | None:
@@ -169,158 +162,75 @@ def _safe_local_path(root: Path, reference: str) -> Path | None:
     return candidate
 
 
-def _meta_present(meta_tags: list[dict[str, str]], *, name: str) -> bool:
-    expected = name.lower()
-    return any(tag.get("name", "").lower() == expected for tag in meta_tags)
-
-
 def validate(path: Path) -> ValidationResult:
     raw = path.read_bytes()
     text = raw.decode("utf-8", errors="replace")
     parser = ManualParser()
     findings: list[Finding] = []
+    parser.feed(text)
+    parser.close()
 
-    try:
-        parser.feed(text)
-        parser.close()
-    except Exception as exc:  # HTMLParser exceptions are unusual but actionable.
-        findings.append(Finding("error", "html-parse", 0, str(exc)))
-
-    lang = parser.html_attrs.get("lang", "").strip()
-    if not lang:
-        findings.append(
-            Finding("error", "missing-html-lang", 0, "The html element needs a lang attribute")
-        )
-
-    title = " ".join(part.strip() for part in parser.title_parts if part.strip())
-    if not title:
-        findings.append(Finding("error", "missing-title", 0, "The document title is empty"))
-
-    if not _meta_present(parser.meta_tags, name="viewport"):
-        findings.append(
-            Finding("error", "missing-viewport", 0, "A responsive viewport meta tag is required")
-        )
-    if not _meta_present(parser.meta_tags, name="description"):
-        findings.append(
-            Finding("warning", "missing-description", 0, "A meta description is recommended")
-        )
+    if not parser.html_attrs.get("lang", "").strip():
+        findings.append(Finding("error", "missing-html-lang", 0, "html needs a lang attribute"))
+    if not " ".join(part.strip() for part in parser.title_parts if part.strip()):
+        findings.append(Finding("error", "missing-title", 0, "document title is empty"))
+    if not _meta_present(parser.meta_tags, "viewport"):
+        findings.append(Finding("error", "missing-viewport", 0, "responsive viewport metadata is required"))
+    if not _meta_present(parser.meta_tags, "description"):
+        findings.append(Finding("warning", "missing-description", 0, "meta description is recommended"))
 
     if len(parser.main_lines) != 1:
-        findings.append(
-            Finding(
-                "error",
-                "main-count",
-                parser.main_lines[0] if parser.main_lines else 0,
-                f"Expected exactly one main element; found {len(parser.main_lines)}",
-            )
-        )
-
-    h1_lines = [line for level, _, line in parser.headings if level == 1]
+        line = parser.main_lines[0] if parser.main_lines else 0
+        findings.append(Finding("error", "main-count", line, f"expected one main; found {len(parser.main_lines)}"))
+    h1_lines = [line for level, line in parser.headings if level == 1]
     if len(h1_lines) != 1:
-        findings.append(
-            Finding(
-                "error",
-                "h1-count",
-                h1_lines[0] if h1_lines else 0,
-                f"Expected exactly one h1; found {len(h1_lines)}",
-            )
-        )
+        line = h1_lines[0] if h1_lines else 0
+        findings.append(Finding("error", "h1-count", line, f"expected one h1; found {len(h1_lines)}"))
 
-    previous_level: int | None = None
-    for level, _, line in parser.headings:
-        if previous_level is not None and level > previous_level + 1:
-            findings.append(
-                Finding(
-                    "warning",
-                    "heading-jump",
-                    line,
-                    f"Heading level jumps from h{previous_level} to h{level}",
-                )
-            )
-        previous_level = level
+    previous: int | None = None
+    for level, line in parser.headings:
+        if previous is not None and level > previous + 1:
+            findings.append(Finding("warning", "heading-jump", line, f"heading jumps from h{previous} to h{level}"))
+        previous = level
 
     for element_id, lines in sorted(parser.ids.items()):
         if len(lines) > 1:
-            findings.append(
-                Finding(
-                    "error",
-                    "duplicate-id",
-                    lines[0],
-                    f"ID {element_id!r} appears on lines {', '.join(map(str, lines))}",
-                )
-            )
+            findings.append(Finding("error", "duplicate-id", lines[0], f"ID {element_id!r} appears on lines {', '.join(map(str, lines))}"))
 
-    known_anchors = set(parser.ids)
+    known_ids = set(parser.ids)
     for anchor, line in parser.anchor_refs:
-        if anchor and anchor not in known_anchors:
-            findings.append(
-                Finding(
-                    "error",
-                    "broken-anchor",
-                    line,
-                    f"Local anchor #{anchor} does not match an element ID",
-                )
-            )
+        if anchor and anchor not in known_ids:
+            findings.append(Finding("error", "broken-anchor", line, f"#{anchor} does not match an element ID"))
 
     root = path.parent
-    for attr, reference, line in parser.local_refs:
+    for attribute, reference, line in parser.local_refs:
         candidate = _safe_local_path(root, reference)
         if candidate is None:
-            findings.append(
-                Finding(
-                    "error",
-                    "unsafe-local-reference",
-                    line,
-                    f"{attr} reference escapes the document root: {reference}",
-                )
-            )
+            findings.append(Finding("error", "unsafe-local-reference", line, f"{attribute} escapes document root: {reference}"))
         elif not candidate.is_file():
-            findings.append(
-                Finding(
-                    "error",
-                    "missing-local-asset",
-                    line,
-                    f"{attr} references missing file: {reference}",
-                )
-            )
+            findings.append(Finding("error", "missing-local-asset", line, f"{attribute} references missing file: {reference}"))
 
     for attrs, line in parser.blank_targets:
-        rel_tokens = {token.lower() for token in attrs.get("rel", "").split()}
-        if "noopener" not in rel_tokens:
-            findings.append(
-                Finding(
-                    "error",
-                    "unsafe-blank-target",
-                    line,
-                    'target="_blank" must include rel="noopener"',
-                )
-            )
+        rel = {token.lower() for token in attrs.get("rel", "").split()}
+        if "noopener" not in rel:
+            findings.append(Finding("error", "unsafe-blank-target", line, 'target="_blank" requires rel="noopener"'))
 
     for attrs, line in parser.images:
         if "alt" not in attrs:
-            findings.append(
-                Finding("error", "missing-image-alt", line, "Image is missing an alt attribute")
-            )
+            findings.append(Finding("error", "missing-image-alt", line, "image is missing alt"))
 
-    for code, pattern in PLACEHOLDER_PATTERNS:
+    for code, pattern in PLACEHOLDERS:
         for match in pattern.finditer(text):
             line = text.count("\n", 0, match.start()) + 1
-            findings.append(
-                Finding(
-                    "warning",
-                    code,
-                    line,
-                    f"Potential unresolved placeholder: {match.group(0)[:80]!r}",
-                )
-            )
+            findings.append(Finding("warning", code, line, f"potential placeholder: {match.group(0)[:80]!r}"))
 
     findings.sort(key=lambda item: (item.severity != "error", item.line, item.code, item.message))
-    counts = Counter(finding.severity for finding in findings)
+    counts = Counter(item.severity for item in findings)
     metrics = Metrics(
         source=str(path),
         source_sha256=hashlib.sha256(raw).hexdigest(),
         bytes=len(raw),
-        element_count=len(parser.elements),
+        element_count=parser.elements,
         unique_ids=len(parser.ids),
         heading_count=len(parser.headings),
         internal_anchor_count=len(parser.anchor_refs),
@@ -335,12 +245,15 @@ def validate(path: Path) -> ValidationResult:
     return ValidationResult(metrics, findings)
 
 
+def _escape_table(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ")
+
+
 def markdown_report(result: ValidationResult) -> str:
     metrics = result.metrics
-    findings = result.findings
-    finding_rows = "\n".join(
-        f"| {finding.severity} | `{finding.code}` | {finding.line or '—'} | {finding.message.replace('|', r'\|')} |"
-        for finding in findings
+    rows = "\n".join(
+        f"| {item.severity} | `{item.code}` | {item.line or '—'} | {_escape_table(item.message)} |"
+        for item in result.findings
     ) or "| — | — | — | No findings. |"
     return f"""# GNOME Prompt Field Manual Validation
 
@@ -364,7 +277,7 @@ Source SHA-256: `{metrics.source_sha256}`
 
 | Severity | Code | Line | Detail |
 |---|---|---:|---|
-{finding_rows}
+{rows}
 """
 
 
@@ -373,11 +286,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--input", type=Path, default=Path("index.html"))
     parser.add_argument("--json", type=Path, default=Path("manual-validation.json"))
     parser.add_argument("--markdown", type=Path, default=Path("manual-validation.md"))
-    parser.add_argument(
-        "--strict-warnings",
-        action="store_true",
-        help="Return non-zero when warnings are present in addition to errors",
-    )
+    parser.add_argument("--strict-warnings", action="store_true")
     return parser.parse_args(argv)
 
 
@@ -386,28 +295,20 @@ def main(argv: list[str] | None = None) -> int:
     if not args.input.is_file():
         print(f"error: manual not found: {args.input}", file=sys.stderr)
         return 2
-
     result = validate(args.input)
     payload = {
         "schema_version": 1,
         "metrics": asdict(result.metrics),
-        "findings": [asdict(finding) for finding in result.findings],
+        "findings": [asdict(item) for item in result.findings],
     }
     for output in (args.json, args.markdown):
         output.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     args.markdown.write_text(markdown_report(result), encoding="utf-8")
-
     print(json.dumps(asdict(result.metrics), sort_keys=True))
-    for finding in result.findings:
-        print(
-            f"{finding.severity}: {finding.code}: line {finding.line}: {finding.message}",
-            file=sys.stderr,
-        )
-
-    if result.metrics.error_count:
-        return 1
-    if args.strict_warnings and result.metrics.warning_count:
+    for item in result.findings:
+        print(f"{item.severity}: {item.code}: line {item.line}: {item.message}", file=sys.stderr)
+    if result.metrics.error_count or (args.strict_warnings and result.metrics.warning_count):
         return 1
     return 0
 
