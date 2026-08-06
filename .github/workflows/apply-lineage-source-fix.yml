@@ -1,0 +1,64 @@
+name: Apply Lineage Source Fix
+
+on:
+  push:
+    branches:
+      - closeout/reconcile-entry-lineage
+    paths:
+      - '.github/workflows/apply-lineage-source-fix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-lineage-source-fix
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: github.repository == 'GnomeMan4201/gnome-prompt-field-manual'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out bounded branch
+        uses: actions/checkout@v6
+        with:
+          ref: closeout/reconcile-entry-lineage
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Verify exact target blob
+        run: test "$(git hash-object tools/reconcile_entry_lineage.py)" = "e801adccea92f6fb8bbadb036d37237f34e7fd55"
+
+      - name: Apply bounded source repair
+        run: python tools/patch_lineage_source.py
+
+      - name: Compile and test repaired source
+        run: |
+          python -m compileall -q tools/reconcile_entry_lineage.py tests/test_reconcile_entry_lineage.py
+          python -m unittest discover -s tests -p 'test_reconcile_entry_lineage.py' -v
+
+      - name: Bound the generated diff
+        run: |
+          mapfile -t changed < <(git diff --name-only)
+          if [[ ${#changed[@]} -ne 1 || "${changed[0]}" != "tools/reconcile_entry_lineage.py" ]]; then
+            printf 'unexpected generated paths:\n%s\n' "${changed[@]}" >&2
+            exit 1
+          fi
+          git diff --check
+
+      - name: Commit repaired source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- tools/reconcile_entry_lineage.py
+          git diff --cached --check
+          git commit -m 'fix: keep lineage report compatible with Python 3.11'
+          git push origin HEAD:closeout/reconcile-entry-lineage
