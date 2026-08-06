@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit v3/v9 editorial lineage and the R-07/R-10 identifier conflict.
+"""Audit v3/v9 editorial lineage and the R-06/R-07/R-10 conflict.
 
 The audit is deterministic and network-free. It reports only what the committed
 HTML and repository history support; it does not invent missing source files or
@@ -20,7 +20,7 @@ from pathlib import Path
 VERSION_RE = re.compile(
     r"(?i)(?:GNOME[_ ]Prompt[_ ]Field[_ ]Manual[^\n<>]{0,120}|\bversion\s+\d+(?:\.\d+)*\b|\bv\d+(?:\.\d+)*\b)"
 )
-ENTRY_RE = re.compile(r"(?<![A-Z0-9])(R-0?7|R-10)(?![A-Z0-9])")
+ENTRY_RE = re.compile(r"(?<![A-Z0-9])(R-06|R-07|R-10)(?![A-Z0-9])")
 WS_RE = re.compile(r"\s+")
 
 
@@ -101,6 +101,11 @@ def nearby_lines(lines: list[str], line_number: int, radius: int = 0) -> str:
     return normalize(" ".join(lines[start:end]))[:500]
 
 
+def has_phrase(items: list[EntryEvidence], phrase: str) -> bool:
+    expected = phrase.lower()
+    return any(expected in item.text.lower() for item in items)
+
+
 def audit(path: Path) -> AuditResult:
     raw = path.read_bytes()
     text = raw.decode("utf-8", errors="replace")
@@ -143,6 +148,11 @@ def audit(path: Path) -> AuditResult:
             evidence.append(EntryEvidence(entry_id, location, line, block_text[:4000]))
             seen_evidence.add(key)
 
+    r06_embedded = [
+        item
+        for item in evidence
+        if item.entry_id == "R-06" and item.location == "embedded-reader-page"
+    ]
     r07_embedded = [
         item
         for item in evidence
@@ -160,23 +170,36 @@ def audit(path: Path) -> AuditResult:
         if item.entry_id == "R-10" and item.location == "embedded-reader-page"
     ]
 
+    planned_numbering = (
+        has_phrase(r10_pending, "planned numbering has r-07 = competing hypotheses")
+        and has_phrase(r10_pending, "r-10 = source-of-truth conflict resolver")
+    )
+    body_pattern = (
+        has_phrase(r06_embedded, "competing hypotheses")
+        and has_phrase(r07_embedded, "source-of-truth conflict resolver")
+        and not r10_embedded
+    )
+
     decision = {
-        "repository_package_version": "1.0.0-rc.1 remains a repository/package baseline only",
-        "editorial_lineage": (
-            "The committed evidence supports v3 as a named source-file label and v9 as the embedded reader's publication label. "
-            "Because no v3 DOCX or separate v9 source artifact is committed, ancestry and authoritative editorial succession are not provable from this repository alone."
+        "repository_package_version": (
+            "1.0.0-rc.1 is the repository/package validation baseline. It is not the editorial version of the manuscript or embedded publication."
         ),
-        "r07_r10": (
-            "Retain R-07 as the current embedded-reader identifier and treat R-10 as a pending alias/renumbering request, not a new entry. "
-            "Do not create a second body. Resolve the public identifier only when the authoritative editorial source is recovered."
-            if r07_embedded and r10_pending and not r10_embedded
-            else "Evidence is insufficient for an automatic identifier decision."
+        "editorial_lineage": (
+            "The committed artifact uses v3 as the editable manuscript/master and production-planning authority, while v9 identifies the embedded rendered publication snapshot generated from a v9 PDF. "
+            "The repository does not contain the named v3 DOCX or a separate editable v9 source, so direct document ancestry and all intervening editorial changes remain unprovable. "
+            "For numbering and pending-state decisions, the explicit v3 master instructions are the strongest committed editorial authority; for the exact currently rendered body, the embedded v9 snapshot is the observation source."
+        ),
+        "identifier_decision": (
+            "Freeze the planned numbering decision: rename the current Competing Hypotheses Table label R-06 → R-07 and rename the current Source-of-Truth Conflict Resolver label R-07 → R-10. "
+            "R-10 is not a new entry and no duplicate body should be created. Apply both label changes and every affected cross-reference in one dedicated, reviewable renumbering pass; then mark R-10 drafted in the production master."
+            if planned_numbering and body_pattern
+            else "Evidence is insufficient to freeze the R-06/R-07/R-10 renumbering decision automatically."
         ),
     }
     limitations = [
         "The repository history contains one original uploaded HTML artifact, a rename, and later documentation/validation changes; it does not contain the named v3 DOCX.",
-        "No independent v9 source document is committed outside the embedded HTML reader.",
-        "Textual occurrence does not prove editorial approval or source chronology.",
+        "The embedded v9 reader is a rendered snapshot generated from a PDF, not a committed editable editorial source.",
+        "The audit freezes the editorial decision but does not mutate labels or cross-references in index.html.",
     ]
     return AuditResult(
         source=str(path),
@@ -204,7 +227,7 @@ def markdown(result: AuditResult) -> str:
     evidence_rows = "\n".join(
         f"| `{item.entry_id}` | {item.location} | {item.line} | {_escape_table(item.text)} |"
         for item in result.entry_evidence
-    ) or "| — | — | — | No R-07/R-10 evidence found. |"
+    ) or "| — | — | — | No R-06/R-07/R-10 evidence found. |"
     decisions = "\n".join(
         f"- **{key}:** {value}" for key, value in result.decision.items()
     )
@@ -219,7 +242,7 @@ Source SHA-256: `{result.source_sha256}`
 |---:|---|---|
 {version_rows}
 
-## R-07 / R-10 evidence
+## R-06 / R-07 / R-10 evidence
 
 | ID | Location | Line | Extracted text |
 |---|---|---:|---|
