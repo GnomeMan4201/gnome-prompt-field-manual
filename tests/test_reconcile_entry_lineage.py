@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from tools.reconcile_entry_lineage import (
+    exclusion_reason,
     markdown_report,
     reconcile,
     validate_expectations,
@@ -35,11 +36,11 @@ FIXTURE = """<!doctype html>
 </div>
 <div class="manual-page-card">
   <div class="manual-page-head">Page 1</div>
-  <pre>D-01: Existing Draft\nContent.</pre>
+  <pre>D-01: Existing Draft\nContent.\nAP-00 [Anti-Prompt Name]\nX-00 [Prompt Name]</pre>
 </div>
 <div class="manual-page-card">
   <div class="manual-page-head">Page 2</div>
-  <pre>T-01 — Timeline Probe\nLegacy occurrence.</pre>
+  <pre>T-01 — Timeline Probe\nLegacy occurrence.\nTEST ID: EDT-01</pre>
 </div>
 </body></html>
 """
@@ -64,18 +65,36 @@ class LineageTests(unittest.TestCase):
 
     def test_builds_reconciled_universe(self) -> None:
         result = reconcile(self.write())
-        self.assertEqual([entry.entry_id for entry in result.entries], ["D-01", "T-01", "T-02"])
+        self.assertEqual(
+            [entry.entry_id for entry in result.entries],
+            ["D-01", "T-01", "T-02"],
+        )
         self.assertEqual(result.summary.reconciled_universe_ids, 3)
+        self.assertEqual(result.summary.drafted_embedded_not_pending, 1)
         by_id = {entry.entry_id: entry for entry in result.entries}
         self.assertEqual(by_id["D-01"].status, "embedded-not-listed-pending")
         self.assertEqual(by_id["T-01"].status, "pending-listed-and-present-in-embedded")
         self.assertEqual(by_id["T-02"].status, "pending-listed-not-found-in-embedded")
 
+    def test_non_entry_tokens_are_retained_but_excluded(self) -> None:
+        result = reconcile(self.write())
+        self.assertEqual(result.summary.candidate_embedded_ids, 5)
+        self.assertEqual(result.summary.excluded_non_entry_ids, 3)
+        self.assertEqual(
+            [item.token for item in result.excluded_tokens],
+            ["AP-00", "EDT-01", "X-00"],
+        )
+        self.assertEqual(
+            exclusion_reason("EDT-06"),
+            "embedded test-case identifier used inside an entry",
+        )
+        self.assertNotIn("AP-00", [entry.entry_id for entry in result.entries])
+
     def test_conflict_sets_are_explicit(self) -> None:
         result = reconcile(self.write())
         self.assertEqual(result.conflicts["pending_present_in_embedded"], ["T-01"])
         self.assertEqual(result.conflicts["pending_missing_from_embedded"], ["T-02"])
-        self.assertEqual(result.conflicts["embedded_without_pending_inventory"], ["D-01"])
+        self.assertEqual(result.conflicts["drafted_embedded_not_pending"], ["D-01"])
         self.assertEqual(result.conflicts["inventory_without_brief"], [])
         self.assertEqual(result.conflicts["brief_without_inventory"], [])
 
@@ -85,6 +104,7 @@ class LineageTests(unittest.TestCase):
             validate_expectations(
                 result,
                 expected_pending=2,
+                expected_drafted=1,
                 expected_total=3,
                 expected_pages=2,
             ),
@@ -97,6 +117,7 @@ class LineageTests(unittest.TestCase):
         failures = validate_expectations(
             result,
             expected_pending=2,
+            expected_drafted=1,
             expected_total=3,
             expected_pages=2,
         )
@@ -108,6 +129,7 @@ class LineageTests(unittest.TestCase):
         failures = validate_expectations(
             result,
             expected_pending=2,
+            expected_drafted=1,
             expected_total=3,
             expected_pages=2,
         )
@@ -116,6 +138,7 @@ class LineageTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertIn(result.summary.source_sha256, first)
         self.assertIn("T-01", first)
+        self.assertIn("AP-00", first)
         self.assertNotIn("Generated:", first)
 
 
