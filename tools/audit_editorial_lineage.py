@@ -109,7 +109,7 @@ def audit(path: Path) -> AuditResult:
     version_refs: list[VersionReference] = []
     seen_versions: set[tuple[int, str]] = set()
     for line_number, line in enumerate(lines, start=1):
-        for match in VERSION_RE.finditer(line):
+        for _ in VERSION_RE.finditer(line):
             context = nearby_lines(lines, line_number)
             key = (line_number, context)
             if key not in seen_versions:
@@ -140,14 +140,25 @@ def audit(path: Path) -> AuditResult:
             key = (entry_id, location, line)
             if key in seen_evidence:
                 continue
-            evidence.append(
-                EntryEvidence(entry_id, location, line, block_text[:4000])
-            )
+            evidence.append(EntryEvidence(entry_id, location, line, block_text[:4000]))
             seen_evidence.add(key)
 
-    r07_embedded = [item for item in evidence if item.entry_id == "R-07" and item.location == "embedded-reader-page"]
-    r10_pending = [item for item in evidence if item.entry_id == "R-10" and item.location in {"pending-inventory", "drafting-brief"}]
-    r10_embedded = [item for item in evidence if item.entry_id == "R-10" and item.location == "embedded-reader-page"]
+    r07_embedded = [
+        item
+        for item in evidence
+        if item.entry_id == "R-07" and item.location == "embedded-reader-page"
+    ]
+    r10_pending = [
+        item
+        for item in evidence
+        if item.entry_id == "R-10"
+        and item.location in {"pending-inventory", "drafting-brief"}
+    ]
+    r10_embedded = [
+        item
+        for item in evidence
+        if item.entry_id == "R-10" and item.location == "embedded-reader-page"
+    ]
 
     decision = {
         "repository_package_version": "1.0.0-rc.1 remains a repository/package baseline only",
@@ -170,23 +181,33 @@ def audit(path: Path) -> AuditResult:
     return AuditResult(
         source=str(path),
         source_sha256=hashlib.sha256(raw).hexdigest(),
-        version_references=sorted(version_refs, key=lambda item: (item.line, item.text)),
-        entry_evidence=sorted(evidence, key=lambda item: (item.entry_id, item.location, item.line)),
+        version_references=sorted(
+            version_refs, key=lambda item: (item.line, item.text)
+        ),
+        entry_evidence=sorted(
+            evidence, key=lambda item: (item.entry_id, item.location, item.line)
+        ),
         decision=decision,
         limitations=limitations,
     )
 
 
+def _escape_table(value: str) -> str:
+    return value.replace("|", "\\|").replace("\n", " ")
+
+
 def markdown(result: AuditResult) -> str:
     version_rows = "\n".join(
-        f"| {item.line} | {item.classification} | {item.text.replace('|', '\\|')} |"
+        f"| {item.line} | {item.classification} | {_escape_table(item.text)} |"
         for item in result.version_references
     ) or "| — | — | No version references found. |"
     evidence_rows = "\n".join(
-        f"| `{item.entry_id}` | {item.location} | {item.line} | {item.text.replace('|', '\\|')} |"
+        f"| `{item.entry_id}` | {item.location} | {item.line} | {_escape_table(item.text)} |"
         for item in result.entry_evidence
     ) or "| — | — | — | No R-07/R-10 evidence found. |"
-    decisions = "\n".join(f"- **{key}:** {value}" for key, value in result.decision.items())
+    decisions = "\n".join(
+        f"- **{key}:** {value}" for key, value in result.decision.items()
+    )
     limits = "\n".join(f"- {value}" for value in result.limitations)
     return f"""# Editorial Lineage Audit
 
@@ -231,9 +252,20 @@ def main(argv: list[str] | None = None) -> int:
     payload = asdict(result)
     for output in (args.json, args.markdown):
         output.parent.mkdir(parents=True, exist_ok=True)
-    args.json.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.json.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     args.markdown.write_text(markdown(result), encoding="utf-8")
-    print(json.dumps({"source_sha256": result.source_sha256, "version_references": len(result.version_references), "entry_evidence": len(result.entry_evidence)}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "source_sha256": result.source_sha256,
+                "version_references": len(result.version_references),
+                "entry_evidence": len(result.entry_evidence),
+            },
+            sort_keys=True,
+        )
+    )
     return 0
 
 
