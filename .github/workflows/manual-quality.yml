@@ -30,10 +30,17 @@ jobs:
           python-version: '3.11'
 
       - name: Syntax check
-        run: python -m compileall -q tools/validate_manual.py tests/test_validate_manual.py
+        run: |
+          python -m compileall -q \
+            tools/inspect_manual.py \
+            tools/validate_manual.py \
+            tests/test_validate_manual.py
 
       - name: Validator unit tests
         run: python -m unittest discover -s tests -p 'test_validate_manual.py' -v
+
+      - name: Print bounded DOM inventory
+        run: python tools/inspect_manual.py index.html --max-elements 240
 
       - name: Validate committed manual
         run: |
