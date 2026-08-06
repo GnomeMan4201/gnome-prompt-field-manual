@@ -52,6 +52,14 @@ class ManualValidatorTests(unittest.TestCase):
         self.assertEqual(result.metrics.heading_count, 2)
         self.assertEqual(result.metrics.external_link_count, 1)
 
+    def test_role_main_is_a_valid_single_landmark(self) -> None:
+        html = VALID_DOCUMENT.replace("<main>", '<div class="app" role="main">').replace(
+            "</main>", "</div>"
+        )
+        result = validate(self.workspace(html, asset=True))
+        self.assertNotIn("main-count", [item.code for item in result.findings])
+        self.assertEqual(result.metrics.error_count, 0)
+
     def test_missing_document_metadata_fails(self) -> None:
         codes = self.codes("<html><head><title></title></head><body></body></html>")
         self.assertIn("missing-html-lang", codes)
