@@ -8,6 +8,7 @@ on:
       - 'tests/test_reconcile_entry_lineage.py'
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
+      - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
   push:
     branches: [main]
     paths:
@@ -15,6 +16,8 @@ on:
       - 'tools/reconcile_entry_lineage.py'
       - 'tests/test_reconcile_entry_lineage.py'
       - '.github/workflows/entry-lineage.yml'
+      - 'docs/IDENTITY_AND_SCOPE.md'
+      - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
   workflow_dispatch:
 
 permissions:
@@ -46,28 +49,35 @@ jobs:
       - name: Unit tests
         run: python -m unittest discover -s tests -p 'test_reconcile_entry_lineage.py' -v
 
-      - name: Generate source-grounded lineage evidence
+      - name: Generate and enforce source-grounded lineage evidence
         run: |
           python tools/reconcile_entry_lineage.py \
             --input index.html \
             --json entry-lineage.json \
             --markdown entry-lineage.md \
             --expect-pending 22 \
+            --expect-drafted 70 \
             --expect-total 92 \
-            --expect-pages 315
+            --expect-pages 315 \
+            --enforce
 
       - name: Verify evidence outputs
         run: test -s entry-lineage.json && test -s entry-lineage.md
 
       - name: Publish lineage summary
-        run: cat entry-lineage.md >> "$GITHUB_STEP_SUMMARY"
+        if: always()
+        run: |
+          if [[ -f entry-lineage.md ]]; then
+            cat entry-lineage.md >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Upload lineage evidence
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: entry-lineage-${{ github.sha }}
           path: |
             entry-lineage.json
             entry-lineage.md
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
