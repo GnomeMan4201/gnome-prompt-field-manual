@@ -12,7 +12,7 @@ This repository currently publishes **PTSP — Pending Entry Draft Plan**, a com
 
 The committed interface reports 22 pending entries, 70 drafted entries, 92 total entries, 10 production batches, and an embedded v9 reader containing 315 pages. It also names a v3 DOCX source, so the editorial version and entry lineage remain under explicit reconciliation. These are source-reported production values, not independently verified completion claims.
 
-See [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md) and issue #3 before interpreting the repository version as the editorial version of the embedded manual.
+See [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md), the [`auditable baseline report`](docs/BASELINE_AUDIT_2026-08-06.md), and issue #3 before interpreting the repository version as the editorial version of the embedded manual.
 
 ## Repository structure
 
@@ -22,6 +22,7 @@ See [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md) and issue #3 befo
 - `tools/validate_manual.py` — deterministic, network-free structural validator.
 - `tools/inspect_manual.py` — bounded structural inventory for the large HTML artifact.
 - `tests/test_validate_manual.py` — validator success and failure-path tests.
+- `docs/BASELINE_AUDIT_2026-08-06.md` — exact measured release-candidate baseline and remaining gates.
 - `docs/IDENTITY_AND_SCOPE.md` — canonical identity, boundaries, and lineage conflict.
 - `docs/QUALITY_GATE.md` — stable release criteria.
 - `docs/MODEL_VERSION_SENSITIVITY.md` — rules for model- and runtime-dependent claims.
