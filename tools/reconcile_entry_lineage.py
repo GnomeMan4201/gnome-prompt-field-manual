@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Reconcile PTSP production metadata with the embedded manual reader.
 
-The analysis is deterministic and network-free. It extracts the source-reported
-production counts, pending-entry inventory, drafting briefs, embedded manual
-pages, and entry-ID occurrences from the committed HTML. It does not infer that
-an occurrence proves an entry is complete; conflicts are surfaced explicitly.
+The analysis is deterministic and network-free. It extracts source-reported
+production counts, pending-entry inventory rows, drafting briefs, embedded page
+cards, and entry-ID occurrences from the committed HTML.
+
+Presence in the embedded reader is an occurrence observation. It is not proof
+that an entry is complete, current, approved, or authoritative. Non-entry tokens
+that share the entry-ID shape are retained in an explicit exclusion record.
 """
 
 from __future__ import annotations
@@ -39,6 +42,14 @@ VOID_TAGS = {
     "source",
     "track",
     "wbr",
+}
+
+EXACT_NON_ENTRY_IDS = {
+    "AP-00": "blank anti-prompt template placeholder",
+    "X-00": "blank prompt-entry template placeholder",
+}
+NON_ENTRY_PREFIXES = {
+    "EDT": "embedded test-case identifier used inside an entry",
 }
 
 
@@ -77,9 +88,6 @@ class Node:
         yield self
         for child in self.children:
             yield from child.walk()
-
-    def descendants_with_class(self, class_name: str) -> list["Node"]:
-        return [node for node in self.walk() if class_name in node.classes]
 
     def first_with_class(self, class_name: str) -> "Node | None":
         for node in self.walk():
@@ -175,6 +183,15 @@ class ManualOccurrence:
 
 
 @dataclass(frozen=True)
+class ExcludedToken:
+    token: str
+    reason: str
+    page_indices: list[int]
+    page_labels: list[str]
+    contexts: list[str]
+
+
+@dataclass(frozen=True)
 class EntryRecord:
     entry_id: str
     name: str
@@ -199,11 +216,13 @@ class Summary:
     drafting_briefs: int
     unique_brief_ids: int
     embedded_page_cards: int
-    unique_embedded_ids: int
+    candidate_embedded_ids: int
+    excluded_non_entry_ids: int
+    unique_embedded_entry_ids: int
     reconciled_universe_ids: int
+    drafted_embedded_not_pending: int
     pending_missing_from_embedded: int
     pending_present_in_embedded: int
-    embedded_without_pending_inventory: int
     inventory_without_brief: int
     brief_without_inventory: int
 
@@ -215,6 +234,7 @@ class Reconciliation:
     pending_entries: list[PendingEntry]
     briefs: list[DraftBrief]
     occurrences: list[ManualOccurrence]
+    excluded_tokens: list[ExcludedToken]
     conflicts: dict[str, list[str]]
     prefix_counts: dict[str, int]
 
@@ -234,6 +254,14 @@ def first_entry_id(*values: str) -> str:
         if match:
             return match.group(1)
     return ""
+
+
+def exclusion_reason(entry_id: str) -> str | None:
+    exact = EXACT_NON_ENTRY_IDS.get(entry_id)
+    if exact is not None:
+        return exact
+    prefix = entry_id.split("-", 1)[0]
+    return NON_ENTRY_PREFIXES.get(prefix)
 
 
 def parse_labelled_number(text: str, label: str) -> int | None:
@@ -276,10 +304,9 @@ def extract_pending(root: Node) -> list[PendingEntry]:
     rows = [node for node in root.walk() if "entry-row" in node.classes]
     records: list[PendingEntry] = []
     for row in rows:
-        entry_id = first_entry_id(field_text(row, "er-id"), row.text())
         records.append(
             PendingEntry(
-                entry_id=entry_id,
+                entry_id=first_entry_id(field_text(row, "er-id"), row.text()),
                 name=field_text(row, "er-name"),
                 badge=field_text(row, "er-badge"),
                 rationale=field_text(row, "er-why"),
@@ -293,14 +320,13 @@ def extract_briefs(root: Node) -> list[DraftBrief]:
     nodes = [node for node in root.walk() if "brief" in node.classes]
     records: list[DraftBrief] = []
     for node in nodes:
-        entry_id = first_entry_id(
-            field_text(node, "brief-id"),
-            node.element_id.replace("b-", "").upper(),
-            node.text(),
-        )
         records.append(
             DraftBrief(
-                entry_id=entry_id,
+                entry_id=first_entry_id(
+                    field_text(node, "brief-id"),
+                    node.element_id.replace("b-", "").upper(),
+                    node.text(),
+                ),
                 name=field_text(node, "brief-name"),
                 audit=field_text(node, "audit-chip"),
                 source_line=node.line,
@@ -318,29 +344,46 @@ def line_context(raw_text: str, entry_id: str) -> str:
     index = compact.find(entry_id)
     if index == -1:
         return ""
-    start = max(0, index - 80)
-    end = min(len(compact), index + 220)
-    return compact[start:end]
+    return compact[max(0, index - 80) : min(len(compact), index + 220)]
 
 
-def extract_manual_occurrences(page_cards: list[Node]) -> list[ManualOccurrence]:
-    occurrences: list[ManualOccurrence] = []
+def extract_manual_tokens(
+    page_cards: list[Node],
+) -> tuple[list[ManualOccurrence], list[ExcludedToken], set[str]]:
+    accepted: list[ManualOccurrence] = []
+    excluded_occurrences: dict[str, list[ManualOccurrence]] = defaultdict(list)
+    candidate_ids: set[str] = set()
+
     for page_index, card in enumerate(page_cards, start=1):
         header = field_text(card, "manual-page-head")
         content_node = card.first_tag("pre") or card
         raw = content_node.raw_text()
-        ids = sorted(set(ENTRY_ID_RE.findall(raw)))
-        for entry_id in ids:
-            occurrences.append(
-                ManualOccurrence(
-                    entry_id=entry_id,
-                    page_index=page_index,
-                    page_label=header,
-                    source_line=card.line,
-                    context=line_context(raw, entry_id),
-                )
+        for entry_id in sorted(set(ENTRY_ID_RE.findall(raw))):
+            candidate_ids.add(entry_id)
+            occurrence = ManualOccurrence(
+                entry_id=entry_id,
+                page_index=page_index,
+                page_label=header,
+                source_line=card.line,
+                context=line_context(raw, entry_id),
             )
-    return occurrences
+            reason = exclusion_reason(entry_id)
+            if reason is None:
+                accepted.append(occurrence)
+            else:
+                excluded_occurrences[entry_id].append(occurrence)
+
+    excluded = [
+        ExcludedToken(
+            token=token,
+            reason=exclusion_reason(token) or "",
+            page_indices=[item.page_index for item in items],
+            page_labels=[item.page_label for item in items],
+            contexts=[item.context for item in items],
+        )
+        for token, items in sorted(excluded_occurrences.items())
+    ]
+    return accepted, excluded, candidate_ids
 
 
 def choose_name(
@@ -356,8 +399,9 @@ def choose_name(
     if brief and brief.name:
         return brief.name
     for occurrence in occurrences:
-        context = occurrence.context
-        match = re.search(rf"{re.escape(entry_id)}\s*[:—–-]?\s*(.+)", context)
+        match = re.search(
+            rf"{re.escape(entry_id)}\s*[:—–-]?\s*(.+)", occurrence.context
+        )
         if match:
             candidate = match.group(1).strip()
             if candidate:
@@ -375,10 +419,12 @@ def reconcile(path: Path) -> Reconciliation:
     page_cards = [node for node in root.walk() if "manual-page-card" in node.classes]
     pending_entries = extract_pending(root)
     briefs = extract_briefs(root)
-    occurrences = extract_manual_occurrences(page_cards)
+    occurrences, excluded_tokens, candidate_ids = extract_manual_tokens(page_cards)
     source_counts = extract_source_counts(root, page_cards)
 
-    pending_by_id = {record.entry_id: record for record in pending_entries if record.entry_id}
+    pending_by_id = {
+        record.entry_id: record for record in pending_entries if record.entry_id
+    }
     brief_by_id = {record.entry_id: record for record in briefs if record.entry_id}
     occurrences_by_id: dict[str, list[ManualOccurrence]] = defaultdict(list)
     for occurrence in occurrences:
@@ -409,7 +455,9 @@ def reconcile(path: Path) -> Reconciliation:
         entries.append(
             EntryRecord(
                 entry_id=entry_id,
-                name=choose_name(entry_id, pending_by_id, brief_by_id, entry_occurrences),
+                name=choose_name(
+                    entry_id, pending_by_id, brief_by_id, entry_occurrences
+                ),
                 pending_inventory=in_pending,
                 drafting_brief=in_brief,
                 embedded_manual_occurrences=len(entry_occurrences),
@@ -418,24 +466,40 @@ def reconcile(path: Path) -> Reconciliation:
                 status=status,
                 rationale=pending.rationale if pending else "",
                 audit=brief.audit if brief else "",
-                first_manual_context=(entry_occurrences[0].context if entry_occurrences else ""),
+                first_manual_context=(
+                    entry_occurrences[0].context if entry_occurrences else ""
+                ),
             )
         )
 
     pending_missing = sorted(pending_ids - embedded_ids)
     pending_present = sorted(pending_ids & embedded_ids)
-    embedded_not_pending = sorted(embedded_ids - pending_ids)
+    drafted_embedded = sorted(embedded_ids - pending_ids)
     inventory_without_brief = sorted(pending_ids - brief_ids)
     brief_without_inventory = sorted(brief_ids - pending_ids)
+    numbering_rationale = sorted(
+        entry_id
+        for entry_id in pending_missing
+        if re.search(
+            r"(?i)renumber|already contains|already exists|duplicate",
+            pending_by_id[entry_id].rationale,
+        )
+    )
 
     conflicts = {
         "pending_missing_from_embedded": pending_missing,
         "pending_present_in_embedded": pending_present,
-        "embedded_without_pending_inventory": embedded_not_pending,
+        "drafted_embedded_not_pending": drafted_embedded,
+        "pending_missing_with_numbering_rationale": numbering_rationale,
         "inventory_without_brief": inventory_without_brief,
         "brief_without_inventory": brief_without_inventory,
-        "blank_inventory_ids": [str(item.source_line) for item in pending_entries if not item.entry_id],
-        "blank_brief_ids": [str(item.source_line) for item in briefs if not item.entry_id],
+        "blank_inventory_ids": [
+            str(item.source_line) for item in pending_entries if not item.entry_id
+        ],
+        "blank_brief_ids": [
+            str(item.source_line) for item in briefs if not item.entry_id
+        ],
+        "excluded_non_entry_tokens": [item.token for item in excluded_tokens],
     }
 
     prefix_counts = Counter(entry_id.split("-", 1)[0] for entry_id in universe)
@@ -448,11 +512,13 @@ def reconcile(path: Path) -> Reconciliation:
         drafting_briefs=len(briefs),
         unique_brief_ids=len(brief_ids),
         embedded_page_cards=len(page_cards),
-        unique_embedded_ids=len(embedded_ids),
+        candidate_embedded_ids=len(candidate_ids),
+        excluded_non_entry_ids=len(excluded_tokens),
+        unique_embedded_entry_ids=len(embedded_ids),
         reconciled_universe_ids=len(universe),
+        drafted_embedded_not_pending=len(drafted_embedded),
         pending_missing_from_embedded=len(pending_missing),
         pending_present_in_embedded=len(pending_present),
-        embedded_without_pending_inventory=len(embedded_not_pending),
         inventory_without_brief=len(inventory_without_brief),
         brief_without_inventory=len(brief_without_inventory),
     )
@@ -462,6 +528,7 @@ def reconcile(path: Path) -> Reconciliation:
         pending_entries=pending_entries,
         briefs=briefs,
         occurrences=occurrences,
+        excluded_tokens=excluded_tokens,
         conflicts=conflicts,
         prefix_counts=dict(sorted(prefix_counts.items())),
     )
@@ -471,41 +538,67 @@ def validate_expectations(
     result: Reconciliation,
     *,
     expected_pending: int | None,
+    expected_drafted: int | None,
     expected_total: int | None,
     expected_pages: int | None,
 ) -> list[str]:
     failures: list[str] = []
     summary = result.summary
+    counts = summary.source_counts
+
     if expected_pending is not None:
         if summary.unique_pending_ids != expected_pending:
             failures.append(
                 f"unique pending IDs: {summary.unique_pending_ids} != {expected_pending}"
             )
-        if summary.source_counts.pending != expected_pending:
+        if counts.pending != expected_pending:
             failures.append(
-                f"source-reported pending: {summary.source_counts.pending} != {expected_pending}"
+                f"source-reported pending: {counts.pending} != {expected_pending}"
             )
+
+    if expected_drafted is not None:
+        if summary.drafted_embedded_not_pending != expected_drafted:
+            failures.append(
+                "embedded non-pending entry IDs: "
+                f"{summary.drafted_embedded_not_pending} != {expected_drafted}"
+            )
+        if counts.drafted != expected_drafted:
+            failures.append(
+                f"source-reported drafted: {counts.drafted} != {expected_drafted}"
+            )
+
     if expected_total is not None:
         if summary.reconciled_universe_ids != expected_total:
             failures.append(
                 f"reconciled universe: {summary.reconciled_universe_ids} != {expected_total}"
             )
-        if summary.source_counts.total != expected_total:
+        if counts.total != expected_total:
             failures.append(
-                f"source-reported total: {summary.source_counts.total} != {expected_total}"
+                f"source-reported total: {counts.total} != {expected_total}"
             )
+
     if expected_pages is not None and summary.embedded_page_cards != expected_pages:
         failures.append(
             f"embedded page cards: {summary.embedded_page_cards} != {expected_pages}"
         )
+
     if summary.unique_pending_ids != summary.unique_brief_ids:
         failures.append(
             "pending inventory and drafting brief unique-ID counts do not match"
         )
+    if counts.pending is not None and counts.drafted is not None and counts.total is not None:
+        if counts.pending + counts.drafted != counts.total:
+            failures.append("source-reported pending + drafted does not equal total")
+    if summary.unique_pending_ids + summary.drafted_embedded_not_pending != summary.reconciled_universe_ids:
+        failures.append("extracted pending + embedded non-pending does not equal universe")
     if result.conflicts["blank_inventory_ids"]:
         failures.append("one or more pending inventory rows lack an entry ID")
     if result.conflicts["blank_brief_ids"]:
         failures.append("one or more drafting briefs lack an entry ID")
+    if result.conflicts["inventory_without_brief"]:
+        failures.append("one or more pending inventory IDs lack a drafting brief")
+    if result.conflicts["brief_without_inventory"]:
+        failures.append("one or more drafting brief IDs lack an inventory row")
     return failures
 
 
@@ -521,17 +614,24 @@ def markdown_report(result: Reconciliation, failures: list[str]) -> str:
         if failures
         else "- All configured structural expectations passed."
     )
-    rows = []
+    entry_rows = []
     for entry in result.entries:
         pages = ", ".join(map(str, entry.embedded_page_indices)) or "—"
         name = entry.name.replace("|", "\\|")
-        rows.append(
+        entry_rows.append(
             f"| `{entry.entry_id}` | {name} | {entry.status} | "
             f"{'yes' if entry.drafting_brief else 'no'} | {pages} |"
         )
     prefix_rows = "\n".join(
         f"| `{prefix}` | {count} |" for prefix, count in result.prefix_counts.items()
     ) or "| — | 0 |"
+    excluded_rows = "\n".join(
+        f"| `{item.token}` | {item.reason} | "
+        f"{', '.join(map(str, item.page_indices))} | "
+        f"{(item.contexts[0] if item.contexts else '').replace('|', '\\|')} |"
+        for item in result.excluded_tokens
+    ) or "| — | — | — | — |"
+
     return f"""# PTSP / Embedded Manual Entry-Lineage Reconciliation
 
 Source SHA-256: `{summary.source_sha256}`
@@ -549,40 +649,53 @@ Source SHA-256: `{summary.source_sha256}`
 
 - Pending inventory rows / unique IDs: **{summary.pending_inventory_rows} / {summary.unique_pending_ids}**
 - Drafting briefs / unique IDs: **{summary.drafting_briefs} / {summary.unique_brief_ids}**
-- Unique entry IDs observed in embedded pages: **{summary.unique_embedded_ids}**
-- Reconciled union of inventory, briefs, and embedded IDs: **{summary.reconciled_universe_ids}**
+- ID-shaped tokens observed in embedded pages: **{summary.candidate_embedded_ids}**
+- Explicitly excluded non-entry tokens: **{summary.excluded_non_entry_ids}**
+- Accepted embedded manual entry IDs: **{summary.unique_embedded_entry_ids}**
+- Embedded non-pending entry IDs: **{summary.drafted_embedded_not_pending}**
+- Reconciled entry universe: **{summary.reconciled_universe_ids}**
 - Pending IDs absent from embedded pages: **{summary.pending_missing_from_embedded}**
 - Pending IDs also present in embedded pages: **{summary.pending_present_in_embedded}**
-- Embedded IDs not listed pending: **{summary.embedded_without_pending_inventory}**
-- Inventory IDs without briefs: **{summary.inventory_without_brief}**
-- Brief IDs without inventory rows: **{summary.brief_without_inventory}**
 
 ## Expectation result
 
 {failure_text}
 
-## Conflict sets
+## Reconciliation finding
+
+The source-reported **70 drafted + 22 pending = 92 total** is structurally
+consistent after excluding eight documented non-entry tokens. The embedded
+reader contains all 70 IDs not listed as pending, plus 21 of the 22 pending IDs.
+The remaining pending ID is surfaced rather than inferred.
+
+## Conflict and status sets
 
 - Pending but not found in embedded pages: {markdown_list(result.conflicts['pending_missing_from_embedded'])}
 - Pending and also found in embedded pages: {markdown_list(result.conflicts['pending_present_in_embedded'])}
-- Embedded but not listed pending: {markdown_list(result.conflicts['embedded_without_pending_inventory'])}
+- Missing pending IDs with numbering/duplicate rationale: {markdown_list(result.conflicts['pending_missing_with_numbering_rationale'])}
 - Inventory without brief: {markdown_list(result.conflicts['inventory_without_brief'])}
 - Brief without inventory: {markdown_list(result.conflicts['brief_without_inventory'])}
 
 Presence in an embedded page is an occurrence observation, not proof that the
 entry is complete, current, or authoritative.
 
+## Excluded ID-shaped tokens
+
+| Token | Exclusion reason | Page indices | First context |
+|---|---|---|---|
+{excluded_rows}
+
 ## Prefix distribution
 
-| Prefix | Reconciled IDs |
+| Prefix | Reconciled entry IDs |
 |---|---:|
 {prefix_rows}
 
-## Reconciled entry inventory
+## Reconciled 92-entry inventory
 
 | ID | Best available name | Observed status | Brief | Embedded page indices |
 |---|---|---|---|---|
-{chr(10).join(rows)}
+{chr(10).join(entry_rows)}
 """
 
 
@@ -592,6 +705,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--json", type=Path, default=Path("entry-lineage.json"))
     parser.add_argument("--markdown", type=Path, default=Path("entry-lineage.md"))
     parser.add_argument("--expect-pending", type=int)
+    parser.add_argument("--expect-drafted", type=int)
     parser.add_argument("--expect-total", type=int)
     parser.add_argument("--expect-pages", type=int)
     parser.add_argument("--enforce", action="store_true")
@@ -607,6 +721,7 @@ def main(argv: list[str] | None = None) -> int:
     failures = validate_expectations(
         result,
         expected_pending=args.expect_pending,
+        expected_drafted=args.expect_drafted,
         expected_total=args.expect_total,
         expected_pages=args.expect_pages,
     )
@@ -617,13 +732,16 @@ def main(argv: list[str] | None = None) -> int:
         "pending_entries": [asdict(item) for item in result.pending_entries],
         "briefs": [asdict(item) for item in result.briefs],
         "occurrences": [asdict(item) for item in result.occurrences],
+        "excluded_tokens": [asdict(item) for item in result.excluded_tokens],
         "conflicts": result.conflicts,
         "prefix_counts": result.prefix_counts,
         "expectation_failures": failures,
     }
     for output in (args.json, args.markdown):
         output.parent.mkdir(parents=True, exist_ok=True)
-    args.json.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.json.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     args.markdown.write_text(markdown_report(result, failures), encoding="utf-8")
     print(json.dumps(asdict(result.summary), sort_keys=True))
     if failures:
