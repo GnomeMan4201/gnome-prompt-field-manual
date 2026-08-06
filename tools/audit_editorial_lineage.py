@@ -95,7 +95,7 @@ def classify_version(text: str) -> str:
     return "other-version-reference"
 
 
-def nearby_lines(lines: list[str], line_number: int, radius: int = 1) -> str:
+def nearby_lines(lines: list[str], line_number: int, radius: int = 0) -> str:
     start = max(0, line_number - radius - 1)
     end = min(len(lines), line_number + radius)
     return normalize(" ".join(lines[start:end]))[:500]
