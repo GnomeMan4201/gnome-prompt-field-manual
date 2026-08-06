@@ -8,14 +8,21 @@ Operational prompt engineering for auditable AI-assisted work.
 
 Current repository version: **1.0.0-rc.1**
 
-This repository currently publishes **PTSP — Pending Entry Draft Plan**, a combined production workspace and embedded GNOME Prompt Field Manual reader. It is an auditable release candidate, not a final stable manual release.
+This repository publishes **PTSP — Pending Entry Draft Plan**, a combined production workspace and embedded GNOME Prompt Field Manual reader. It is an auditable release candidate, not a final stable manual release.
 
-The committed structure now independently reconciles to 22 pending IDs, 70 embedded non-pending IDs, and 92 total manual entry IDs across 315 embedded page cards. Eight additional ID-shaped tokens are explicitly classified as templates or embedded test cases rather than entries. Twenty-one pending IDs already occur in the reader; `R-10` is documented as a numbering collision with an existing `R-07`.
+The committed structure reconciles to 22 pending IDs, 70 embedded non-pending IDs, and 92 total manual entry IDs across 315 embedded page cards.
 
-The entry arithmetic is verified, but the interface still names a v3 DOCX source while the embedded reader identifies itself as v9. Authoritative editorial lineage, pending-entry disposition, and the final public-product boundary remain release blockers.
+The v3/v9 roles are now resolved:
+
+- **v3 master** — editable manuscript and production-planning authority named by the PTSP instructions, but not physically committed;
+- **v9 reader** — rendered publication snapshot embedded in `index.html` and generated from a v9 PDF;
+- **1.0.0-rc.1** — repository/package validation version, not a manuscript or publication version.
+
+The numbering decision is also frozen: Competing Hypotheses Table must move **R-06 → R-07**, and Source-of-Truth Conflict Resolver must move **R-07 → R-10**. R-10 is not a new entry. The physical renumbering and all cross-reference updates remain a dedicated release-blocking change set.
 
 See:
 
+- [`docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md`](docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md)
 - [`docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md`](docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md)
 - [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
 - [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
@@ -24,19 +31,18 @@ See:
 ## Repository structure
 
 - `index.html` — canonical combined PTSP workspace and embedded reader.
-- `VERSION` — repository-package version, not the unresolved embedded-manual editorial version.
+- `VERSION` — repository-package version.
 - `CHANGELOG.md` — material repository and publication changes.
 - `tools/validate_manual.py` — deterministic structural validator.
 - `tools/reconcile_entry_lineage.py` — deterministic 22/70/92 entry-lineage reconciler.
+- `tools/audit_editorial_lineage.py` — deterministic v3/v9 and R-06/R-07/R-10 decision audit.
 - `tools/inspect_manual.py` — bounded structural inventory for the large HTML artifact.
-- `tests/test_validate_manual.py` — structural validator tests.
-- `tests/test_reconcile_entry_lineage.py` — lineage extraction and classification tests.
-- `docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md` — verified 92-entry arithmetic and interpretation boundary.
-- `docs/BASELINE_AUDIT_2026-08-06.md` — measured release-candidate baseline and remaining gates.
-- `docs/IDENTITY_AND_SCOPE.md` — canonical identity, boundaries, and unresolved version lineage.
+- `tests/` — structural, inventory, and editorial-lineage tests.
+- `docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md` — frozen artifact roles and numbering decision.
+- `docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md` — verified 92-entry arithmetic.
+- `docs/BASELINE_AUDIT_2026-08-06.md` — measured release-candidate baseline.
+- `docs/IDENTITY_AND_SCOPE.md` — canonical identity and remaining release boundaries.
 - `docs/QUALITY_GATE.md` — stable release criteria.
-- `docs/MODEL_VERSION_SENSITIVITY.md` — rules for model- and runtime-dependent claims.
-- `docs/CORRECTIONS_AND_EVIDENCE.md` — correction, evidence, citation, and redaction policy.
 
 ## Validate locally
 
@@ -60,13 +66,18 @@ python tools/reconcile_entry_lineage.py \
   --expect-total 92 \
   --expect-pages 315 \
   --enforce
+
+python tools/audit_editorial_lineage.py \
+  --input index.html \
+  --json editorial-lineage.json \
+  --markdown editorial-lineage.md
 ```
 
-The generated reports record the exact SHA-256 of `index.html`. They establish committed structure and inventory arithmetic; they do not establish external-link health, factual correctness, editorial completeness, prompt portability, or accessibility conformance.
+The reports record the exact SHA-256 of `index.html`. They establish structure, inventory arithmetic, and the committed editorial decision; they do not establish factual correctness, editorial completion, prompt portability, external-link health, or accessibility conformance.
 
 ## Release policy
 
-A stable release requires all applicable gates in [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md), plus the version-lineage and public-product resolution tracked in issue #3. Prompt behavior is treated as an observation of a complete model/runtime environment, not as a permanent guarantee of prompt text alone.
+Stable release remains blocked by the complete R-06/R-07/R-10 renumbering pass, remaining pending-entry disposition, public-product finalization, accessibility/browser review, and final release evidence.
 
 ## Project
 
