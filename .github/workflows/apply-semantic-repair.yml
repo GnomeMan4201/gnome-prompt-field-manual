@@ -1,0 +1,75 @@
+name: Apply Semantic Repair
+
+on:
+  push:
+    branches:
+      - closeout/auditable-v1-baseline
+    paths:
+      - '.github/workflows/apply-semantic-repair.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-semantic-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: github.repository == 'GnomeMan4201/gnome-prompt-field-manual'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the bounded closeout branch
+        uses: actions/checkout@v6
+        with:
+          ref: closeout/auditable-v1-baseline
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Apply exact hash-gated transformation
+        run: python tools/patch_manual_semantics.py index.html
+
+      - name: Run validator tests
+        run: python -m unittest discover -s tests -p 'test_validate_manual.py' -v
+
+      - name: Require a clean semantic validation result
+        run: |
+          python tools/validate_manual.py \
+            --input index.html \
+            --json manual-validation.json \
+            --markdown manual-validation.md \
+            --strict-warnings
+
+      - name: Bound the generated diff
+        id: diff
+        shell: bash
+        run: |
+          mapfile -t changed < <(git diff --name-only)
+          if [[ ${#changed[@]} -eq 0 ]]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ ${#changed[@]} -ne 1 || "${changed[0]}" != "index.html" ]]; then
+            printf 'unexpected generated paths:\n%s\n' "${changed[@]}" >&2
+            exit 1
+          fi
+          git diff --check
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit the reviewed generated file
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html
+          git diff --cached --check
+          git commit -m 'fix: add semantic landmarks to PTSP workspace'
+          git push origin HEAD:closeout/auditable-v1-baseline
