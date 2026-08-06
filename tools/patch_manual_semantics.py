@@ -28,8 +28,8 @@ WRAP_PATTERN = re.compile(
     r'<div(?P<attrs>[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*)>'
 )
 SECTION_PATTERN = re.compile(
-    r"<div(?P<attrs>[^>]*\bclass\s*=\s*['\"][^'\"]*section-title[^'\"]*['\"][^>]*)>"
-    r"(?P<body>.*?)</div>",
+    r"<span(?P<attrs>[^>]*\bclass\s*=\s*['\"][^'\"]*section-title[^'\"]*['\"][^>]*)>"
+    r"(?P<body>.*?)</span>",
     re.DOTALL,
 )
 
@@ -75,8 +75,21 @@ def already_patched(text: str) -> bool:
     return all(
         (
             text.count(f'<meta name="description" content="{DESCRIPTION}">') == 1,
-            len(re.findall(r'<div[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*\brole="main"[^>]*>', text)) == 1,
-            len(re.findall(r'<h1[^>]*\bclass="[^"]*\bhdr-title\b[^"]*"[^>]*>.*?</h1>', text, re.DOTALL)) == 1,
+            len(
+                re.findall(
+                    r'<div[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*\brole="main"[^>]*>',
+                    text,
+                )
+            )
+            == 1,
+            len(
+                re.findall(
+                    r'<h1[^>]*\bclass="[^"]*\bhdr-title\b[^"]*"[^>]*>.*?</h1>',
+                    text,
+                    re.DOTALL,
+                )
+            )
+            == 1,
             len(
                 re.findall(
                     r"<h2[^>]*\bclass\s*=\s*['\"][^'\"]*section-title[^'\"]*['\"][^>]*>.*?</h2>",
@@ -86,6 +99,7 @@ def already_patched(text: str) -> bool:
             )
             == 7,
             text.count(".hdr-title { margin: 0; }") == 1,
+            text.count(".section-title { margin: 0; }") == 1,
             not TITLE_PATTERN.search(text),
             not SECTION_PATTERN.search(text),
         )
@@ -115,7 +129,9 @@ def patch(path: Path) -> bool:
     text = replace_exact(
         text,
         "</style>",
-        "    .hdr-title { margin: 0; }\n  </style>",
+        "    .hdr-title { margin: 0; }\n"
+        "    .section-title { margin: 0; }\n"
+        "  </style>",
     )
     text = sub_exact(
         TITLE_PATTERN,
@@ -142,7 +158,10 @@ def patch(path: Path) -> bool:
         raise ValueError("postcondition failed after semantic transformation")
 
     path.write_text(text, encoding="utf-8", newline="")
-    print(f"patched {path}; source_sha256={digest}; output_sha256={sha256(path.read_bytes())}")
+    print(
+        f"patched {path}; source_sha256={digest}; "
+        f"output_sha256={sha256(path.read_bytes())}"
+    )
     return True
 
 
