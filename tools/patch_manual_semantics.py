@@ -59,6 +59,18 @@ def sub_exact(
     return updated
 
 
+def sub_first(
+    pattern: re.Pattern[str],
+    text: str,
+    replacement,
+    *,
+    label: str,
+) -> str:
+    if pattern.search(text) is None:
+        raise ValueError(f"expected at least one {label} element; found 0")
+    return pattern.sub(replacement, text, count=1)
+
+
 def already_patched(text: str) -> bool:
     return all(
         (
@@ -105,12 +117,11 @@ def patch(path: Path) -> bool:
         expected=1,
         label="hdr-title",
     )
-    text = sub_exact(
+    text = sub_first(
         WRAP_PATTERN,
         text,
         lambda match: f'<div{match.group("attrs")} role="main">',
-        expected=1,
-        label="wrap",
+        label="primary wrap",
     )
     text = sub_exact(
         SECTION_PATTERN,
