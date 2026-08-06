@@ -28,8 +28,8 @@ WRAP_PATTERN = re.compile(
     r'<div(?P<attrs>[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*)>'
 )
 SECTION_PATTERN = re.compile(
-    r'<div(?P<attrs>[^>]*\bclass="[^"]*\bsection-title\b[^"]*"[^>]*)>'
-    r'(?P<body>.*?)</div>',
+    r"<div(?P<attrs>[^>]*\bclass\s*=\s*['\"][^'\"]*section-title[^'\"]*['\"][^>]*)>"
+    r"(?P<body>.*?)</div>",
     re.DOTALL,
 )
 
@@ -77,7 +77,14 @@ def already_patched(text: str) -> bool:
             text.count(f'<meta name="description" content="{DESCRIPTION}">') == 1,
             len(re.findall(r'<div[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*\brole="main"[^>]*>', text)) == 1,
             len(re.findall(r'<h1[^>]*\bclass="[^"]*\bhdr-title\b[^"]*"[^>]*>.*?</h1>', text, re.DOTALL)) == 1,
-            len(re.findall(r'<h2[^>]*\bclass="[^"]*\bsection-title\b[^"]*"[^>]*>.*?</h2>', text, re.DOTALL)) == 7,
+            len(
+                re.findall(
+                    r"<h2[^>]*\bclass\s*=\s*['\"][^'\"]*section-title[^'\"]*['\"][^>]*>.*?</h2>",
+                    text,
+                    re.DOTALL,
+                )
+            )
+            == 7,
             text.count(".hdr-title { margin: 0; }") == 1,
             not TITLE_PATTERN.search(text),
             not SECTION_PATTERN.search(text),
