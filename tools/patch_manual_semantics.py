@@ -19,6 +19,20 @@ DESCRIPTION = (
     "including the PTSP pending-entry drafting plan."
 )
 
+TITLE_PATTERN = re.compile(
+    r'<div(?P<attrs>[^>]*\bclass="[^"]*\bhdr-title\b[^"]*"[^>]*)>'
+    r'(?P<body>.*?)</div>',
+    re.DOTALL,
+)
+WRAP_PATTERN = re.compile(
+    r'<div(?P<attrs>[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*)>'
+)
+SECTION_PATTERN = re.compile(
+    r'<div(?P<attrs>[^>]*\bclass="[^"]*\bsection-title\b[^"]*"[^>]*)>'
+    r'(?P<body>.*?)</div>',
+    re.DOTALL,
+)
+
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -31,17 +45,32 @@ def replace_exact(text: str, old: str, new: str, *, expected: int = 1) -> str:
     return text.replace(old, new)
 
 
+def sub_exact(
+    pattern: re.Pattern[str],
+    text: str,
+    replacement,
+    *,
+    expected: int,
+    label: str,
+) -> str:
+    updated, count = pattern.subn(replacement, text)
+    if count != expected:
+        raise ValueError(f"expected {expected} {label} elements; transformed {count}")
+    return updated
+
+
 def already_patched(text: str) -> bool:
-    checks = (
-        text.count(f'<meta name="description" content="{DESCRIPTION}">') == 1,
-        text.count('<div class="wrap" role="main">') == 1,
-        text.count('<h1 class="hdr-title" style="margin:0">PTSP — Pending Entry Draft Plan</h1>') == 1,
-        len(re.findall(r'<h2 class="section-title">.*?</h2>', text)) == 7,
-        '<div class="hdr-title">PTSP — Pending Entry Draft Plan</div>' not in text,
-        '<div class="wrap">' not in text,
-        '<div class="section-title">' not in text,
+    return all(
+        (
+            text.count(f'<meta name="description" content="{DESCRIPTION}">') == 1,
+            len(re.findall(r'<div[^>]*\bclass="[^"]*\bwrap\b[^"]*"[^>]*\brole="main"[^>]*>', text)) == 1,
+            len(re.findall(r'<h1[^>]*\bclass="[^"]*\bhdr-title\b[^"]*"[^>]*>.*?</h1>', text, re.DOTALL)) == 1,
+            len(re.findall(r'<h2[^>]*\bclass="[^"]*\bsection-title\b[^"]*"[^>]*>.*?</h2>', text, re.DOTALL)) == 7,
+            text.count(".hdr-title { margin: 0; }") == 1,
+            not TITLE_PATTERN.search(text),
+            not SECTION_PATTERN.search(text),
+        )
     )
-    return all(checks)
 
 
 def patch(path: Path) -> bool:
@@ -66,19 +95,30 @@ def patch(path: Path) -> bool:
     )
     text = replace_exact(
         text,
-        '<div class="hdr-title">PTSP — Pending Entry Draft Plan</div>',
-        '<h1 class="hdr-title" style="margin:0">PTSP — Pending Entry Draft Plan</h1>',
+        "</style>",
+        "    .hdr-title { margin: 0; }\n  </style>",
     )
-    text = replace_exact(
+    text = sub_exact(
+        TITLE_PATTERN,
         text,
-        '<div class="wrap">',
-        '<div class="wrap" role="main">',
+        lambda match: f'<h1{match.group("attrs")}>{match.group("body")}</h1>',
+        expected=1,
+        label="hdr-title",
     )
-
-    section_pattern = re.compile(r'<div class="section-title">(.*?)</div>')
-    text, count = section_pattern.subn(r'<h2 class="section-title">\1</h2>', text)
-    if count != 7:
-        raise ValueError(f"expected 7 section-title elements; transformed {count}")
+    text = sub_exact(
+        WRAP_PATTERN,
+        text,
+        lambda match: f'<div{match.group("attrs")} role="main">',
+        expected=1,
+        label="wrap",
+    )
+    text = sub_exact(
+        SECTION_PATTERN,
+        text,
+        lambda match: f'<h2{match.group("attrs")}>{match.group("body")}</h2>',
+        expected=7,
+        label="section-title",
+    )
 
     if not already_patched(text):
         raise ValueError("postcondition failed after semantic transformation")
