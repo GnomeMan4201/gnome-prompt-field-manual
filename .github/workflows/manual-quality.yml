@@ -39,6 +39,16 @@ jobs:
             tools/validate_manual.py \
             tests/test_validate_manual.py
 
+      - name: Print exact semantic repair targets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          tokens = ("hdr-title", "section-title", 'class="wrap"', "class='wrap'")
+          for number, line in enumerate(Path("index.html").read_text(encoding="utf-8").splitlines(), 1):
+              if any(token in line for token in tokens):
+                  print(f"{number}: {line[:800]!r}")
+          PY
+
       - name: Apply exact hash-gated semantic repair
         run: python tools/patch_manual_semantics.py index.html
 
