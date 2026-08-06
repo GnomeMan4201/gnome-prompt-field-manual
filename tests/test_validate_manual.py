@@ -36,7 +36,9 @@ class ManualValidatorTests(unittest.TestCase):
         path = root / "index.html"
         path.write_text(html, encoding="utf-8")
         if asset:
-            (root / "diagram.svg").write_text("<svg xmlns='http://www.w3.org/2000/svg'/>", encoding="utf-8")
+            (root / "diagram.svg").write_text(
+                "<svg xmlns='http://www.w3.org/2000/svg'/>", encoding="utf-8"
+            )
         return path
 
     def codes(self, html: str, *, asset: bool = False) -> list[str]:
@@ -89,12 +91,13 @@ class ManualValidatorTests(unittest.TestCase):
     def test_heading_jump_and_placeholder_are_warnings(self) -> None:
         html = VALID_DOCUMENT.replace(
             '<h2 id="method">Method</h2>',
-            '<h3 id="method">TODO Method</h3>',
+            'TODO\n    <h3 id="method">Method</h3>',
         )
         result = validate(self.workspace(html, asset=True))
         self.assertEqual(result.metrics.error_count, 0)
-        self.assertIn("heading-jump", [item.code for item in result.findings])
-        self.assertIn("editorial-marker", [item.code for item in result.findings])
+        codes = [item.code for item in result.findings]
+        self.assertIn("heading-jump", codes)
+        self.assertIn("editorial-marker", codes)
 
     def test_report_is_deterministic_and_hash_bound(self) -> None:
         result = validate(self.workspace(VALID_DOCUMENT, asset=True))
