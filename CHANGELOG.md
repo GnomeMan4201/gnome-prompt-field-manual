@@ -8,8 +8,11 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 - Deterministic, network-free structural validation for `index.html`.
 - Source-SHA-256-bound JSON and Markdown validation evidence.
-- Eight unit tests covering validator success and failure paths.
-- Read-only GitHub Actions quality gate with non-persistent checkout credentials.
+- Eight structural-validator unit tests.
+- Deterministic PTSP entry-lineage reconciliation with seven dedicated unit tests.
+- Enforced, read-only 22 pending / 70 drafted / 92 total / 315 page-card lineage baseline.
+- Explicit classification evidence for ID-shaped templates and embedded test-case identifiers.
+- Read-only GitHub Actions quality gates with non-persistent checkout credentials.
 - Explicit release-quality, correction, evidence, and model/version-sensitivity requirements.
 - Bounded structural inventory tooling for the large embedded artifact.
 - Canonical identity and scope record.
@@ -20,13 +23,22 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 - Added a document description, one main landmark, one primary heading, and seven section headings without changing the underlying section text.
 - Replaced the placeholder README with an accurate production-workspace guide.
 - Clarified that the repository package version is distinct from the unresolved embedded-manual editorial version.
+- Replaced source-reported entry arithmetic with a reproducible 92-entry structural reconciliation.
 
-### Discovered
+### Verified lineage findings
 
-- The public artifact is **PTSP — Pending Entry Draft Plan**, not a neutral final-manual landing page.
-- It combines a production workspace with an embedded GNOME Prompt Field Manual v9 reader.
-- The artifact reports 22 pending, 70 drafted, and 92 total entries across 10 batches, while also citing a v3 DOCX source.
-- The v3/v9 lineage, pending-entry inventory, and final public-product boundary require reconciliation before stable release.
+- The pending inventory contains 22 unique IDs and 22 matching drafting briefs.
+- The embedded reader contains 70 non-pending manual entry IDs.
+- The pending and embedded non-pending sets reconcile to exactly 92 manual entry IDs.
+- Eight additional ID-shaped tokens are non-entry structures: `AP-00`, `X-00`, and `EDT-01` through `EDT-06`.
+- Twenty-one pending IDs also occur in the embedded reader; occurrence does not override pending status.
+- `R-10` is absent under that number because the source records a numbering collision with an existing `R-07`.
+
+### Remaining lineage conflict
+
+- The public artifact is **PTSP — Pending Entry Draft Plan**, combining a production workspace with an embedded GNOME Prompt Field Manual v9 reader.
+- The artifact also cites a v3 DOCX source.
+- The authoritative v3/v9 editorial lineage, final `R-07` / `R-10` identifier, pending-entry disposition, and public-product boundary remain unresolved.
 
 ### Validation baseline
 
@@ -36,12 +48,14 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 - 348 unique IDs
 - 8 headings
 - 23 internal anchors
+- 315 embedded reader page cards
+- 92 reconciled manual entry IDs
 - 0 structural errors
 - 0 structural warnings
 
 ### Status
 
-This is an auditable release baseline, not the final stable release. Identity/version reconciliation, source-grounded examples and counterexamples, technical-claim review, accessibility review, and browser-matrix validation remain open.
+This is an auditable release baseline, not the final stable release. Authoritative version lineage, source-grounded examples and counterexamples, technical-claim review, accessibility review, and browser-matrix validation remain open.
 
 ## [0.1.0] - 2026-05-24
 

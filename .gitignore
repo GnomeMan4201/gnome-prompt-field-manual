@@ -2,4 +2,6 @@ __pycache__/
 *.pyc
 manual-validation.json
 manual-validation.md
+entry-lineage.json
+entry-lineage.md
 .DS_Store
