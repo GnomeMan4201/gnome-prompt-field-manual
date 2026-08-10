@@ -3,10 +3,8 @@
 Operational prompt engineering for auditable AI-assisted work.
 
 <p align="center">
-  <img src="assets/gnome-mask-operator.svg" alt="Stylized GNOME operator illustration holding a theatrical mask" width="320" />
+  <img src="DC177E5E-70E7-4DED-A59D-469F51E607C0.png" alt="GNOME Prompt Field Manual graffiti banner" width="720" />
 </p>
-
-<p align="center"><sub>GNOME operator illustration — analytical identity, inspection, and role separation.</sub></p>
 
 [Open the published workspace and embedded reader](https://gnomeman4201.github.io/gnome-prompt-field-manual/)
 
