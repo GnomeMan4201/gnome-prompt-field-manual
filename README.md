@@ -1,6 +1,6 @@
-# GNOME Prompt Field Manual Production Workspace
+# GNOME Prompt Field Manual
 
-Operational prompt engineering for auditable AI-assisted work.
+**Operational prompt engineering for structured, inspectable, auditable AI-assisted work.**
 
 <p align="center">
   <img src="DC177E5E-70E7-4DED-A59D-469F51E607C0.png" alt="GNOME Prompt Field Manual graffiti banner" width="720" />
@@ -8,29 +8,49 @@ Operational prompt engineering for auditable AI-assisted work.
 
 [Open the published workspace and embedded reader](https://gnomeman4201.github.io/gnome-prompt-field-manual/)
 
-## Status
+## What this is
 
-Current repository version: **1.0.0-rc.1**
+The GNOME Prompt Field Manual is a practical reference for people using AI inside analytical, research, investigative, and production workflows where the reasoning process needs to remain inspectable.
 
-This repository publishes **PTSP — Pending Entry Draft Plan**, a combined production workspace and embedded GNOME Prompt Field Manual reader. It is an auditable release candidate, not a final stable manual release.
+It is not a collection of magic prompt phrases. The manual focuses on repeatable working structures: defining evidence boundaries, separating observation from inference, preserving provenance, testing competing explanations, controlling revisions, recording uncertainty, and making AI-assisted work easier to audit after the fact.
 
-The committed structure reconciles to 22 pending IDs, 70 embedded non-pending IDs, and 92 total manual entry IDs across 315 embedded page cards.
+The repository is also the production workspace for the manual. That means the public artifact preserves its editorial state, entry lineage, validation tooling, and unresolved release work instead of presenting a polished reader with its construction history hidden.
 
-The v3/v9 roles are now resolved:
+## Start here
+
+- **Read/use the manual:** [published workspace and embedded reader](https://gnomeman4201.github.io/gnome-prompt-field-manual/)
+- **Inspect identity and scope:** [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
+- **Inspect the measured release baseline:** [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
+- **Inspect stable-release criteria:** [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md)
+
+## Current release state
+
+Current repository version: **1.0.0-rc.1**.
+
+This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 22 pending IDs, 70 embedded non-pending IDs, and 92 total manual entry IDs across 315 embedded page cards.
+
+<details>
+<summary><strong>Editorial lineage and numbering state</strong></summary>
+
+The repository publishes **PTSP — Pending Entry Draft Plan**, a combined production workspace and embedded GNOME Prompt Field Manual reader.
+
+The v3/v9 roles are resolved:
 
 - **v3 master** — editable manuscript and production-planning authority named by the PTSP instructions, but not physically committed;
 - **v9 reader** — rendered publication snapshot embedded in `index.html` and generated from a v9 PDF;
 - **1.0.0-rc.1** — repository/package validation version, not a manuscript or publication version.
 
-The numbering decision is also frozen: Competing Hypotheses Table must move **R-06 → R-07**, and Source-of-Truth Conflict Resolver must move **R-07 → R-10**. R-10 is not a new entry. The physical renumbering and all cross-reference updates remain a dedicated release-blocking change set.
+The numbering decision is frozen: Competing Hypotheses Table must move **R-06 → R-07**, and Source-of-Truth Conflict Resolver must move **R-07 → R-10**. R-10 is not a new entry. The physical renumbering and all cross-reference updates remain a dedicated release-blocking change set.
 
-See:
+Authoritative records:
 
 - [`docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md`](docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md)
 - [`docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md`](docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md)
 - [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
 - [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
 - issue #3
+
+</details>
 
 ## Repository structure
 
