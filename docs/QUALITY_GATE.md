@@ -14,6 +14,9 @@ The manual is a publication artifact and an operational reference. A page that r
 
 ## Editorial gate
 
+- Every current entry ID maps to one semantic title, and each semantic title maps to one entry ID.
+- Corrected page headings, cross-references, search metadata, and visible text agree.
+- Historical/provenance statements remain explicitly classified and are not mistaken for current-state mappings.
 - Every section has an explicit operational purpose.
 - Examples show inputs, constraints, expected output shape, and verification procedure.
 - Counterexamples explain the failure mechanism rather than merely labeling a prompt as bad.
@@ -40,6 +43,8 @@ The manual is a publication artifact and an operational reference. A page that r
 
 ## Release gate
 
+- Corrected searchable text is canonical/default; any historical PDF is separately labelled, independently hashed, and never represented as corrected.
+- PDF and searchable text may be represented as one corrected reader only when generated from the same authoritative corrected source.
 - `VERSION`, `CHANGELOG.md`, README status, and the published artifact agree.
 - A clean checkout reproduces validation results.
 - The final commit hash and `index.html` SHA-256 are recorded.

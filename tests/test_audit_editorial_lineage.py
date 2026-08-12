@@ -1,62 +1,122 @@
 from __future__ import annotations
 
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
 
-from tools.audit_editorial_lineage import audit, markdown
+from tools.audit_editorial_lineage import (
+    CLASSIFIER_PATH,
+    HISTORICAL_RECORDS,
+    audit,
+    markdown,
+)
 
 
-FIXTURE = """<!doctype html><html><body>
-<p>Source: GNOME_Prompt_Field_Manual_v3_final.docx</p>
-<p>Embedded reader: GNOME Prompt Field Manual v9</p>
-<div class="entry-row">R-10 Source-of-Truth Conflict Resolver Body already contains this entry as R-07. Requires renumbering fix, not new draft.</div>
-<div class="brief">R-10 Source-of-Truth Conflict Resolver. The v3 master's planned numbering has R-07 = Competing Hypotheses Table and R-10 = Source-of-Truth Conflict Resolver. The body uses R-06 = Competing Hypotheses and R-07 = Source-of-Truth. Update the body labels to match the planned TOC numbering.</div>
-<div class="manual-page-card"><pre>R-06 — Competing Hypotheses Table\nCompare alternatives.</pre></div>
-<div class="manual-page-card"><pre>R-07 — Source-of-Truth Conflict Resolver\nUse the stated authority order.</pre></div>
-</body></html>"""
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
 class EditorialLineageAuditTests(unittest.TestCase):
-    def write(self, text: str = FIXTURE) -> Path:
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.source = (REPOSITORY_ROOT / "index.html").read_text(encoding="utf-8")
+
+    def write_source(self, text: str) -> Path:
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
         path = Path(directory.name) / "index.html"
         path.write_text(text, encoding="utf-8")
         return path
 
-    def test_finds_v3_and_v9_references(self) -> None:
-        result = audit(self.write())
-        classifications = {item.classification for item in result.version_references}
-        self.assertIn("source-filename-or-v3-reference", classifications)
-        self.assertIn("embedded-reader-v9-reference", classifications)
+    def copy_repository_evidence(self) -> Path:
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        root = Path(directory.name)
+        for relative in (*HISTORICAL_RECORDS, CLASSIFIER_PATH):
+            source = REPOSITORY_ROOT / relative
+            destination = root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        return root
 
-    def test_freezes_two_label_renumbering_without_new_entry(self) -> None:
-        result = audit(self.write())
-        decision = result.decision["identifier_decision"]
-        self.assertIn("R-06 → R-07", decision)
-        self.assertIn("R-07 → R-10", decision)
-        self.assertIn("not a new entry", decision)
-        evidence = {(item.entry_id, item.location) for item in result.entry_evidence}
-        self.assertIn(("R-06", "embedded-reader-page"), evidence)
-        self.assertIn(("R-07", "embedded-reader-page"), evidence)
-        self.assertIn(("R-10", "pending-inventory"), evidence)
-        self.assertNotIn(("R-10", "embedded-reader-page"), evidence)
+    def failed_checks(self, result) -> set[str]:
+        return {check.name for check in result.checks if not check.passed}
 
-    def test_refuses_decision_when_expected_body_pattern_is_incomplete(self) -> None:
-        broken = FIXTURE.replace("R-06 — Competing Hypotheses Table", "R-05 — Competing Hypotheses Table")
-        result = audit(self.write(broken))
-        self.assertIn("insufficient", result.decision["identifier_decision"].lower())
+    def test_corrected_repository_passes_all_post_state_gates(self) -> None:
+        result = audit(REPOSITORY_ROOT / "index.html", REPOSITORY_ROOT)
+        self.assertTrue(result.passed)
+        self.assertEqual(self.failed_checks(result), set())
+        self.assertEqual(len(result.affected_pages), 7)
+        self.assertTrue(all(item.parity for item in result.affected_pages))
+
+    def test_partial_renumbering_fails_closed(self) -> None:
+        broken = self.source.replace(
+            "  R-10 Source-of-Truth Conflict Resolver",
+            "  R-07 Source-of-Truth Conflict Resolver",
+            1,
+        )
+        result = audit(self.write_source(broken), REPOSITORY_ROOT)
+        self.assertFalse(result.passed)
+        self.assertIn("manual-page-093:surface-parity", self.failed_checks(result))
+        self.assertIn("exactly-one-source-of-truth-body", self.failed_checks(result))
+
+    def test_duplicate_source_of_truth_body_fails_closed(self) -> None:
+        marker = "</div>\n    </div>\n  </div>\n</section>"
+        duplicate = (
+            '<article class="manual-page-card" id="manual-page-999" '
+            'data-manual-text="r-10 source-of-truth conflict resolver">'
+            "<pre>R-10 Source-of-Truth Conflict Resolver</pre></article>"
+        )
+        broken = self.source.replace(marker, duplicate + marker, 1)
+        result = audit(self.write_source(broken), REPOSITORY_ROOT)
+        self.assertFalse(result.passed)
+        self.assertIn("exactly-one-source-of-truth-body", self.failed_checks(result))
+
+    def test_stale_cross_reference_fails_closed(self) -> None:
+        broken = self.source.replace(
+            "r-05 (failure-to-test converter)",
+            "r-06 (failure-to-test converter)",
+            1,
+        )
+        result = audit(self.write_source(broken), REPOSITORY_ROOT)
+        self.assertFalse(result.passed)
+        self.assertIn("no-stale-current-state-pairing", self.failed_checks(result))
+
+    def test_stale_search_metadata_fails_parity(self) -> None:
+        broken = self.source.replace(
+            "step 6 →r-07 (competing hypotheses table)",
+            "step 6 →r-06 (competing hypotheses table)",
+            1,
+        )
+        result = audit(self.write_source(broken), REPOSITORY_ROOT)
+        self.assertFalse(result.passed)
+        self.assertIn("manual-page-267:surface-parity", self.failed_checks(result))
+
+    def test_historical_provenance_mutation_fails_closed(self) -> None:
+        root = self.copy_repository_evidence()
+        record = root / "docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md"
+        record.write_text(record.read_text(encoding="utf-8") + "\nmutated\n", encoding="utf-8")
+        result = audit(REPOSITORY_ROOT / "index.html", root)
+        self.assertFalse(result.passed)
+        self.assertIn(
+            "preserve:docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md",
+            self.failed_checks(result),
+        )
+
+    def test_historical_pdf_mutation_fails_closed(self) -> None:
+        broken = self.source.replace("JVBERi0x", "KVBERi0x", 1)
+        result = audit(self.write_source(broken), REPOSITORY_ROOT)
+        self.assertFalse(result.passed)
+        self.assertIn("historical-pdf-byte-preservation", self.failed_checks(result))
 
     def test_report_is_deterministic_and_hash_bound(self) -> None:
-        result = audit(self.write())
+        result = audit(REPOSITORY_ROOT / "index.html", REPOSITORY_ROOT)
         first = markdown(result)
         second = markdown(result)
         self.assertEqual(first, second)
         self.assertIn(result.source_sha256, first)
-        self.assertIn("R-06", first)
-        self.assertIn("R-10", first)
-        self.assertIn("v3", first)
+        self.assertIn(result.pdf_sha256, first)
+        self.assertIn(result.text_surface_sha256, first)
 
 
 if __name__ == "__main__":

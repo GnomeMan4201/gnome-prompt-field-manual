@@ -12,6 +12,9 @@ from tools.reconcile_entry_lineage import (
 )
 
 
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+
+
 FIXTURE = """<!doctype html>
 <html><body>
 <div class="stat"><span class="stat-num">2</span><span class="stat-label">Pending</span></div>
@@ -140,6 +143,20 @@ class LineageTests(unittest.TestCase):
         self.assertIn("T-01", first)
         self.assertIn("AP-00", first)
         self.assertNotIn("Generated:", first)
+
+    def test_repository_post_state_reconciles_to_21_70_91(self) -> None:
+        result = reconcile(REPOSITORY_ROOT / "index.html")
+        failures = validate_expectations(
+            result,
+            expected_pending=21,
+            expected_drafted=70,
+            expected_total=91,
+            expected_pages=315,
+        )
+        self.assertEqual(failures, [])
+        self.assertEqual(result.summary.pending_missing_from_embedded, 0)
+        self.assertEqual(result.summary.pending_present_in_embedded, 21)
+        self.assertEqual(result.conflicts["pending_missing_with_numbering_rationale"], [])
 
 
 if __name__ == "__main__":

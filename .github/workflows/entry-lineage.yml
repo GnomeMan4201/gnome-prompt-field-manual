@@ -9,6 +9,8 @@ on:
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
+      - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md'
+      - 'docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md'
   push:
     branches: [main]
     paths:
@@ -18,6 +20,8 @@ on:
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
+      - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md'
+      - 'docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md'
   workflow_dispatch:
 
 permissions:
@@ -55,9 +59,9 @@ jobs:
             --input index.html \
             --json entry-lineage.json \
             --markdown entry-lineage.md \
-            --expect-pending 22 \
+            --expect-pending 21 \
             --expect-drafted 70 \
-            --expect-total 92 \
+            --expect-total 91 \
             --expect-pages 315 \
             --enforce
 

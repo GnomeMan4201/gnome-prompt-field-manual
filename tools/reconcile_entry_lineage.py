@@ -667,10 +667,13 @@ Source SHA-256: `{summary.source_sha256}`
 
 ## Reconciliation finding
 
-The source-reported **70 drafted + 22 pending = 92 total** is structurally
-consistent after excluding eight documented non-entry tokens. The embedded
-reader contains all 70 IDs not listed as pending, plus 21 of the 22 pending IDs.
-The remaining pending ID is surfaced rather than inferred.
+The source-reported **{counts.drafted} drafted + {counts.pending} pending = {counts.total} total**
+is structurally consistent after excluding {summary.excluded_non_entry_ids}
+documented non-entry tokens. The embedded reader contains all
+{summary.drafted_embedded_not_pending} IDs not listed as pending, plus
+{summary.pending_present_in_embedded} of the {summary.unique_pending_ids}
+pending IDs. Pending IDs absent from the reader are surfaced rather than
+inferred.
 
 ## Conflict and status sets
 
@@ -695,7 +698,7 @@ entry is complete, current, or authoritative.
 |---|---:|
 {prefix_rows}
 
-## Reconciled 92-entry inventory
+## Reconciled {summary.reconciled_universe_ids}-entry inventory
 
 | ID | Best available name | Observed status | Brief | Embedded page indices |
 |---|---|---|---|---|

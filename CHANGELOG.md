@@ -2,6 +2,27 @@
 
 All material changes to the GNOME Prompt Field Manual production workspace are recorded here. Dates use UTC. A release entry describes the committed artifact; it does not imply that every prompt pattern behaves identically across model families or versions.
 
+## [Unreleased]
+
+### Corrected
+
+- Completed the frozen semantic mapping: Competing Hypotheses Table is now `R-07`; Source-of-Truth Conflict Resolver is now `R-10`.
+- Corrected Failure-to-Test Converter cross-references from `R-06` to the existing `R-05` entry.
+- Removed completed `R-10` work from the pending inventory and drafting briefs without creating a duplicate body.
+- Reconciled the post-state to 21 pending, 70 embedded non-pending, and 91 semantic entries across 315 reader pages.
+
+### Changed
+
+- Made corrected searchable text the canonical/default reader.
+- Preserved and labelled the unchanged v9 PDF as a historical snapshot with an independent SHA-256.
+- Replaced the decision-freeze audit with fail-closed post-state, parity, duplicate-body, stale-reference, PDF-boundary, and provenance gates.
+- Added a machine-readable classifier for all 151 baseline `R-06`, `R-07`, and `R-10` token occurrences.
+
+### Known limitations
+
+- The authoritative editable v3 manuscript and editable v9 source remain unavailable.
+- `R-05 (Field Journal Entry)` at `manual-page-213` remains a separately tracked semantic collision pending authoritative evidence.
+
 ## [1.0.0-rc.1] - 2026-08-06
 
 ### Added
