@@ -27,25 +27,28 @@ The repository is also the production workspace for the manual. That means the p
 
 Current repository version: **1.0.0-rc.1**.
 
-This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 22 pending IDs, 70 embedded non-pending IDs, and 92 total manual entry IDs across 315 embedded page cards.
+This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 21 pending IDs, 70 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
 
 <details>
 <summary><strong>Editorial lineage and numbering state</strong></summary>
 
 The repository publishes **PTSP — Pending Entry Draft Plan**, a combined production workspace and embedded GNOME Prompt Field Manual reader.
 
-The v3/v9 roles are resolved:
+The v3/v9 roles and public reader boundary are resolved:
 
 - **v3 master** — editable manuscript and production-planning authority named by the PTSP instructions, but not physically committed;
-- **v9 reader** — rendered publication snapshot embedded in `index.html` and generated from a v9 PDF;
+- **canonical searchable text** — corrected current reader with the completed R-07/R-10 mapping;
+- **historical v9 PDF** — unchanged rendered snapshot embedded in `index.html`, explicitly non-canonical and preserved for provenance;
 - **1.0.0-rc.1** — repository/package validation version, not a manuscript or publication version.
 
-The numbering decision is frozen: Competing Hypotheses Table must move **R-06 → R-07**, and Source-of-Truth Conflict Resolver must move **R-07 → R-10**. R-10 is not a new entry. The physical renumbering and all cross-reference updates remain a dedicated release-blocking change set.
+The numbering correction is complete: Competing Hypotheses Table is **R-07**, and Source-of-Truth Conflict Resolver is **R-10**. R-10 is the existing Source-of-Truth body under its corrected identifier, not a new entry. The old mapping remains only in SHA-bound historical evidence and the explicitly historical PDF.
 
 Authoritative records:
 
 - [`docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md`](docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md)
 - [`docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md`](docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md)
+- [`docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md`](docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md)
+- [`docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md`](docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md)
 - [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
 - [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
 - issue #3
@@ -58,12 +61,16 @@ Authoritative records:
 - `VERSION` — repository-package version.
 - `CHANGELOG.md` — material repository and publication changes.
 - `tools/validate_manual.py` — deterministic structural validator.
-- `tools/reconcile_entry_lineage.py` — deterministic 22/70/92 entry-lineage reconciler.
-- `tools/audit_editorial_lineage.py` — deterministic v3/v9 and R-06/R-07/R-10 decision audit.
+- `tools/reconcile_entry_lineage.py` — deterministic 21/70/91 entry-lineage reconciler.
+- `tools/audit_editorial_lineage.py` — fail-closed renumbering, parity, PDF-boundary, and provenance audit.
+- `tools/classify_editorial_occurrences.py` — deterministic generator for the frozen token classifier.
 - `tools/inspect_manual.py` — bounded structural inventory for the large HTML artifact.
 - `tests/` — structural, inventory, and editorial-lineage tests.
 - `docs/EDITORIAL_LINEAGE_DECISION_2026-08-06.md` — frozen artifact roles and numbering decision.
 - `docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md` — verified 92-entry arithmetic.
+- `docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv` — classified baseline occurrence inventory.
+- `docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md` — renumbering completion and artifact-boundary evidence.
+- `docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md` — verified 91-entry semantic post-state.
 - `docs/BASELINE_AUDIT_2026-08-06.md` — measured release-candidate baseline.
 - `docs/IDENTITY_AND_SCOPE.md` — canonical identity and remaining release boundaries.
 - `docs/QUALITY_GATE.md` — stable release criteria.
@@ -85,9 +92,9 @@ python tools/reconcile_entry_lineage.py \
   --input index.html \
   --json entry-lineage.json \
   --markdown entry-lineage.md \
-  --expect-pending 22 \
+  --expect-pending 21 \
   --expect-drafted 70 \
-  --expect-total 92 \
+  --expect-total 91 \
   --expect-pages 315 \
   --enforce
 
@@ -97,11 +104,11 @@ python tools/audit_editorial_lineage.py \
   --markdown editorial-lineage.md
 ```
 
-The reports record the exact SHA-256 of `index.html`. They establish structure, inventory arithmetic, and the committed editorial decision; they do not establish factual correctness, editorial completion, prompt portability, external-link health, or accessibility conformance.
+The reports record the exact SHA-256 of `index.html`. They establish structure, 21/70/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
 
 ## Release policy
 
-Stable release remains blocked by the complete R-06/R-07/R-10 renumbering pass, remaining pending-entry disposition, public-product finalization, accessibility/browser review, and final release evidence.
+Stable release remains blocked by the remaining pending-entry disposition, the separately tracked R-05 Field Journal Entry collision, accessibility/browser review, and final release evidence.
 
 ## Project
 
