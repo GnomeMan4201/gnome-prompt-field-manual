@@ -1,0 +1,10 @@
+{
+  "name": "gnome-prompt-field-manual",
+  "private": true,
+  "scripts": {
+    "test:browser": "node tests/browser_smoke.mjs chromium"
+  },
+  "devDependencies": {
+    "playwright": "1.62.0"
+  }
+}
