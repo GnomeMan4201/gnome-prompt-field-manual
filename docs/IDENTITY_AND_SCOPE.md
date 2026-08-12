@@ -74,6 +74,13 @@ The repository uses a **combined product** boundary: PTSP remains visible as pro
 Issue #3 continues to track:
 
 - editorial disposition of remaining pending entries;
-- resolution of the independently tracked `R-05 (Field Journal Entry)` collision at `manual-page-213` from authoritative evidence;
 - accessibility and browser validation;
 - stable-release versioning and publication evidence.
+
+Issue #6 resolved the former `R-05 (Field Journal Entry)` collision at
+`manual-page-213`. The committed audit appendix identifies the predecessor as
+`W-04 Field Journal Scaffolder` and records that it was cut; live `W-04` and
+`R-05` are already assigned to Over-Smoothing Detector and Failure-to-Test
+Converter. The unsupported current-state cross-reference was therefore removed
+without inventing a replacement identifier. See
+[Field Journal Identifier Decision — 2026-08-12](FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md).

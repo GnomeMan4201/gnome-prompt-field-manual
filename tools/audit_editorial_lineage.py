@@ -65,6 +65,13 @@ PAGE_RULES = {
         "required": ("r-05 (failure-to-test converter)",),
         "forbidden": ("r-06",),
     },
+    "manual-page-213": {
+        "required": ("use a structured session record when no belief changes are expected",),
+        "forbidden": (
+            "r-05 (field journal entry)",
+            "w-04 (field journal entry)",
+        ),
+    },
     "manual-page-267": {
         "required": ("r-07 (competing hypotheses table)",),
         "forbidden": ("r-06 (competing hypotheses table)",),
@@ -231,6 +238,9 @@ def audit(path: Path, repository_root: Path | None = None) -> AuditResult:
     source_bodies = re.findall(
         r"(?im)^\s*R-10\s+Source-of-Truth Conflict Resolver\s*$", visible_pages
     )
+    failure_to_test_bodies = re.findall(
+        r"(?im)^\s*R-05\s+Failure-to-Test Converter\s*$", visible_pages
+    )
     add_check(
         checks,
         "exactly-one-competing-hypotheses-body",
@@ -242,6 +252,12 @@ def audit(path: Path, repository_root: Path | None = None) -> AuditResult:
         "exactly-one-source-of-truth-body",
         len(source_bodies) == 1,
         f"count={len(source_bodies)}",
+    )
+    add_check(
+        checks,
+        "exactly-one-failure-to-test-body",
+        len(failure_to_test_bodies) == 1,
+        f"count={len(failure_to_test_bodies)}",
     )
 
     pending_ids = {item.entry_id for item in extract_pending(root)}
@@ -259,6 +275,8 @@ def audit(path: Path, repository_root: Path | None = None) -> AuditResult:
         "R-07 Source-of-Truth": r"r-07\s+(?:—\s*)?source-of-truth conflict resolver",
         "R-06 Failure-to-Test": r"r-06\s*\(failure-to-test converter\)",
         "R-11 · R-06": r"r-11\s*·\s*r-06",
+        "R-05 Field Journal": r"r-05\s*\(field journal entry\)",
+        "W-04 Field Journal": r"w-04\s*\(field journal entry\)",
     }
     stale_hits = [name for name, pattern in stale_patterns.items() if re.search(pattern, normalized_raw)]
     add_check(
@@ -350,7 +368,7 @@ def audit(path: Path, repository_root: Path | None = None) -> AuditResult:
         limitations=[
             "The authoritative editable v3 manuscript and editable v9 source remain unavailable.",
             "The embedded PDF is intentionally preserved as an uncorrected historical v9 snapshot.",
-            "R-05 (Field Journal Entry) at manual-page-213 remains a separately tracked semantic collision and is not guessed here.",
+            "The cut W-04 Field Journal Scaffolder remains visible only in historical provenance; it has no live entry identifier.",
         ],
     )
 

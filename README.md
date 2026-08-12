@@ -49,6 +49,7 @@ Authoritative records:
 - [`docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md`](docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md)
 - [`docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md`](docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md)
 - [`docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md`](docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md)
+- [`docs/FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md`](docs/FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md)
 - [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
 - [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
 - issue #3
@@ -71,6 +72,7 @@ Authoritative records:
 - `docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv` — classified baseline occurrence inventory.
 - `docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md` — renumbering completion and artifact-boundary evidence.
 - `docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md` — verified 91-entry semantic post-state.
+- `docs/FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md` — evidence-backed disposition of the cut Field Journal predecessor and page-213 correction.
 - `docs/BASELINE_AUDIT_2026-08-06.md` — measured release-candidate baseline.
 - `docs/IDENTITY_AND_SCOPE.md` — canonical identity and remaining release boundaries.
 - `docs/QUALITY_GATE.md` — stable release criteria.
@@ -108,7 +110,7 @@ The reports record the exact SHA-256 of `index.html`. They establish structure, 
 
 ## Release policy
 
-Stable release remains blocked by the remaining pending-entry disposition, the separately tracked R-05 Field Journal Entry collision, accessibility/browser review, and final release evidence.
+Stable release remains blocked by the remaining pending-entry disposition, accessibility/browser review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
 
 ## Project
 

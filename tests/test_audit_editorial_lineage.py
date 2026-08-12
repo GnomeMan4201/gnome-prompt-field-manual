@@ -46,8 +46,25 @@ class EditorialLineageAuditTests(unittest.TestCase):
         result = audit(REPOSITORY_ROOT / "index.html", REPOSITORY_ROOT)
         self.assertTrue(result.passed)
         self.assertEqual(self.failed_checks(result), set())
-        self.assertEqual(len(result.affected_pages), 7)
+        self.assertEqual(len(result.affected_pages), 8)
         self.assertTrue(all(item.parity for item in result.affected_pages))
+
+    def test_field_journal_collision_fails_closed_even_with_surface_parity(self) -> None:
+        broken = self.source.replace(
+            "use a structured session record when no belief changes are expected",
+            "use r-05 (field journal entry) for structured session records when no belief changes are expected",
+            1,
+        ).replace(
+            "use a structured session\nrecord when no belief changes are expected",
+            "use R-05 (Field Journal\nEntry) for structured session records when no belief changes are\nexpected",
+            1,
+        )
+        result = audit(self.write_source(broken), REPOSITORY_ROOT)
+        failed = self.failed_checks(result)
+        self.assertFalse(result.passed)
+        self.assertIn("manual-page-213:semantic-rules", failed)
+        self.assertIn("no-stale-current-state-pairing", failed)
+        self.assertNotIn("manual-page-213:surface-parity", failed)
 
     def test_partial_renumbering_fails_closed(self) -> None:
         broken = self.source.replace(
