@@ -50,12 +50,12 @@ def metadata_text(fragment: str) -> str:
 
 
 class Batch1DispositionTests(unittest.TestCase):
-    def test_t01_t02_promoted_out_of_pending_state(self) -> None:
+    def test_t01_t02_remain_promoted_in_current_repository_state(self) -> None:
         result = reconcile(INDEX)
         failures = validate_expectations(
             result,
-            expected_pending=19,
-            expected_drafted=72,
+            expected_pending=16,
+            expected_drafted=75,
             expected_total=91,
             expected_pages=315,
         )
@@ -128,12 +128,12 @@ class Batch1DispositionTests(unittest.TestCase):
         self.assertIn("do not execute the block below as a current drafting instruction", source)
         self.assertNotIn('<td class="batch-entries">T-01, T-02</td>', source)
 
-    def test_default_open_briefs_follow_remaining_pending_inventory(self) -> None:
+    def test_default_open_briefs_follow_current_remaining_pending_inventory(self) -> None:
         source = INDEX.read_text(encoding="utf-8")
-        self.assertNotIn("document.getElementById('b-t01').classList.add('open');", source)
-        self.assertNotIn("document.getElementById('b-t02').classList.add('open');", source)
-        self.assertIn("document.getElementById('b-w01').classList.add('open');", source)
-        self.assertIn("document.getElementById('b-w02').classList.add('open');", source)
+        for stale in ("b-t01", "b-t02", "b-w01", "b-w02"):
+            self.assertNotIn(f"document.getElementById('{stale}').classList.add('open');", source)
+        self.assertIn("document.getElementById('b-r01').classList.add('open');", source)
+        self.assertIn("document.getElementById('b-r03').classList.add('open');", source)
 
 
 if __name__ == "__main__":
