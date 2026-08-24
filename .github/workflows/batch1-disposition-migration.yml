@@ -41,7 +41,7 @@ jobs:
           patches = {
               "r'LENS 6 — WEAKEST LINK LENS Given the five lenses above, identify the\\s+single point at which this idea is most likely to break\\. State it\\s+as: “This idea fails if \\[specific condition\\]\\.\"? Why this link and not\\s+others\\?'": "r'LENS 6 — WEAKEST LINK LENS[\\s\\S]*?others\\?'",
               "r'and a single verdict\\.\\s+The\\s+verdict is not a summary'": "r'and a single verdict\\.[\\s\\S]*?verdict[\\s\\S]*?is not a summary'",
-              "r'Add “run Lens 6 twice: once before reading the other lenses, once after”\\s+to check whether the weakest link shifts under scrutiny\\.'": "r'Add\\s+“Run Lens 6 twice:[\\s\\S]*?after” to check whether the weakest link shifts under scrutiny\\.'",
+              "r'Add “run Lens 6 twice: once before reading the other lenses, once after”\\s+to check whether the weakest link shifts under scrutiny\\.'": "r'Add[\\s\\S]*?“Run Lens 6 twice:[\\s\\S]*?weakest link shifts under scrutiny\\.'",
           }
           for old, new in patches.items():
               if s.count(old) != 1:
