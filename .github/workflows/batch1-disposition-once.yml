@@ -1,0 +1,96 @@
+name: Batch 1 Disposition One-Shot
+
+on:
+  push:
+    branches:
+      - agent/disposition-batch-1
+    paths:
+      - 'tools/apply_batch1_disposition.py'
+      - '.github/workflows/batch1-disposition-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: batch1-disposition-once
+  cancel-in-progress: false
+
+jobs:
+  apply-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out review branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-1
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Apply hash-gated Batch 1 disposition
+        run: python tools/apply_batch1_disposition.py
+
+      - name: Syntax and full unit suite
+        run: |
+          python -m compileall -q tools tests
+          python -m unittest discover -s tests -v
+
+      - name: Strict structural validation
+        run: |
+          python tools/validate_manual.py \
+            --input index.html \
+            --json manual-validation.json \
+            --markdown manual-validation.md \
+            --strict-warnings
+
+      - name: Enforce 19 / 72 / 91 lineage
+        run: |
+          python tools/reconcile_entry_lineage.py \
+            --input index.html \
+            --json entry-lineage.json \
+            --markdown entry-lineage.md \
+            --expect-pending 19 \
+            --expect-drafted 72 \
+            --expect-total 91 \
+            --expect-pages 315 \
+            --enforce
+
+      - name: Preserve frozen editorial classifier
+        run: |
+          python tools/classify_editorial_occurrences.py
+          git diff --exit-code -- docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv
+
+      - name: Run editorial-lineage audit
+        run: |
+          python tools/audit_editorial_lineage.py \
+            --input index.html \
+            --repository-root . \
+            --json editorial-lineage.json \
+            --markdown editorial-lineage.md
+
+      - name: Verify bounded diff
+        run: |
+          git diff --check
+          git status --short
+          test -s docs/BATCH1_DISPOSITION_2026-08-24.md
+
+      - name: Remove temporary mutation authority
+        run: |
+          rm tools/apply_batch1_disposition.py
+          rm .github/workflows/batch1-disposition-once.yml
+
+      - name: Commit verified Batch 1 disposition
+        run: |
+          git config user.name 'GnomeMan4201'
+          git config user.email '96637667+GnomeMan4201@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'adjudicate Batch 1 T-01 and T-02'
+          git push origin HEAD:agent/disposition-batch-1
