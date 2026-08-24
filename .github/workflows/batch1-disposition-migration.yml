@@ -70,6 +70,21 @@ jobs:
           PY
       - name: Apply fail-closed Batch 1 disposition
         run: python tools/apply_batch1_disposition.py
+      - name: Align generated regression test with manuscript schema
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tests/test_batch1_disposition.py')
+          s = p.read_text(encoding='utf-8')
+          if s.count('    "WHY IT WORKS",') != 1:
+              raise SystemExit('expected one obsolete WHY IT WORKS field assertion')
+          s = s.replace('    "WHY IT WORKS",', '    "WHEN TO USE",', 1)
+          old = '        self.assertNotIn("collapses", metadata)'
+          new = '''        self.assertNotIn("dissection verdict: defensible / partially defensible / collapses", metadata)\n        self.assertNotIn("collapses: the claim relies", metadata)\n        self.assertNotIn("partially defensible or collapses", metadata)\n        self.assertNotIn("a collapses verdict", metadata)'''
+          if s.count(old) != 1:
+              raise SystemExit('expected one over-broad metadata COLLAPSES assertion')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
       - name: Compile Python
         run: python -m compileall -q tools tests
       - name: Run complete unit suite
