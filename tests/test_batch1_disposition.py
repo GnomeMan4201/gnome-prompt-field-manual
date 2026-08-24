@@ -128,6 +128,13 @@ class Batch1DispositionTests(unittest.TestCase):
         self.assertIn("do not execute the block below as a current drafting instruction", source)
         self.assertNotIn('<td class="batch-entries">T-01, T-02</td>', source)
 
+    def test_default_open_briefs_follow_remaining_pending_inventory(self) -> None:
+        source = INDEX.read_text(encoding="utf-8")
+        self.assertNotIn("document.getElementById('b-t01').classList.add('open');", source)
+        self.assertNotIn("document.getElementById('b-t02').classList.add('open');", source)
+        self.assertIn("document.getElementById('b-w01').classList.add('open');", source)
+        self.assertIn("document.getElementById('b-w02').classList.add('open');", source)
+
 
 if __name__ == "__main__":
     unittest.main()
