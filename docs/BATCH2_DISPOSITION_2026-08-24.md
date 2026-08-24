@@ -6,7 +6,7 @@ Bounded editorial disposition of the existing canonical bodies for `W-01 Dense-t
 
 - Base commit: `8591c9f7ed4dbdeb5ed83de96e33c4dfbfedc324`
 - Pre-mutation `index.html` SHA-256: `92d4e6c395c620bb9eb08a6df798ff1d1685b7c091a5ffd910e8fd996d9c9559`
-- Post-mutation `index.html` SHA-256: `0203cde07cc1b3d42323d04334d5699e9177bb11a2a7bdd96fc46ceb9cf86e76`
+- Post-mutation `index.html` SHA-256: `e0d88f80a6f14e90732a7f0765794ffe348bf526aaa3225fe3b87c8acb073bac`
 - Pre-state: 19 pending / 72 drafted / 91 semantic entries / 315 pages / 9 remaining batches
 - Post-state: 16 pending / 75 drafted / 91 semantic entries / 315 pages / 8 remaining batches
 - Historical v9 PDF SHA-256: `97482787a2471cbea5a837a0023a0aa5d0317eb149d8dd6c47e6924222b7f1e9`
