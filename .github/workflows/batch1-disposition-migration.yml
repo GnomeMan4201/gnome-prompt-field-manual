@@ -99,7 +99,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html README.md CHANGELOG.md docs/IDENTITY_AND_SCOPE.md docs/BATCH1_DISPOSITION_2026-08-24.md tests/test_reconcile_entry_lineage.py tests/test_batch1_disposition.py tools/apply_batch1_disposition.py
+          git add -A
           git diff --cached --check
+          git diff --cached --name-only | grep -v '^\.github/workflows/' > /tmp/nonworkflow-files
+          test -s /tmp/nonworkflow-files
+          if git diff --cached --name-only | grep -q '^\.github/workflows/'; then echo 'workflow file unexpectedly staged' >&2; exit 1; fi
           git commit -m 'adjudicate Batch 1 T-01 and T-02'
           git push origin HEAD:agent/disposition-batch-1
