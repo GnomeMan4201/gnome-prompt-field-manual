@@ -1,0 +1,56 @@
+name: Batch 1 Page 016 Repair
+
+on:
+  push:
+    branches: [agent/disposition-batch-1]
+    paths:
+      - 'tools/repair_batch1_page016.py'
+      - '.github/workflows/batch1-page016-repair.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: batch1-page016-repair
+  cancel-in-progress: false
+
+jobs:
+  repair-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-1
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Apply hash-gated page-016 repair
+        run: python tools/repair_batch1_page016.py
+      - name: Run complete verification gate
+        run: |
+          python -m compileall -q tools tests
+          python -m unittest discover -s tests -v
+          python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
+          python tools/reconcile_entry_lineage.py --input index.html --json entry-lineage.json --markdown entry-lineage.md --expect-pending 19 --expect-drafted 72 --expect-total 91 --expect-pages 315 --enforce
+          python tools/classify_editorial_occurrences.py
+          git diff --exit-code -- docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv
+          python tools/audit_editorial_lineage.py --input index.html --repository-root . --json editorial-lineage.json --markdown editorial-lineage.md
+          git diff --check
+          grep -q 'dissection does not change what you understand about the claim' index.html
+          ! grep -qi 'dissue' index.html
+      - name: Prepare content-only repair commit
+        run: git rm -f tools/repair_batch1_page016.py
+      - name: Commit repaired reader
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --name-only | grep -q '^\.github/workflows/'; then echo 'workflow file unexpectedly staged' >&2; exit 1; fi
+          git diff --cached --check
+          git commit -m 'repair Batch 1 T-02 page 016 prose'
+          git push origin HEAD:agent/disposition-batch-1
