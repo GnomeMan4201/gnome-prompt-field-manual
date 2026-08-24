@@ -4,12 +4,12 @@ on:
   push:
     branches: [agent/disposition-batch-3]
     paths:
-      - 'tools/apply_batch3_disposition.py'
+      - 'tools/apply_batch3_disposition_v2.py'
       - '.github/workflows/batch3-disposition-apply.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'tools/apply_batch3_disposition.py'
+      - 'tools/apply_batch3_disposition_v2.py'
       - '.github/workflows/batch3-disposition-apply.yml'
   workflow_dispatch:
 
@@ -35,7 +35,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Apply hash-gated Batch 3 disposition
-        run: python tools/apply_batch3_disposition.py
+        run: python tools/apply_batch3_disposition_v2.py
       - name: Verify Batch 3 non-browser gate
         run: |
           python -m compileall -q tools tests
@@ -48,7 +48,7 @@ jobs:
           git diff --check
       - name: Prepare content-only commit
         run: |
-          git rm -f tools/apply_batch3_disposition.py tools/extract_batch3_context.py batch3-extraction.txt
+          git rm -f tools/apply_batch3_disposition.py tools/apply_batch3_disposition_v2.py tools/extract_batch3_context.py batch3-extraction.txt
       - name: Commit Batch 3 disposition
         run: |
           git config user.name 'github-actions[bot]'
