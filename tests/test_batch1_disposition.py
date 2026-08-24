@@ -90,10 +90,18 @@ class Batch1DispositionTests(unittest.TestCase):
         self.assertIn("highest-severity finding", visible)
         self.assertIn("VERDICT JUSTIFICATION", visible)
         self.assertIn("T-02 (Claim Dissection)", visible)
+        self.assertIn("Assume a competent adversary knows this idea is being de-", visible)
+        self.assertIn("Historical analog must be from", visible)
+        self.assertIn("Weight lenses by:", visible)
+        self.assertIn("run the weakest-link selection twice", visible)
         self.assertIn("lens 6 — constraint lens", metadata)
         self.assertIn("highest-severity finding", metadata)
         self.assertIn("verdict justification", metadata)
         self.assertIn("t-02 (claim dissection)", metadata)
+        self.assertIn("assume a competent adversary knows this idea is being de-", metadata)
+        self.assertIn("historical analog must be from", metadata)
+        self.assertIn("weight lenses by:", metadata)
+        self.assertIn("run the weakest-link selection twice", metadata)
         self.assertNotIn("LENS 6 — WEAKEST LINK LENS", visible)
 
     def test_t02_frozen_clauses_and_metadata_parity(self) -> None:
