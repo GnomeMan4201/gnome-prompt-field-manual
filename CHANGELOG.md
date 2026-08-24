@@ -6,6 +6,11 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- Adjudicated W-01 Dense-to-Clear, W-02 Argument Skeleton Extractor, and W-03 Adversarial Reader against their frozen Batch 2 briefs without drafting replacement bodies.
+- Added the frozen W-11 prerequisite to W-01 `INPUTS NEEDED` for source material that may not be safely summarizable.
+- Preserved W-02 unchanged after it passed its frozen brief as written.
+- Added W-03's explicit minimum-three requirement for persona-specific objections while preserving the existing adversarial report structure.
+
 - Adjudicated T-01 Idea Stress-Test and T-02 Claim Dissection against their frozen Batch 1 briefs without drafting replacement bodies.
 - Replaced T-01's dependent weakest-link Lens 6 with an independent Constraint Lens; weakest-link synthesis now occurs after all six lenses and explicitly selects the highest-severity finding.
 - Added T-01's missing T-02 follow-up and one-sentence STRESS VERDICT justification requirement.
@@ -19,7 +24,11 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Changed
 
-- Promoted T-01 and T-02 from pending to drafted after bounded disposition; current state is 19 pending / 72 drafted / 91 semantic entries / 315 pages / 9 remaining batches.
+- Promoted W-01, W-02, and W-03 from pending to drafted after bounded disposition; current state is 16 pending / 75 drafted / 91 semantic entries / 315 pages / 8 remaining batches.
+- Removed W-01/W-02/W-03 from active pending inventory and drafting briefs, removed Batch 2 from the remaining-batch table without renumbering later batches, and retargeted startup defaults to R-01/R-03.
+- Added a fail-closed Batch 2 disposition regression gate and SHA-bound audit record.
+
+- Promoted T-01 and T-02 from pending to drafted after bounded disposition.
 - Removed T-01/T-02 from active pending inventory and drafting briefs while preserving the original Batch 1 drafting prompt as explicitly completed historical provenance.
 - Added a fail-closed Batch 1 disposition regression gate and SHA-bound audit record.
 

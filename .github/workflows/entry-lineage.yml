@@ -12,6 +12,7 @@ on:
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md'
       - 'docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md'
       - 'docs/BATCH1_DISPOSITION_2026-08-24.md'
+      - 'docs/BATCH2_DISPOSITION_2026-08-24.md'
   push:
     branches: [main]
     paths:
@@ -24,6 +25,7 @@ on:
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md'
       - 'docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md'
       - 'docs/BATCH1_DISPOSITION_2026-08-24.md'
+      - 'docs/BATCH2_DISPOSITION_2026-08-24.md'
   workflow_dispatch:
 
 permissions:
@@ -61,8 +63,8 @@ jobs:
             --input index.html \
             --json entry-lineage.json \
             --markdown entry-lineage.md \
-            --expect-pending 19 \
-            --expect-drafted 72 \
+            --expect-pending 16 \
+            --expect-drafted 75 \
             --expect-total 91 \
             --expect-pages 315 \
             --enforce

@@ -17,11 +17,11 @@ It is not yet a final stable manual release.
 
 The deterministic entry-lineage baseline confirms:
 
-- 19 pending inventory IDs;
-- 19 matching drafting briefs;
-- 72 embedded non-pending entry IDs;
+- 16 pending inventory IDs;
+- 16 matching drafting briefs;
+- 75 embedded non-pending entry IDs;
 - 91 reconciled semantic manual entries;
-- 9 remaining production batches;
+- 8 remaining production batches;
 - 5 special-caution entries;
 - 315 embedded reader page cards.
 
@@ -71,11 +71,11 @@ The repository uses a **combined product** boundary: PTSP remains visible as pro
 
 ## Remaining release blockers
 
-Issue #1 is the umbrella stable-release closeout. Batch 1 disposition promoted T-01 and T-02 on 2026-08-24; 19 pending entries remain.
+Issue #1 is the umbrella stable-release closeout. Batch 1 promoted T-01/T-02 and Batch 2 promoted W-01/W-02/W-03 on 2026-08-24; 16 pending entries remain.
 
 Remaining blockers:
 
-- editorial disposition of the 19 remaining pending entries;
+- editorial disposition of the 16 remaining pending entries;
 - regression browser/accessibility validation after the final content mutation;
 - stable-release versioning, independent or documented-equivalent editorial review, and publication evidence.
 
