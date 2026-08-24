@@ -51,17 +51,25 @@ async function assertInitialState(page) {
 
 async function assertSearch(page) {
   const search = page.getByLabel('Search manual text', { exact: true });
+  const expectedSearchMeta = 'Showing 1 of 315 pages matching “source-of-truth conflict resolver”.';
   await search.fill('source-of-truth conflict resolver');
-  assert.equal(
-    await page.locator('#manualSearchMeta').innerText(),
-    'Showing 1 of 315 pages matching “source-of-truth conflict resolver”.',
-  );
+  await waitForExactText(page, '#manualSearchMeta', expectedSearchMeta);
+  assert.equal(await page.locator('#manualSearchMeta').innerText(), expectedSearchMeta);
   assert.equal(await page.locator('.manual-page-card:not(.hidden)').count(), 1);
   assert.ok(await page.locator('#manual-page-093').isVisible());
   await assertTabState(page, 'text');
 
   await page.getByRole('button', { name: 'Clear', exact: true }).click();
+  await waitForExactText(page, '#manualSearchMeta', 'Showing all 315 pages.');
   assert.equal(await page.locator('.manual-page-card:not(.hidden)').count(), 315);
+}
+
+async function waitForExactText(page, selector, expected) {
+  await page.waitForFunction(
+    ({ selector, expected }) => document.querySelector(selector)?.textContent === expected,
+    { selector, expected },
+    { timeout: 5000 },
+  );
 }
 
 async function assertTabInteractions(page) {
