@@ -24,6 +24,18 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      - name: Check out review branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-1
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
       - name: Harden temporary migration harness against source typography
         run: |
           python - <<'PY'
