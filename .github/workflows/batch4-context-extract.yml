@@ -6,6 +6,11 @@ on:
     paths:
       - 'tools/extract_batch4_context.py'
       - '.github/workflows/batch4-context-extract.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/extract_batch4_context.py'
+      - '.github/workflows/batch4-context-extract.yml'
   workflow_dispatch:
 
 permissions:
