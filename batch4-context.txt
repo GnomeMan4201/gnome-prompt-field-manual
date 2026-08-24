@@ -1,0 +1,1731 @@
+===== BRIEF b-s01 =====
+S-01 System Map with Trust Boundaries CRITERIA 1, 7, 9 Keep ▶ Why Pending Part 0 audit: KEEP. "Trust boundary enumeration and observable gaps make this a real security tool, not just documentation." Upgrade: "Add explicit 'who can inject into each trust boundary' column."
+
+
+===== BRIEF b-s02 =====
+S-02 Code Archaeology CRITERIA 1, 7, 9 Keep ▶ Why Pending Part 0 audit: KEEP. "Intent-vs-behavior divergence and safe modification zones are operationally specific." Upgrade: "Add 'hidden state dependencies' as a named failure mode."
+
+
+===== BRIEF b-s03 =====
+S-03 Failure Mode Inventory CRITERIA 2, 5, 9 Keep ▶ Why Pending Part 0 audit: KEEP. "Seven-category structure covering adversarial failures specifically is above commodity level." Upgrade: "Add detectability rating as mandatory field."
+
+
+===== PAGE 104 =====
+GNOME Prompt Field Manual
+
+
+
+
+   knowledge value.
+
+   Failure to document: [DESCRIBE THE EXPERIMENT, RESULT, OR PREDICTION
+
+   THAT FAILED. Include as much operational detail as you have — context
+
+   you omit here will be unrecoverable.]
+
+
+
+
+INPUTS NEEDED
+
+
+A description of the failure — what was attempted, what was ex-
+pected, what happened instead. The more operational detail, the
+better the artifact. If records exist (logs, measurements, test out-
+put), include them — the prompt will extract structured claims
+from raw evidence. Minimum viable input: a description of what
+was claimed and what the result was.
+
+
+EXPECTED OUTPUT
+
+
+A seven-section negative result artifact: falsified claim (precise,
+citable), test conditions (reproducible), observed result (raw),
+scope does-establish (the specific thing ruled out), scope does-
+not-establish (at least two things still open), confidence with jus-
+tification, replication requirements, and knowledge value. Every
+section complete. The DOES NOT ESTABLISH section is always
+populated — if there’s only one failure mode this result speaks
+to, there are at least two things it doesn’t speak to.
+
+
+KNOBS
+
+
+Add ‘this result will be shared with others who may attempt the
+same approach: optimize KNOWLEDGE VALUE for that audi-
+ence’ to sharpen the reuse framing. Add ‘flag if the original
+hypothesis was badly formed’ — sometimes the failure is the
+hypothesis design, not the test. Add ‘link to prior work:  [de-
+scription]’ for accumulating failure libraries where this result
+connects to previous entries. Add ‘regulatory or safety context:
+[domain]’ for results that have compliance implications.
+
+
+
+104
+
+===== PAGE 105 =====
+FAILURE MODE
+
+
+The SCOPE sections will be wrong in both directions. The DOES
+ESTABLISH section will be too broad — the model will want to
+claim the failure rules out more than it does. The DOES NOT
+ESTABLISH section will be too narrow — only one or two entries
+when five or six apply. Push both.
+
+For DOES ESTABLISH: “Under what specific conditions? If any
+condition changed, would the result change?” Force the scope
+down to what’s actually defensible.
+
+For DOES NOT ESTABLISH: “What else might a reader think
+this result rules out that it actually doesn’t?” Run that question
+explicitly after the first draft.
+
+Field card: if DOES NOT ESTABLISH has fewer than two entries,
+the artifact is incomplete.
+
+
+FOLLOW-UP
+
+
+Use R-05 (Failure-to-Test Converter) if you want to design the
+next test — R-11 documents what was established, R-05 designs
+what to try next. They are sequential, not substitutes.
+
+File the artifact in the relevant knowledge base, repository, or re-
+search log immediately. Negative results decay faster than pos-
+itive ones — the mental model of why the failure matters fades
+within weeks. The artifact should be findable by anyone who
+might attempt the same approach in the future.
+
+Field card: a negative result artifact with a HIGH confidence
+rating and a populated REPLICATION REQUIREMENTS section
+is citable in future work. Treat it as such.
+
+
+
+
+
+                                                      105
+
+===== PAGE 106 =====
+GNOME Prompt Field Manual
+
+
+
+SAFETY NOTES
+
+
+Negative result documentation surfaces things organizations pre-
+fer to forget. In institutional contexts, a well-documented failure
+can become a political document — evidence of a failed initiative,
+a wrong call, or a misallocated budget. Know your environment
+before sharing. The artifact is valuable precisely because it’s
+honest. That honesty has a cost in some settings.
+
+Do not use negative result artifacts to assign blame. The docu-
+mentation is about what was established, not who decided to run
+the experiment. Blameless framing is not just better culture —
+it makes the artifact more useful because future readers won’t
+filter it through the political context of its creation.
+
+
+
+
+
+106
+
+===== PAGE 107 =====
+Part IV — Build, Break, Observe
+
+
+
+
+
+Prompts for systems work. The emphasis is on trust boundaries,
+failure modes, and observability — the three things that deter-
+mine whether you understand a system well enough to change it
+safely.
+
+
+
+  S-01 System Map with Trust Boundaries
+
+  Criteria:  1, 7, 9 — hidden assumption + trust boundary + ship
+  cleaner
+
+
+
+
+WHAT IT DOES
+
+
+Maps a system as a threat-relevant operational artifact — not
+as architecture documentation. Produces a per-component map
+showing trust boundaries, what crosses them, who can inject at
+each crossing, what authority level is granted on the other side,
+and what is and is not observable. The map makes visible what
+architecture diagrams bury: where authority changes, where ex-
+ternal input can reach internal state, and where an operator can-
+not see what happened.
+
+
+
+
+
+                                                      107
+
+===== PAGE 108 =====
+GNOME Prompt Field Manual
+
+
+
+WHEN TO USE
+
+
+Before any significant change to a system that processes exter-
+nal input. When inheriting a codebase or system and need to
+establish the actual trust model before modifying anything. Be-
+fore a security review, penetration test, or threat modeling ses-
+sion. When an incident revealed that the system reached a state
+that shouldn’t have been reachable — the map reconstructs how.
+When planning instrumentation: the observability gap column
+drives the monitoring backlog. Not a substitute for reading the
+code. The map reflects what you already know or can describe
+— garbage input produces a map of your misunderstanding.
+
+
+THE PROMPT
+
+
+
+
+
+   Map the following system for operational trust analysis. System
+
+   description: [COMPONENT LIST / ARCHITECTURE / CODE DESCRIPTION]
+
+   Produce each section in order.
+
+   1. SYSTEM BEING MAPPED State what system is being analyzed, what
+
+   it does, and its trust boundary context — what is inside the trust
+
+   perimeter and what is outside.
+
+   2. COMPONENT TABLE For each component, produce one complete entry:
+
+   COMPONENT: [Name]
+
+   ROLE: [What it does — one sentence, behavioral not architectural]
+
+   INPUTS: [All inputs this component receives — distinguish trusted
+
+   vs untrusted at intake] OUTPUTS: [All outputs this component
+
+   produces — include state changes, not just return values] TRUST
+
+   BOUNDARY CROSSED: [Does this component receive input that crosses
+
+   a trust boundary? Name the boundary: external→internal, user→system,
+
+   service→privileged service, etc.] WHO CAN INJECT: [Who — specific
+
+   actor type — can supply or influence the input to this component?
+
+   Include indirect injection: who can influence data this component
+
+   will consume downstream] AUTHORITY / PERMISSION LEVEL: [What
+
+   authority does this component operate with? What can it do that
+
+   callers cannot do themselves?] OBSERVABILITY STATUS: MONITORED
+
+
+
+
+
+108
+
+===== PAGE 109 =====
+   / PARTIALLY MONITORED / UNMONITORED — what is and is not logged;
+
+   what would not appear in any alert or log if this component were
+
+   abused FAILURE OR ABUSE MODE: [The most plausible way this component
+
+   fails or is abused given its inputs and authority level] HARDENING
+
+   PRIORITY: CRITICAL / HIGH / MEDIUM / LOW — based on authority level,
+
+   injection surface, and observability gap combined
+
+   3. DATA FLOWS Map the primary data flows across trust boundaries. For
+
+   each flow: FLOW: [Source component →destination component]
+
+   CROSSES BOUNDARY: [Which trust boundary this flow crosses, if any]
+
+   DATA TYPE: [What is being passed]
+
+   VALIDATED AT: [Where validation happens — before the boundary,
+
+   after, or not at all] INJECTION RISK: [Whether this flow can carry
+
+   attacker-controlled content into a higher-trust context]
+
+   4. OBSERVABILITY GAPS List all UNMONITORED or PARTIALLY MONITORED
+
+   components from the component table. For each: GAP: [What cannot be
+
+   observed]
+
+   CONSEQUENCE: [What could happen without detection — operational
+
+   failure, abuse, or both] MINIMUM INSTRUMENT: [The smallest addition
+
+   that would close or reduce this gap]
+
+   5. HARDENING PRIORITIES Ranked list of all CRITICAL and HIGH
+
+   components from the component table, ordered by: authority level ×
+
+   injection surface × observability gap. State one specific hardening
+
+   action per component.
+
+
+
+
+INPUTS NEEDED
+
+
+A description of the system with enough detail to name its compo-
+nents, what they do, and how data moves between them. Works
+at architecture level (component names and data flows) or code
+level (actual function boundaries and call graphs).  Vague de-
+scriptions produce vague maps — if a component cannot be named
+and its inputs/outputs described, the map will flag it as unknown.
+
+
+
+
+
+                                                      109
+
+===== PAGE 110 =====
+GNOME Prompt Field Manual
+
+
+
+EXPECTED OUTPUT
+
+
+Five-section system map: system context, per-component table
+with injection column and observability status, data flow analysis
+across trust boundaries, observability gap inventory, and ranked
+hardening priorities. The test: every entry in the WHO CAN IN-
+JECT column must name a specific actor type, not “users” or “ex-
+ternal systems.”
+
+
+KNOBS
+
+
+Add “Assume attacker has read access to this system description”
+to force the WHO CAN INJECT column to account for informed
+attackers. Add “Focus component table on external-facing com-
+ponents only” for a fast injection surface map before a full au-
+dit. Add “Expand AUTHORITY / PERMISSION LEVEL to include:
+specific API calls, database tables, filesystem paths, and envi-
+ronment variables accessible” for systems where privilege scope
+matters precisely. Add “Flag any component where WHO CAN
+INJECT is unknown” to surface the model’s uncertainty explic-
+itly.
+
+
+FAILURE MODE
+
+
+The model will produce architecture documentation — a compo-
+nent list with descriptions, data flow arrows, and no injection
+analysis. Signs: the WHO CAN INJECT column contains “users”
+or “external systems” without specifying how; OBSERVABILITY
+STATUS is MONITORED for everything without evidence; HARD-
+ENING PRIORITIES lists generic advice (“add input validation”)
+rather than per-component actions tied to specific injection paths.
+A valid S-01 output must show where authority changes, where
+input crosses a trust boundary, who specifically can inject at
+each crossing, and what is not currently visible to an operator.
+If the map could describe any system without modification, it
+has failed.
+
+
+
+
+
+110
+
+===== PAGE 111 =====
+FOLLOW-UP
+
+
+→Run S-04 (Command/Data Boundary Audit) on any component
+where WHO CAN INJECT is non-empty and AUTHORITY / PER-
+MISSION LEVEL is elevated — these are the highest-priority in-
+jection surfaces. →Run S-06 (Observability Gap Finder) on the
+gaps identified in section 4 to produce a prioritized instrumen-
+tation backlog. →Run SEC-01 (Prompt Injection Recognizer) on
+any component that passes user-controlled content to an AI/LLM
+— the injection column makes AI-mediated injection paths visible.
+→Run SEC-10 (Trust Boundary Mapper) for a security-focused
+analysis of the same trust boundaries — S-01 maps the system;
+SEC-10 maps the attack surface.
+
+
+SAFETY NOTES
+
+
+A system map produced by this prompt contains a prioritized at-
+tack surface — the HARDENING PRIORITIES section is an or-
+dered list of the system’s most exploitable components. Han-
+dle with the same access controls as a penetration test report.
+Do not paste system maps containing real component names,
+credentials, or network topology into untrusted contexts. The
+WHO CAN INJECT column will surface injection vectors that may
+not have been considered before.  Treat newly surfaced injec-
+tion paths as findings that require triage, not as acceptable pre-
+existing conditions.
+
+
+
+  S-02 Code Archaeology
+
+   Criteria:  1, 7, 9 — hidden assumption + trust boundary + ship
+  cleaner
+
+
+
+
+
+                                                      111
+
+===== PAGE 112 =====
+GNOME Prompt Field Manual
+
+
+
+WHAT IT DOES
+
+
+Reconstructs the operational behavior of an unfamiliar codebase
+— specifically the divergence between what code appears to do
+and what it actually does, where state is hidden or implicit, and
+which zones are safe to modify without side effects. Produces
+an archaeology report that answers the question every engineer
+asks when inheriting a codebase: where can I change this with-
+out breaking something I didn’t know existed?
+
+
+WHEN TO USE
+
+
+When inheriting a codebase, module, or service with no original
+author available and no adequate documentation. Before making
+any non-trivial change to production code you haven’t written.
+When a previous modification produced an unexpected failure
+and you need to understand what hidden dependency was vio-
+lated. When a codebase has accumulated changes across multi-
+ple authors and the original intent is no longer legible from the
+current state. Not appropriate as a substitute for running the
+code — the report captures structural and behavioral analysis,
+not runtime behavior under real inputs. Hidden state dependen-
+cies in particular require running the code to confirm.
+
+
+THE PROMPT
+
+
+
+
+
+   Run a code archaeology analysis on the following codebase or module.
+
+   Code: [PASTE CODE OR DESCRIBE MODULE WITH FUNCTION SIGNATURES AND
+
+   KNOWN BEHAVIORS]
+
+   Produce each section in order.
+
+   1. STATED INTENT What does this code appear to do based on its names,
+
+   comments, and surface structure? State it in one paragraph. This
+
+   is what a new engineer would assume the code does before reading it
+
+   carefully.
+
+   2. ACTUAL BEHAVIOR What does this code actually do — including
+
+
+
+
+112
+
+===== PAGE 113 =====
+behaviors not apparent from names or comments? — Identify any
+
+divergence between stated intent and actual behavior. — For each
+
+divergence: STATED: [what it appears to do] / ACTUAL: [what it does]
+
+/ CONSEQUENCE: [what breaks when someone acts on the stated intent
+
+instead of the actual behavior]
+
+3. ENTRY POINTS List every external entry point: functions, methods,
+
+endpoints, or hooks that accept input from outside this module. For
+
+each: ENTRY POINT: [name]
+
+ACCEPTS: [input types and sources]
+
+VALIDATES: [yes / no / partial — what validation is present and what
+
+is absent] TRUST ASSUMPTION: [what trust level does this entry point
+
+implicitly grant to its input?]
+
+4. CRITICAL PATHS Trace the paths through this code that affect
+
+persistent state, external systems, or irreversible operations. For
+
+each: PATH: [entry point →operation →state change or external call]
+
+COMMITS TO: [what this path writes, deletes, sends, or triggers]
+
+REVERSIBLE: yes / no / partial
+
+PRECONDITIONS: [what must be true for this path to behave as
+
+expected]
+
+5. HIDDEN STATE DEPENDENCIES Identify all implicit dependencies
+
+— state that this code reads or writes but does not declare in
+
+its inputs or outputs. — Global variables, class-level state,
+
+module-level singletons — Database reads that are not passed as
+
+parameters — Environment variables, configuration files, or system
+
+state read at runtime — Order dependencies: operations that must
+
+happen before this code runs for it to behave correctly For each:
+
+STATE: [what it is] / READ OR WRITE: [which] / DEPENDENCY TYPE:
+
+[global / external / order / environment] /
+
+FAILURE IF ABSENT OR WRONG: [what breaks]
+
+6. SIDE EFFECTS List all operations this code performs beyond its
+
+primary stated purpose: logging, metrics, cache writes, event
+
+emissions, audit trails, external API calls. Include implicit side
+
+effects — things that happen as consequences of primary operations.
+
+For each: SIDE EFFECT / WHEN IT FIRES / WHAT IT MODIFIES OR SIGNALS /
+
+SAFE TO REMOVE OR STUB: yes / no
+
+7. SAFE MODIFICATION ZONES List the locations in this code where a
+
+modification can be made with low risk of unexpected consequences
+
+
+
+                                                    113
+
+===== PAGE 114 =====
+GNOME Prompt Field Manual
+
+
+
+
+   — specifically where: inputs and outputs are fully contained within
+
+   the function scope, no hidden state is read or written, no external
+
+   system is called, and the change has a clear test path. For each
+
+   zone: LOCATION / WHY SAFE / MINIMUM TEST TO CONFIRM SAFETY.
+
+   8. DANGEROUS MODIFICATION ZONES List locations where modification
+
+   carries high risk of unexpected consequences — specifically where
+
+   hidden state dependencies exist, where multiple callers depend
+
+   on undocumented behavior, or where side effects would be silently
+
+   broken. For each: LOCATION / WHY DANGEROUS / HIDDEN DEPENDENCY AT
+
+   RISK / TEST REQUIRED BEFORE TOUCHING.
+
+   9. MINIMUM SAFE CHANGE PLAN Given a planned change to this code:
+
+   [DESCRIBE CHANGE, OR OMIT IF NOT YET DETERMINED] State: the
+
+   pre-conditions that must be true before touching anything; the
+
+   order in which changes should be made to avoid breaking hidden
+
+   dependencies; the tests or probes that must exist before the change
+
+   can be made safely; and the rollback procedure if the change reveals
+
+   an undocumented dependency that breaks on contact.
+
+
+
+
+INPUTS NEEDED
+
+
+Actual code — function bodies, not just signatures. The more
+complete the input, the more specific the hidden state and side
+effect analysis. Works on individual functions, modules, services,
+or described architectures. Minimum viable input: function sig-
+natures, known behaviors, and any error conditions that have
+been observed. If the codebase cannot be pasted, describe: en-
+try points, what state it reads and writes, and what external sys-
+tems it calls.
+
+
+
+
+
+114
+
+===== PAGE 115 =====
+EXPECTED OUTPUT
+
+
+A nine-section code archaeology report covering stated-vs-actual
+behavior, entry points with trust assumptions, critical paths to
+persistent state, hidden state dependencies, side effects, safe
+and dangerous modification zones, and a minimum safe change
+plan. The DANGEROUS MODIFICATION ZONES section is the
+primary operational output — it is the list of locations that will
+produce silent failures if modified without understanding the hid-
+den dependencies.
+
+
+KNOBS
+
+
+Add “Focus on hidden state dependencies only” for a fast depen-
+dency audit before a specific targeted change. Add “Assume orig-
+inal author is unavailable and no tests exist” to harden the safe
+modification plan against the worst-case inheritance scenario.
+Add “Identify dead code: functions, paths, or conditions that are
+never reached under normal operation” for codebase reduction
+work before a major refactor. Add “Planned change: [descrip-
+tion]” to generate a change-specific MINIMUM SAFE CHANGE
+PLAN instead of a general one.
+
+
+FAILURE MODE
+
+
+The model will summarize the code rather than reconstruct its
+operational behavior — producing a description of what the code
+does rather than an analysis of where it can be safely changed.
+Signs: ACTUAL BEHAVIOR is identical to STATED INTENT with
+no divergences found; HIDDEN STATE DEPENDENCIES is empty
+or lists only obvious parameters; DANGEROUS MODIFICATION
+ZONES contains generic warnings (“this function is complex”)
+without naming specific hidden dependencies; the MINIMUM
+SAFE CHANGE PLAN does not list specific preconditions or a
+specific test order. A valid S-02 output must identify what changes
+state, what depends on undocumented state, and where a modi-
+fication would produce a silent failure. If the archaeology report
+would not change what you do before modifying the code, it has
+
+
+                                                      115
+
+===== PAGE 116 =====
+GNOME Prompt Field Manual
+
+
+failed.
+
+
+FOLLOW-UP
+
+
+→Run S-03 (Failure Mode Inventory) after completing the ar-
+chaeology — the DANGEROUS MODIFICATION ZONES and CRIT-
+ICAL PATHS sections are direct inputs to the failure inventory’s
+STATE FAILURE and DEPENDENCY FAILURE categories. →Run
+S-05 (API Contract Stress-Test) on any entry point where TRUST
+ASSUMPTION is implicit or undocumented — the archaeology
+identifies where implicit trust exists; the contract audit identifies
+what happens when that trust is violated. →Run S-06 (Observ-
+ability Gap Finder) using the SIDE EFFECTS section as input
+— silent side effects that fire without logging are observability
+gaps disguised as code behavior. →Run T-04 (Weakest Link Iso-
+lator) on any DANGEROUS MODIFICATION ZONE before touch-
+ing it — the archaeology identifies where modification is risky;
+T-04 structures the minimum viable test for the specific failure
+mode.
+
+
+SAFETY NOTES
+
+
+Code archaeology of production systems produces a precise map
+of where the system is fragile. The DANGEROUS MODIFICA-
+TION ZONES section is a list of locations that will produce hard-
+to-diagnose failures if modified carelessly. Do not use this report
+to justify making changes without the tests it specifies — the re-
+port identifies what could break, not confirmation that it won’t.
+Hidden state dependencies that the model flags as speculative
+(based on code structure rather than confirmed runtime behav-
+ior) must be verified by running the code before they can be ruled
+out. The model cannot observe runtime state — it can only infer
+from structure. Confirm every HIDDEN STATE DEPENDENCIES
+flag before treating it as resolved.
+
+
+
+
+
+116
+
+===== PAGE 117 =====
+  S-03 Failure Mode Inventory
+
+  Criteria: 2, 5, 9 — failure→test + safety-critical + ship cleaner
+
+
+
+
+WHAT IT DOES
+
+
+Produces a structured failure inventory for a system, process,
+or component — organized by failure category, not by compo-
+nent. Covers seven categories: input, state, dependency, per-
+mission/authority, observability, recovery, and adversarial. Each
+failure entry includes a trigger condition, effect, detectability rat-
+ing, earliest observable signal, blast radius, mitigation, and test
+or probe. The detectability rating is mandatory — it is the field
+that separates a failure inventory from a risk list.
+
+
+WHEN TO USE
+
+
+Before deploying a system with external-facing components or
+external dependencies. After completing a system map (S-01) or
+code archaeology (S-02) — those outputs are direct inputs to this
+inventory. When a system has been stable but not tested against
+adversarial conditions. When a post-mortem has revealed a fail-
+ure mode that “nobody had considered” — that is a signal the
+inventory was never built. When planning observability invest-
+ment: failures rated LOW DETECTABILITY are the first priority
+for instrumentation. Not appropriate as a real-time incident re-
+sponse tool — use S-08 (Rollback Decision Gate) and S-09 (In-
+cident Report Scaffold) for live incidents. The inventory is pre-
+incident work.
+
+
+THE PROMPT
+
+
+
+
+
+   Build a failure mode inventory for the following system or process.
+
+   System / process: [DESCRIPTION — components, inputs, outputs,
+
+   dependencies, authority level]
+
+
+
+                                                      117
+
+===== PAGE 118 =====
+GNOME Prompt Field Manual
+
+
+
+
+   Produce entries for all seven failure categories below. Do not
+
+   collapse categories or skip categories with no obvious failures —
+
+   if a category appears not to apply, state that explicitly and explain
+
+   why.
+
+   For each failure mode entry, produce: FAILURE MODE: [Name of
+
+   the specific failure — not the category, the specific way this
+
+   particular system fails] TRIGGER CONDITION: [The specific input,
+
+   state, or external event that initiates this failure] EFFECT: [What
+
+   breaks, degrades, or produces incorrect output — specific scope]
+
+   DETECTABILITY: HIGH — immediately visible to operators / MEDIUM —
+
+   detectable with existing monitoring within [timeframe] / LOW — not
+
+   detectable without specific instrumentation / UNKNOWN — current
+
+   monitoring posture is insufficient to assess EARLIEST OBSERVABLE
+
+   SIGNAL: [The first observable indication that this failure has begun,
+
+   before it is fully realized. If DETECTABILITY is LOW or UNKNOWN,
+
+   this is what needs to be instrumented.] BLAST RADIUS: [What else
+
+   breaks when this failure mode occurs — downstream systems, dependent
+
+   processes, user impact, data integrity] MITIGATION: [The specific
+
+   change — architectural, operational, or procedural — that reduces
+
+   this failure’s probability, severity, or blast radius] TEST OR PROBE:
+
+   [The specific test, probe, or chaos experiment that would confirm
+
+   this failure mode exists or does not exist under the current system
+
+   state]
+
+   CATEGORY 1 — INPUT FAILURE Failures initiated by malformed,
+
+   unexpected, or adversarially crafted input. Include: schema
+
+   violations that produce silent corruption rather than errors; inputs
+
+   at boundary conditions that are not tested; inputs that are valid
+
+   individually but invalid in combination; inputs that exploit implicit
+
+   trust assumptions at intake.
+
+   CATEGORY 2 — STATE FAILURE Failures caused by unexpected or corrupted
+
+   system state. Include: race conditions and ordering dependencies;
+
+   state that accumulates across requests without bounds; partial
+
+   updates that leave the system in an inconsistent state; state that
+
+   diverges between replicas or services.
+
+   CATEGORY 3 — DEPENDENCY FAILURE Failures caused by external
+
+   dependency degradation or absence. Include: hard dependencies treated
+
+   as guaranteed; degraded dependency responses treated as correct;
+
+
+
+
+118
+
+===== PAGE 119 =====
+timeout behaviors that cascade; circular dependencies that prevent
+
+recovery.
+
+CATEGORY 4 — PERMISSION / AUTHORITY FAILURE Failures caused by
+
+incorrect authority grants, authority escalation, or authority
+
+assumptions. Include: operations that execute at higher privilege
+
+than needed; trust boundaries where elevated authority is granted
+
+without re-validation; authority that propagates through data
+
+(TOCTOU, delegation chains).
+
+CATEGORY 5 — OBSERVABILITY FAILURE Failures that occur but cannot
+
+be detected with current instrumentation. These are not operational
+
+failures — they are gaps that allow other failures to go undetected.
+
+Include: silent corruption that produces wrong outputs without
+
+errors; failures that produce logs but no alerts; partial failures
+
+that appear healthy to monitors but degraded to users.
+
+CATEGORY 6 — RECOVERY FAILURE Failures in the recovery process
+
+itself. Include: rollback procedures that fail under the conditions
+
+that triggered the original failure; retry logic that amplifies
+
+rather than resolves the original failure; recovery that succeeds
+
+technically but leaves state inconsistent; incomplete recovery that
+
+masks the original failure while leaving residual damage.
+
+CATEGORY 7 — ADVERSARIAL FAILURE Failures that require an active
+
+adversary to realize — abuse of legitimate functionality, injection,
+
+privilege escalation, and denial of service vectors not covered by
+
+the other categories. Include: inputs crafted to exploit edge cases
+
+in validation; legitimate operations chained to produce unauthorized
+
+effects; resource exhaustion via valid requests; exfiltration paths
+
+through legitimate output channels.
+
+After all seven categories, produce:
+
+DETECTABILITY SUMMARY List all failure modes rated LOW or UNKNOWN
+
+detectability. For each: the earliest observable signal and the
+
+minimum instrumentation required to move this rating to MEDIUM or
+
+HIGH.
+
+HARDENING SEQUENCE Given the full inventory, what is the order in
+
+which to address these failures? Rank by: detectability × blast
+
+radius × probability. State the top three and why.
+
+
+
+
+
+                                                    119
+
+===== PAGE 120 =====
+GNOME Prompt Field Manual
+
+
+
+INPUTS NEEDED
+
+
+A system or process description sufficient to identify its compo-
+nents, inputs, outputs, dependencies, and authority level. Works
+with architecture descriptions, code summaries, or deployment
+configurations. Minimum viable input: component names, what
+external inputs they accept, what external systems they depend
+on, and what authority level they operate with. The more spe-
+cific the input, the more specific the TEST OR PROBE entries —
+generic inputs produce generic probes.
+
+
+EXPECTED OUTPUT
+
+
+A structured failure inventory with entries across all seven cate-
+gories, each with eight fields. The DETECTABILITY field is manda-
+tory for every entry — an entry without it is not a valid failure
+mode record. The DETECTABILITY SUMMARY and HARDEN-
+ING SEQUENCE sections synthesize the inventory into action-
+able priorities.
+
+
+KNOBS
+
+
+Add “Weight ADVERSARIAL FAILURE category: this system is
+internet-facing and actively targeted” to force adversarial fail-
+ure enumeration beyond obvious attack paths. Add “Focus DE-
+TECTABILITY analysis on:  [specific monitoring stack]” to pro-
+duce TEST OR PROBE entries tailored to available observability
+tooling. Add “Scope to: [specific component or subsystem]” to
+run a deep inventory on one module rather than a shallow pass
+across all seven categories. Add “Compare against known in-
+cident history: [incident descriptions]” to use past failures as
+seeds for each category.
+
+
+
+
+
+120
+
+===== PAGE 121 =====
+FAILURE MODE
+
+
+The model will produce a risk list — broad categories of things
+that could go wrong, without the structure that makes a fail-
+ure mode inventory actionable. Signs: FAILURE MODE entries
+name categories (“state corruption”) rather than specific failure
+modes (“write operation completes on primary but fails on replica
+without raising an error, leaving replica in stale state”); TRIG-
+GER CONDITION is vague (“under load”) without specifying the
+load condition; DETECTABILITY is omitted or uniformly HIGH;
+TEST OR PROBE entries say “monitor for errors” rather than
+specifying a test procedure. A valid S-03 output must state how
+each failure starts (TRIGGER CONDITION), how it appears (EAR-
+LIEST OBSERVABLE SIGNAL), how detectable it is (DETECTABIL-
+ITY), what it breaks (BLAST RADIUS), and how to verify it exists
+(TEST OR PROBE). If any of these five fields are absent or generic
+across multiple entries, the inventory has failed.
+
+
+FOLLOW-UP
+
+
+→Run T-05 (Decision Pre-Mortem) on any decision to deploy
+or promote this system, using the ADVERSARIAL FAILURE and
+LOW DETECTABILITY entries as inputs — these are the failure
+modes most likely to produce the worst surprises. →Run S-06
+(Observability Gap Finder) on the DETECTABILITY SUMMARY
+— the low-detectability entries are a direct input to the instru-
+mentation backlog. →Run S-08 (Rollback Decision Gate) on any
+RECOVERY FAILURE entry that involves a rollback procedure
+— recovery failures are most dangerous when the system is al-
+ready degraded and rollback is the last line of defense. →Run
+SEC-06 (Tool-Agent Offense Probe) on the ADVERSARIAL FAIL-
+URE entries if the system includes AI/LLM components — S-03
+enumerates the adversarial surface; SEC-06 generates test cases
+to probe it.
+
+
+
+
+
+                                                      121
+
+===== PAGE 122 =====
+GNOME Prompt Field Manual
+
+
+
+SAFETY NOTES
+
+
+The ADVERSARIAL FAILURE category produces a prioritized ex-
+ploitation inventory. Handle output with the same access con-
+trols as a penetration test report. Do not share failure inventories
+containing real component names, real dependencies, or real au-
+thority levels in untrusted contexts before the identified failures
+are mitigated. TEST OR PROBE entries for adversarial failures
+are specifications for tests to be executed in staging or under
+controlled conditions — not instructions to execute immediately
+on production systems.
+
+
+
+  S-04 Command/Data Boundary Audit
+
+  Criteria:  1, 7, 9 — hidden assumption + trust boundary + ship
+  cleaner
+
+
+
+
+
+WHAT IT DOES
+
+
+Audits code, configuration, or system architecture for locations
+where commands and data are not properly separated — specifi-
+cally where user-controlled or externally-sourced data can reach
+a command execution context without explicit sanitization or bound-
+ary enforcement.
+
+
+WHEN TO USE
+
+
+Security review of any system that processes external input. Be-
+fore deploying anything that passes user data to shell commands,
+SQL queries, file paths, eval statements, AI prompts, or external
+APIs. After a security incident involving injection.
+
+
+THE PROMPT
+
+
+
+
+
+122
+
+===== PAGE 123 =====
+   Audit the following [code/configuration/system description] for
+
+   command/data boundary violations.
+
+   A command/data boundary violation occurs wherever data that could be
+
+   controlled by an untrusted party reaches a context that executes or
+
+   interprets instructions.
+
+   Check for:
+
+   1. DIRECT INJECTION SURFACES: SQL queries built from string
+
+   concatenation. Shell commands assembled from user input. File paths
+
+   constructed from user-supplied values. eval() or equivalent. Template
+
+   rendering with unsanitized interpolation.
+
+   2. INDIRECT INJECTION SURFACES: Data stored in one step and used in a
+
+   command context in another step. Cached values. Retrieved content
+
+   used in downstream command contexts. Third-party data passed to
+
+   execution contexts.
+
+   3. TRUST BOUNDARY VIOLATIONS: Data that crosses a trust boundary
+
+   (external →internal, user →admin, untrusted →trusted) without
+
+   explicit validation, sanitization, or re-classification.
+
+   4. MISSING PARAMETERIZATION: Contexts that should use parameterized
+
+   queries, prepared statements, or structured APIs but instead use
+
+   string construction.
+
+   5. IMPLICIT TRUST: Code that trusts data because of where it came
+
+   from (from our database, from internal API) without verifying it
+
+   hasn't been tampered with along the way.
+
+   For each finding: location in code/system, attack vector enabled,
+
+   severity (CRITICAL/HIGH/MEDIUM/LOW), and remediation.
+
+   [CODE/CONFIG/SYSTEM DESCRIPTION]
+
+
+
+
+INPUTS NEEDED
+
+
+Code, configuration files, or system description. Works best with
+actual code.
+
+
+
+
+
+                                                      123
+
+===== PAGE 124 =====
+GNOME Prompt Field Manual
+
+
+
+EXPECTED OUTPUT
+
+
+Five-category audit with per-finding location, attack vector, sever-
+ity, and remediation.
+
+
+KNOBS
+
+
+Add ‘assume attacker has read access to the codebase’ for threat
+models where source is exposed. Add ‘focus on AI/LLM integra-
+tion points specifically’ for AI systems. Add ‘generate exploit
+proof-of-concept for each CRITICAL finding’ for active penetra-
+tion testing.
+
+
+FAILURE MODE
+
+
+Static analysis of text descriptions misses runtime trust viola-
+tions.  This audit is architecture-level — follow up with actual
+dynamic testing for any CRITICAL findings.
+
+
+FOLLOW-UP
+
+
+For each CRITICAL finding: write a test that demonstrates the
+vulnerability. For each HIGH finding: write a test before patch-
+ing so you can confirm the fix.
+
+
+SAFETY NOTES
+
+
+This audit generates real attack surface analysis. Handle find-
+ings with appropriate access controls. Do not publish detailed
+vulnerability findings before patching.
+
+
+
+  S-05 API Contract Stress-Test
+
+  Criteria: 1, 9 — hidden assumption + ship cleaner
+
+
+
+
+
+124
+
+===== PAGE 125 =====
+WHAT IT DOES
+
+
+Stresses-tests an API contract (spec, documentation, or inter-
+face definition) for ambiguities, under-specified behaviors, and
+implicit assumptions that will cause integration failures when
+callers or implementations make different assumptions about the
+same contract.
+
+
+WHEN TO USE
+
+
+Before implementing against a new API. Before publishing an
+API that others will implement against. When an integration is
+failing in unexpected ways. When two implementations of the
+same spec behave differently.
+
+
+THE PROMPT
+
+
+
+
+
+   Stress-test the following API contract.
+
+   Contract: [API SPEC / DOCUMENTATION / INTERFACE DEFINITION]
+
+   1. AMBIGUITY AUDIT: Identify every term, behavior, or value in the
+
+   contract that a caller and implementer might reasonably interpret
+
+   differently. For each: describe the two interpretations and what
+
+   failure occurs when they differ.
+
+   2. UNDER-SPECIFIED BEHAVIORS: What does the contract not specify
+
+   that will determine actual behavior? - Error cases not enumerated -
+
+   Ordering guarantees (or lack thereof) - Consistency guarantees - Rate
+
+   limits, size limits, timeout behaviors - Authentication edge cases -
+
+   Concurrency behavior
+
+   3. IMPLICIT ASSUMPTIONS: What must be true about the caller's
+
+   environment, state, or knowledge for this API to work as expected?
+
+   These are often undocumented prerequisites.
+
+   4. BREAKING CHANGE SURFACE: If this contract changes, what changes
+
+   would be technically backwards-compatible but practically breaking
+
+   (changed semantics, changed performance characteristics, changed
+
+   error messages that callers parse)?
+
+
+
+                                                      125
+
+===== PAGE 126 =====
+GNOME Prompt Field Manual
+
+
+
+
+   5. ADVERSARIAL CALLER: An API caller who follows the contract exactly
+
+   but tries to cause problems — what can they do?
+
+   Severity: CRITICAL (will cause data loss or security failure) / HIGH
+
+   (will cause incorrect behavior) / MEDIUM (will cause integration
+
+   friction) / LOW (will cause confusion).
+
+
+
+
+INPUTS NEEDED
+
+
+API specification, documentation, or interface definition in any
+format.
+
+
+EXPECTED OUTPUT
+
+
+Five-section stress test with ambiguities, under-specified behav-
+iors, implicit assumptions, breaking change surface, and adver-
+sarial caller analysis.
+
+
+KNOBS
+
+
+Add ‘compare to implementation: [description]’ to find spec/implementation
+drift. Add ‘focus on error handling specifically’ for resilience re-
+view. Add ‘focus on security boundaries’ for authentication/authorization
+APIs.
+
+
+FAILURE MODE
+
+
+Will not find implementation bugs, only contract specification is-
+sues. The adversarial caller section in particular requires do-
+main knowledge to assess — review with security perspective.
+
+
+
+
+
+126
+
+===== PAGE 127 =====
+FOLLOW-UP
+
+
+For each CRITICAL ambiguity: add explicit test cases to the
+contract spec. For each under-specified behavior: decide and
+document the intended behavior, then test that implementations
+match.
+
+
+SAFETY NOTES
+
+
+API contracts that handle authentication, authorization, or sensi-
+tive data should have security review that goes beyond this spec
+analysis.
+
+
+
+  S-06 Observability Gap Finder
+
+  Criteria:  1, 7, 9 — hidden assumption + trust boundary + ship
+  cleaner
+
+
+
+
+
+WHAT IT DOES
+
+
+Audits a system’s observability posture for gaps — specifically,
+failure modes that are currently undetectable, trust boundaries
+that are unmonitored, and system states that could drift without
+triggering an alert. Produces a prioritized list of what to instru-
+ment before the next incident teaches you the hard way.
+
+
+WHEN TO USE
+
+
+Before a major deployment. When reviewing a system you’ve in-
+herited. After an incident that wasn’t detected by existing moni-
+toring. When planning observability investment.
+
+
+THE PROMPT
+
+
+
+
+
+                                                      127
+
+===== PAGE 128 =====
+GNOME Prompt Field Manual
+
+
+
+
+   Find observability gaps in the following system.
+
+   System description: [ARCHITECTURE / COMPONENT LIST / CURRENT
+
+   MONITORING DESCRIPTION]
+
+   1. UNDETECTABLE FAILURES: For each component and each failure mode,
+
+   ask: would we know within [5 minutes / 1 hour / 24 hours] if this
+
+   failed? List failure modes with no corresponding detection mechanism.
+
+   2. UNMONITORED TRUST BOUNDARIES: Where does data cross a trust
+
+   boundary (external →internal, user →system, service →service)?
+
+   Which of these crossings are not logged or monitored? These are blind
+
+   spots for both failure and attack.
+
+   3. SILENT DEGRADATION SURFACES: Where could system performance or
+
+   correctness degrade gradually without triggering threshold-based
+
+   alerts? (Slow drift, partial failures, quality degradation without
+
+   quantity errors)
+
+   4. MISSING CAUSAL CHAIN: When an incident occurs, can you trace it
+
+   end-to-end? Identify gaps in the observable causal chain — places
+
+   where you'd lose the trail during incident investigation.
+
+   5. ALERT COVERAGE MAP: For each current alert: what does it actually
+
+   detect? What does it miss? Are there alerts that are too noisy to be
+
+   trusted?
+
+   Output: prioritized instrumentation backlog with: what to add, why it
+
+   matters, estimated effort.
+
+
+
+
+INPUTS NEEDED
+
+
+System description including current components, architecture,
+and existing monitoring/alerting.
+
+
+EXPECTED OUTPUT
+
+
+Five-section observability audit with prioritized instrumentation
+backlog.
+
+
+
+
+
+128
+
+===== PAGE 129 =====
+KNOBS
+
+
+Add ‘focus on: [latency / error rate / data quality / security events]’
+to specialize. Add ‘assume you have [hours / days] for observ-
+ability work before next release’ to prioritize output. Add ‘flag
+SLA-relevant gaps first.’
+
+
+FAILURE MODE
+
+
+Will generate a longer list than you can act on. The prioritization
+section is mandatory — use it. An observability wish list without
+prioritization is just anxiety.
+
+
+FOLLOW-UP
+
+
+Pick the top three gaps that would most change your incident
+response capability. Instrument those before anything else.
+
+
+SAFETY NOTES
+
+
+Observability infrastructure itself has security implications — logs
+can contain sensitive data. Include data classification and access
+control in instrumentation design.
+
+
+
+  S-07 Migration Risk Classifier
+
+  Criteria: 8, 9 — decision quality under uncertainty + ship safer
+
+
+
+WHAT IT DOES
+
+
+Classifies the risk of a planned migration — data migration, ser-
+vice migration, database schema change, infrastructure move, or
+API version cutover — before execution. Produces a per-dimension
+risk verdict for each structural risk category that migrations typ-
+ically fail on, then issues a MIGRATION VERDICT that gates
+whether the migration should proceed, proceed with conditions,
+
+
+                                                      129
+
+===== PAGE 130 =====
+GNOME Prompt Field Manual
+
+
+or be blocked pending specific remediation. Distinct from a pre-
+deployment checklist:  this prompt assesses migration-specific
+risk categories that generic deployment gates miss — schema
+contract breakage, state ordering constraints, rollback complex-
+ity under data-in-flight conditions, and observability gaps that
+leave the team blind during cutover.
+
+
+WHEN TO USE
+
+
+Before any migration where failure would require emergency
+rollback, data recovery, or incident response.  Before schema
+changes to production databases. Before API version cutovers
+affecting downstream consumers. Before infrastructure moves
+where state must transfer between systems. When planning the
+go/no-go criteria for a migration window. When a migration has
+failed before and you need to identify what structural risk was
+missed. Not for greenfield deployments with no state to migrate.
+Not a substitute for migration-specific dry runs — this prompt
+identifies risk categories that require a dry run, it does not re-
+place performing one.
+
+
+THE PROMPT
+
+
+
+
+
+   Classify the migration risk for the following planned migration.
+
+   Produce a per-dimension risk assessment and a final verdict.
+
+   SOURCE SYSTEM: [What is being migrated from — system, version,
+
+   schema, service, or infrastructure description] TARGET SYSTEM: [What
+
+   is being migrated to]
+
+   STATE / DATA BEING MIGRATED: [What data or state must transfer —
+
+   rows, blobs, config, secrets, queue contents, session state]
+
+   For each dimension below, provide: RISK LEVEL: CRITICAL / HIGH /
+
+   MODERATE / LOW
+
+   EVIDENCE: What specific property of this migration drives this
+
+   rating? Do not rate without evidence. MITIGATION REQUIRED: What must
+
+   be true before this dimension clears to LOW?
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━COMPATIBILITY RISK
+
+
+
+130
+
+===== PAGE 131 =====
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━Will the migrated data or
+
+service preserve semantic meaning in the target system? Will the
+
+target system behave the same way the source system did for all
+
+current consumers? Flag if: type coercions are required; encoding
+
+differences exist; NULL handling differs; default values differ;
+
+precision or range constraints differ between source and target.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━SCHEMA / CONTRACT RISK
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━Does any consumer of
+
+this system depend on a schema or API contract that changes during
+
+migration? Are there implicit contracts (field ordering, response
+
+structure, error codes) that no documented spec captures? Flag if:
+
+consumers have not been inventoried; contract tests do not exist;
+
+the schema change is additive but consumers use wildcard selectors;
+
+breaking changes exist in any field used by a known consumer.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━DEPENDENCY RISK
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━What systems depend on
+
+the source system and will be affected during or after migration?
+
+Have all upstream and downstream dependencies been inventoried and
+
+notified? Flag if: dependency map is incomplete; dependent systems
+
+have not been tested against the target; circular dependencies exist
+
+that could cause partial migration failure; third-party integrations
+
+have undocumented coupling to source system state.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ORDERING / SEQUENCING RISK
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━Does the migration have
+
+ordering constraints that could cause data inconsistency or service
+
+failure if violated? Flag if: foreign key relationships require
+
+ordered migration; event streams have ordering guarantees that do
+
+not survive cutover; queue contents must drain before migration;
+
+dual-write or dual-read windows require careful sequencing; the
+
+migration is not atomic and partial completion leaves a valid but
+
+inconsistent state.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ROLLBACK RISK
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━If the migration fails
+
+after partial completion, can the system return to the source state?
+
+What is the rollback procedure, and is it tested? Flag if: rollback
+
+has not been tested; state written to the target cannot be unwound
+
+
+
+
+                                                    131
+
+===== PAGE 132 =====
+GNOME Prompt Field Manual
+
+
+
+
+   without data loss; rollback requires more time than the migration
+
+   window allows; data-in-flight during cutover cannot be recovered
+
+   from either source or target; rollback invalidates audit logs or
+
+   compliance records.
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━OBSERVABILITY RISK
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━Will the team have
+
+   sufficient visibility during and after cutover to detect failure
+
+   quickly and diagnose it accurately? Flag if: migration-specific
+
+   metrics are not defined; there is no baseline for post-migration
+
+   comparison; alert thresholds have not been adjusted for the cutover
+
+   period; logs from source and target cannot be correlated during the
+
+   transition window; the team would have to rely on user reports to
+
+   detect failure.
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━USER / DOWNSTREAM IMPACT
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━What is the user-facing
+
+   or downstream-system-facing impact during and immediately after
+
+   migration? Is there a maintenance window? Have affected users or
+
+   downstream teams been notified? Flag if: user impact during cutover
+
+   has not been characterized; no maintenance window is planned for
+
+   a migration that requires one; SLA obligations apply during the
+
+   migration window; downstream systems are not aware of the behavioral
+
+   changes they will see after cutover.
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━DETECTABILITY
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━If this migration produces
+
+   a silent failure — data loss without errors, behavioral change
+
+   without alerts, contract breakage that consumers tolerate without
+
+   immediate failure — how long before detection? What is the detection
+
+   mechanism? Flag if: silent data corruption is possible without
+
+   alerting; behavioral regression could be masked by retry logic; the
+
+   detection window exceeds the rollback window.
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━REQUIRED TEST OR DRY RUN
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━Given the risk levels
+
+   above: what specific test or dry run is required before production
+
+   migration proceeds? State: what environment, what data volume, what
+
+   success criteria, and who reviews the dry run results. If no dry run
+
+   is required: justify why the risk profile supports skipping it.
+
+
+
+
+132
