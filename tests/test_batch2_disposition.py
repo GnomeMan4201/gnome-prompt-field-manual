@@ -127,6 +127,7 @@ class Batch2DispositionTests(unittest.TestCase):
         metadata = " ".join(metadata_text(x) for x in cards)
         self.assertIn("SPECIFIC OBJECTIONS A numbered list of at least three distinct objections", visible.replace("\n", " "))
         self.assertIn("specific objections a numbered list of at least three distinct objections", metadata)
+        self.assertIn("<em>SPECIFIC OBJECTIONS A numbered list of at least three distinct objections this</em>", page(45))
         self.assertIn("WHAT THIS DRAFT AVOIDS", visible)
         self.assertIn("CONFIDENCE LAUNDERING FLAGS", visible)
         self.assertIn("ADVERSARIAL VERDICT: SURVIVES ATTACK / NEEDS REVISION / FAILS UNDER", visible)
