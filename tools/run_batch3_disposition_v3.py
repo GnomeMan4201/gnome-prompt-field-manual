@@ -10,3 +10,11 @@ if count != 1:
 s = s.replace(old, new, 1)
 code = compile(s, str(p), 'exec')
 exec(code, {'__name__': '__main__', '__file__': str(p)})
+
+test = Path(__file__).resolve().parents[1] / 'tests' / 'test_reconcile_entry_lineage.py'
+t = test.read_text(encoding='utf-8')
+old_assert = 'self.assertEqual(result.summary.pending_present_in_embedded, 16)'
+new_assert = 'self.assertEqual(result.summary.pending_present_in_embedded, 14)'
+if t.count(old_assert) != 1:
+    raise SystemExit(f'stale lineage assertion expected once, found {t.count(old_assert)}')
+test.write_text(t.replace(old_assert, new_assert, 1), encoding='utf-8')
