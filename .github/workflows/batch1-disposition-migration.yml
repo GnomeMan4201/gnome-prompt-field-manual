@@ -1,5 +1,4 @@
 name: Batch 1 Disposition Migration
-# Single authoritative, temporary migration path for PR #11.
 
 on:
   push:
@@ -48,21 +47,17 @@ jobs:
               if s.count(old) != 1:
                   raise SystemExit(f'matcher patch expected once, found {s.count(old)}: {old}')
               s = s.replace(old, new)
-
           old_block = '''    def page016(page: str) -> str:\n        for old, new, label in [\n            ("issue a COLLAPSES verdict", "issue a COLLAPSE verdict", "visible failure-mode verdict"),\n            ("issue a collapses verdict", "issue a collapse verdict", "metadata failure-mode verdict"),\n            ("PARTIALLY DEFENSIBLE or COLLAPSES", "PARTIALLY DEFENSIBLE or COLLAPSE", "visible follow-up verdict"),\n            ("partially defensible or collapses", "partially defensible or collapse", "metadata follow-up verdict"),\n        ]:\n            page = exact(page, old, new, label=f"T-02 {label}")\n        return page\n'''
-          new_block = '''    def page016(page: str) -> str:\n        page = regex_once(\n            page,\n            r'is-[\\s\\S]*?ue a collapses verdict',\n            "issue a collapse verdict",\n            label="T-02 metadata failure-mode verdict",\n        )\n        page = exact(\n            page,\n            "partially defensible or collapses",\n            "partially defensible or collapse",\n            label="T-02 metadata follow-up verdict",\n        )\n        page = regex_once(\n            page,\n            r'is-[\\s\\S]*?sue a COLLAPSES verdict',\n            "issue a COLLAPSE verdict",\n            label="T-02 visible failure-mode verdict",\n        )\n        page = regex_once(\n            page,\n            r'PARTIALLY DEFENSIBLE or COLLAPSES',\n            "PARTIALLY DEFENSIBLE or COLLAPSE",\n            label="T-02 visible follow-up verdict",\n        )\n        return page\n'''
+          new_block = '''    def page016(page: str) -> str:\n        page = regex_once(page, r'is-[\\s\\S]*?ue a collapses verdict', "issue a collapse verdict", label="T-02 metadata failure-mode verdict")\n        page = exact(page, "partially defensible or collapses", "partially defensible or collapse", label="T-02 metadata follow-up verdict")\n        page = regex_once(page, r'is-[\\s\\S]*?sue a COLLAPSES verdict', "issue a COLLAPSE verdict", label="T-02 visible failure-mode verdict")\n        page = regex_once(page, r'PARTIALLY DEFENSIBLE or COLLAPSES', "PARTIALLY DEFENSIBLE or COLLAPSE", label="T-02 visible follow-up verdict")\n        return page\n'''
           if s.count(old_block) != 1:
               raise SystemExit(f'page016 replacement expected once, found {s.count(old_block)}')
           s = s.replace(old_block, new_block, 1)
-
           start_marker = '    text = exact(\n        text,\n        "### Changed\\n\\n",'
           end_marker = '        label="CHANGELOG Batch 1 changed section",\n    )\n'
           start = s.find(start_marker)
-          if start < 0:
-              raise SystemExit('missing CHANGELOG changed insertion block')
           end = s.find(end_marker, start)
-          if end < 0:
-              raise SystemExit('missing CHANGELOG changed insertion block end')
+          if start < 0 or end < 0:
+              raise SystemExit('missing CHANGELOG Changed insertion block')
           end += len(end_marker)
           replacement = '''    changed_heading = "### Changed\\n\\n"\n    changed_insert = "### Changed\\n\\n- Promoted T-01 and T-02 from pending to drafted after bounded disposition; current state is 19 pending / 72 drafted / 91 semantic entries / 315 pages / 9 remaining batches.\\n- Removed T-01/T-02 from active pending inventory and drafting briefs while preserving the original Batch 1 drafting prompt as explicitly completed historical provenance.\\n- Added a fail-closed Batch 1 disposition regression gate and SHA-bound audit record.\\n\\n"\n    if text.count(changed_heading) != 2:\n        raise SystemExit(f"CHANGELOG: expected two Changed headings before bounded insertion, found {text.count(changed_heading)}")\n    text = text.replace(changed_heading, changed_insert, 1)\n'''
           s = s[:start] + replacement + s[end:]
@@ -85,29 +80,21 @@ jobs:
               raise SystemExit('expected one over-broad metadata COLLAPSES assertion')
           p.write_text(s.replace(old, new, 1), encoding='utf-8')
           PY
-      - name: Compile Python
-        run: python -m compileall -q tools tests
-      - name: Run complete unit suite
-        run: python -m unittest discover -s tests -v
-      - name: Strict structural validation
-        run: python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
-      - name: Enforce post-Batch-1 entry lineage
-        run: python tools/reconcile_entry_lineage.py --input index.html --json entry-lineage.json --markdown entry-lineage.md --expect-pending 19 --expect-drafted 72 --expect-total 91 --expect-pages 315 --enforce
-      - name: Verify frozen editorial occurrence classifier
+      - name: Verify full Batch 1 gate
         run: |
+          python -m compileall -q tools tests
+          python -m unittest discover -s tests -v
+          python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
+          python tools/reconcile_entry_lineage.py --input index.html --json entry-lineage.json --markdown entry-lineage.md --expect-pending 19 --expect-drafted 72 --expect-total 91 --expect-pages 315 --enforce
           python tools/classify_editorial_occurrences.py
           git diff --exit-code -- docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv
-      - name: Audit editorial lineage
-        run: python tools/audit_editorial_lineage.py --input index.html --repository-root . --json editorial-lineage.json --markdown editorial-lineage.md
-      - name: Verify bounded diff
-        run: |
+          python tools/audit_editorial_lineage.py --input index.html --repository-root . --json editorial-lineage.json --markdown editorial-lineage.md
           git diff --check
-          git status --short
           test -s docs/BATCH1_DISPOSITION_2026-08-24.md
-      - name: Remove one-shot write-capable migration tooling
+      - name: Remove temporary mutation authority
         run: |
-          git rm tools/apply_batch1_disposition.py
-          git rm .github/workflows/batch1-disposition-migration.yml
+          git rm -f tools/apply_batch1_disposition.py
+          git rm -f .github/workflows/batch1-disposition-migration.yml
       - name: Commit verified disposition
         run: |
           git config user.name 'github-actions[bot]'
