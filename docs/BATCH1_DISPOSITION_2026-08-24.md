@@ -8,7 +8,7 @@ Bounded editorial disposition of the existing canonical bodies for `T-01 Idea St
 
 - Base commit: `0ee5a50bc1fddf86e45c9b51818b78e7c40fccfc`
 - Pre-mutation `index.html` SHA-256: `4ac0157df83a7deed06583da6d9f000d4ec2220490fa07e03de4bd6759d65243`
-- Post-mutation `index.html` SHA-256: `23587eff709f0c4e2cbe4ebc78a3809ad937f1f5e7bdd5ca87f52e8090d44c22`
+- Post-mutation `index.html` SHA-256: `e8a197606485e2ccf9c29d237de8b24e1dca6694851706262ae4983ee210ecbb`
 - Pre-state: 21 pending / 70 drafted / 91 semantic entries / 315 pages / 10 batches
 - Post-state: 19 pending / 72 drafted / 91 semantic entries / 315 pages / 9 remaining batches
 

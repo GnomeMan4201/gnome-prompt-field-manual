@@ -111,6 +111,8 @@ class Batch1DispositionTests(unittest.TestCase):
         self.assertNotIn("collapses: the claim relies", metadata)
         self.assertNotIn("partially defensible or collapses", metadata)
         self.assertNotIn("a collapses verdict", metadata)
+        self.assertNotIn("dissue", metadata)
+        self.assertIn("dis- section does not change what you understand about the claim", metadata)
 
     def test_batch1_prompt_is_historical_not_active(self) -> None:
         source = INDEX.read_text(encoding="utf-8")
