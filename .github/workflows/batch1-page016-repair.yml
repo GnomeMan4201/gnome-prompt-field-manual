@@ -6,13 +6,18 @@ on:
     paths:
       - 'tools/repair_batch1_page016.py'
       - '.github/workflows/batch1-page016-repair.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/repair_batch1_page016.py'
+      - '.github/workflows/batch1-page016-repair.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: batch1-page016-repair
+  group: batch1-page016-repair-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
