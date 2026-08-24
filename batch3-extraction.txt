@@ -24,12 +24,6 @@ R-03
         Failure Mode to Avoid  Overlap with R-11. R-03 is pre-hoc: assessing whether a result CAN be replicated before attempting it. R-11 is post-hoc: documenting what a FAILED replication established. The distinction must be explicit in WHAT IT DOES. HARKING detection (the audit upgrade) means flagging when a study's hypothesis appears to have been written after seeing the results — detectable by: hypothesis phrasing that is suspiciously well-matched to the specific result obtained, no pre-registration evidence, effect size is exactly what was needed for significance.  
         Required Artifact  Replication risk assessment: P-HACKING INDICATORS (multiple comparisons, selective reporting), EFFECT SIZE vs SIGNIFICANCE ANALYSIS (is the effect practically meaningful or just statistically detectable), HARKING DETECTION (probability that hypotheses were written post-hoc), REPLICATION REQUIREMENTS (what would be needed to replicate), OVERALL REPLICATION RISK: LOW / MEDIUM / HIGH / VERY HIGH with justification.
 
-===== TITLE POSITIONS R-01 Source Map with Contested Zones =====
-[1379668]
-
-===== TITLE POSITIONS R-03 Replication Check =====
-[]
-
 ===== PAGE 070 =====
 GNOME Prompt Field Manual
 
@@ -335,6 +329,117 @@ researchers emphasize X while others focus on Y” is not a con-
 
 
                                                        75
+
+===== PAGE 076 =====
+GNOME Prompt Field Manual
+
+
+tested zone — that is a difference of emphasis, not a conflict of
+evidence.
+
+
+FOLLOW-UP
+
+
+→Run R-02 (Source Flattening Detector) on any source flagged
+in SOURCE FLATTENING WARNINGS to trace how far back the
+flattening chain extends and whether a usable primary source ex-
+ists at all, or whether the citation chain loops back to the same
+original study cited differently. →If CONTESTED ZONES re-
+turns genuine empirical disputes, run R-07 (Competing Hypothe-
+ses Table) on the conflicting claims — the contested zones be-
+come the input hypotheses for the table. →If the source map
+reveals weak or absent primary evidence for a key claim, run
+W-09 (Claim-Evidence Separator) on the document using those
+sources — to separate what is actually supported from what is
+being asserted through accumulated citation. →If a specific
+disputed claim has contested definitional components, run T-02
+(Claim Dissection) to determine whether the dispute is genuinely
+empirical or whether the parties are measuring or defining the
+construct differently. →Run R-09 (Citation Integrity Check) on
+any citation chain passing through a SOURCE FLATTENING WARN-
+ING — flattened sources frequently introduce errors that prop-
+agate when the secondary source is cited without checking the
+original.
+
+
+SAFETY NOTES
+
+
+Source maps reflect the model’s knowledge of a literature, which
+has a training cutoff and inherent gaps. The KNOWN GAPS sec-
+tion must be treated as a starting point for human expert review,
+not a complete account of what the literature does not address.
+Domain experts will know things the model does not.  Institu-
+tional interest mapping is probabilistic, not accusatory. A flag
+in INSTITUTIONAL INTEREST / POSITION records that an in-
+terest exists and should be disclosed when citing the source —
+it does not mean the source’s findings are wrong. Many institu-
+tional sources are also methodologically rigorous. Source flatten-
+
+
+
+76
+
+===== PAGE 077 =====
+ing is structurally endemic to academic citation practice. Most
+secondary sources cite primary sources accurately within their
+scope. The flattening risk arises specifically when the secondary
+source is cited for a claim that the primary source’s conditions
+or population do not support — a scope error, not a fabrication.
+
+
+
+  R-02 Source Flattening Detector
+
+  Criteria: 1, 3 — hidden assumption + signal/noise
+
+
+
+
+
+WHAT IT DOES
+
+
+Identifies the specific failure where secondary sources are cited,
+quoted, or treated as if they were primary — collapsing the evi-
+dence chain and losing the uncertainty and limitations that were
+present in the original research.  Detects citation laundering,
+telephone-effect distortion, and overreach in interpretation.
+
+
+WHEN TO USE
+
+
+Auditing any document that synthesizes research. Before pub-
+lishing an analysis that cites secondary sources. When a claim
+sounds more certain in a synthesis than it did in the original
+study.
+
+
+THE PROMPT
+
+
+
+
+
+   Detect source flattening in the following text.
+
+   Source flattening occurs when: (a) A secondary source is cited as
+
+   if it were primary evidence (b) A primary source's findings are
+
+   stated more strongly than the original supports (c) The limitations,
+
+   confidence intervals, or caveats present in the original research
+
+   are dropped in the citation (d) Multiple studies with conflicting
+
+   findings are cited as if in consensus
+
+
+
+                                                       77
 
 ===== PAGE 078 =====
 GNOME Prompt Field Manual
@@ -951,1027 +1056,6 @@ THE PROMPT
 
 
                                                        87
-
-===== PAGE 088 =====
-GNOME Prompt Field Manual
-
-
-
-INPUTS NEEDED
-
-
-Raw research notes, interview transcripts, data summaries, or
-document extracts.
-
-
-EXPECTED OUTPUT
-
-
-Schema-locked table. Every claim traceable to specific evidence.
-Every entry complete or flagged as incomplete. Unclaimable ma-
-terial section.
-
-
-KNOBS
-
-
-Add specific domain to the schema (e.g., add ‘REGULATORY IM-
-PLICATION’ column for compliance research). Add ‘sort by AC-
-TIONABLE first’ for decision-support research. Add ‘mark claims
-that require legal review’ for sensitive material.
-
-
-FAILURE MODE
-
-
-Model will write vague LIMITATIONS entries (‘further research
-needed’). These are useless. Push: ‘State specifically what this
-evidence cannot establish — what would require different or ad-
-ditional evidence to support?’
-
-
-FOLLOW-UP
-
-
-Which HIGH-confidence claims can be published or acted on im-
-mediately? Which LOW-confidence claims need a specific piece
-of evidence to move to MEDIUM?
-
-
-
-
-
-88
-
-===== PAGE 089 =====
-SAFETY NOTES
-
-
-Schema-locked output looks authoritative. Confidence ratings
-are only as reliable as the quality of the source assessment. Re-
-view ratings against actual sources before using in high-stakes
-contexts.
-
-
-  R-05 Failure-to-Test Converter
-
-  Criteria: 2, 6 — failure→test + reusable artifact
-
-
-
-
-WHAT IT DOES
-
-
-Takes any described failure — an experiment that didn’t work, a
-bug, an unexpected result, a wrong prediction, a rejected hypoth-
-esis — and converts it into a structured test specification that
-encodes what was learned, what is now falsifiable, and what the
-next test should look like.
-
-
-WHEN TO USE
-
-
-After any failure, unexpected result, or disconfirmed prediction.
-Before you move on. When a failure would otherwise be lost to
-narrative (‘we tried X, it didn’t work’) rather than encoded as
-testable knowledge.
-
-
-THE PROMPT
-
-
-
-
-
-   Convert the following failure into a structured test specification.
-
-   FAILURE DESCRIPTION: [What happened]
-
-   Step 1 — FAILURE ANATOMY: - What was the hypothesis or expectation? -
-
-   What was the actual result? - At what step did the divergence occur?
-
-   - What variables were not controlled?
-
-   Step 2 — WHAT WAS LEARNED: - State the falsified claim explicitly:
-
-
-
-                                                       89
-
-===== PAGE 090 =====
-GNOME Prompt Field Manual
-
-
-
-
-   "We now know that [X] does NOT [Y] under [conditions]." - State what
-
-   remains uncertain: "This result does NOT establish whether [Z]." -
-
-   Identify any new hypotheses generated by the failure.
-
-   Step 3 — TEST SPECIFICATION: - New hypothesis (falsifiable statement)
-
-   - Test conditions (what must be held constant, what must vary) -
-
-   Success criteria (what observable result counts as confirmation) -
-
-   Failure criteria (what observable result counts as disconfirmation)
-
-   - Minimum viable test (smallest test that would give signal) -
-
-   Cost/time estimate for minimum viable test
-
-   Step 4 — KNOWLEDGE ARTIFACT: Write a one-paragraph entry for a lab
-
-   notebook / knowledge base that encodes this failure as reusable
-
-   institutional knowledge.
-
-   Failure: [DESCRIPTION]
-
-
-
-
-INPUTS NEEDED
-
-
-A description of any failure, bug, unexpected result, or discon-
-firmed prediction.
-
-
-EXPECTED OUTPUT
-
-
-Four-section failure analysis: anatomy, learning, test spec, and
-knowledge artifact.
-
-
-KNOBS
-
-
-Add ‘assume this failure will be shared with others who might
-make the same mistake’ to sharpen the knowledge artifact. Add
-‘flag if this failure suggests the original hypothesis was badly
-formed.’ Add ‘link to related failures’ for accumulating failure
-libraries.
-
-
-
-
-
-90
-
-===== PAGE 262 =====
-GNOME Prompt Field Manual
-
-
-
-
-    STEP 7 →S-08 (Incident Report Scaffold): Document the vulnerability,
-
-    patch, and lessons. This is your security changelog entry and
-
-    potentially your disclosure document.
-
-
-
-
-LINK LOGIC
-
-
-The test cases in Step 4 must exist before the patch in Step 5.
-This is non-negotiable. A patch without a test is a patch that will
-regress.
-
-
-BREAK ON
-
-
-BREAK at the Human Gate if the scope map reveals the vulnera-
-bility is more widespread than expected. Escalate before patch-
-ing.
-
-
-OUTPUT
-
-
-Characterized vulnerability + scope map + regression test suite
-+ patch + post-patch review + security changelog entry.
-
-
-SAFETY
-
-
-This chain handles real vulnerabilities. Every step should be con-
-ducted in a secure environment with limited access. Coordinate
-disclosure before publishing anything.
-
-
-
-  CH-05 Claim-to-Citation-to-Publication Chain
-
-   Criteria: 1, 3, 8
-
-
-
-
-
-262
-
-===== PAGE 263 =====
-PURPOSE
-
-
-Builds a claim from initial intuition through evidence to a publication-
-ready, defensible assertion. Prevents the common failure where
-a weak claim gets published because nobody ever checked whether
-the evidence actually supported it.
-
-
-WHEN
-
-
-Building any argument you intend to publish or share. When you
-have an intuition you want to turn into a defensible claim. When
-reviewing someone else’s claims before amplifying them.
-
-
-CHAIN
-
-
-
-
-
-   STEP 1 →T-02 (Claim Dissection): Dissect the initial claim. Separate
-
-   empirical, definitional, and normative components. Identify where
-
-   disagreement lives. Output: dissected claim with components.
-
-   STEP 2 →R-01 (Source Map): Map the source landscape for the
-
-   empirical components. Identify primary sources, contested zones, and
-
-   gaps. Output: source landscape.
-
-   STEP 3 →R-04 (Research Artifact Generator): Build the evidence table
-
-   from the sources. Schema-locked: every claim needs evidence. Output:
-
-   claim/evidence table.
-
-   STEP 4 →W-06 (Confidence Laundering Detector): Audit the assembled
-
-   evidence for laundering patterns. Are secondary sources doing primary
-
-   source work? Output: laundering audit.
-
-   STEP 5 →R-09 (Citation Integrity Check): Check each citation
-
-   for integrity. Does each citation actually support the claim it's
-
-   supporting? Output: citation integrity report.
-
-   STEP 6 →W-03 (Adversarial Reader): Run the adversarial reader on
-
-   the full argument. Persona: the reviewer most likely to find fault.
-
-   Output: adversarial review.
-
-   STEP 7 →T-08 (Confidence Calibration Audit): Final calibration pass.
-
-
-
-
-                                                      263
-
-===== PAGE 264 =====
-GNOME Prompt Field Manual
-
-
-
-
-   Does the published confidence match the evidence? Output: calibrated
-
-   claim, ready to publish.
-
-
-
-
-LINK LOGIC
-
-
-Steps 4 and 5 are quality gates. If either finds a significant prob-
-lem, return to Step 3. The chain is not complete until both gates
-pass.
-
-
-BREAK ON
-
-
-BREAK if Step 3 reveals the claim has no evidence in the READY
-or NEAR-READY artifact categories. Either the claim can’t be
-supported yet, or you need different research.
-
-
-OUTPUT
-
-
-A fully documented, source-mapped, evidence-backed, adversar-
-ially reviewed, calibrated claim ready for publication.
-
-
-SAFETY
-
-
-Over-documented claims can still be wrong. This chain reduces
-errors of process, not errors of fact.
-
-
-
-  CH-06 Incident-to-Runbook Chain
-
-  Criteria: 2, 6, 10
-
-
-
-
-
-264
-
-===== PAGE 265 =====
-PURPOSE
-
-
-Converts the knowledge produced during an incident — what
-worked, what didn’t, what the correct sequence was — into a
-runbook that codifies that knowledge for the next operator who
-faces the same situation.
-
-
-WHEN
-
-
-During or immediately after an incident that required non-obvious
-diagnostic or remediation steps. When an incident revealed a
-gap in existing runbooks. When a specific expert’s knowledge
-needs to be institutionalized.
-
-
-CHAIN
-
-
-
-
-
-   STEP 1 →S-08 (Incident Report Scaffold): Document the incident
-
-   completely while memory is fresh. Output: incident report.
-
-   STEP 2 →R-05 (Failure-to-Test Converter): Convert each contributing
-
-   factor into a test specification. What test would detect this failure
-
-   earlier next time? Output: test specifications.
-
-   STEP 3 →S-06 (Observability Gap Finder): Feed the incident timeline
-
-   into the gap finder. What monitoring would have detected this
-
-   earlier? Output: instrumentation backlog.
-
-   STEP 4 →RUNBOOK GENERATION PROMPT: Given: [incident report] + [test
-
-   specifications] + [observability gaps] Generate a runbook for the
-
-   failure mode that caused this incident.
-
-   Runbook structure: TRIGGER: The specific condition that activates
-
-   this runbook - INITIAL ASSESSMENT (2 minutes): What to check first
-
-   and why DIAGNOSTIC SEQUENCE: Ordered steps to confirm the diagnosis
-
-   REMEDIATION OPTIONS: Ordered by speed vs. risk tradeoff
-
-   ROLLBACK DECISION POINT: When to stop mitigation and roll back
-
-   VERIFICATION: How to confirm resolution
-
-   ESCALATION PATH: When to escalate and to whom
-
-   STEP 5 →VALIDATION: Have someone who was not in the incident read
-
-
-
-                                                      265
-
-===== PAGE 266 =====
-GNOME Prompt Field Manual
-
-
-
-
-   the runbook and attempt to execute it on a staging environment or
-
-   with a simulated scenario.
-
-
-
-
-LINK LOGIC
-
-
-Step 5 is non-negotiable. A runbook that hasn’t been executed
-by someone other than its author is not a runbook — it’s a guess.
-
-
-BREAK ON
-
-
-BREAK if the incident was a one-time event with no recurring
-failure mode. Not every incident needs a runbook — only those
-likely to recur.
-
-
-OUTPUT
-
-
-Incident report + test specifications + observability backlog +
-validated runbook.
-
-
-SAFETY
-
-
-Runbooks that contain credentials, specific system details, or
-security-sensitive information should be stored with appropriate
-access controls.
-
-
- CH-07 Assumption-to-Test-to-Decision Chain
-
-  Criteria: 1, 2, 8
-
-
-
-PURPOSE
-
-
-Converts a plan’s most critical assumptions into executed tests,
-then synthesizes test results into an informed decision. The ex-
-plicit codification of how to run a lean experiment loop.
-
-
-266
-
-===== PAGE 267 =====
-WHEN
-
-
-Before committing significant resources to any plan with testable
-assumptions. When someone says ‘let’s just try it and see’ — this
-chain makes that rigorous.
-
-
-CHAIN
-
-
-
-
-
-   STEP 1 →T-03 (Assumption Ledger): Build the complete assumption
-
-   ledger. Sort by CRITICAL + LOW confidence. Output: prioritized
-
-   assumption ledger.
-
-   STEP 2 →ASSUMPTION SELECTION: Choose the top 1–3 assumptions
-
-   from the CRITICAL + LOW category. More than 3 means you're not
-
-   prioritizing.
-
-   STEP 3 →T-05 (Decision Pre-Mortem): Run a pre-mortem scoped to
-
-   the selected assumptions. What does failure look like if these
-
-   assumptions are wrong? Output: failure scenarios specific to selected
-
-   assumptions.
-
-   STEP 4 →R-05 (Failure-to-Test Converter): For each selected
-
-   assumption, convert 'if this assumption is wrong, what happens'
-
-   into a test specification. Output: test specifications with
-
-   success/failure criteria.
-
-   STEP 5 →EXECUTE TESTS: Run the minimum viable tests from Step 4.
-
-   This step is not a prompt — it's work.
-
-   STEP 6 →R-07 (Competing Hypotheses Table): Feed test results into
-
-   the hypotheses table. Does the evidence support the assumption or
-
-   falsify it? Output: updated hypothesis assessment.
-
-   STEP 7 →T-06 (Belief Update Scaffold): Document the belief update
-
-   from test results to decision. Explicit prior, evidence, update,
-
-   and decision implication. Output: documented decision with explicit
-
-   reasoning.
-
-
-
-
-
-                                                      267
-
-===== PAGE 306 =====
-GNOME Prompt Field Manual
-
-
-
-
-
-306
-
-===== PAGE 307 =====
-Part IX — Field Cards
-
-
-
-
-
-Quick-reference index organized by operational trigger.  Find
-your situation, get the entry ID, go to the full entry.
-
- • TRIGGER | REACH FOR THESE ENTRIES
- • Starting a new idea or project | T-01 · T-03 · T-04 · T-05 · CH-01
- • About to make a significant decision | T-05 · T-06 · T-08 · T-10
-     · CH-07
- • Something went wrong / post-incident | S-08 · R-05 · CH-06 ·
-   S-07
- • Writing / editing something to publish | W-01 · W-03 · W-04 ·
-  W-07 · W-08 · CH-08
- • Reviewing AI-generated or AI-assisted work | AP-01 · AP-02 ·
-  AP-06 · AP-09 · AP-17
- • Security review of a system or agent | SEC-01 · SEC-02 · SEC-
-  05 · SEC-09 · SEC-10 · CH-04 · CH-09
- • Inheriting a codebase | S-02 · S-01 · S-04 · S-06 · CH-03
- • Turning notes into publishable work | R-08 · P-04 · P-05 · CH-
-  02 · CH-10
- • Research / building an argument | R-01 · R-02 · W-09 · W-06 ·
-  CH-05
- • Auditing a document someone else wrote | T-02 · T-03 · W-05 ·
-  W-06 · R-09 · AP-03
- • Model output seems off | AP-01 · AP-05 · AP-08 · AP-13 · AP-14
- • Need to summarize technical material without losing load-
-   bearing details | W-11
- • Something failed but still taught something | R-11 · R-05
- • External content may contain instructions | SEC-01 · SEC-09
-     · SEC-10
- • RAG corpus may be poisoned, stale, or drifting | SEC-03 · SEC-
-  01 · SEC-09
-
-
-                                                      307
-
-===== PAGE 308 =====
-GNOME Prompt Field Manual
-
-
- • LLM judge may be gamed or score-inflated | SEC-04 · AP-08
- • About to publish / ship anything | W-03 · W-08 · AP-02 · AP-07
-     · AP-10
-
-
-Blank Entry Templates
-
-Prompt Entry (Blank)
-
-
-
-  X-00 [Prompt Name]
-
-   Criteria: [cite at least one of the 10 criteria]
-
-
-
-WHAT IT DOES
-
-
-[Describe the specific transformation or operation. Not a tagline
-— what goes in, what comes out, and why it’s distinct.]
-
-
-WHEN TO USE
-
-
-[The operational condition. When should someone reach for this?
-What triggers it?]
-
-
-THE PROMPT
-
-
-
-
-
-   [The full prompt text. [BRACKETS] for mandatory inputs. Everything
-
-   the user needs, nothing they need to supply from context.]
-
-
-
-
-INPUTS NEEDED
-
-
-[What the user must provide. If a placeholder is ambiguous, ex-
-plain what makes a good input.]
-
-
-
-
-
-308
-
-===== PAGE 309 =====
-Blank Entry Templates
-
-
-
-EXPECTED OUTPUT
-
-
-[What good output looks like. Enough detail that a user can eval-
-uate what they get.]
-
-
-KNOBS
-
-
-[Ways to modify for different contexts. Be specific — ‘add X for
-Y situation’ not ‘customize as needed.’]
-
-
-FAILURE MODE
-
-
-[The most common failure mode. What does bad output look like?
-How do you catch it?]
-
-
-FOLLOW-UP
-
-
-[The natural next prompt. What question does this output raise?]
-
-
-SAFETY NOTES
-
-
-[Operational and ethical notes. Not boilerplate — specific to this
-prompt.]
-
-Anti-Prompt Entry (Blank)
-
-
-
- AP-00 [Anti-Prompt Name]
-
-  Criteria: [cite the criteria]
-
-
-
-WHAT IT DETECTS
-
-
-[The specific failure mode this detects.]
-
-
-
-
-
-                                                      309
-
-===== PAGE 310 =====
-GNOME Prompt Field Manual
-
-
-
-WHEN TO RUN
-
-
-[When to run this diagnostic.]
-
-
-THE ANTI-PROMPT
-
-
-
-
-
-   [The probe text.]
-
-
-
-
-SIGNAL OF FAILURE
-
-
-[What a positive finding looks like — the signal that the failure
-mode is present.]
-
-
-WHAT TO DO ON HIT
-
-
-[What to do when the signal fires.]
-
-
-NOTES
-
-
-[Operational notes specific to this anti-prompt.]
-
-
-
-
-
-310
-
-===== PAGE 311 =====
-Appendix A — Editorial Audit of the
-Previous Draft
-
-
-
-
-Why the Audit Happened
-
-The first draft of this manual contained 22 prompts. All 22 passed
-the inclusion criteria when checked individually. But ‘passes at
-least one criterion’ is a floor, not a standard. A prompt can tech-
-nically reveal a hidden assumption while being indistinguishable
-from every other ‘list your assumptions’ prompt in every other
-AI book.
-
-The audit below applies a harder question: Is this prompt dis-
-tinctively useful, or is it a slightly polished version of something
-any practitioner would think to try? The former stays. The latter
-gets upgraded or cut.
-
-Five verdicts are used:
-
- • KEEP — Already strong and distinctive. Not available in generic
-   prompt books. Keep as-is or with minor sharpening.
-
- • UPGRADE — The concept is right. The execution is too generic.
-   Specific deficiencies are listed. The upgraded version appears
-   in the new draft.
-
- • CUT — Not strong enough for this book. May be a perfectly
-   fine prompt. It is not distinctive enough to earn a slot here.
-
- • MERGE — Better combined with another prompt than stand-
-   ing alone.
-
- • FLAG — Useful but has a safety or dual-use concern that needs
-   explicit hardening before inclusion.
-
-
-
-
-                                                      311
-
-===== PAGE 312 =====
-GNOME Prompt Field Manual
-
-
-
-ID     Name           Verdict   Crit.  Reason
-
-T-01      Idea     Stress-  KEEP     1,4,8   Six-lens audit includ-
-          Test                               ing adversarial user
-                                       and  historical  ana-
-                                                   log.  Not available
-                                                  in  generic  prompt
-                                            books.
-
-T-02     Claim   Dissec-  KEEP     1,3,8   Empirical/definitional
-           tion                                      split is rare and pre-
-                                                     cise.    Cherry-pick
-                                         check is distinctive.
-
-T-03     Assumption     UPGRADE1,8    Good  concept,  but
-         Ledger                                        ’list assumptions’ is
-                                             too common.  Miss-
-                                                  ing: consequence-if-
-                                      wrong  scoring and
-                                              detection method.
-
-T-04     Concept  Com-  UPGRADE3      Useful but ’explain
-          pression                               this  concept’  is  a
-                                       commodity  prompt.
-                                           Missing adversarial
-                                               layer  and   failure
-                                   mode   of   shallow
-                                               analogies.
-
-W-01     Dense-to-Clear  KEEP    3,10   Rule-based  rewrite
-                                           with specific prohibi-
-                                                 tions (passive voice,
-                                           hedges,    30-word
-                                            sentences)  elevates
-                                                    this above ’simplify
-                                my writing’.
-
-W-02    Argument      KEEP     1,4,8   Premise-conclusion
-          Skeleton                            extraction      with
-                                             inference gap detec-
-                                                 tion  is  analytically
-                                               rigorous.
-
-
-
-
-
-312
-
-===== PAGE 313 =====
-Why the Audit Happened
-
-
-
-ID     Name           Verdict   Crit.  Reason
-
-W-03     Adversarial     KEEP     4,8     Persona-specific  re-
-         Reader                          view (hostile expert
-                                             vs general  skeptic)
-                                           with ’what this draft
-                                                avoids’ is distinctive.
-
-W-04     Field   Journal  UPGRADE6      Structured  journal-
-          Scaffolder                          ing is useful but the
-                                                 interactive   format
-                                                          is fragile — one big
-                                       answer  breaks    it.
-                                      The output format is
-                                                also underspecified.
-
-R-01     Source Map    KEEP     1,3,8   Contested    zones
-                                       and  known  gaps
-                                                distinguish this from
-                                                     ’find  me  sources’.
-                                                   Institutional interest
-                                      mapping   is  rarely
-                                               included.
-
-R-02     Research   Arti-  UPGRADE6,10   Concept    is   right
-           fact Generator                    but  output  format
-                                             too vague —  ’lit re-
-                                         view section’ needs
-                                                 tighter structure to
-                                       be truly reusable.
-
-R-03      Replication     KEEP     1,4,8   P-hacking flags and
-        Check                                 effect size vs statis-
-                                                       tical significance dis-
-                                                  tinction are specific
-                                       enough  to be gen-
-                                               uinely useful.
-
-S-01     System Map    KEEP     1,7,9   Trust     boundary
-                                         enumeration   and
-                                            observable    gaps
-                                   make  this  a  real
-                                                security   tool,  not
-                                                    just documentation.
-
-
-
-
-
-                                                      313
-
-===== PAGE 314 =====
-GNOME Prompt Field Manual
-
-
-
-ID     Name           Verdict   Crit.  Reason
-
-S-02     Code Archaeol-  KEEP     1,7,9   Intent-vs-behavior
-         ogy                              divergence and safe
-                                              modification  zones
-                                            are    operationally
-                                                    specific.
-
-S-03      Failure  Mode  KEEP     2,5,9   Seven-category
-          Inventory                           structure  covering
-                                               adversarial  failures
-                                                   specifically is above
-                                       commodity level.
-
-SEC-01  Prompt   Injec-  KEEP     5,7     Six  attack  classifi-
-           tion Recognizer                     cations    including
-                                          semantic smuggling
-                                       and delimiter confu-
-                                               sion are specific and
-                                                 rare.
-
-SEC-02  Prompt    Fire-  KEEP     5,7,9   Canary     strategy
-          wall Design                         section is distinctive.
-                                      Most  firewall  guid-
-                                        ance stops at input
-                                                   sanitization.
-
-SEC-03  RAG  Poisoning  KEEP     5,7     Persistent  injection
-          Auditor                               risk and  metadata
-                                                  injection  are  spe-
-                                                         cific  enough  that
-                                       most   practitioners
-                                             haven’t  considered
-                                          them.
-
-SEC-04   Evaluator Hard-  KEEP     4,5     Evaluator   capture
-         ening                                via  anchoring  and
-                                            score   inflation   is
-                                         under-documented.
-                                                   Critical  for anyone
-                                            using LLM-as-judge.
-
-
-
-
-
-314
-
-===== PAGE 315 =====
-Audit Summary
-
-
-
-ID     Name           Verdict   Crit.  Reason
-
-SEC-05  Command/Data  KEEP     5,7,9   Interpolation  elimi-
-          Separator                          nation  is the  right
-                                                prescription.    An-
-                                            notated     refactor
-                                            output  is genuinely
-                                                  useful.
-
-SEC-06   Tool-Agent     KEEP     2,7,9   Chained tool attacks
-          Offense Probe                   and loop  induction
-                                            are specific.   Dual-
-                                          use framing is hon-
-                                                     est.
-
-P-01      Build-in-Public   UPGRADE6,10   The  rule  ’include
-          Post Gen                       one thing that didn’t
-                                          work’ is good.  But
-                                              ’no call to action’ is a
-                                                   style preference, not
-                                       an operational rule.
-                                         Output  format  too
-                                                loosely specified.
-
-P-02     Learning  Log  UPGRADE3,6     Separating   actual
-          Extractor                    new  understanding
-                                        from   activity   log
-                                                          is  right.   But  ’dis-
-                                         proven assumptions’
-                                         needs  more  force
-                        — currently sounds
-                                                     like a suggestion.
-
-
-Audit Summary
-
-14 prompts: KEEP. 6 prompts: UPGRADE (all upgraded in the
-new draft). 2 prompts: CUT (W-04 Field Journal Scaffolder cut
-as too open-ended; P-01 and P-02 fully rewritten). 0 prompts:
-MERGE or FLAG in this round.
-
-The upgrades are not cosmetic. Each upgraded prompt has a
-specific deficiency listed and a specific fix applied. If the fix isn’t
-visible in the new version, the upgrade didn’t happen.
-
-
-
-
-                                                      315
 
 ===== BATCH ROWS =====
 3: R-01, R-03
