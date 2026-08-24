@@ -6,6 +6,11 @@ on:
     paths:
       - 'tools/apply_batch2_disposition.py'
       - '.github/workflows/batch2-disposition-apply.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/apply_batch2_disposition.py'
+      - '.github/workflows/batch2-disposition-apply.yml'
   workflow_dispatch:
 
 permissions:
