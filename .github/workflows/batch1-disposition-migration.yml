@@ -7,13 +7,19 @@ on:
     paths:
       - 'tools/apply_batch1_disposition.py'
       - '.github/workflows/batch1-disposition-migration.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'tools/apply_batch1_disposition.py'
+      - '.github/workflows/batch1-disposition-migration.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: batch1-disposition-migration
+  group: batch1-disposition-migration-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -77,7 +83,7 @@ jobs:
             --json editorial-lineage.json \
             --markdown editorial-lineage.md
 
-      - name: Verify only bounded files changed before cleanup
+      - name: Verify bounded diff
         run: |
           git diff --check
           git status --short
