@@ -31,9 +31,10 @@ titles = {
 starts = {}
 for eid, title in titles.items():
     hits = [n for n, txt in plain if eid in txt and title in txt]
-    if len(hits) != 1:
-        raise SystemExit(f'{eid} title hits: {hits}')
-    starts[eid] = hits[0]
+    if not hits:
+        raise SystemExit(f'{eid} title not found')
+    starts[eid] = min(hits)
+    out.append(f'===== TITLE HITS {eid} =====\n{hits}\n')
 
 ordered = sorted((n, eid) for eid, n in starts.items())
 for idx, (start, eid) in enumerate(ordered):
