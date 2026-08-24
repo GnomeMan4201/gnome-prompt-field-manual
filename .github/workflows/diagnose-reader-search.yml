@@ -5,6 +5,10 @@ on:
     branches: [agent/disposition-batch-1]
     paths:
       - '.github/workflows/diagnose-reader-search.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/diagnose-reader-search.yml'
   workflow_dispatch:
 
 permissions:
