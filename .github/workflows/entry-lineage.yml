@@ -13,6 +13,7 @@ on:
       - 'docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md'
       - 'docs/BATCH1_DISPOSITION_2026-08-24.md'
       - 'docs/BATCH2_DISPOSITION_2026-08-24.md'
+      - 'docs/BATCH3_DISPOSITION_2026-08-24.md'
   push:
     branches: [main]
     paths:
@@ -26,6 +27,7 @@ on:
       - 'docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md'
       - 'docs/BATCH1_DISPOSITION_2026-08-24.md'
       - 'docs/BATCH2_DISPOSITION_2026-08-24.md'
+      - 'docs/BATCH3_DISPOSITION_2026-08-24.md'
   workflow_dispatch:
 
 permissions:
@@ -63,8 +65,8 @@ jobs:
             --input index.html \
             --json entry-lineage.json \
             --markdown entry-lineage.md \
-            --expect-pending 16 \
-            --expect-drafted 75 \
+            --expect-pending 14 \
+            --expect-drafted 77 \
             --expect-total 91 \
             --expect-pages 315 \
             --enforce
