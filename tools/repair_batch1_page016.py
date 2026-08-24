@@ -56,9 +56,10 @@ audit = replace_once(audit, EXPECTED_PRE_SHA256, post_sha, "audit post-mutation 
 AUDIT.write_text(audit, encoding="utf-8")
 
 # Strengthen the permanent regression gate so this exact truncation cannot recur.
+# The metadata intentionally preserves the PDF-derived "dis- section" line wrap.
 test = TEST.read_text(encoding="utf-8")
 anchor = '        self.assertNotIn("a collapses verdict", metadata)\n'
-addition = anchor + '        self.assertNotIn("dissue", metadata)\n        self.assertIn("dissection does not change what you understand about the claim", metadata)\n'
+addition = anchor + '        self.assertNotIn("dissue", metadata)\n        self.assertIn("dis- section does not change what you understand about the claim", metadata)\n'
 test = replace_once(test, anchor, addition, "page-016 regression assertions")
 TEST.write_text(test, encoding="utf-8")
 
