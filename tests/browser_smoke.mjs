@@ -24,6 +24,14 @@ try {
     page.on('pageerror', error => pageErrors.push(String(error)));
 
     await page.goto(manualUrl, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(100);
+    const runtimeState = await page.evaluate(() => ({
+      runManualSearch: typeof globalThis.runManualSearch,
+      searchValue: document.getElementById('manualSearch')?.value ?? null,
+      cardCount: document.querySelectorAll('.manual-page-card').length,
+    }));
+    console.log(`RUNTIME ${browserName} ${scenario.name}`, JSON.stringify(runtimeState), JSON.stringify(pageErrors));
+    if (pageErrors.length) throw new Error(`${scenario.name}: startup page errors: ${pageErrors.join(' | ')}`);
 
     await assertInitialState(page);
     await assertSearch(page);
