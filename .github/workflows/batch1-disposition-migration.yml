@@ -1,4 +1,5 @@
 name: Batch 1 Disposition Migration
+# Single authoritative, temporary migration path for PR #11.
 
 on:
   push:
@@ -92,7 +93,6 @@ jobs:
         run: |
           git rm tools/apply_batch1_disposition.py
           git rm .github/workflows/batch1-disposition-migration.yml
-          git rm -f .github/workflows/batch1-disposition-once.yml
       - name: Commit verified disposition
         run: |
           git config user.name 'github-actions[bot]'
