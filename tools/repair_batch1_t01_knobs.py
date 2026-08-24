@@ -8,6 +8,7 @@ INDEX = ROOT / "index.html"
 AUDIT = ROOT / "docs" / "BATCH1_DISPOSITION_2026-08-24.md"
 EXPECTED_PRE_SHA256 = "e8a197606485e2ccf9c29d237de8b24e1dca6694851706262ae4983ee210ecbb"
 
+# Temporary one-shot helper; successful workflow removes this file.
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
