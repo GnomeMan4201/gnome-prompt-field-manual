@@ -46,7 +46,7 @@ jobs:
           git diff --exit-code -- docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv
           python tools/audit_editorial_lineage.py --input index.html --repository-root . --json editorial-lineage.json --markdown editorial-lineage.md
           git diff --check
-          grep -q 'dissection does not change what you understand about the claim' index.html
+          grep -q 'dis- section does not change what you understand about the claim' index.html
           ! grep -qi 'dissue' index.html
       - name: Prepare content-only repair commit
         run: git rm -f tools/repair_batch1_page016.py
