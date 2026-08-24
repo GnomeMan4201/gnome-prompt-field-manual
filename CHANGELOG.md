@@ -6,6 +6,11 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- Adjudicated T-01 Idea Stress-Test and T-02 Claim Dissection against their frozen Batch 1 briefs without drafting replacement bodies.
+- Replaced T-01's dependent weakest-link Lens 6 with an independent Constraint Lens; weakest-link synthesis now occurs after all six lenses and explicitly selects the highest-severity finding.
+- Added T-01's missing T-02 follow-up and one-sentence STRESS VERDICT justification requirement.
+- Normalized T-02's verdict token to `COLLAPSE`, added the required one-sentence CHERRY-PICK RISK rationale, and corrected the expected artifact from seven sections to eight items.
+
 - Completed the frozen semantic mapping: Competing Hypotheses Table is now `R-07`; Source-of-Truth Conflict Resolver is now `R-10`.
 - Corrected Failure-to-Test Converter cross-references from `R-06` to the existing `R-05` entry.
 - Removed the orphaned `R-05 (Field Journal Entry)` reference from `manual-page-213`; the evidence identifies its `W-04 Field Journal Scaffolder` predecessor as cut, not as a live entry eligible for reassignment.
@@ -13,6 +18,10 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 - Reconciled the post-state to 21 pending, 70 embedded non-pending, and 91 semantic entries across 315 reader pages.
 
 ### Changed
+
+- Promoted T-01 and T-02 from pending to drafted after bounded disposition; current state is 19 pending / 72 drafted / 91 semantic entries / 315 pages / 9 remaining batches.
+- Removed T-01/T-02 from active pending inventory and drafting briefs while preserving the original Batch 1 drafting prompt as explicitly completed historical provenance.
+- Added a fail-closed Batch 1 disposition regression gate and SHA-bound audit record.
 
 - Made corrected searchable text the canonical/default reader.
 - Preserved and labelled the unchanged v9 PDF as a historical snapshot with an independent SHA-256.
