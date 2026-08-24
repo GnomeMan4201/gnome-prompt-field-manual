@@ -12,8 +12,9 @@ for bid in ('b-s01', 'b-s02', 'b-s03'):
     m = re.search(rf'(<div class="brief" id="{bid}">.*?</div>\s*</div>)', source, re.S)
     if not m:
         raise SystemExit(f'missing brief {bid}')
-    text = re.sub(r'<[^>]+>', ' ', m.group(1))
-    out.append(f'===== BRIEF {bid} =====\n{html.unescape(re.sub(r"\\s+", " ", text)).strip()}\n')
+    raw_text = re.sub(r'<[^>]+>', ' ', m.group(1))
+    normalized = html.unescape(re.sub(r'\s+', ' ', raw_text)).strip()
+    out.append(f'===== BRIEF {bid} =====\n{normalized}\n')
 
 cards = re.findall(r'(<article class="manual-page-card" id="manual-page-(\d{3})"[^>]*>.*?</article>)', source, re.S)
 plain = []
@@ -52,5 +53,3 @@ for idx, (start, eid) in enumerate(ordered):
 
 (ROOT / 'batch4-context.txt').write_text('\n\n'.join(out), encoding='utf-8')
 print('wrote batch4-context.txt')
-
-# Trigger marker: workflow now exists on this branch.
