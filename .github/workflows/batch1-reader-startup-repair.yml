@@ -1,0 +1,63 @@
+name: Batch 1 Reader Startup Repair
+
+on:
+  push:
+    branches: [agent/disposition-batch-1]
+    paths:
+      - 'tools/repair_batch1_reader_startup.py'
+      - '.github/workflows/batch1-reader-startup-repair.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/repair_batch1_reader_startup.py'
+      - '.github/workflows/batch1-reader-startup-repair.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: batch1-reader-startup-repair-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  repair-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-1
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Apply hash-gated reader startup repair
+        run: python tools/repair_batch1_reader_startup.py
+      - name: Run complete non-browser verification gate
+        run: |
+          python -m compileall -q tools tests
+          python -m unittest discover -s tests -v
+          python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
+          python tools/reconcile_entry_lineage.py --input index.html --json entry-lineage.json --markdown entry-lineage.md --expect-pending 19 --expect-drafted 72 --expect-total 91 --expect-pages 315 --enforce
+          python tools/classify_editorial_occurrences.py
+          git diff --exit-code -- docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv
+          python tools/audit_editorial_lineage.py --input index.html --repository-root . --json editorial-lineage.json --markdown editorial-lineage.md
+          git diff --check
+          grep -q "document.getElementById('b-w01').classList.add('open');" index.html
+          grep -q "document.getElementById('b-w02').classList.add('open');" index.html
+          ! grep -q "document.getElementById('b-t01').classList.add('open');" index.html
+          ! grep -q "document.getElementById('b-t02').classList.add('open');" index.html
+      - name: Prepare content-only repair commit
+        run: git rm -f tools/repair_batch1_reader_startup.py
+      - name: Commit repaired reader
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --name-only | grep -q '^\.github/workflows/'; then echo 'workflow file unexpectedly staged' >&2; exit 1; fi
+          git diff --cached --check
+          git commit -m 'repair Batch 1 reader startup targets'
+          git push origin HEAD:agent/disposition-batch-1
