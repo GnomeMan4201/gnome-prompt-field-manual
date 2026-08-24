@@ -6,6 +6,11 @@ on:
     paths:
       - 'tools/extract_batch3_context.py'
       - '.github/workflows/batch3-context-extract.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/extract_batch3_context.py'
+      - '.github/workflows/batch3-context-extract.yml'
   workflow_dispatch:
 
 permissions:
