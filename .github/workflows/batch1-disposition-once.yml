@@ -54,7 +54,7 @@ jobs:
           knob = [i for i, line in enumerate(lines) if "r'Add “run Lens 6 twice" in line]
           if len(knob) != 1:
               raise SystemExit(f'expected one rendered Lens 6 knob matcher line, found {len(knob)}')
-          lines[knob[0]] = "            r'Add “Run Lens 6 twice: once before reading the other lenses, once after”\\s+to check whether the weakest link shifts under scrutiny\\.',"
+          lines[knob[0]] = "            r'Add “Run Lens 6 twice: once before reading the other lenses, once\\s+after”\\s+to check whether the weakest link shifts under scrutiny\\.',"
 
           source = '\n'.join(lines) + '\n'
           pattern = re.compile(
