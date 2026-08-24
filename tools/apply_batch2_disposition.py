@@ -104,9 +104,9 @@ text = replace_once(
     "specific objections a numbered list of at least three distinct objections this persona raises. each objection must:",
     "W-03 metadata minimum objections",
 )
-text = replace_once(
+text = regex_replace_once(
     text,
-    "SPECIFIC OBJECTIONS A numbered list of distinct objections this\npersona raises. Each objection must:",
+    r"SPECIFIC OBJECTIONS A numbered list of distinct objections this\s+persona raises\. Each objection must:",
     "SPECIFIC OBJECTIONS A numbered list of at least three distinct objections this\npersona raises. Each objection must:",
     "W-03 visible minimum objections",
 )
