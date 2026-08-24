@@ -1,0 +1,97 @@
+name: Batch 1 Disposition Migration
+
+on:
+  push:
+    branches:
+      - agent/disposition-batch-1
+    paths:
+      - 'tools/apply_batch1_disposition.py'
+      - '.github/workflows/batch1-disposition-migration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: batch1-disposition-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out exact branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-1
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Verify frozen base ancestry
+        run: git merge-base --is-ancestor 0ee5a50bc1fddf86e45c9b51818b78e7c40fccfc HEAD
+
+      - name: Apply fail-closed Batch 1 disposition
+        run: python tools/apply_batch1_disposition.py
+
+      - name: Compile Python
+        run: python -m compileall -q tools tests
+
+      - name: Run complete unit suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Strict structural validation
+        run: |
+          python tools/validate_manual.py \
+            --input index.html \
+            --json manual-validation.json \
+            --markdown manual-validation.md \
+            --strict-warnings
+
+      - name: Enforce post-Batch-1 entry lineage
+        run: |
+          python tools/reconcile_entry_lineage.py \
+            --input index.html \
+            --json entry-lineage.json \
+            --markdown entry-lineage.md \
+            --expect-pending 19 \
+            --expect-drafted 72 \
+            --expect-total 91 \
+            --expect-pages 315 \
+            --enforce
+
+      - name: Verify frozen editorial occurrence classifier
+        run: python tools/classify_editorial_occurrences.py --input index.html --verify docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv
+
+      - name: Audit editorial lineage
+        run: |
+          python tools/audit_editorial_lineage.py \
+            --input index.html \
+            --json editorial-lineage.json \
+            --markdown editorial-lineage.md
+
+      - name: Verify only bounded files changed before cleanup
+        run: |
+          git diff --check
+          git status --short
+
+      - name: Remove one-shot write-capable migration tooling
+        run: |
+          git rm tools/apply_batch1_disposition.py
+          git rm .github/workflows/batch1-disposition-migration.yml
+
+      - name: Commit verified disposition
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html README.md CHANGELOG.md docs/IDENTITY_AND_SCOPE.md docs/BATCH1_DISPOSITION_2026-08-24.md tests/test_reconcile_entry_lineage.py tests/test_batch1_disposition.py .github/workflows/entry-lineage.yml
+          git diff --cached --check
+          git commit -m 'adjudicate Batch 1 T-01 and T-02'
+          git push origin HEAD:agent/disposition-batch-1
