@@ -18,26 +18,14 @@ for brief_id in ("b-r01", "b-r03"):
         raise SystemExit(f"missing brief {brief_id}")
     emit(f"BRIEF {brief_id}", re.sub(r"<[^>]+>", " ", html.unescape(m.group(0))))
 
-for title in ("R-01 Source Map with Contested Zones", "R-03 Replication Check"):
-    positions = [m.start() for m in re.finditer(re.escape(title), source)]
-    emit(f"TITLE POSITIONS {title}", repr(positions))
-
 cards = list(re.finditer(r'<article class="manual-page-card" id="manual-page-(\d{3})"[^>]*>.*?</article>', source, re.S))
-seen = set()
-for i, m in enumerate(cards):
-    visible = re.search(r"<pre>(.*?)</pre>", m.group(0), re.S)
-    if not visible:
+for cm in cards:
+    page_no = int(cm.group(1))
+    if not 70 <= page_no <= 87:
         continue
-    text = html.unescape(re.sub(r"<[^>]+>", "", visible.group(1)))
-    if "R-01" in text or "R-03" in text or "Source Map with Contested Zones" in text or "Replication Check" in text:
-        for j in range(max(0, i-1), min(len(cards), i+5)):
-            if j in seen:
-                continue
-            seen.add(j)
-            cm = cards[j]
-            pre = re.search(r"<pre>(.*?)</pre>", cm.group(0), re.S)
-            if pre:
-                emit(f"PAGE {cm.group(1)}", html.unescape(re.sub(r"<[^>]+>", "", pre.group(1))))
+    pre = re.search(r"<pre>(.*?)</pre>", cm.group(0), re.S)
+    if pre:
+        emit(f"PAGE {cm.group(1)}", html.unescape(re.sub(r"<[^>]+>", "", pre.group(1))))
 
 rows = re.findall(r'<tr><td class="batch-num">(\d+)</td><td class="batch-entries">(.*?)</td>.*?</tr>', source, re.S)
 emit("BATCH ROWS", "\n".join(f"{n}: {re.sub(r'<[^>]+>', '', e)}" for n,e in rows))
