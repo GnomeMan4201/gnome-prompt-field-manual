@@ -91,15 +91,15 @@ jobs:
           python tools/audit_editorial_lineage.py --input index.html --repository-root . --json editorial-lineage.json --markdown editorial-lineage.md
           git diff --check
           test -s docs/BATCH1_DISPOSITION_2026-08-24.md
-      - name: Remove temporary mutation authority
+      - name: Prepare content-only commit
         run: |
           git rm -f tools/apply_batch1_disposition.py
-          git rm -f .github/workflows/batch1-disposition-migration.yml
-      - name: Commit verified disposition
+          git checkout HEAD -- .github/workflows/entry-lineage.yml
+      - name: Commit verified content disposition
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
+          git add index.html README.md CHANGELOG.md docs/IDENTITY_AND_SCOPE.md docs/BATCH1_DISPOSITION_2026-08-24.md tests/test_reconcile_entry_lineage.py tests/test_batch1_disposition.py tools/apply_batch1_disposition.py
           git diff --cached --check
           git commit -m 'adjudicate Batch 1 T-01 and T-02'
           git push origin HEAD:agent/disposition-batch-1
