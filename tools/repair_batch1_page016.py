@@ -8,6 +8,7 @@ INDEX = ROOT / "index.html"
 AUDIT = ROOT / "docs" / "BATCH1_DISPOSITION_2026-08-24.md"
 TEST = ROOT / "tests" / "test_batch1_disposition.py"
 
+# Exact artifact produced by the initial Batch 1 migration before prose repair.
 EXPECTED_PRE_SHA256 = "23587eff709f0c4e2cbe4ebc78a3809ad937f1f5e7bdd5ca87f52e8090d44c22"
 
 
