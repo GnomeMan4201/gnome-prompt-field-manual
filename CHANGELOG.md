@@ -6,6 +6,10 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- Adjudicated R-01 Source Map with Contested Zones and R-03 Replication Risk Auditor against their frozen Batch 3 briefs without drafting replacement bodies.
+- Added R-01's explicit cross-source `INSTITUTIONAL INTEREST MAP` while preserving the existing per-source institutional-interest disclosure and source-flattening controls.
+- Restored R-03's `VERY HIGH RISK` level, retained `NOT REPLICATION-READY` as a separate insufficient-information status, and added the frozen R-05 Failure-to-Test Converter follow-up.
+
 - Adjudicated W-01 Dense-to-Clear, W-02 Argument Skeleton Extractor, and W-03 Adversarial Reader against their frozen Batch 2 briefs without drafting replacement bodies.
 - Added the frozen W-11 prerequisite to W-01 `INPUTS NEEDED` for source material that may not be safely summarizable.
 - Preserved W-02 unchanged after it passed its frozen brief as written.
@@ -24,7 +28,11 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Changed
 
-- Promoted W-01, W-02, and W-03 from pending to drafted after bounded disposition; current state is 16 pending / 75 drafted / 91 semantic entries / 315 pages / 8 remaining batches.
+- Promoted R-01 and R-03 from pending to drafted after bounded disposition; current state is 14 pending / 77 drafted / 91 semantic entries / 315 pages / 7 remaining batches.
+- Removed R-01/R-03 from active pending inventory and drafting briefs, removed Batch 3 from the remaining-batch table without renumbering later batches, and retargeted startup defaults to S-01/S-02.
+- Added a fail-closed Batch 3 disposition regression gate and SHA-bound audit record.
+
+- Promoted W-01, W-02, and W-03 from pending to drafted after bounded disposition.
 - Removed W-01/W-02/W-03 from active pending inventory and drafting briefs, removed Batch 2 from the remaining-batch table without renumbering later batches, and retargeted startup defaults to R-01/R-03.
 - Added a fail-closed Batch 2 disposition regression gate and SHA-bound audit record.
 
