@@ -37,16 +37,14 @@ for eid, title in titles.items():
 ordered = sorted((n, eid) for eid, n in starts.items())
 for idx, (start, eid) in enumerate(ordered):
     next_start = ordered[idx + 1][0] if idx + 1 < len(ordered) else None
-    # For S-03, stop at the next entry heading after its start.
     selected = []
     for n, txt in plain:
         if n < start:
             continue
         if next_start is not None and n >= next_start:
             break
-        if next_start is None and n > start:
-            if re.search(r'\n\s*S-\d{2}\s+[^\n]+', txt):
-                break
+        if next_start is None and n > start and re.search(r'\n\s*S-\d{2}\s+[^\n]+', txt):
+            break
         selected.append((n, txt))
     out.append(f'===== BODY {eid} START PAGE {start:03d} =====')
     for n, txt in selected:
@@ -54,3 +52,5 @@ for idx, (start, eid) in enumerate(ordered):
 
 (ROOT / 'batch4-context.txt').write_text('\n\n'.join(out), encoding='utf-8')
 print('wrote batch4-context.txt')
+
+# Trigger marker: workflow now exists on this branch.
