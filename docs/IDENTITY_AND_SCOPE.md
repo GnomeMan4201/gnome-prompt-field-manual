@@ -17,11 +17,11 @@ It is not yet a final stable manual release.
 
 The deterministic entry-lineage baseline confirms:
 
-- 21 pending inventory IDs;
-- 21 matching drafting briefs;
-- 70 embedded non-pending entry IDs;
+- 19 pending inventory IDs;
+- 19 matching drafting briefs;
+- 72 embedded non-pending entry IDs;
 - 91 reconciled semantic manual entries;
-- 10 production batches;
+- 9 remaining production batches;
 - 5 special-caution entries;
 - 315 embedded reader page cards.
 
@@ -71,11 +71,13 @@ The repository uses a **combined product** boundary: PTSP remains visible as pro
 
 ## Remaining release blockers
 
-Issue #3 continues to track:
+Issue #1 is the umbrella stable-release closeout. Batch 1 disposition promoted T-01 and T-02 on 2026-08-24; 19 pending entries remain.
 
-- editorial disposition of remaining pending entries;
-- accessibility and browser validation;
-- stable-release versioning and publication evidence.
+Remaining blockers:
+
+- editorial disposition of the 19 remaining pending entries;
+- regression browser/accessibility validation after the final content mutation;
+- stable-release versioning, independent or documented-equivalent editorial review, and publication evidence.
 
 Issue #6 resolved the former `R-05 (Field Journal Entry)` collision at
 `manual-page-213`. The committed audit appendix identifies the predecessor as

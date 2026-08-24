@@ -27,7 +27,7 @@ The repository is also the production workspace for the manual. That means the p
 
 Current repository version: **1.0.0-rc.1**.
 
-This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 21 pending IDs, 70 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
+This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 19 pending IDs, 72 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
 
 <details>
 <summary><strong>Editorial lineage and numbering state</strong></summary>
@@ -52,7 +52,8 @@ Authoritative records:
 - [`docs/FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md`](docs/FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md)
 - [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
 - [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
-- issue #3
+- issue #1 — umbrella stable-release closeout
+- [`docs/BATCH1_DISPOSITION_2026-08-24.md`](docs/BATCH1_DISPOSITION_2026-08-24.md) — SHA-bound Batch 1 disposition record
 
 </details>
 
@@ -62,7 +63,7 @@ Authoritative records:
 - `VERSION` — repository-package version.
 - `CHANGELOG.md` — material repository and publication changes.
 - `tools/validate_manual.py` — deterministic structural validator.
-- `tools/reconcile_entry_lineage.py` — deterministic 21/70/91 entry-lineage reconciler.
+- `tools/reconcile_entry_lineage.py` — deterministic 19/72/91 entry-lineage reconciler.
 - `tools/audit_editorial_lineage.py` — fail-closed renumbering, parity, PDF-boundary, and provenance audit.
 - `tools/classify_editorial_occurrences.py` — deterministic generator for the frozen token classifier.
 - `tools/inspect_manual.py` — bounded structural inventory for the large HTML artifact.
@@ -73,6 +74,7 @@ Authoritative records:
 - `docs/EDITORIAL_RENUMBERING_COMPLETION_2026-08-12.md` — renumbering completion and artifact-boundary evidence.
 - `docs/ENTRY_LINEAGE_BASELINE_2026-08-12.md` — verified 91-entry semantic post-state.
 - `docs/FIELD_JOURNAL_IDENTIFIER_DECISION_2026-08-12.md` — evidence-backed disposition of the cut Field Journal predecessor and page-213 correction.
+- `docs/BATCH1_DISPOSITION_2026-08-24.md` — adjudication record for T-01/T-02 promotion from pending to drafted.
 - `docs/BASELINE_AUDIT_2026-08-06.md` — measured release-candidate baseline.
 - `docs/IDENTITY_AND_SCOPE.md` — canonical identity and remaining release boundaries.
 - `docs/QUALITY_GATE.md` — stable release criteria.
@@ -94,8 +96,8 @@ python tools/reconcile_entry_lineage.py \
   --input index.html \
   --json entry-lineage.json \
   --markdown entry-lineage.md \
-  --expect-pending 21 \
-  --expect-drafted 70 \
+  --expect-pending 19 \
+  --expect-drafted 72 \
   --expect-total 91 \
   --expect-pages 315 \
   --enforce
@@ -106,11 +108,11 @@ python tools/audit_editorial_lineage.py \
   --markdown editorial-lineage.md
 ```
 
-The reports record the exact SHA-256 of `index.html`. They establish structure, 21/70/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
+The reports record the exact SHA-256 of `index.html`. They establish structure, 19/72/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
 
 ## Release policy
 
-Stable release remains blocked by the remaining pending-entry disposition, accessibility/browser review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
+Stable release remains blocked by disposition of the 19 remaining pending entries, final regression browser/accessibility review after content closeout, independent or equivalent editorial review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
 
 ## Project
 
