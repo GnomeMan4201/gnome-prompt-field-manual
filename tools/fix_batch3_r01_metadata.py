@@ -34,3 +34,5 @@ if not (page.index("institutional interest map") < page.index("contested zones")
 
 INDEX.write_text(text, encoding="utf-8", newline="")
 print(hashlib.sha256(INDEX.read_bytes()).hexdigest())
+
+# Touch marker: workflow exists before this push, so this commit triggers it.
