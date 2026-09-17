@@ -6,6 +6,7 @@ on:
       - 'index.html'
       - 'tools/reconcile_entry_lineage.py'
       - 'tests/test_reconcile_entry_lineage.py'
+      - 'tests/test_batch4_disposition.py'
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
@@ -14,12 +15,14 @@ on:
       - 'docs/BATCH1_DISPOSITION_2026-08-24.md'
       - 'docs/BATCH2_DISPOSITION_2026-08-24.md'
       - 'docs/BATCH3_DISPOSITION_2026-08-24.md'
+      - 'docs/BATCH4_DISPOSITION_2026-09-17.md'
   push:
     branches: [main]
     paths:
       - 'index.html'
       - 'tools/reconcile_entry_lineage.py'
       - 'tests/test_reconcile_entry_lineage.py'
+      - 'tests/test_batch4_disposition.py'
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
@@ -28,6 +31,7 @@ on:
       - 'docs/BATCH1_DISPOSITION_2026-08-24.md'
       - 'docs/BATCH2_DISPOSITION_2026-08-24.md'
       - 'docs/BATCH3_DISPOSITION_2026-08-24.md'
+      - 'docs/BATCH4_DISPOSITION_2026-09-17.md'
   workflow_dispatch:
 
 permissions:
@@ -54,10 +58,13 @@ jobs:
           python-version: '3.11'
 
       - name: Syntax check
-        run: python -m compileall -q tools/reconcile_entry_lineage.py tests/test_reconcile_entry_lineage.py
+        run: python -m compileall -q tools/reconcile_entry_lineage.py tests/test_reconcile_entry_lineage.py tests/test_batch4_disposition.py
 
       - name: Unit tests
         run: python -m unittest discover -s tests -p 'test_reconcile_entry_lineage.py' -v
+
+      - name: Batch 4 disposition regression
+        run: python -m unittest tests.test_batch4_disposition -v
 
       - name: Generate and enforce source-grounded lineage evidence
         run: |
@@ -65,8 +72,8 @@ jobs:
             --input index.html \
             --json entry-lineage.json \
             --markdown entry-lineage.md \
-            --expect-pending 14 \
-            --expect-drafted 77 \
+            --expect-pending 11 \
+            --expect-drafted 80 \
             --expect-total 91 \
             --expect-pages 315 \
             --enforce
