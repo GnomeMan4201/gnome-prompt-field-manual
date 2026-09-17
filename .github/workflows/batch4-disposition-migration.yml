@@ -43,7 +43,7 @@ jobs:
 
           def rewrite_stat(source: str, label_fragment: str, old: int, new: int) -> str:
               number_re = re.compile(
-                  rf'(<span\b[^>]*class="stat-num"[^>]*>\s*){old}(\s*</span>)',
+                  rf'(<[^>]+class="[^"]*\bstat-num\b[^"]*"[^>]*>\s*){old}(\s*</[^>]+>)',
                   re.I,
               )
               replacements = []
@@ -54,8 +54,13 @@ jobs:
                   if count:
                       replacements.append((start, end, replaced))
               if not replacements:
+                  candidates = [
+                      migration.normalized(block)[:240]
+                      for _, _, block in class_div_blocks(source, "stat")
+                      if label_fragment.lower() in migration.normalized(block).lower()
+                  ]
                   raise RuntimeError(
-                      f"could not rewrite any {label_fragment} stat {old} -> {new}"
+                      f"could not rewrite any {label_fragment} stat {old} -> {new}; candidates={candidates!r}"
                   )
               for start, end, replaced in reversed(replacements):
                   source = source[:start] + replaced + source[end:]
