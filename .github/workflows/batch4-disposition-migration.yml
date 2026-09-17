@@ -43,7 +43,7 @@ jobs:
 
           def rewrite_stat(source: str, label_fragment: str, old: int, new: int) -> str:
               number_re = re.compile(
-                  rf'(<div\b[^>]*class="stat-num"[^>]*>\s*){old}(\s*</div>)',
+                  rf'(<span\b[^>]*class="stat-num"[^>]*>\s*){old}(\s*</span>)',
                   re.I,
               )
               replacements = []
