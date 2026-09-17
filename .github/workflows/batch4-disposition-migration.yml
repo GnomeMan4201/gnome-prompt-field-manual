@@ -1,0 +1,40 @@
+name: Batch 4 Disposition Migration
+
+on:
+  push:
+    branches: [agent/disposition-batch-4]
+    paths:
+      - 'tools/apply_batch4_disposition.py'
+      - '.github/workflows/batch4-disposition-migration.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-4
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Apply fail-closed Batch 4 disposition
+        run: python tools/apply_batch4_disposition.py
+      - name: Verify structural and lineage post-state
+        run: |
+          python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
+          python tools/reconcile_entry_lineage.py --input index.html --json entry-lineage.json --markdown entry-lineage.md --expect-pending 11 --expect-drafted 80 --expect-total 91 --expect-pages 315 --enforce
+      - name: Commit bounded production mutation
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html docs/BATCH4_DISPOSITION_2026-09-17.md
+          git diff --cached --check
+          git commit -m 'adjudicate Batch 4 S-01 S-02 S-03'
+          git push origin HEAD:agent/disposition-batch-4
