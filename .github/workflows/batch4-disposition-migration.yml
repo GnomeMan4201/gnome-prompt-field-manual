@@ -25,7 +25,25 @@ jobs:
         with:
           python-version: '3.11'
       - name: Apply fail-closed Batch 4 disposition
-        run: PYTHONPATH=. python tools/apply_batch4_disposition.py
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import re
+          import tools.apply_batch4_disposition as migration
+
+          def class_div_blocks(source: str, class_name: str):
+              start_re = re.compile(
+                  r'<div\b[^>]*class="[^"]*\b' + re.escape(class_name) + r'\b[^"]*"[^>]*>',
+                  re.I,
+              )
+              blocks = []
+              for match in start_re.finditer(source):
+                  start, end = migration.balanced_div_span(source, match.start())
+                  blocks.append((start, end, source[start:end]))
+              return blocks
+
+          migration.class_div_blocks = class_div_blocks
+          raise SystemExit(migration.main())
+          PY
       - name: Verify structural and lineage post-state
         run: |
           python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
