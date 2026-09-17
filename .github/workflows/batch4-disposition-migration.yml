@@ -41,7 +41,28 @@ jobs:
                   blocks.append((start, end, source[start:end]))
               return blocks
 
+          def rewrite_stat(source: str, label_fragment: str, old: int, new: int) -> str:
+              number_re = re.compile(
+                  rf'(<div\b[^>]*class="stat-num"[^>]*>\s*){old}(\s*</div>)',
+                  re.I,
+              )
+              replacements = []
+              for start, end, block in class_div_blocks(source, "stat"):
+                  if label_fragment.lower() not in migration.normalized(block).lower():
+                      continue
+                  replaced, count = number_re.subn(rf"\g<1>{new}\g<2>", block, count=1)
+                  if count:
+                      replacements.append((start, end, replaced))
+              if not replacements:
+                  raise RuntimeError(
+                      f"could not rewrite any {label_fragment} stat {old} -> {new}"
+                  )
+              for start, end, replaced in reversed(replacements):
+                  source = source[:start] + replaced + source[end:]
+              return source
+
           migration.class_div_blocks = class_div_blocks
+          migration.rewrite_stat = rewrite_stat
           migration.TARGET_BRIEFS = ("b-s01", "b-s02", "b-s03")
           raise SystemExit(migration.main())
           PY
