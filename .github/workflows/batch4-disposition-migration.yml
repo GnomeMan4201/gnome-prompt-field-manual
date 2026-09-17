@@ -1,0 +1,135 @@
+name: Batch 4 Disposition Migration
+
+on:
+  push:
+    branches: [agent/disposition-batch-4]
+    paths:
+      - 'tools/apply_batch4_disposition.py'
+      - '.github/workflows/batch4-disposition-migration.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: agent/disposition-batch-4
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Apply fail-closed Batch 4 disposition
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import re
+          import tools.apply_batch4_disposition as migration
+
+          def class_div_blocks(source: str, class_name: str):
+              start_re = re.compile(
+                  r'<div\b[^>]*class="[^"]*\b' + re.escape(class_name) + r'\b[^"]*"[^>]*>',
+                  re.I,
+              )
+              blocks = []
+              for match in start_re.finditer(source):
+                  start, end = migration.balanced_div_span(source, match.start())
+                  blocks.append((start, end, source[start:end]))
+              return blocks
+
+          def rewrite_stat(source: str, label_fragment: str, old: int, new: int) -> str:
+              number_re = re.compile(
+                  rf'(<[^>]+class="[^"]*\bstat-num\b[^"]*"[^>]*>\s*){old}(\s*</[^>]+>)',
+                  re.I,
+              )
+              replacements = []
+              for start, end, block in class_div_blocks(source, "stat"):
+                  if label_fragment.lower() not in migration.normalized(block).lower():
+                      continue
+                  replaced, count = number_re.subn(rf"\g<1>{new}\g<2>", block, count=1)
+                  if count:
+                      replacements.append((start, end, replaced))
+              if not replacements:
+                  candidates = [
+                      migration.normalized(block)[:240]
+                      for _, _, block in class_div_blocks(source, "stat")
+                      if label_fragment.lower() in migration.normalized(block).lower()
+                  ]
+                  raise RuntimeError(
+                      f"could not rewrite any {label_fragment} stat {old} -> {new}; candidates={candidates!r}"
+                  )
+              for start, end, replaced in reversed(replacements):
+                  source = source[:start] + replaced + source[end:]
+              return source
+
+          migration.class_div_blocks = class_div_blocks
+          migration.rewrite_stat = rewrite_stat
+          migration.TARGET_BRIEFS = ("b-s01", "b-s02", "b-s03")
+          raise SystemExit(migration.main())
+          PY
+
+      - name: Normalize only migration-introduced trailing whitespace
+        run: |
+          PYTHONPATH=. python - <<'PY'
+          import hashlib
+          import re
+          import subprocess
+          from pathlib import Path
+          import tools.apply_batch4_disposition as migration
+
+          path = Path("index.html")
+          lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+          check = subprocess.run(
+              ["git", "diff", "--check", "--", "index.html"],
+              text=True,
+              capture_output=True,
+          )
+          touched = set()
+          for line in check.stdout.splitlines():
+              match = re.match(r"index\.html:(\d+): trailing whitespace\.$", line)
+              if match:
+                  touched.add(int(match.group(1)) - 1)
+          for index in touched:
+              ending = "\n" if lines[index].endswith("\n") else ""
+              lines[index] = lines[index].rstrip() + ending
+          path.write_text("".join(lines), encoding="utf-8")
+
+          original = subprocess.check_output(
+              ["git", "show", "HEAD:index.html"], text=True
+          )
+          current = path.read_text(encoding="utf-8")
+          for number in range(107, 122):
+              assert migration.page_card(current, number) == migration.page_card(original, number), number
+
+          digest = hashlib.sha256(path.read_bytes()).hexdigest()
+          audit = Path("docs/BATCH4_DISPOSITION_2026-09-17.md")
+          text = audit.read_text(encoding="utf-8")
+          text, count = re.subn(
+              r"Final `index\.html` SHA-256: `[0-9a-f]{64}`",
+              f"Final `index.html` SHA-256: `{digest}`",
+              text,
+              count=1,
+          )
+          assert count == 1
+          audit.write_text(text, encoding="utf-8")
+          print(f"normalized {len(touched)} changed lines; final SHA-256: {digest}")
+          PY
+
+      - name: Verify structural and lineage post-state
+        run: |
+          python tools/validate_manual.py --input index.html --json manual-validation.json --markdown manual-validation.md --strict-warnings
+          python tools/reconcile_entry_lineage.py --input index.html --json entry-lineage.json --markdown entry-lineage.md --expect-pending 11 --expect-drafted 80 --expect-total 91 --expect-pages 315 --enforce
+          git diff --check
+
+      - name: Commit bounded production mutation
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html docs/BATCH4_DISPOSITION_2026-09-17.md
+          git diff --cached --check
+          git commit -m 'adjudicate Batch 4 S-01 S-02 S-03'
+          git push origin HEAD:agent/disposition-batch-4

@@ -1,0 +1,38 @@
+name: Batch 4 Context Extract
+
+on:
+  push:
+    branches: [agent/disposition-batch-4]
+    paths:
+      - 'tools/extract_batch4_context.py'
+      - '.github/workflows/batch4-context-extract.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/extract_batch4_context.py'
+      - '.github/workflows/batch4-context-extract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: python tools/extract_batch4_context.py
+      - name: Upload extraction evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch4-context
+          path: batch4-context.txt
+          if-no-files-found: error
+          retention-days: 7
