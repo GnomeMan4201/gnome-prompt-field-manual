@@ -42,6 +42,7 @@ jobs:
               return blocks
 
           migration.class_div_blocks = class_div_blocks
+          migration.TARGET_BRIEFS = ("b-s01", "b-s02", "b-s03")
           raise SystemExit(migration.main())
           PY
       - name: Verify structural and lineage post-state
