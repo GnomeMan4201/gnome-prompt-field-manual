@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GNOME Evidence Reactor Observation",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "runId",
+    "experimentId",
+    "condition",
+    "inputId",
+    "inputHash",
+    "promptHash",
+    "outputText"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "gnome.reactor.observation.v1"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "experimentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "condition": {
+      "enum": [
+        "CONTROL",
+        "VARIANT"
+      ]
+    },
+    "inputId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "promptHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "provider": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recordedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outputText": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "score": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
+    },
+    "passed": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "evaluator": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "temperature": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "seed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "tools": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "datasetId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rubricHash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "trialId": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GNOME Evidence Reactor Portable Capsule",
+  "type": "object",
+  "required": ["schemaVersion", "manifest", "source", "experiments", "prompts", "datasets", "runs", "evaluations", "claims", "challenges", "integrity"],
+  "properties": {
+    "schemaVersion": { "const": "gnome.reactor.capsule.v1" },
+    "manifest": { "type": "object" },
+    "source": { "type": "object" },
+    "experiments": { "type": "object" },
+    "prompts": { "type": "object", "required": ["control", "variant"] },
+    "datasets": { "type": "object" },
+    "runs": { "type": "object" },
+    "evaluations": { "type": "object" },
+    "claims": { "type": "object" },
+    "challenges": { "type": "object" },
+    "integrity": { "type": "object", "required": ["checksums"] }
+  }
+}

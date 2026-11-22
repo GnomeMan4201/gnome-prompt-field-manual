@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GNOME // EVIDENCE REACTOR (Phase VIII-A)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="prov-bar">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <span class="pill pill-amber">DOMAIN A: SOURCE TRUTH (0/91 VERIFIED)</span>
+      <span class="pill pill-green">DOMAIN B: EXPERIMENTAL EXECUTION</span>
+      <span class="pill pill-crimson">DOMAIN C: EVIDENCE &amp; CLAIMS</span>
+    </div>
+    <div class="mono" style="color:var(--text-mute);">Phase VIII-A · Offline Replay Ready</div>
+  </div>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand"><span class="brand-dot" aria-hidden="true"></span><span>GNOME // EVIDENCE REACTOR</span></div>
+      <nav class="mode-nav" role="tablist" aria-label="Reactor Modes">
+        <button type="button" role="tab" class="mode-btn" data-mode="m1" aria-selected="true">01. Method</button>
+        <button type="button" role="tab" class="mode-btn" data-mode="m2" aria-selected="false">02. Microscope</button>
+        <button type="button" role="tab" class="mode-btn" data-mode="m3" aria-selected="false">03. Experiment</button>
+        <button type="button" role="tab" class="mode-btn" data-mode="m4" aria-selected="false">04. Execution</button>
+        <button type="button" role="tab" class="mode-btn" data-mode="m5" aria-selected="false">05. Analysis</button>
+        <button type="button" role="tab" class="mode-btn" data-mode="m6" aria-selected="false">06. Capsule</button>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="panel" id="reactor-root" aria-live="polite"></section>
+  </main>
+  <script src="source-adapter.js"></script>
+  <script src="experiment-core.js"></script>
+  <script src="comparison-engine.js"></script>
+  <script src="evidence-capsule.js"></script>
+  <script src="replay-engine.js"></script>
+  <script src="observation-validator.js"></script>
+  <script src="app.js"></script>
+  <script>window.bootEvidenceReactor();</script>
+</body>
+</html>
