@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "gnome.reactor.intervention.v1",
+  "interventionId": "INT-1",
+  "type": "PROMPT_VARIANT",
+  "controlPromptHash": "b8f6a4302e74b0bf0d6e644e189bf9d96a287d9cbbb8bd6fde5508ce9dd2bc87",
+  "variantPromptHash": "0777a2c37801f655d5d3582007577dbb591a5fe716dbc4b879c3f111b04bbb2c",
+  "fixedTaskHash": "8e000ba02a00d78560631be46281d4408b7f53bcb3ced9f65d7ac6937c5ce6fc",
+  "fixedConfigHash": "49931036b306cd2b7ff566b74276917d2e4b0a3ab677bc1dfc6307dc01db12d1",
+  "provenanceStatus": "DECLARED_PROMPT_VARIANT"
+}

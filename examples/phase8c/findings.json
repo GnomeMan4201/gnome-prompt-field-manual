@@ -1,0 +1,10 @@
+{
+  "claims": [
+    {
+      "claimId": "NOT-RUN",
+      "status": "INCONCLUSIVE",
+      "trialRefs": [],
+      "statement": "No model run was performed."
+    }
+  ]
+}
