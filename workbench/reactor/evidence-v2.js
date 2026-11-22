@@ -39,10 +39,31 @@ function validatePlan(p){
  }
  require_(p.sourceRef&&['UNVERIFIED_SOURCE_CANDIDATE','EXPERIMENTAL_TRANSCRIPTION'].includes(p.sourceRef.bodyStatus),'SOURCE_TRUTH_NOT_DECLARED');require_(ident(p.sourceRef.entryId)&&/^[a-f0-9]{64}$/.test(p.sourceRef.sourceSha256),'UNBOUND_SOURCE_REFERENCE');
 }
+// Accept only a flat JSON object of primitive values and reject duplicate keys.
+// Native JSON.parse silently overwrites duplicates; that is unacceptable for scoring.
+function parseFlatJson(text){
+ let i=0;const ws=()=>{while(i<text.length&&/\s/.test(text[i]))i++;};
+ const readString=()=>{const start=i;if(text[i++]!=='"')throw Error('EXPECTED_STRING');
+  while(i<text.length){if(text[i]==='\\'){i+=2;continue;}if(text[i]==='"'){i++;return JSON.parse(text.slice(start,i));}i++;}
+  throw Error('UNTERMINATED_STRING');};
+ ws();if(text[i++]!=='{')throw Error('NOT_OBJECT');const obj=Object.create(null),keys=new Set();ws();
+ if(text[i]==='}'){i++;ws();if(i!==text.length)throw Error('TRAILING_TEXT');return obj;}
+ while(i<text.length){ws();if(text[i]!=='"')throw Error('EXPECTED_KEY');const key=readString();
+  if(keys.has(key))throw Error('DUPLICATE_JSON_KEY');keys.add(key);ws();if(text[i++]!==':')throw Error('EXPECTED_COLON');ws();
+  let value;if(text[i]==='"')value=readString();else{
+   const start=i;while(i<text.length&&!/[\s,}]/.test(text[i]))i++;const token=text.slice(start,i);
+   if(!(/^(null|true|false)$/.test(token)||/^-?(0|[1-9][0-9]*)$/.test(token)))throw Error('INVALID_PRIMITIVE');
+   value=JSON.parse(token);if(typeof value==='number'&&!Number.isSafeInteger(value))throw Error('UNSAFE_INTEGER');
+  }
+  obj[key]=value;ws();if(text[i]==='}') {i++;ws();if(i!==text.length)throw Error('TRAILING_TEXT');return obj;}
+  if(text[i++]!==',')throw Error('EXPECTED_COMMA');ws();
+ }
+ throw Error('UNTERMINATED_OBJECT');
+}
 function scoreText(text, rules, ref){
  if(typeof text!=='string'||bytes(text)>MAX_BYTES)return {deterministic:'UNKNOWN',grounded:'NOT_ASSESSABLE',reason:'INVALID_OUTPUT'};
  const forbidden=rules.forbiddenTokens.some(t=>text.includes(t));let v;
- try{v=JSON.parse(text);}catch(e){return {deterministic:forbidden?'FAIL':'UNKNOWN',grounded:'NOT_ASSESSABLE',reason:'INVALID_JSON'};}
+ try{v=parseFlatJson(text);}catch(e){return {deterministic:'UNKNOWN',grounded:'NOT_ASSESSABLE',reason:'INVALID_JSON'};}
  if(!v||typeof v!=='object'||Array.isArray(v))return {deterministic:'FAIL',grounded:'NOT_ASSESSABLE',reason:'NOT_JSON_OBJECT'};
  const refKeys=rules.requiredFields;const keys=Object.keys(v);
  const sameKeys=keys.length===refKeys.length&&refKeys.every(k=>Object.hasOwn(v,k));
