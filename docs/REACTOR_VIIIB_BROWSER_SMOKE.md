@@ -35,6 +35,10 @@ The fixture deliberately set a caller-supplied `comparable: true` but did not in
 - Separate local hardening package: **43 tests run, 42 pass, 1 skip** because the canonical GitHub identity index was not included in the standalone package.
 - Canonical `index.html` SHA-256 still `1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19`. Manuscript structural, reconciliation, and editorial lineage checks passed.
 
+## Standalone full-dependency validation
+
+With the actual 91-entry identity index copied from the original repository into the local repair-package test directory, Node 22 and `jsonschema` installed, the complete standalone repair suite reported **43 tests, OK, zero skipped**. This is separate from the **127-test integrated repository run**, which had 10 environment-dependent skips. GitHub Actions success remains unconfirmed.
+
 ## Not established
 
 This smoke test does **not** establish the validity of real model-derived scores, true scorer independence, prompt-injection resistance of an actual connected evaluator, local Ollama integration in the browser, full adversarial attack generation, native file import, new VIII-B evidence capsules, mobile or keyboard accessibility, or full zero-skip GitHub Actions CI.
