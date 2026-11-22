@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GNOME // Evidence Spine</title>
+<link rel="stylesheet" href="style.css">
+<style>
+:root{color-scheme:dark;--ink:#f0ebe6;--muted:#a1a1af;--red:#f46874;--edge:#404450;--accent:#bfc7ee}
+*{box-sizing:border-box}body{background:#0b0d12;color:var(--ink);margin:0;font:15px/1.5 system-ui, sans-serif}
+.labbar{border-bottom:1px solid var(--edge);background:#11141b;position:sticky;top:0;z-index:1}.labbar-inner{max-width:1480px;margin:auto;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.eyebrow{font:700 .7rem/1.4 ui-monospace,monospace;letter-spacing:.13em;color:var(--red)}.container{max-width:1480px;margin:auto;padding:1.3rem 1.5rem 4rem}
+h1{font-size:clamp(1.7rem,3.5vw,3.5rem);margin:.5rem 0;letter-spacing:-.04em}h2{font-size:1rem;margin:0 0 .8rem}p{color:var(--muted);margin:.3rem 0 1rem}a{color:var(--accent)}.lede{max-width:850px}
+.pills{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0 1.2rem}.pill{font:650 .7rem ui-monospace,monospace;padding:.5rem .7rem;border:1px solid var(--edge);border-radius:4px;color:var(--muted);background:#151720}
+.track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.45rem;margin:1.25rem 0}.track span{border-left:2px solid #853443;background:#171a23;padding:.7rem;font:.68rem ui-monospace,monospace;word-break:break-word}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}.panel{background:#141720;border:1px solid var(--edge);border-radius:9px;padding:1rem;min-width:0}.full{grid-column:1/-1}
+label{display:block;color:#dedcea;margin:.4rem 0;font-weight:650;font-size:.85rem}textarea{resize:vertical;display:block;min-height:250px;width:100%;padding:1rem;background:#090c11;color:#e0e0e8;border:1px solid #555a68;border-radius:5px;font:12px/1.5 ui-monospace,monospace}textarea:focus,input:focus,button:focus-visible{outline:3px solid #a0b3fb;outline-offset:2px}
+.actions{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0 .3rem}button{cursor:pointer;background:#2c3040;border:1px solid #596176;border-radius:5px;padding:.7rem .9rem;font:600 .81rem system-ui;color:var(--ink)}button.primary{background:#893040;border-color:#bd6570;color:#fff}button[disabled]{opacity:.5;cursor:not-allowed}
+input[type=file]{max-width:100%;color:#ccd0e2;font-size:.83rem}.status{border-left:3px solid #cc9e45;background:#242014;padding:.7rem .9rem;margin:.8rem 0;color:#fff;font-size:.88rem}.status.error{border-color:#ec6476;background:#32181f}.status.ok{border-color:#64b3a0;background:#132924}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}.metric{background:#1c202b;border:1px solid #333a49;padding:1rem;border-radius:5px}.metric strong{display:block;font-size:clamp(1.3rem,2vw,2rem);font-variant-numeric:tabular-nums}.metric small{color:#a6adbe}
+pre{max-height:450px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#090c11;padding:1rem;color:#cbd5e1;font:12px/1.5 ui-monospace,monospace;border:1px solid #363e4c}
+.footer-note{font-size:.8rem;border-top:1px solid var(--edge);margin-top:1.5rem;padding-top:1rem}
+@media(max-width:760px){.container{padding:1rem}.layout{grid-template-columns:1fr}.track{grid-template-columns:repeat(2,minmax(0,1fr))}.track span:last-child{grid-column:1/-1}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.labbar-inner{padding:.8rem 1rem}textarea{min-height:210px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="labbar"><div class="labbar-inner"><span class="eyebrow">GNOME // EVIDENCE SPINE / VIII-B</span><nav aria-label="GNOME workspaces"><a href="index.html">Reactor</a> · <a href="chamber.html">Chamber</a></nav></div></div>
+<main class="container">
+<header><div class="eyebrow">REFERENCE-BOUND EVALUATION / COMPUTATIONAL REPLAY</div><h1>Evidence, not assertions.</h1><p class="lede">Evaluate raw control and variant observations against a declared exact-reference plan. Imported verdicts are rejected. Provenance and tamper checks are inspectable; reference authenticity is not implied.</p></header>
+<div class="pills" role="list"><span class="pill" role="listitem">SOURCE: UNVERIFIED CANDIDATES</span><span class="pill" role="listitem">SCORER: DETERMINISTIC RULES</span><span class="pill" role="listitem">EVIDENCE: REVIEWER-SUPPLIED</span><span class="pill" role="listitem">REPLAY: OFFLINE ONLY</span></div>
+<div class="track" aria-label="Evaluation pipeline"><span>01 / PLAN</span><span>02 / RAW OUTPUTS</span><span>03 / RESCORE</span><span>04 / ATTRIBUTE</span><span>05 / VERIFY</span></div>
+<div class="layout">
+<section class="panel"><h2>01 — Frozen evaluation plan</h2><p>Paste JSON or import a local file. References must include exact expected JSON, evidence IDs and input text. No data leaves this page.</p><label for="plan">Plan JSON</label><textarea id="plan" spellcheck="false" aria-label="Evaluation plan JSON" placeholder="Paste an evaluation plan JSON"></textarea><div class="actions"><label for="plan-file">Import plan file</label><input id="plan-file" type="file" accept=".json,application/json"></div></section>
+<section class="panel"><h2>02 — Raw paired observations</h2><p>Provide original model output records, not claimed pass/fail scores. Model execution requires the separate opt-in local runner.</p><label for="observations">Observations JSON array</label><textarea id="observations" spellcheck="false" aria-label="Raw observations JSON" placeholder="Paste an array of raw observation records"></textarea><div class="actions"><label for="obs-file">Import observations file</label><input id="obs-file" type="file" accept=".json,application/json"></div></section>
+<section class="panel full"><h2>03 — Evidence evaluation and capsule</h2><div class="actions"><button type="button" id="demo">Load clearly labeled synthetic demonstration</button><button type="button" id="evaluate" class="primary">Evaluate raw observations</button><button type="button" id="export">Export v2 evidence capsule</button><label for="capsule-file">Reimport/verify capsule</label><input type="file" id="capsule-file" accept=".json,application/json"></div><div id="status" class="status" role="status" aria-live="polite">NOT TESTED — supply plan and observations.</div><div class="metrics" aria-label="Evidence summary"><div class="metric"><strong id="pairs">—</strong><small>Comparable paired trials</small></div><div class="metric"><strong id="induced">—</strong><small>Variant-induced failures</small></div><div class="metric"><strong id="unattr">—</strong><small>Unattributable trials</small></div><div class="metric"><strong id="percent">—</strong><small>Observed proportion (conditional)</small></div></div></section>
+<section class="panel full"><h2>04 — Inspection ledger</h2><p>Every classification is recomputed. A passed checksum proves consistency of these bytes, not the truth of the supplied reference or independent replication.</p><pre id="result" aria-live="polite">No analysis executed.</pre></section></div>
+<p class="footer-note">GNOME evaluation contract v2 · No external model calls from this page · No AI-generated scripts executed · Synthetic fixtures cannot count as empirical model outcomes. Only measured, authenticated experiments can support stronger research claims.</p>
+</main>
+<script src="experiment-core.js"></script><script src="comparison-engine.js"></script><script src="evidence-v2.js"></script><script src="evidence-lab.js"></script>
+</body></html>

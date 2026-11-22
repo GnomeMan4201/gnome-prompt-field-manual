@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GNOME Independent Evaluation",
+  "type": "object",
+  "required": ["schemaVersion", "evaluationId", "trialId", "deterministic", "evidenceGrounded", "llmJudge", "disposition"],
+  "properties": {
+    "schemaVersion": { "const": "gnome.reactor.evaluation.v1" }
+  }
+}

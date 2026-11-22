@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GNOME Claim Review Record",
+  "type": "object",
+  "required": ["schemaVersion", "claimId", "experimentId", "threatModelId", "trialIds", "evaluationIds", "supportingEvidence", "contradictoryEvidence", "knownLimitations", "attributionStatus", "reviewerDisposition", "reproductionStatus"],
+  "properties": {
+    "schemaVersion": { "const": "gnome.reactor.claim.v1" }
+  }
+}

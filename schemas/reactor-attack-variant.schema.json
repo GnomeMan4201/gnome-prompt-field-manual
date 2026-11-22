@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GNOME Attack Variant",
+  "type": "object",
+  "required": ["schemaVersion", "parentHash", "variantHash", "modifiedSurfaces", "mutationType", "isCompoundIntervention", "expectedEffect"],
+  "properties": {
+    "schemaVersion": { "const": "gnome.reactor.attack-variant.v1" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GNOME Threat Model",
+  "type": "object",
+  "required": ["schemaVersion", "threatModelId", "category", "targetBehavior", "expectedAuthorizedBehavior", "attackerObjective", "attackerControlledSurface", "defenderControlledSurface", "trustBoundary", "attackAssumptions", "successConditions", "failureConditions", "scopeLimitations", "safetyConstraints", "evaluationRubric"],
+  "properties": {
+    "schemaVersion": { "const": "gnome.reactor.threat-model.v1" },
+    "threatModelId": { "type": "string", "minLength": 1 },
+    "category": { "enum": ["PROMPT_INJECTION", "INSTRUCTION_HIERARCHY_CONFUSION", "TOOL_OUTPUT_CONTAMINATION", "RETRIEVED_DOCUMENT_MANIPULATION", "EVALUATOR_INJECTION", "CONTEXT_BOUNDARY_CONFUSION", "AUTHORITY_SPOOFING", "UNSUPPORTED_CLAIM_GENERATION", "MULTI_TURN_INSTRUCTION_DRIFT", "EVIDENCE_LAUNDERING"] }
+  }
+}

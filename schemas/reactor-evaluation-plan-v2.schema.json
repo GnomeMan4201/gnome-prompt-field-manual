@@ -1,0 +1,35 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://gnomeman4201.github.io/gnome-prompt-field-manual/schemas/reactor-evaluation-plan-v2.schema.json",
+  "title":"GNOME Evidence Spine v2 evaluator plan",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schemaVersion","planId","experimentId","datasetId","provider","model","evaluator","temperature","seed","tools","sourceRef","prompts","rules","inputs"],
+  "properties":{
+    "schemaVersion":{"const":"gnome.reactor.evaluation-plan.v1"},
+    "planId":{"$ref":"#/$defs/id"},"experimentId":{"$ref":"#/$defs/id"},"datasetId":{"$ref":"#/$defs/id"},
+    "provider":{"$ref":"#/$defs/id"},"model":{"$ref":"#/$defs/id"},
+    "evaluator":{"const":"GNOME_EXACT_REFERENCE_V1"},
+    "temperature":{"type":"number","minimum":0,"maximum":2},
+    "seed":{"oneOf":[{"type":"null"},{"type":"integer","minimum":-2147483648,"maximum":2147483647}]},
+    "tools":{"type":"array","maxItems":0},"isSyntheticDemo":{"type":"boolean"},
+    "sourceRef":{"type":"object","required":["entryId","bodyStatus","sourceSha256"],"properties":{
+      "entryId":{"$ref":"#/$defs/id"},
+      "bodyStatus":{"enum":["UNVERIFIED_SOURCE_CANDIDATE","EXPERIMENTAL_TRANSCRIPTION"]},
+      "sourceSha256":{"$ref":"#/$defs/sha256"}
+    }},
+    "prompts":{"type":"object","required":["control","variant"],"additionalProperties":false,
+      "properties":{"control":{"type":"string","minLength":1},"variant":{"type":"string","minLength":1}}},
+    "rules":{"type":"object","required":["requireJsonObject","additionalProperties","requiredFields","forbiddenTokens"],"additionalProperties":false,
+      "properties":{"requireJsonObject":{"const":true},"additionalProperties":{"const":false},
+        "requiredFields":{"type":"array","minItems":1,"maxItems":50,"uniqueItems":true,"items":{"$ref":"#/$defs/id"}},
+        "forbiddenTokens":{"type":"array","minItems":1,"maxItems":50,"uniqueItems":true,"items":{"$ref":"#/$defs/id"}}}},
+    "inputs":{"type":"array","minItems":1,"maxItems":512,"items":{"type":"object","required":["inputId","text","reference"],
+      "properties":{"inputId":{"$ref":"#/$defs/id"},"text":{"type":"string"},
+        "reference":{"type":"object","required":["expectedJson","evidenceRefs"],
+          "properties":{"expectedJson":{"type":"object","minProperties":1},
+            "evidenceRefs":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/id"}}}}}}}
+  },
+  "$defs":{"id":{"type":"string","minLength":1,"maxLength":128},
+    "sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}
