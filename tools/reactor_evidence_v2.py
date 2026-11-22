@@ -95,7 +95,7 @@ def validate_plan(plan: Any) -> None:
         ref = inp.get('reference')
         require(isinstance(ref, dict) and isinstance(ref.get('expectedJson'), dict) and bool(ref['expectedJson']), 'MISSING_EXACT_REFERENCE')
         expected = ref['expectedJson']
-        require(all(isinstance(k, str) and 0 < len(k) <= 128 and (v is None or type(v) in (str, int, bool)) for k, v in expected.items()), 'UNSUPPORTED_REFERENCE_VALUE')
+        require(all(isinstance(k, str) and 0 < len(k) <= 128 and (v is None or (type(v) in (str, bool) or (type(v) is int and abs(v) <= 9007199254740991))) for k, v in expected.items()), 'UNSUPPORTED_REFERENCE_VALUE')
         require(set(rules['requiredFields']) == set(expected), 'REFERENCE_KEYS_MUST_MATCH_RULES')
         require(isinstance(ref.get('evidenceRefs'), list) and bool(ref['evidenceRefs']) and all(object_id(x) for x in ref['evidenceRefs']), 'MISSING_REFERENCE_PROVENANCE')
     require(isinstance(plan.get('sourceRef'), dict) and plan['sourceRef'].get('bodyStatus') in ('UNVERIFIED_SOURCE_CANDIDATE', 'EXPERIMENTAL_TRANSCRIPTION'), 'SOURCE_TRUTH_NOT_DECLARED')
@@ -112,11 +112,21 @@ def evaluate_text(output: str, rules: dict, reference: dict) -> dict:
         return {'deterministic': 'UNKNOWN', 'grounded': 'NOT_ASSESSABLE', 'reason': 'INVALID_OUTPUT'}
     forbidden = any(token in output for token in rules['forbiddenTokens'])
     try:
-        parsed = json.loads(output, parse_constant=lambda _: (_ for _ in ()).throw(ValueError('NONFINITE_JSON'))) 
+        def no_duplicate_keys(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ValueError('DUPLICATE_JSON_KEY')
+                result[key] = value
+            return result
+        parsed = json.loads(output, object_pairs_hook=no_duplicate_keys,
+                            parse_constant=lambda _: (_ for _ in ()).throw(ValueError('NONFINITE_JSON')))
     except (ValueError, TypeError):
-        return {'deterministic': 'FAIL' if forbidden else 'UNKNOWN', 'grounded': 'NOT_ASSESSABLE', 'reason': 'INVALID_JSON'}
+        return {'deterministic': 'UNKNOWN', 'grounded': 'NOT_ASSESSABLE', 'reason': 'INVALID_JSON'}
     if not isinstance(parsed, dict):
-        return {'deterministic': 'FAIL', 'grounded': 'NOT_ASSESSABLE', 'reason': 'NOT_JSON_OBJECT'}
+        return {'deterministic': 'UNKNOWN', 'grounded': 'NOT_ASSESSABLE', 'reason': 'INVALID_JSON'}
+    if any(v is not None and not (type(v) in (str,bool) or (type(v) is int and abs(v) <= 9007199254740991)) for v in parsed.values()):
+        return {'deterministic': 'UNKNOWN', 'grounded': 'NOT_ASSESSABLE', 'reason': 'INVALID_JSON'}
     expected = reference['expectedJson']
     keys_match = set(parsed) == set(rules['requiredFields'])
     det = 'FAIL' if forbidden or not keys_match else 'PASS'
