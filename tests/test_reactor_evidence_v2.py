@@ -71,6 +71,18 @@ class EvidenceV2(unittest.TestCase):
         self.assertEqual(r['counts']['unattributableCount'],1)
         self.assertEqual(r['counts']['variantInducedFailures'],0)
 
+    def test_duplicate_output_keys_fail_closed(self):
+        output='{"answer":"BAD","answer":"42"}'
+        r=analyze(plan(),obs(variant=output))
+        self.assertEqual(r['counts']['variantInducedFailures'],0)
+        self.assertEqual(r['counts']['unattributableCount'],1)
+
+    def test_unsafe_output_integer_fails_closed(self):
+        p=plan();p['inputs'][0]['reference']['expectedJson']={'answer':42}
+        r=analyze(p,obs(p,variant='{"answer":9007199254740994}'))
+        self.assertEqual(r['counts']['variantInducedFailures'],0)
+        self.assertEqual(r['counts']['unattributableCount'],1)
+
     def test_unscorable_claim_does_not_count_as_failure(self):
         r=analyze(plan(),obs(variant='this is a completely unstructured answer'))
         self.assertEqual(r['counts']['unattributableCount'],1)
@@ -167,6 +179,10 @@ process.stdin.on('end',async()=>{try{
         o=obs();o[1]['passed']=False
         ret=self.js({'op':'analyze','plan':plan(),'observations':o})
         self.assertIn('IMPORTED_VERDICT_BLOCKED',ret['error'])
+
+    def test_duplicate_output_keys_python_js_parity(self):
+        p=plan();o=obs(variant='{"answer":"BAD","answer":"42"}')
+        self.assertEqual(self.js({'op':'analyze','plan':p,'observations':o}),analyze(p,o))
 
     def test_js_missing_metadata_cannot_induce_failure(self):
         o=obs();o[1]['inputHash']='f'*64
