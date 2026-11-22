@@ -66,7 +66,14 @@ async function inspect(c){
  if(!claims.length)add(p,'p','No recorded claims');
  claims.forEach(cl=>{const div=add(p,'p',`${cl.claimId||'NO ID'} — ${cl.status||'UNKNOWN'}: ${cl.statement||'No statement'}`);div.className='meta';});
 }
-function clearData(){shown('run-state','—');shown('pairs','—');shown('induced','—');}
+function clearData(){
+ shown('run-state','—');shown('pairs','—');shown('induced','—');
+ dl('source-meta',{'Origin':'No valid capsule'});
+ dl('intervention-meta',{'Binding':'No valid capsule'});
+ const tbody=$('trial-rows');tbody.replaceChildren();
+ const tr=document.createElement('tr');const td=add(tr,'td','No verified capsule');td.colSpan=4;tbody.appendChild(tr);
+ $('claims').replaceChildren();add($('claims'),'p','No valid capsule loaded');
+}
 file.addEventListener('change',async function(){
  clearData();
  const f=file.files&&file.files[0];if(!f)return;
