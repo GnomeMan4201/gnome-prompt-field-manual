@@ -163,6 +163,12 @@ class EvidenceV3(unittest.TestCase):
              {'claims':[{'claimId':'Q','status':'SUPPORTED_WITHIN_RECORDED_CONDITIONS','trialRefs':['I-1:T1'],'statement':'Success'}]})
         self.assertIn('SYNTHETIC_OR_UNVERIFIED_RUN_NOT_EMPIRICAL',str(replay_evidence_capsule_v3(cap)['errors']))
 
+    def test_execution_provenance_conflict_rejected(self):
+        c,i=fixture();x=completed(c,i)
+        x['modelProvenance']='PROVIDER_REPORTED_UNAUTHENTICATED'
+        cap=build_evidence_capsule_v3(c,i,x,calculate_stub(),{'claims':[]})
+        self.assertIn('EXECUTION_MODE_CONFLICT',str(replay_evidence_capsule_v3(cap)['errors']))
+
     def test_missing_pair_unattributable(self):
         c,i=fixture();obs=observations(c,i)[:1]
         cap=build_checked_capsule_v3(c,i,completed(c,i,obs),{'claims':[]})
