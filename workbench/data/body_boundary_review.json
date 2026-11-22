@@ -1,0 +1,1471 @@
+{
+  "schemaVersion": "gnome.manual.boundary-review.v1",
+  "sourceHtmlSha256": "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19",
+  "status": "PARTIAL_REVIEW_REQUIRED",
+  "counts": {
+    "total": 91,
+    "VERIFIED": 0,
+    "PARTIAL": 91,
+    "UNRESOLVED": 0,
+    "CONFLICT": 0
+  },
+  "scope": "Source-bounded raw span candidates only: no editorial body ownership verified",
+  "entries": [
+    {
+      "entryId": "T-01",
+      "titleCandidate": "Idea Stress-Test",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 9,
+      "startOffsetCodepoints": 244,
+      "endPage": 13,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "39efd5d6b782b4ce45b4c771d1eec6dd67514928af051850924e3005184d040c",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-02",
+      "titleCandidate": "Claim Dissection",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 13,
+      "startOffsetCodepoints": 0,
+      "endPage": 17,
+      "endOffsetCodepoints": 757,
+      "rawSpanSha256": "141c9003cb490c42ed9214a040ae9d001d676741e4f2e6bfb63717c07c2f9305",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-03",
+      "titleCandidate": "Assumption Ledger with Consequence Scoring",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 17,
+      "startOffsetCodepoints": 757,
+      "endPage": 19,
+      "endOffsetCodepoints": 498,
+      "rawSpanSha256": "71c49529dfc76d2b75ed97dab2c904aa0267009d28827d4d7273193004cb26ff",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-04",
+      "titleCandidate": "Weakest Link Isolator",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 19,
+      "startOffsetCodepoints": 498,
+      "endPage": 21,
+      "endOffsetCodepoints": 363,
+      "rawSpanSha256": "f4420acf1c495b9d3181c1c237b1991a3352f1a19874862de285c089210007a9",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-05",
+      "titleCandidate": "Decision Pre-Mortem",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 21,
+      "startOffsetCodepoints": 363,
+      "endPage": 23,
+      "endOffsetCodepoints": 760,
+      "rawSpanSha256": "230007c9ca368e88b5471ee669ff85072d303949b03f53bc9a531ea9a7630c05",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-06",
+      "titleCandidate": "Belief Update Scaffold",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 23,
+      "startOffsetCodepoints": 760,
+      "endPage": 25,
+      "endOffsetCodepoints": 979,
+      "rawSpanSha256": "2f35e6d1ffc12a1598c479062f4b8fe2c54b18613aded27acf0a1a346b63ed7a",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-07",
+      "titleCandidate": "Scope Inflation Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 25,
+      "startOffsetCodepoints": 979,
+      "endPage": 28,
+      "endOffsetCodepoints": 195,
+      "rawSpanSha256": "abc369104a8f8f497a58641839a9fed94e0cf9c00c959320b27767bdc249082c",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-08",
+      "titleCandidate": "Confidence Calibration Audit",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 28,
+      "startOffsetCodepoints": 195,
+      "endPage": 30,
+      "endOffsetCodepoints": 456,
+      "rawSpanSha256": "79665529ec04e142dcdd35123bdd2e531d68ccc6faebcdd88672ee8079db3354",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-09",
+      "titleCandidate": "Second-Order Effects Scanner",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 30,
+      "startOffsetCodepoints": 456,
+      "endPage": 32,
+      "endOffsetCodepoints": 893,
+      "rawSpanSha256": "1bf187ce1dd6c7e83a82aa3a3136cc4dcb6be07d1d013a6be88bf12cfa1500c5",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "T-10",
+      "titleCandidate": "Reversibility Classifier",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 32,
+      "startOffsetCodepoints": 893,
+      "endPage": 35,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "52de4a5e27b75262ca6bf401713f1035019033446edc5869723b38657187100f",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part II — Dense-to-Clear Without"
+      ]
+    },
+    {
+      "entryId": "W-01",
+      "titleCandidate": "Dense-to-Clear (Rule-Based)",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 35,
+      "startOffsetCodepoints": 262,
+      "endPage": 39,
+      "endOffsetCodepoints": 742,
+      "rawSpanSha256": "85b670481afd347536554beab0caaa3470c44e10ac2bc051b3b8cc40ba85b7fd",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-02",
+      "titleCandidate": "Argument Skeleton Extractor",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 39,
+      "startOffsetCodepoints": 742,
+      "endPage": 43,
+      "endOffsetCodepoints": 1274,
+      "rawSpanSha256": "77c9d9ba66dc4bf850d614f1ef123979306c1a97757b1b7c3a5686453b9ba7c2",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-03",
+      "titleCandidate": "Adversarial Reader (Persona-Specific)",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 43,
+      "startOffsetCodepoints": 1274,
+      "endPage": 48,
+      "endOffsetCodepoints": 931,
+      "rawSpanSha256": "29eafecd0a395c03c987c0a0d9cfdaef7247bffee5a2610b85ef41b36b71ad10",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-04",
+      "titleCandidate": "Over-Smoothing Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 48,
+      "startOffsetCodepoints": 931,
+      "endPage": 50,
+      "endOffsetCodepoints": 1060,
+      "rawSpanSha256": "7dd51b8bdd056789bd18b99b27ea38dc36387da892302c5713548035714b4adb",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-05",
+      "titleCandidate": "Hedge Auditor",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 50,
+      "startOffsetCodepoints": 1060,
+      "endPage": 53,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "9356f61c94c98c086781e75f9badddb5ab77730b8fcb5215c5315e35ed16c63f",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-06",
+      "titleCandidate": "Confidence Laundering Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 53,
+      "startOffsetCodepoints": 0,
+      "endPage": 55,
+      "endOffsetCodepoints": 545,
+      "rawSpanSha256": "5f135384f685f53f90a1ebe13a2a86841cbe9c9fee8805100c4817aac4f4ba0f",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-07",
+      "titleCandidate": "Drift-Preserving Rewrite",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 55,
+      "startOffsetCodepoints": 545,
+      "endPage": 57,
+      "endOffsetCodepoints": 645,
+      "rawSpanSha256": "d6594cea25a9067b7727371b051a0d448ae6388a3d3c9e858c8e7c0d5100fbd9",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-08",
+      "titleCandidate": "Seriousness Filter",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 57,
+      "startOffsetCodepoints": 645,
+      "endPage": 60,
+      "endOffsetCodepoints": 209,
+      "rawSpanSha256": "5fc16af1a171fc4f16c4e807915021836ff584668bf69bc41919a8a48347bf88",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-09",
+      "titleCandidate": "Claim-Evidence Separator",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 60,
+      "startOffsetCodepoints": 209,
+      "endPage": 62,
+      "endOffsetCodepoints": 390,
+      "rawSpanSha256": "932ae7e863166003855a419bac05f7c15b3798d5cf87d4cc9e07127a2bc74176",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-10",
+      "titleCandidate": "Jargon Legitimacy Audit",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 62,
+      "startOffsetCodepoints": 390,
+      "endPage": 64,
+      "endOffsetCodepoints": 810,
+      "rawSpanSha256": "b06bac160cc06533f6f76b710136da97be1e4180b8c910fde2b0e6d3ac56abc7",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "W-11",
+      "titleCandidate": "The Anti-Summary",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 64,
+      "startOffsetCodepoints": 810,
+      "endPage": 71,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "13b2cc5a4d516d991cf3f218079ee4daa8f4ef6050d0884dbc83b290ede6ef6c",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part III — Turning Raw Work Into"
+      ]
+    },
+    {
+      "entryId": "R-01",
+      "titleCandidate": "Source Map with Contested Zones",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 71,
+      "startOffsetCodepoints": 248,
+      "endPage": 77,
+      "endOffsetCodepoints": 326,
+      "rawSpanSha256": "a793b222292af8d6c131368f8dda45c8a8ac0db2b3fdfecc7a92729f80da7695",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-02",
+      "titleCandidate": "Source Flattening Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 77,
+      "startOffsetCodepoints": 326,
+      "endPage": 79,
+      "endOffsetCodepoints": 374,
+      "rawSpanSha256": "703c65449970454f0182b3d19763e017462798e64dfd4e44bc7fc59ffe067706",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-03",
+      "titleCandidate": "Replication Risk Auditor",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 79,
+      "startOffsetCodepoints": 374,
+      "endPage": 86,
+      "endOffsetCodepoints": 1102,
+      "rawSpanSha256": "69d7764c3a0884167ad4aabb7f7c4a504b2973aba0f7997c6191385a8a11fb89",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-04",
+      "titleCandidate": "Research Artifact Generator (Schema-Locked)",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 86,
+      "startOffsetCodepoints": 1102,
+      "endPage": 89,
+      "endOffsetCodepoints": 218,
+      "rawSpanSha256": "41e220c7375a36b5131b329de5b998909db1f6f3f815838c30a9dd161532b043",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-05",
+      "titleCandidate": "Failure-to-Test Converter",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 89,
+      "startOffsetCodepoints": 218,
+      "endPage": 91,
+      "endOffsetCodepoints": 895,
+      "rawSpanSha256": "f4875280f6ee367cb814089d863cd2712e82818db1adaecb4a6d9b46dbd342b0",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-07",
+      "titleCandidate": "Competing Hypotheses Table",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 91,
+      "startOffsetCodepoints": 895,
+      "endPage": 93,
+      "endOffsetCodepoints": 936,
+      "rawSpanSha256": "6680a353ba57ffe164d49f994c41462c4495950830cd9f09c8919d399f0b948b",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-10",
+      "titleCandidate": "Source-of-Truth Conflict Resolver",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 93,
+      "startOffsetCodepoints": 936,
+      "endPage": 96,
+      "endOffsetCodepoints": 417,
+      "rawSpanSha256": "a2a2597b66f44eeee90998e40135baeb07cdbd6ce0b969003e4b8c8e3b7f2326",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-08",
+      "titleCandidate": "Artifact Extraction Protocol",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 96,
+      "startOffsetCodepoints": 417,
+      "endPage": 98,
+      "endOffsetCodepoints": 709,
+      "rawSpanSha256": "5e8c71853aba91c0f27d7709958cc527d5078f84a92ed65ccc97a1945f957fe5",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-09",
+      "titleCandidate": "Citation Integrity Check",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 98,
+      "startOffsetCodepoints": 709,
+      "endPage": 101,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "9760b97b0de723caa67a9f6f8d9db4b5dd1182b318cb0a22b88ec367a7de0071",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "R-11",
+      "titleCandidate": "Negative Result Documenter",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 101,
+      "startOffsetCodepoints": 0,
+      "endPage": 107,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "3fc6de53e91c4a0b76ddfcd02818a6ceb4272cac4eb6d1e45b033fd3f7cd60c2",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part IV — Build, Break, Observe"
+      ]
+    },
+    {
+      "entryId": "S-01",
+      "titleCandidate": "System Map with Trust Boundaries",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 107,
+      "startOffsetCodepoints": 237,
+      "endPage": 111,
+      "endOffsetCodepoints": 1256,
+      "rawSpanSha256": "ac20f67fbbf647a1e553cb393a9194f8a6f0bedbf70f7b392a05d6bec1c17031",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-02",
+      "titleCandidate": "Code Archaeology",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 111,
+      "startOffsetCodepoints": 1256,
+      "endPage": 117,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "37fc8f535a7abb55d401ed5424fbfb84a988575ea2a42f8204a6d2f9b1fc0740",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-03",
+      "titleCandidate": "Failure Mode Inventory",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 117,
+      "startOffsetCodepoints": 0,
+      "endPage": 122,
+      "endOffsetCodepoints": 583,
+      "rawSpanSha256": "6d4a2003be703202f437fa72ea473f927fe7314677a9cf1448b0ff368f8332a2",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-04",
+      "titleCandidate": "Command/Data Boundary Audit",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 122,
+      "startOffsetCodepoints": 583,
+      "endPage": 124,
+      "endOffsetCodepoints": 967,
+      "rawSpanSha256": "863dc6a9f9ed4f17df150d1633b1a361871c9373dfa27dd627fa382697ecd3fb",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-05",
+      "titleCandidate": "API Contract Stress-Test",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 124,
+      "startOffsetCodepoints": 967,
+      "endPage": 127,
+      "endOffsetCodepoints": 365,
+      "rawSpanSha256": "2f523c500d76b3bcd1c02e973754b99019688608e518ede8f10786118136e944",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-06",
+      "titleCandidate": "Observability Gap Finder",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 127,
+      "startOffsetCodepoints": 365,
+      "endPage": 129,
+      "endOffsetCodepoints": 744,
+      "rawSpanSha256": "47c0cdb51276c737f3e2553fb7b1b93815a2ad713c79622260d078627d9c8b57",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-07",
+      "titleCandidate": "Migration Risk Classifier",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 129,
+      "startOffsetCodepoints": 744,
+      "endPage": 136,
+      "endOffsetCodepoints": 29,
+      "rawSpanSha256": "1d7f2ce57cb7a93eb122e56b559bb162e3d142bde7077026309c4705b4e656f1",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-08",
+      "titleCandidate": "Rollback Decision Gate",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 136,
+      "startOffsetCodepoints": 29,
+      "endPage": 138,
+      "endOffsetCodepoints": 368,
+      "rawSpanSha256": "d00ab4ffe5d983a673ebf026b71b247776ca9cec7ecfd2d20393d8d3e622a6e5",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-09",
+      "titleCandidate": "Incident Report Scaffold",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 138,
+      "startOffsetCodepoints": 368,
+      "endPage": 140,
+      "endOffsetCodepoints": 815,
+      "rawSpanSha256": "3803bc35dbe50f348d26fef251883fa4dd5660766ab8882af62a1c80f301e0f5",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "S-10",
+      "titleCandidate": "Architecture Decision Record Generator",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 140,
+      "startOffsetCodepoints": 815,
+      "endPage": 145,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "884935f8967380e8fb2a92f091edcd4bef3bb351005a21932be2189bf16bad1d",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part V — Prompts That Survive"
+      ]
+    },
+    {
+      "entryId": "SEC-01",
+      "titleCandidate": "Prompt Injection Recognizer",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 145,
+      "startOffsetCodepoints": 211,
+      "endPage": 154,
+      "endOffsetCodepoints": 29,
+      "rawSpanSha256": "66e1238f28f46c393189d081a473e37a48a435581de4d4012ae046312eb03cc1",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-02",
+      "titleCandidate": "Prompt Firewall Designer",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 154,
+      "startOffsetCodepoints": 29,
+      "endPage": 163,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "577b0bd8978d3c1c5035affab53c5d04f85118e0ac7f410d20ef61805b2ba27b",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-03",
+      "titleCandidate": "RAG Poisoning Auditor",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 163,
+      "startOffsetCodepoints": 0,
+      "endPage": 171,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "69067811557aed860d8ab537d16f3c30a370fb1d973ec73bbfe3202707695feb",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-04",
+      "titleCandidate": "Evaluator Capture Scanner",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 171,
+      "startOffsetCodepoints": 0,
+      "endPage": 179,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "a46a7b889b03cf68b1eb80ab1eb65e7153b1d865f4c893dc68a0d5b9a0000620",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-05",
+      "titleCandidate": "Command/Data Separator (Refactor)",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 179,
+      "startOffsetCodepoints": 0,
+      "endPage": 187,
+      "endOffsetCodepoints": 683,
+      "rawSpanSha256": "d65d328c84f93cb11701e46d0b4a8b0b106f016567250050982b8c76cce3916b",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-06",
+      "titleCandidate": "Tool-Agent Offense Probe",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 187,
+      "startOffsetCodepoints": 683,
+      "endPage": 198,
+      "endOffsetCodepoints": 29,
+      "rawSpanSha256": "0b032deb9f1839809f13a667b3740546172c4e0e9a0fdf5b0f1ffd277d28ae0b",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-07",
+      "titleCandidate": "Human Confirmation Gate Designer",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 198,
+      "startOffsetCodepoints": 29,
+      "endPage": 200,
+      "endOffsetCodepoints": 668,
+      "rawSpanSha256": "99a4e900f9d0f8a35ffaca45183f4da0d9f09a7a6cc8c964651ea93f72aa9d90",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-08",
+      "titleCandidate": "Generated Junk Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 200,
+      "startOffsetCodepoints": 668,
+      "endPage": 203,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "be4a1649e6c2282d439a0e9e9157eb014ab063ac41cdf7552c752b4fca7d93c9",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-09",
+      "titleCandidate": "Indirect Injection Tracer",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 203,
+      "startOffsetCodepoints": 0,
+      "endPage": 205,
+      "endOffsetCodepoints": 539,
+      "rawSpanSha256": "78af438a40dd0ac418c3585bf8f6f3173f5d12d590cfec4c80186970e4721664",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "SEC-10",
+      "titleCandidate": "Trust Boundary Mapper (Security)",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 205,
+      "startOffsetCodepoints": 539,
+      "endPage": 209,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "c0d538f637b54f6f6d8dcf5fd8cf1a5928376c245feae634bec53af071d08643",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part VI — Publishing Serious"
+      ]
+    },
+    {
+      "entryId": "P-01",
+      "titleCandidate": "Build-in-Public Post (Structured)",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 209,
+      "startOffsetCodepoints": 241,
+      "endPage": 213,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "699001810b2592005ad28652e947ffdd3b484a9dacf4fa578d3ab8f06aa892df",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-02",
+      "titleCandidate": "Learning Log Extractor",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 213,
+      "startOffsetCodepoints": 0,
+      "endPage": 217,
+      "endOffsetCodepoints": 647,
+      "rawSpanSha256": "9effa8763450263d26af5d5c15a2271bcb296769132ba7226e26d8ce26d44d89",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-03",
+      "titleCandidate": "README Quality Auditor",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 217,
+      "startOffsetCodepoints": 647,
+      "endPage": 219,
+      "endOffsetCodepoints": 668,
+      "rawSpanSha256": "76998b39e49174a84dd4423a4015e3a8833fe8bb53f8b675d22b9735cc0d9bb5",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-04",
+      "titleCandidate": "Technical Post-Mortem Publisher",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 219,
+      "startOffsetCodepoints": 668,
+      "endPage": 222,
+      "endOffsetCodepoints": 29,
+      "rawSpanSha256": "c9e8ececdec39bd87c7c1c4555eac57eea2204e278a7ee3bc6b898a2c300e1ea",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-05",
+      "titleCandidate": "Work Sample Annotator",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 222,
+      "startOffsetCodepoints": 29,
+      "endPage": 228,
+      "endOffsetCodepoints": 65,
+      "rawSpanSha256": "0625c9143b11668e813954c94003c29e6fe03d6e0449f73283990507f52fbb49",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-06",
+      "titleCandidate": "Changelog Curation Engine",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 228,
+      "startOffsetCodepoints": 65,
+      "endPage": 232,
+      "endOffsetCodepoints": 1378,
+      "rawSpanSha256": "7fa1847b47415a0b682f3e6d296761569035cd797b5a05918930ee1ea5d8d5de",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-07",
+      "titleCandidate": "RFC Draft Generator",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 232,
+      "startOffsetCodepoints": 1378,
+      "endPage": 238,
+      "endOffsetCodepoints": 559,
+      "rawSpanSha256": "131565e18051a7722d031fb0cdd052b4622d1136cfa88403d0b03e7612bc9d1a",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-08",
+      "titleCandidate": "Peer Review Responder",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 238,
+      "startOffsetCodepoints": 559,
+      "endPage": 242,
+      "endOffsetCodepoints": 1274,
+      "rawSpanSha256": "d277049aaa6a3f0b29f9b6de879d6381d2e71bf65de4d09c16cd76cd6bfed8ab",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-09",
+      "titleCandidate": "Correction/Retraction Writer",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 242,
+      "startOffsetCodepoints": 1274,
+      "endPage": 247,
+      "endOffsetCodepoints": 1554,
+      "rawSpanSha256": "ac32caa78a7e33638f3f30e34d366c7139f76dda5296829f1a7ba868ceb37cf8",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "P-10",
+      "titleCandidate": "Open Source Contribution Guide Generator",
+      "editorialStatus": "PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 247,
+      "startOffsetCodepoints": 1554,
+      "endPage": 255,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "429be32d7561757289fd1ce9e3acb2200abc6dbbf190fcc37ab867a6402e3428",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part VII — Prompt Chains"
+      ]
+    },
+    {
+      "entryId": "CH-01",
+      "titleCandidate": "Idea-to-Commitment Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 255,
+      "startOffsetCodepoints": 583,
+      "endPage": 257,
+      "endOffsetCodepoints": 308,
+      "rawSpanSha256": "7f4660e9ba883a351d9ea6478feedd84b1763b7a81fb835902dd84e2ae4564a8",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-02",
+      "titleCandidate": "Raw Notes-to-Publishable-Artifact Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 257,
+      "startOffsetCodepoints": 308,
+      "endPage": 259,
+      "endOffsetCodepoints": 70,
+      "rawSpanSha256": "cc5a5f9ce07fc01b3bc113d9ff3f8004d681d5469b161ab29c87de536c356552",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-03",
+      "titleCandidate": "Codebase Inherit-and-Harden Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 259,
+      "startOffsetCodepoints": 70,
+      "endPage": 261,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "797a63281dc5d6592705cfb6414fe4b55220c75a1be9fb6ab4b26c776a53bbd2",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-04",
+      "titleCandidate": "Security Audit-to-Patch Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 261,
+      "startOffsetCodepoints": 0,
+      "endPage": 262,
+      "endOffsetCodepoints": 829,
+      "rawSpanSha256": "8ddf5afc1fb0d9d0c5653f2ba9888dc10c2bcf4633f6e908f17345bb03156e3e",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-05",
+      "titleCandidate": "Claim-to-Citation-to-Publication Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 262,
+      "startOffsetCodepoints": 829,
+      "endPage": 264,
+      "endOffsetCodepoints": 717,
+      "rawSpanSha256": "dfeba98e858ac6aaeb3467fe6a04a7fa894274c5f862c69aa4ee1615b1901fbb",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-06",
+      "titleCandidate": "Incident-to-Runbook Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 264,
+      "startOffsetCodepoints": 717,
+      "endPage": 266,
+      "endOffsetCodepoints": 680,
+      "rawSpanSha256": "9a47bf37a2d937db036113168032338a831c41b9209dfd49a0e38870c395becd",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-07",
+      "titleCandidate": "Assumption-to-Test-to-Decision Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 266,
+      "startOffsetCodepoints": 680,
+      "endPage": 268,
+      "endOffsetCodepoints": 706,
+      "rawSpanSha256": "ba630c4259811730a6049e53d51bbd604d731b6d26ba2abb221d10bb5dce881e",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-08",
+      "titleCandidate": "Draft-to-Adversarial-Review-to-Publish Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 268,
+      "startOffsetCodepoints": 706,
+      "endPage": 270,
+      "endOffsetCodepoints": 715,
+      "rawSpanSha256": "6db798cd76c2421034381617a1bb7501d4183645ee32bf1ae1c393812edaeb69",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-09",
+      "titleCandidate": "Agent Build-Break-Harden Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 270,
+      "startOffsetCodepoints": 715,
+      "endPage": 272,
+      "endOffsetCodepoints": 793,
+      "rawSpanSha256": "f4bad50fd2c7ead2d0bae52932ac01c3499f1f932bf8844ff456eefa50b09025",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "CH-10",
+      "titleCandidate": "Learning-to-Public-Knowledge Chain",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 272,
+      "startOffsetCodepoints": 793,
+      "endPage": 275,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "c18ab9cdb16945e9b01bd099699b9d8aeb7214545cca2c2e078a2f74306ba89d",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "SECTION_TRANSITION: Part VIII — Anti-Prompts and Failure"
+      ]
+    },
+    {
+      "entryId": "AP-01",
+      "titleCandidate": "Over-Smoothing Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 275,
+      "startOffsetCodepoints": 769,
+      "endPage": 277,
+      "endOffsetCodepoints": 593,
+      "rawSpanSha256": "bb37382a8bb4259f9b3be3bbacc577adb0f7b64696e185d7302a5efb0e22c11e",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-02",
+      "titleCandidate": "Confidence Laundering Probe",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 277,
+      "startOffsetCodepoints": 593,
+      "endPage": 279,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "dee78992da1a8ba6aca757850a0a9b27a53fd7f1d571e5e5fdf92f1cb9271e54",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-03",
+      "titleCandidate": "Source Flattening Alarm",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 279,
+      "startOffsetCodepoints": 0,
+      "endPage": 280,
+      "endOffsetCodepoints": 369,
+      "rawSpanSha256": "ce8f5286c7baaa9352f120cc4c344c9152a8b12c0459cacd7a81148b564eeb3e",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-04",
+      "titleCandidate": "Scope Inflation Catch",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 280,
+      "startOffsetCodepoints": 369,
+      "endPage": 281,
+      "endOffsetCodepoints": 767,
+      "rawSpanSha256": "33bc4a7cd798f581f8f510da8a3cd9f11648b70c94f23a45fb7688b5a255c057",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-05",
+      "titleCandidate": "Sycophancy Tripwire",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 281,
+      "startOffsetCodepoints": 767,
+      "endPage": 283,
+      "endOffsetCodepoints": 192,
+      "rawSpanSha256": "b17400b608da5d6d0068aa11689ed492a9c9638e5c4634d8e8485385c2e97ab0",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-06",
+      "titleCandidate": "Generated Junk Classifier",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 283,
+      "startOffsetCodepoints": 192,
+      "endPage": 284,
+      "endOffsetCodepoints": 723,
+      "rawSpanSha256": "114c32957dfc888b30e992eba458941a6b34239c27f7054574c8b634ae133c55",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-07",
+      "titleCandidate": "Hedge Accumulation Audit",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 284,
+      "startOffsetCodepoints": 723,
+      "endPage": 286,
+      "endOffsetCodepoints": 146,
+      "rawSpanSha256": "b043e11664a6283973ec6d659b38d568781d2cdadf80dfbc721a9bac92e8e7c3",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-08",
+      "titleCandidate": "Evaluator Capture Probe",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 286,
+      "startOffsetCodepoints": 146,
+      "endPage": 287,
+      "endOffsetCodepoints": 836,
+      "rawSpanSha256": "9bf15f1825b7ca1faf2fc431122dc061db4b0b8cd6c39b0e3f4db5e5719593a2",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-09",
+      "titleCandidate": "Hallucinated Structure Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 287,
+      "startOffsetCodepoints": 836,
+      "endPage": 289,
+      "endOffsetCodepoints": 170,
+      "rawSpanSha256": "9436a7ce062d9d72a3c5a16beab3fbbf45544552429c083879c67a758cdf9ba2",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-10",
+      "titleCandidate": "False Precision Alarm",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 289,
+      "startOffsetCodepoints": 170,
+      "endPage": 290,
+      "endOffsetCodepoints": 791,
+      "rawSpanSha256": "0d8f28a151621c9d3d2ef0042bce8be714f870caa637adb4c35eae942a6b2cec",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-11",
+      "titleCandidate": "Stale Training Data Probe",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 290,
+      "startOffsetCodepoints": 791,
+      "endPage": 292,
+      "endOffsetCodepoints": 210,
+      "rawSpanSha256": "041e1598d90b31bdb97cd1ec63b76e5f59b5e0fba1378ec8969cddf883471605",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-12",
+      "titleCandidate": "Context Window Drift Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 292,
+      "startOffsetCodepoints": 210,
+      "endPage": 293,
+      "endOffsetCodepoints": 727,
+      "rawSpanSha256": "cc2d9ab0f31ddf75909140c3cc044c020fe65da8351f38d70209d05f58d7ef58",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-13",
+      "titleCandidate": "Injection Residue Check",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 293,
+      "startOffsetCodepoints": 727,
+      "endPage": 295,
+      "endOffsetCodepoints": 675,
+      "rawSpanSha256": "180f6d8e0e178ee9d3dd68e39db366070ab49ece1476a72d775f8903b6b1cd0c",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-14",
+      "titleCandidate": "Role Bleed Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 295,
+      "startOffsetCodepoints": 675,
+      "endPage": 297,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "52f386880f267ab849529ed5304066d91fad9424ce4fc627196a34218b6a6c2a",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-15",
+      "titleCandidate": "Refusal Laundering Probe",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 297,
+      "startOffsetCodepoints": 0,
+      "endPage": 298,
+      "endOffsetCodepoints": 663,
+      "rawSpanSha256": "9cdf807783ae44e28bc937c8a86650773677e0c0ecd498487538172d1e86cca8",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-16",
+      "titleCandidate": "Overfit-to-Prompt Detector",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 298,
+      "startOffsetCodepoints": 663,
+      "endPage": 300,
+      "endOffsetCodepoints": 29,
+      "rawSpanSha256": "41a70b008cd43efa91dde622e775a5d94c63c86343239450f105101bb2d40943",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-17",
+      "titleCandidate": "Plausible Nonsense Screen",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 300,
+      "startOffsetCodepoints": 29,
+      "endPage": 301,
+      "endOffsetCodepoints": 555,
+      "rawSpanSha256": "71c2b132afb575a795c67f256000033352a7c1ede435e8b98bc7ff3e524e6646",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-18",
+      "titleCandidate": "Minority Opinion Suppression Check",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 301,
+      "startOffsetCodepoints": 555,
+      "endPage": 303,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "ef239df53231e965dd769259345d1592ef945d2ab12080a723874baf36dd8e44",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-19",
+      "titleCandidate": "Format Compliance vs Substance Decay Check",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 303,
+      "startOffsetCodepoints": 0,
+      "endPage": 304,
+      "endOffsetCodepoints": 683,
+      "rawSpanSha256": "12cb027005a957239c36903ca9d931d7d5b9b29769bdd28f1fd0062d2d8206db",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "NEXT_DECLARATION"
+      ]
+    },
+    {
+      "entryId": "AP-20",
+      "titleCandidate": "Model Confidence Miscalibration Audit",
+      "editorialStatus": "NON_PENDING",
+      "bodyStatus": "PARTIAL",
+      "reviewRequired": true,
+      "startPage": 304,
+      "startOffsetCodepoints": 683,
+      "endPage": 307,
+      "endOffsetCodepoints": 0,
+      "rawSpanSha256": "54d7b7c4193831721a69b97f9232e32f509bfa2227da95dad592693b1eb5ca5f",
+      "spanRoundTrip": true,
+      "boundaryReason": [
+        "PART_IX_BEGINNING"
+      ]
+    }
+  ]
+}
