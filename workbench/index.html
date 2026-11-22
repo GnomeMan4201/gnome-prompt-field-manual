@@ -393,7 +393,7 @@
         <span class="mono" style="font-size:0.74rem;color:var(--crimson);letter-spacing:0.1em;text-transform:uppercase;">OPERATIONAL PROMPT ENGINEERING &amp; EVAL WORKBENCH</span>
         <h1>Prompts That Survive Pressure.</h1>
         <p style="color:var(--text-dim);margin:0;">
-          An interactive engineering environment built on the GNOME Prompt Field Manual. Inspect six illustrative sheets (not the canonical entries), dissect prompt contracts, stress-test failure modes deterministically, and export reproducible verification records.
+          An interactive engineering environment built on the GNOME Prompt Field Manual. Inspect six illustrative beta sheets (not transcriptions of the canonical entries), dissect prompt contracts, stress-test failure modes deterministically, and export reproducible verification records.
         </p>
       </div>
       <div class="hero-meta">
@@ -599,7 +599,7 @@
                 filtered.map(function (e) {
                   var cls = 'entry-item' + (e.status.indexOf('PENDING') !== -1 || e.status.indexOf('CUT') !== -1 ? ' is-pending' : '');
                   return '<button type="button" class="' + cls + '" data-entry-id="' + e.id + '" aria-pressed="' + (e.id === active.id) + '">' +
-                    '<div class="entry-top"><span>' + esc(e.id) + '</span><span>' + esc(e.status) + '</span></div>' +
+                    '<div class="entry-top"><span>' + esc(e.id) + '</span><span>DEMO / ' + esc(e.status) + '</span></div>' +
                     '<div style="font-weight:600;font-size:0.9rem;">' + esc(e.title) + '</div>' +
                   '</button>';
                 }).join('') +
@@ -622,7 +622,7 @@
                 '<div class="sheet-box"><h4>Verification Procedure</h4><div>' + esc(active.verify) + '</div></div>' +
               '</div>' +
               '<div class="mono" style="font-size:0.74rem;color:#5c5448;border-top:1px solid #cfc6b5;padding-top:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">' +
-                '<span>Provenance: ' + esc(active.provenance) + '</span>' +
+                '<span>Demo adaptation (not verbatim canonical content). Context: ' + esc(active.provenance) + '</span>' +
                 '<button type="button" class="btn" id="load-to-anatomy" style="background:#181613;color:#f4efe6;border-color:#181613;">Load Pattern into Anatomy Lab &rarr;</button>' +
               '</div>' +
             '</article>' +
@@ -878,7 +878,13 @@
           copyBtn.addEventListener('click', function () {
             var txt = JSON.stringify(buildExportRecord(), null, 2);
             if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(txt).catch(function () {});
+              navigator.clipboard.writeText(txt).then(function () {
+                state.copiedExport = true;
+                render();
+              }).catch(function () {
+                state.copiedExport = false;
+                copyBtn.textContent = 'Copy failed — use JSON download';
+              });
             } else {
               var ta = document.createElement('textarea');
               ta.value = txt;
@@ -886,13 +892,13 @@
               ta.style.left = '-9999px';
               document.body.appendChild(ta);
               ta.select();
-              try { document.execCommand('copy'); } catch (err) {}
+              var ok = false;
+              try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
               document.body.removeChild(ta);
+              state.copiedExport = ok;
+              if (ok) render();
+              else copyBtn.textContent = 'Copy failed — use JSON download';
             }
-            // Clipboard success must be reported by the resolved browser operation, not assumed.
-            // See asynchronous handler above; leave UI unconfirmed rather than showing a false success.
-            state.copiedExport = false;
-            render();
           });
         }
       }
