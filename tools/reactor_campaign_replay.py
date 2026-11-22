@@ -92,6 +92,14 @@ def calculate(campaign:dict, intervention:dict,execution:dict)->dict:
         require(not execution['errors'],'COMPLETED_WITH_FAILURES')
     if execution['status']=='PARTIAL':
         require(bool(execution['errors']),'PARTIAL_WITHOUT_FAILURES')
+    mode_expected = {'PROVIDER_REPORTED_UNAUTHENTICATED': 'LOCAL_OLLAMA_REPORTED',
+                     'SYNTHETIC_MOCK_TEST_ONLY': 'MOCK_TEST_ONLY'}
+    require(execution['modelProvenance'] in mode_expected, 'EXECUTION_PROVENANCE_NOT_AVAILABLE')
+    for n, record in enumerate(obs):
+        require(isinstance(record,dict) and isinstance(record.get('executionProvenance'),dict),
+                f'OBSERVATION_{n}:MISSING_EXECUTION_PROVENANCE')
+        require(record['executionProvenance'].get('executionMode')==mode_expected[execution['modelProvenance']],
+                f'OBSERVATION_{n}:EXECUTION_MODE_CONFLICT')
     plan=campaign['plan']
     validate_run_records(plan,obs)      # Rejects imported pass/evaluation/disposition assertions.
     validate_intervention_observations(intervention,plan,obs)
