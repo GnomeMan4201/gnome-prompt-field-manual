@@ -7,10 +7,11 @@ on:
       - 'workbench/reactor/**'
       - 'workbench/data/entry_identity_index.json'
       - 'schemas/reactor-*.schema.json'
-      - 'tools/reactor_engine.py'
+      - 'tools/reactor_*.py'
       - 'tools/verify_reactor_capsule.py'
       - 'tests/test_reactor_*.py'
       - 'tests/reactor_fixtures.py'
+      - 'qa/**'
   push:
     branches: [main]
     paths:
@@ -18,10 +19,11 @@ on:
       - 'workbench/reactor/**'
       - 'workbench/data/entry_identity_index.json'
       - 'schemas/reactor-*.schema.json'
-      - 'tools/reactor_engine.py'
+      - 'tools/reactor_*.py'
       - 'tools/verify_reactor_capsule.py'
       - 'tests/test_reactor_*.py'
       - 'tests/reactor_fixtures.py'
+      - 'qa/**'
   workflow_dispatch:
 
 permissions:
@@ -71,13 +73,13 @@ jobs:
 
       - name: Python and JavaScript syntax
         run: |
-          python -m compileall -q tools/reactor_engine.py tools/verify_reactor_capsule.py tests
+          python -m compileall -q tools/reactor_engine.py tools/reactor_evidence_v2.py tools/reactor_pair_runner.py tools/reactor_chamber.py tools/reactor_evaluator.py tools/reactor_local_runner.py tools/verify_reactor_capsule.py tests
           for file in workbench/reactor/*.js; do node --check "$file"; done
 
       - name: Run all repository tests with no skipped cases
         run: |
           python - <<'PY'
-          import pathlib, unittest
+          import unittest
           suite = unittest.defaultTestLoader.discover("tests")
           result = unittest.TextTestRunner(verbosity=2).run(suite)
           print(f"Run={result.testsRun}, skipped={len(result.skipped)}, failures={len(result.failures)}, errors={len(result.errors)}")
