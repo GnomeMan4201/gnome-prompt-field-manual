@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>GNOME // Campaign Evidence Inspector</title>
+<style>
+:root{color-scheme:dark;--bg:#080a10;--panel:#111620;--line:#303846;--fg:#e8edf4;--muted:#9caac0;--warn:#ffcb81;--accent:#d65e67;--good:#86d6bd}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse 60% 30% at 80% 5%,#271824 0,transparent 78%),var(--bg);color:var(--fg);font:15px/1.55 ui-sans-serif,system-ui,-apple-system,sans-serif;min-height:100vh}
+header,main,footer{max-width:1320px;margin:0 auto;padding:clamp(18px,3vw,40px)}header{padding-top:45px;border-bottom:1px solid var(--line)}h1{font:normal clamp(2rem,5vw,4.5rem)/1.05 Georgia,serif;letter-spacing:-.04em;margin:.2em 0}.kicker{font:700 .72rem ui-monospace,SFMono-Regular,monospace;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
+p{max-width:77ch}.meta{font:12px ui-monospace,SFMono-Regular,monospace;color:var(--muted);letter-spacing:.04em}button,.file-btn{background:#1c2532;color:var(--fg);border:1px solid #485465;border-radius:8px;padding:12px 16px;min-height:44px;cursor:pointer;font:inherit}button:hover,.file-btn:hover{border-color:var(--accent)}button:focus-visible,input:focus-visible{outline:3px solid #d77a80;outline-offset:3px}input[type=file]{width:100%;max-width:560px;display:block;margin-top:10px;padding:15px;border:1px dashed #617084;border-radius:8px;background:#101722;color:var(--fg)}
+.card{background:linear-gradient(145deg,#141b27,#0e131b);border:1px solid var(--line);padding:20px;border-radius:12px;min-width:0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.span2{grid-column:span 2}.stat{font:700 clamp(1.5rem,3vw,2.6rem) ui-monospace,SFMono-Regular,monospace;margin:5px 0}.tag{display:inline-block;font:700 .72rem ui-monospace,SFMono-Regular,monospace;color:var(--warn);padding:4px 8px;border:1px solid #5d4734;border-radius:4px}.ok{color:var(--good)}.fail{color:#ff9a9a}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,SFMono-Regular,monospace;background:#090e16;border:1px solid var(--line);border-radius:8px;padding:14px;max-height:360px;overflow:auto}h2{font:normal 1.7rem Georgia,serif;margin:12px 0}h3{font:700 .88rem ui-monospace,SFMono-Regular,monospace;text-transform:uppercase;letter-spacing:.09em;color:#c9d5e4}section{margin-top:26px}dd{margin:2px 0 11px;overflow-wrap:anywhere}dt{font:11px ui-monospace,SFMono-Regular,monospace;color:var(--muted);text-transform:uppercase}dl{margin:0}.scroll{overflow:auto}table{border-collapse:collapse;min-width:580px;width:100%;font-size:13px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px;vertical-align:top;overflow-wrap:anywhere}th{color:var(--muted);font-size:11px;letter-spacing:.08em}small{color:var(--muted)}#status[role=status]{padding:12px 16px;margin:18px 0;border-left:3px solid var(--accent);background:#191521}a{color:#ec9a9f}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.span2{grid-column:span 1}header,main,footer{padding:18px}table{min-width:520px}}@media(prefers-reduced-motion:no-preference){button{transition:border-color .16s,background .16s}} 
+</style>
+</head>
+<body>
+<header>
+ <div class="kicker">GNOME / Research Systems / Phase VIII-C</div>
+ <h1>Campaign Evidence<br>Inspector</h1>
+ <p>A read-only forensic workspace for source references, interventions, raw trials, claim challenges and checksum inspection. <strong>Importing an artifact does not authenticate it.</strong></p>
+ <div class="meta">SOURCE CANDIDATES: 0/91 VERIFIED · EDITORIAL DECISIONS PENDING: 629 · NO AUTOMATIC MODEL EXECUTION</div>
+</header>
+<main>
+ <section class="card"><h2>01 / Load local capsule</h2>
+  <p>Choose a <code>gnome.reactor.evidence.v3</code> JSON capsule. This page never uploads your file, runs a model, or treats capsule metadata as independently verified truth.</p>
+  <label for="capsule-file">Evidence capsule (JSON, maximum 4 MB)</label>
+  <input id="capsule-file" type="file" accept=".json,application/json" aria-describedby="status">
+  <p id="status" role="status" aria-live="polite">NO FILE IMPORTED — NOT EXECUTED</p>
+  <span class="tag">CHECKSUM INTEGRITY ≠ AUTHENTICITY</span>
+ </section>
+ <section class="grid" aria-label="Campaign overview">
+  <div class="card"><div class="meta">RUN STATE — CLAIMED</div><div id="run-state" class="stat">—</div><small>Execution must be independently established</small></div>
+  <div class="card"><div class="meta">REPORTED VALID PAIRS</div><div id="pairs" class="stat">—</div><small>Unverified until Python replay</small></div>
+  <div class="card"><div class="meta">REPORTED INDUCED FAILURES</div><div id="induced" class="stat">—</div><small>Never interpret synthetic counts as empirical</small></div>
+ </section>
+ <section class="grid">
+  <div class="card"><h2>02 / Source truth</h2><dl id="source-meta"><dt>Origin</dt><dd>No capsule</dd></dl></div>
+  <div class="card"><h2>03 / Intervention</h2><dl id="intervention-meta"><dt>Binding</dt><dd>No capsule</dd></dl></div>
+  <div class="card"><h2>04 / Integrity</h2><pre id="integrity-result">Not checked</pre><small>Cryptographic checksums cover internal content only; Python CLI must recompute all scoring and claims.</small></div>
+ </section>
+ <section class="card"><h2>05 / Raw trial matrix</h2><p class="meta">All records below are untrusted input data until independent replay. No inferred model identity or execution.</p><div class="scroll"><table><thead><tr><th>Input / Trial</th><th>Condition</th><th>Reported model</th><th>Response preview</th></tr></thead><tbody id="trial-rows"><tr><td colspan="4">No observations</td></tr></tbody></table></div></section>
+ <section class="grid"><div class="card span2"><h2>06 / Claim and challenge register</h2><div id="claims">No recorded claims</div></div><div class="card"><h2>07 / Independent verification</h2><p>To verify a capsule, run the Python v3 replay tool from the checked-out GNOME repository:</p><pre>python3 tools/reactor_campaign_replay.py verify capsule.json</pre><p>It recalculates scores using Evidence Spine v2, validates intervention bindings, checks claim-to-trial links and detects modified evidence.</p><p><strong>Still not proved:</strong> source authenticity, reviewer identity, whether a claimed model run occurred, or independent replication.</p></div></section>
+</main>
+<footer class="meta">GNOME / EVIDENCE REACTOR — SOURCE-LINKED CLAIMS, NOT SELF-CERTIFIED RESULTS</footer>
+<script src="campaign-lab.js"></script>
+</body></html>
