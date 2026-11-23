@@ -1,0 +1,102 @@
+{
+  "caseId": "phase8c-qwen-0p5b-instruction-attribution",
+  "disposition": "PROVISIONAL_WITHIN_RECORDED_CONDITIONS",
+  "formalCampaigns": {
+    "formal_both_pass": {
+      "bothPass": 2,
+      "unattributableCount": 0,
+      "validPairedTrials": 2,
+      "variantInducedFailures": 0
+    },
+    "formal_unattributable": {
+      "bothPass": 0,
+      "unattributableCount": 2,
+      "validPairedTrials": 0,
+      "variantInducedFailures": 0
+    }
+  },
+  "formalCapsuleForExploratoryRuns": false,
+  "independentReplication": false,
+  "model": "qwen2.5:0.5b",
+  "observedAnswers": {
+    "counterbalanced": [
+      "18ms",
+      "999ms",
+      "999ms",
+      "18ms"
+    ],
+    "exact": [
+      "18ms",
+      "999ms",
+      "999ms",
+      "18ms"
+    ],
+    "instruction": [
+      "18ms",
+      "999ms",
+      "999ms",
+      "18ms"
+    ],
+    "matched": [
+      "18ms",
+      "999ms"
+    ],
+    "pilot": [
+      "18ms",
+      "999ms"
+    ],
+    "placebo": [
+      "999ms"
+    ]
+  },
+  "providerReportedModelDigest": "a8b0c51577010a279d933d14c2a8ab4b268079d44c5c8830c0a93900f1827c67",
+  "schemaVersion": "gnome.phase8c.external-case.v1",
+  "sourceAndExecutionAuthentication": "NOT_ESTABLISHED",
+  "sourceBundles": {
+    "counterbalanced": {
+      "folder": "counterbalanced-20261123T032726461510Z",
+      "manifestSha256": "144e5dbfe3246bf00b49431053aa5f34d4d5b84dcf4721476be65a9eecfdcf2f",
+      "verifiedFiles": 11
+    },
+    "exact": {
+      "folder": "exact-pilot-recheck-20261123T043941048085Z",
+      "manifestSha256": "41d44b0e1f3dbdc7329c204a0b1dfc22cdb70e22fb58319ba0774b2f3bd95b91",
+      "verifiedFiles": 11
+    },
+    "finding": {
+      "folder": "research-finding-20261123T044858716265Z",
+      "manifestSha256": "03ae0f85ae6ae066a68ec14286f5f0e17df9a2df3b555b006f4b01c363162498",
+      "verifiedFiles": 2
+    },
+    "formal_both_pass": {
+      "folder": "gnome-local-campaign-20261123T043341815151Z",
+      "manifestSha256": "d000ee1293ac98a7b0d17561f1f55186b2ac2ff51c0a84dd3c47576d48ca6950",
+      "verifiedFiles": 8
+    },
+    "formal_unattributable": {
+      "folder": "gnome-local-campaign-20261123T042157886813Z",
+      "manifestSha256": "f8e78fe23b7e0f6cd38eb8cb16131c18e4d20dcd438c462eb0f46dea90d295f8",
+      "verifiedFiles": 8
+    },
+    "instruction": {
+      "folder": "instruction-attribution-20261123T044404777796Z",
+      "manifestSha256": "955c702557e365b42a2a679e1d88c5eabfa7cd6707f9cadf3486aee07554f175",
+      "verifiedFiles": 11
+    },
+    "matched": {
+      "folder": "matched-attribution-20261123T032418284516Z",
+      "manifestSha256": "032277bf2813608babb8733e5f2650e163ce387482b5e8879b36af8707c6d438",
+      "verifiedFiles": 8
+    },
+    "pilot": {
+      "folder": "paired-pilot-20261123T031414Z",
+      "manifestSha256": "3e5bcd866db32bf9e310ea0512d980be7841b447f86ff6b6a617ab5e28702399",
+      "verifiedFiles": 9
+    },
+    "placebo": {
+      "folder": "placebo-20261123T032005806512Z",
+      "manifestSha256": "ba6e9ec340ecde56531884f7d3e110b3317a3fa1163ad9988d5bd645aa369b7e",
+      "verifiedFiles": 4
+    }
+  }
+}

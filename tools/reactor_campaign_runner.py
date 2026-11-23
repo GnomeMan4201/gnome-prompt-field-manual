@@ -186,11 +186,12 @@ def attempt_falsification(finding:dict[str,Any])->dict[str,Any]:
 
 
 def run_campaign(campaign:dict, intervention:dict,endpoint:str, trials:int=1,
-                 run_call=run_local_ollama_trial, timeout:float=20.0)->dict:
+                 run_call=run_local_ollama_trial, timeout:float=120.0)->dict:
     """Explicit execution path, opt-in; no model outcome is invented on failure."""
     from reactor_reference_registry import verify_reference_bytes
     plan=campaign['plan'];validate_intervention(intervention,plan)
     require(type(trials) is int and 1<=trials<=20,'INVALID_TRIAL_COUNT')
+    require(type(timeout) in (int,float) and 0<timeout<=300,'INVALID_TIMEOUT')
     require(is_localhost_url(endpoint),'NON_LOOPBACK_ENDPOINT_BLOCKED')
     require(plan['provider']=='ollama-local','OLLAMA_PROVIDER_REQUIRED')
     observations=[];errors=[]
@@ -216,6 +217,7 @@ def main(argv=None)->int:
     parser.add_argument('--intervention',required=True)
     parser.add_argument('--endpoint',required=True)
     parser.add_argument('--trials',type=int,default=1)
+    parser.add_argument('--timeout',type=float,default=120.0)
     parser.add_argument('--out',required=True)
     args=parser.parse_args(argv)
     try:
@@ -224,7 +226,7 @@ def main(argv=None)->int:
             f=Path(p);require(f.is_file() and f.stat().st_size<=4*1024*1024,'FILE_NOT_FOUND_OR_TOO_LARGE')
             return json.loads(f.read_text(encoding='utf8'))
         campaign=read(args.campaign);intv=read(args.intervention)
-        result=run_campaign(campaign,intv,args.endpoint,args.trials)
+        result=run_campaign(campaign,intv,args.endpoint,args.trials,timeout=args.timeout)
         Path(args.out).write_text(json.dumps(result,indent=2,allow_nan=False)+'\n',encoding='utf8')
         print(json.dumps({'status':result['status'],'observations':len(result['observations']),
                           'failures':len(result['errors']),'scored':False}))
