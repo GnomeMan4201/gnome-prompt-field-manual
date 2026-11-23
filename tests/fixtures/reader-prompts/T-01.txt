@@ -1,0 +1,43 @@
+Run a six-lens stress test on the following idea. Each lens is a distinct attack angle. Do not merge lenses or treat one lens as a variant of another. For each lens, produce a structured finding using the exact format below.
+
+LENS 1 — ASSUMPTION LENS Identify the load-bearing assumptions this idea requires to be true. Which assumption is most likely false? Which is least verifiable?
+
+LENS 2 — ADVERSARIAL USER LENS Who would use this idea in ways it was not intended? What would a motivated bad actor, competitor, or non-compliant user do with it, to it, or against it? How does that use case break the idea or undermine its core value?
+
+LENS 3 — HISTORICAL ANALOG LENS What is the closest historical precedent — a similar idea, in a similar context, attempted before? What happened? Where did it succeed? Where did it fail? What does the analog predict about this idea’s failure mode?
+
+LENS 4 — INCENTIVE LENS Who benefits if this idea succeeds? Who is harmed, disadvantaged, or threatened by it? Where are the misaligned incentives that will generate resistance, gaming, or sabotage?
+
+LENS 5 — FAILURE CASCADE LENS If this idea fails, what fails because of it? Map the downstream collapse: what breaks first, what breaks next, what breaks last? What is the maximum realistic blast radius?
+
+LENS 6 — CONSTRAINT LENS What hard real-world constraint can make this idea fail even if its assumptions are true and participants cooperate? Test time, budget, capability, regulation, external dependencies, and coordination limits. Which constraint binds first, and what evidence would show that it is actually binding?
+
+---
+
+FORMAT FOR EACH LENS:
+
+LENS NAME: [Name]
+
+ATTACK ANGLE: [What this lens tests and why it’s a distinct attack]
+
+FINDING: [What you found — specific, not generic]
+
+SEVERITY: HIGH / MEDIUM / LOW
+
+RECOMMENDED ACTION: [What to do about this finding before proceeding]
+
+---
+
+After the six lenses, produce:
+
+WEAKEST LINK: [Select the highest-severity finding from the six lenses and state it as a falsifiable condition]
+
+WHY THIS LINK MATTERS: [Why failure here causes larger downstream collapse than failure at any other point]
+
+MINIMUM TEST: [The smallest, fastest test that determines whether this link will hold]
+
+STRESS VERDICT: PROCEED / REVISE / ABANDON
+
+VERDICT JUSTIFICATION: [One sentence tying the verdict to the weakest link and evidence above]
+
+Idea to stress-test: [IDEA]

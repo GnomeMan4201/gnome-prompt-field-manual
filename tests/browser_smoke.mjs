@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
@@ -18,6 +19,7 @@ const scenarios = [
 ];
 
 try {
+  await assertPromptCopy();
   for (const scenario of scenarios) {
     const page = await browser.newPage({ viewport: scenario.viewport });
     const pageErrors = [];
@@ -119,4 +121,42 @@ async function assertReflow(page, scenario) {
 
 function normalize(value) {
   return value.replace(/\s+/g, ' ').trim();
+}
+
+async function assertPromptCopy() {
+  const url = pathToFileURL(resolve('GNOME-Field-Manual.html')).href;
+  const cases = [[9, 'T-01'], [10, 'T-01'], [11, 'T-01'], [19, 'T-04'], [20, 'T-04']];
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const offline = await browser.newPage({ javaScriptEnabled: false });
+  await offline.goto(url);
+  if (browserName === 'chromium') {
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+  } else {
+    await page.addInitScript(() => Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async text => { window.copiedPrompt = text; } }
+    }));
+  }
+  for (const [number, entry] of cases) {
+    const expected = readFileSync(resolve('tests/fixtures/reader-prompts', entry + '.txt'), 'utf8').trimEnd();
+    await page.goto(url + '#book/page-' + number);
+    const button = page.locator('#main-root [data-action="copy-prompt"]');
+    await button.click();
+    await page.getByText('Prompt copied.', { exact: true }).waitFor();
+    const copy = browserName === 'chromium'
+      ? await page.evaluate(() => navigator.clipboard.readText())
+      : await page.evaluate(() => window.copiedPrompt);
+    assert.equal(copy, expected);
+    const tools = offline.locator('#page-' + number + ' .prompt-tools');
+    await tools.locator('summary').click();
+    assert.equal(await tools.locator('textarea').inputValue(), expected);
+    assert.ok(await tools.locator('button').isHidden());
+  }
+  await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { value: undefined }));
+  await page.locator('#main-root [data-action="copy-prompt"]').click();
+  const selected = page.locator('#main-root textarea:focus');
+  assert.ok(await selected.isVisible());
+  assert.ok(await selected.evaluate(field => field.selectionStart === 0 && field.selectionEnd === field.value.length));
+  await page.close();
+  await offline.close();
 }

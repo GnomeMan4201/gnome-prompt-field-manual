@@ -1,0 +1,5 @@
+Identify the weakest link in the following [plan/argument/system].
+
+Rules: 1. One answer only. The weakest link is singular. 2. State it as a falsifiable claim: "This [plan/argument/system] fails if [specific condition]." 3. Explain why this link, not others — what makes it the point of maximum leverage? 4. Describe the failure cascade: if this link breaks, what breaks next, and what breaks after that? 5. What is the minimum viable test to determine whether this link will hold? 6. If this link were somehow guaranteed to hold, what becomes the new weakest link?
+
+[PLAN/ARGUMENT/SYSTEM]

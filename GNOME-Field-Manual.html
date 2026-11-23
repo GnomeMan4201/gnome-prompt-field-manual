@@ -233,6 +233,11 @@ nav[aria-label="Reader links"] a {display:inline-flex;align-items:center;min-hei
 #print-reader .print-spacer:target {display:block}
 .typeset-body .flowing {white-space:normal}
 .typeset-body .part-title {font:500 1.5rem/1.2 var(--serif);margin:0 0 .65rem}
+.prompt-tools,.worked-case {font:normal .93rem/1.5 var(--sans);margin:.75rem 0;white-space:normal}
+.prompt-tools button,.prompt-tools summary,.worked-case summary {cursor:pointer;min-height:44px;padding:.6rem .75rem}
+.prompt-tools button {border:0;background:#292721;color:#fff;border-radius:5px}
+.prompt-tools textarea {display:block;box-sizing:border-box;width:100%;font:1rem/1.5 var(--mono);padding:.6rem}
+.worked-case {border-left:2px solid #8e5038;padding-left:.75rem}
 </style>
 </head>
 <body>
@@ -294,6 +299,54 @@ nav[aria-label="Reader links"] a {display:inline-flex;align-items:center;min-hei
 <p class="flowing">The prompts in this manual were not selected because they are clever. They were selected because they work under conditions that generic prompts don’t.</p></div><a href="#page-directory">Page directory</a></article><article class="book-page print-spacer" id="page-8"><h2>Page 8</h2><div class="book-prose typeset-body"><p class="flowing">GNOME Prompt Field Manual</p></div><a href="#page-directory">Page directory</a></article><article class="book-page" id="page-9"><h2>Page 9</h2><div class="book-prose typeset-body"><h3 class="part-title">Part I — Idea Hardening</h3>
 <p class="flowing">Prompts that operate on ideas before they become commitments. The goal is not to discourage ideas — it is to find out which ones collapse under the first serious question, and fix them before you’ve bet on them.</p>
 <div class="source-block">  T-01 Idea Stress-Test</div>
+<div class="prompt-tools">
+<button type="button" data-action="copy-prompt" hidden>Copy T-01 prompt</button>
+<details><summary>Select T-01 prompt text</summary>
+<textarea aria-label="T-01 complete prompt" readonly rows="8">Run a six-lens stress test on the following idea. Each lens is a distinct attack angle. Do not merge lenses or treat one lens as a variant of another. For each lens, produce a structured finding using the exact format below.
+
+LENS 1 — ASSUMPTION LENS Identify the load-bearing assumptions this idea requires to be true. Which assumption is most likely false? Which is least verifiable?
+
+LENS 2 — ADVERSARIAL USER LENS Who would use this idea in ways it was not intended? What would a motivated bad actor, competitor, or non-compliant user do with it, to it, or against it? How does that use case break the idea or undermine its core value?
+
+LENS 3 — HISTORICAL ANALOG LENS What is the closest historical precedent — a similar idea, in a similar context, attempted before? What happened? Where did it succeed? Where did it fail? What does the analog predict about this idea’s failure mode?
+
+LENS 4 — INCENTIVE LENS Who benefits if this idea succeeds? Who is harmed, disadvantaged, or threatened by it? Where are the misaligned incentives that will generate resistance, gaming, or sabotage?
+
+LENS 5 — FAILURE CASCADE LENS If this idea fails, what fails because of it? Map the downstream collapse: what breaks first, what breaks next, what breaks last? What is the maximum realistic blast radius?
+
+LENS 6 — CONSTRAINT LENS What hard real-world constraint can make this idea fail even if its assumptions are true and participants cooperate? Test time, budget, capability, regulation, external dependencies, and coordination limits. Which constraint binds first, and what evidence would show that it is actually binding?
+
+---
+
+FORMAT FOR EACH LENS:
+
+LENS NAME: [Name]
+
+ATTACK ANGLE: [What this lens tests and why it’s a distinct attack]
+
+FINDING: [What you found — specific, not generic]
+
+SEVERITY: HIGH / MEDIUM / LOW
+
+RECOMMENDED ACTION: [What to do about this finding before proceeding]
+
+---
+
+After the six lenses, produce:
+
+WEAKEST LINK: [Select the highest-severity finding from the six lenses and state it as a falsifiable condition]
+
+WHY THIS LINK MATTERS: [Why failure here causes larger downstream collapse than failure at any other point]
+
+MINIMUM TEST: [The smallest, fastest test that determines whether this link will hold]
+
+STRESS VERDICT: PROCEED / REVISE / ABANDON
+
+VERDICT JUSTIFICATION: [One sentence tying the verdict to the weakest link and evidence above]
+
+Idea to stress-test: [IDEA]</textarea></details>
+<span role="status"></span></div>
+
 <div class="source-block">  Criteria: 1, 4, 8 — hidden assumption + harden against attack +
   decision quality</div>
 <div class="source-block">WHAT IT DOES</div>
@@ -301,6 +354,54 @@ nav[aria-label="Reader links"] a {display:inline-flex;align-items:center;min-hei
 <div class="source-block">WHEN TO USE</div>
 <p class="flowing">Before investing meaningful resources in an idea that hasn’t been formally challenged. Before pitching, building, or proposing. When an idea has survived informal discussion but hasn’t survived adversarial scrutiny. When a previous version of a similar idea failed and you’re not sure if the new version has the same structural flaw.</p></div><a href="#page-directory">Page directory</a></article><article class="book-page" id="page-10"><h2>Page 10</h2><div class="book-prose typeset-body"><div class="source-block">GNOME Prompt Field Manual</div>
 <div class="source-block">THE PROMPT</div>
+<div class="prompt-tools">
+<button type="button" data-action="copy-prompt" hidden>Copy T-01 prompt</button>
+<details><summary>Select T-01 prompt text</summary>
+<textarea aria-label="T-01 complete prompt" readonly rows="8">Run a six-lens stress test on the following idea. Each lens is a distinct attack angle. Do not merge lenses or treat one lens as a variant of another. For each lens, produce a structured finding using the exact format below.
+
+LENS 1 — ASSUMPTION LENS Identify the load-bearing assumptions this idea requires to be true. Which assumption is most likely false? Which is least verifiable?
+
+LENS 2 — ADVERSARIAL USER LENS Who would use this idea in ways it was not intended? What would a motivated bad actor, competitor, or non-compliant user do with it, to it, or against it? How does that use case break the idea or undermine its core value?
+
+LENS 3 — HISTORICAL ANALOG LENS What is the closest historical precedent — a similar idea, in a similar context, attempted before? What happened? Where did it succeed? Where did it fail? What does the analog predict about this idea’s failure mode?
+
+LENS 4 — INCENTIVE LENS Who benefits if this idea succeeds? Who is harmed, disadvantaged, or threatened by it? Where are the misaligned incentives that will generate resistance, gaming, or sabotage?
+
+LENS 5 — FAILURE CASCADE LENS If this idea fails, what fails because of it? Map the downstream collapse: what breaks first, what breaks next, what breaks last? What is the maximum realistic blast radius?
+
+LENS 6 — CONSTRAINT LENS What hard real-world constraint can make this idea fail even if its assumptions are true and participants cooperate? Test time, budget, capability, regulation, external dependencies, and coordination limits. Which constraint binds first, and what evidence would show that it is actually binding?
+
+---
+
+FORMAT FOR EACH LENS:
+
+LENS NAME: [Name]
+
+ATTACK ANGLE: [What this lens tests and why it’s a distinct attack]
+
+FINDING: [What you found — specific, not generic]
+
+SEVERITY: HIGH / MEDIUM / LOW
+
+RECOMMENDED ACTION: [What to do about this finding before proceeding]
+
+---
+
+After the six lenses, produce:
+
+WEAKEST LINK: [Select the highest-severity finding from the six lenses and state it as a falsifiable condition]
+
+WHY THIS LINK MATTERS: [Why failure here causes larger downstream collapse than failure at any other point]
+
+MINIMUM TEST: [The smallest, fastest test that determines whether this link will hold]
+
+STRESS VERDICT: PROCEED / REVISE / ABANDON
+
+VERDICT JUSTIFICATION: [One sentence tying the verdict to the weakest link and evidence above]
+
+Idea to stress-test: [IDEA]</textarea></details>
+<span role="status"></span></div>
+
 <div class="source-block">   Run a six-lens stress test on the following idea. Each lens is a</div>
 <div class="source-block">   distinct attack angle. Do not merge lenses or treat one lens as a</div>
 <div class="source-block">   variant of another. For each lens, produce a structured finding using</div>
@@ -334,7 +435,55 @@ nav[aria-label="Reader links"] a {display:inline-flex;align-items:center;min-hei
 <div class="source-block">   FINDING: [What you found — specific, not generic]</div>
 <div class="source-block">   SEVERITY: HIGH / MEDIUM / LOW</div>
 <div class="source-block">   RECOMMENDED ACTION: [What to do about this finding before proceeding]</div>
-<div class="source-block">   ---</div></div><a href="#page-directory">Page directory</a></article><article class="book-page" id="page-11"><h2>Page 11</h2><div class="book-prose typeset-body"><div class="source-block">After the six lenses, produce:</div>
+<div class="source-block">   ---</div></div><a href="#page-directory">Page directory</a></article><article class="book-page" id="page-11"><h2>Page 11</h2><div class="book-prose typeset-body">
+<div class="prompt-tools">
+<button type="button" data-action="copy-prompt" hidden>Copy T-01 prompt</button>
+<details><summary>Select T-01 prompt text</summary>
+<textarea aria-label="T-01 complete prompt" readonly rows="8">Run a six-lens stress test on the following idea. Each lens is a distinct attack angle. Do not merge lenses or treat one lens as a variant of another. For each lens, produce a structured finding using the exact format below.
+
+LENS 1 — ASSUMPTION LENS Identify the load-bearing assumptions this idea requires to be true. Which assumption is most likely false? Which is least verifiable?
+
+LENS 2 — ADVERSARIAL USER LENS Who would use this idea in ways it was not intended? What would a motivated bad actor, competitor, or non-compliant user do with it, to it, or against it? How does that use case break the idea or undermine its core value?
+
+LENS 3 — HISTORICAL ANALOG LENS What is the closest historical precedent — a similar idea, in a similar context, attempted before? What happened? Where did it succeed? Where did it fail? What does the analog predict about this idea’s failure mode?
+
+LENS 4 — INCENTIVE LENS Who benefits if this idea succeeds? Who is harmed, disadvantaged, or threatened by it? Where are the misaligned incentives that will generate resistance, gaming, or sabotage?
+
+LENS 5 — FAILURE CASCADE LENS If this idea fails, what fails because of it? Map the downstream collapse: what breaks first, what breaks next, what breaks last? What is the maximum realistic blast radius?
+
+LENS 6 — CONSTRAINT LENS What hard real-world constraint can make this idea fail even if its assumptions are true and participants cooperate? Test time, budget, capability, regulation, external dependencies, and coordination limits. Which constraint binds first, and what evidence would show that it is actually binding?
+
+---
+
+FORMAT FOR EACH LENS:
+
+LENS NAME: [Name]
+
+ATTACK ANGLE: [What this lens tests and why it’s a distinct attack]
+
+FINDING: [What you found — specific, not generic]
+
+SEVERITY: HIGH / MEDIUM / LOW
+
+RECOMMENDED ACTION: [What to do about this finding before proceeding]
+
+---
+
+After the six lenses, produce:
+
+WEAKEST LINK: [Select the highest-severity finding from the six lenses and state it as a falsifiable condition]
+
+WHY THIS LINK MATTERS: [Why failure here causes larger downstream collapse than failure at any other point]
+
+MINIMUM TEST: [The smallest, fastest test that determines whether this link will hold]
+
+STRESS VERDICT: PROCEED / REVISE / ABANDON
+
+VERDICT JUSTIFICATION: [One sentence tying the verdict to the weakest link and evidence above]
+
+Idea to stress-test: [IDEA]</textarea></details>
+<span role="status"></span></div>
+<div class="source-block">After the six lenses, produce:</div>
 <div class="source-block">   WEAKEST LINK: [Select the highest-severity finding from the six lenses and state it as a falsifiable condition]</div>
 <div class="source-block">   WHY THIS LINK MATTERS: [Why failure here causes larger downstream</div>
 <div class="source-block">   collapse than failure at any other point]</div>
@@ -466,12 +615,39 @@ inputs to the Assumption Lens.</div></div><a href="#page-directory">Page directo
 <div class="source-block">SAFETY NOTES</div>
 <p class="flowing">Assumption ledgers surface things people don’t want to see. In organizational contexts, they can become political documents. Know your environment.</p>
 <div class="source-block">  T-04 Weakest Link Isolator</div>
+<div class="prompt-tools">
+<button type="button" data-action="copy-prompt" hidden>Copy T-04 prompt</button>
+<details><summary>Select T-04 prompt text</summary>
+<textarea aria-label="T-04 complete prompt" readonly rows="8">Identify the weakest link in the following [plan/argument/system].
+
+Rules: 1. One answer only. The weakest link is singular. 2. State it as a falsifiable claim: &quot;This [plan/argument/system] fails if [specific condition].&quot; 3. Explain why this link, not others — what makes it the point of maximum leverage? 4. Describe the failure cascade: if this link breaks, what breaks next, and what breaks after that? 5. What is the minimum viable test to determine whether this link will hold? 6. If this link were somehow guaranteed to hold, what becomes the new weakest link?
+
+[PLAN/ARGUMENT/SYSTEM]</textarea></details>
+<span role="status"></span></div>
+
+<details class="worked-case"><summary>Worked example · Choosing mobile navigation</summary>
+<p><strong>Decision.</strong> We have two weeks to improve the reader. Should entry IDs become the primary navigation?</p>
+<p><strong>Weakest link.</strong> The proposal assumes that a newcomer with a decision to make can find the right entry from its ID. If the newcomer cannot tell T-04 from T-01 before opening either, faster ID lookup may speed up repeat visits while leaving the first visit just as slow.</p>
+<p><strong>Failure cascade.</strong> A reader who needs one assumption to test may pick the broader six-lens prompt, copy it successfully, and still leave without deciding which test to run first.</p>
+<p><strong>Minimum test.</strong> Compare an ID-first list with a list showing the same entries by name and intended use. Give new readers one known-ID lookup and one scenario without an ID. Counterbalance the order and use different target entries for the two tasks. Record the first entry chosen, whether its prompt fits the task, and time to a correct copy.</p>
+<p><strong>Decision rule.</strong> Advance ID-first navigation to a larger trial only if it improves known-ID lookup and preserves successful scenario-based discovery. If discovery suffers, keep IDs as a lookup shortcut. If discovery succeeds, test the next link: can readers recognize an unusable answer after running the prompt?</p>
+<p><em>Editorial example. The proposed reader test has not been run.</em></p></details>
 <div class="source-block">  Criteria: 1, 4, 8 — hidden assumption + harden + decision quality</div>
 <div class="source-block">WHAT IT DOES</div>
 <p class="flowing">Given a plan, argument, or system description, identifies the single assumption, dependency, or step whose failure causes the largest downstream collapse. Not a list of risks — a single point of maximum leverage for testing or hardening.</p>
 <div class="source-block">WHEN TO USE</div>
 <p class="flowing">When you have a complete plan and need to know where to stress-test first. When resources are constrained and you can only validate one thing before committing. When a previous version of a similar plan failed and you need to know if this one has the same structural flaw.</p></div><a href="#page-directory">Page directory</a></article><article class="book-page" id="page-20"><h2>Page 20</h2><div class="book-prose typeset-body"><div class="source-block">GNOME Prompt Field Manual</div>
 <div class="source-block">THE PROMPT</div>
+<div class="prompt-tools">
+<button type="button" data-action="copy-prompt" hidden>Copy T-04 prompt</button>
+<details><summary>Select T-04 prompt text</summary>
+<textarea aria-label="T-04 complete prompt" readonly rows="8">Identify the weakest link in the following [plan/argument/system].
+
+Rules: 1. One answer only. The weakest link is singular. 2. State it as a falsifiable claim: &quot;This [plan/argument/system] fails if [specific condition].&quot; 3. Explain why this link, not others — what makes it the point of maximum leverage? 4. Describe the failure cascade: if this link breaks, what breaks next, and what breaks after that? 5. What is the minimum viable test to determine whether this link will hold? 6. If this link were somehow guaranteed to hold, what becomes the new weakest link?
+
+[PLAN/ARGUMENT/SYSTEM]</textarea></details>
+<span role="status"></span></div>
+
 <div class="source-block">   Identify the weakest link in the following [plan/argument/system].</div>
 <div class="source-block">   Rules: 1. One answer only. The weakest link is singular. 2. State</div>
 <div class="source-block">   it as a falsifiable claim: &quot;This [plan/argument/system] fails if</div>
@@ -6207,6 +6383,24 @@ Previous Draft</div>
         else if (state.view === 'book') root.innerHTML = renderBook();
         else if (state.view === 'reactor') root.innerHTML = renderReactor();
         else root.innerHTML = renderWorkbench();
+
+        root.querySelectorAll('[data-action="copy-prompt"]').forEach(function (button) {
+          button.hidden = false;
+          button.addEventListener('click', async function () {
+            var tools = button.parentElement;
+            var field = tools.querySelector('textarea');
+            var status = tools.querySelector('[role="status"]');
+            try {
+              await navigator.clipboard.writeText(field.value);
+              status.textContent = 'Prompt copied.';
+            } catch (error) {
+              tools.querySelector('details').open = true;
+              field.focus();
+              field.select();
+              status.textContent = 'Use Copy to copy the selected prompt.';
+            }
+          });
+        });
 
         var gb = document.getElementById('go-book'); if (gb) gb.addEventListener('click', function () { navigate('book', '#book', true); });
         var gr = document.getElementById('go-reactor'); if (gr) gr.addEventListener('click', function () { navigate('reactor', '#reactor', true); });
