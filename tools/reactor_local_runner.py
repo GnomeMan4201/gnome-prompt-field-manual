@@ -30,16 +30,18 @@ def is_localhost_url(url: str) -> bool:
 
 def run_local_ollama_trial(endpoint:str, model:str, prompt:str,temperature:float|None=None,
                            seed:int|None=None,timeout_seconds:float=10.0,trial_id:str='TRIAL-1',
-                           cancel_check=None) -> dict[str,Any]:
+                           cancel_check=None,format_json:bool=False) -> dict[str,Any]:
     result={'trialId':trial_id,'ok':False,'rawResponse':None}
     if not is_localhost_url(endpoint):return {**result,'errorClass':'NON_LOOPBACK_ENDPOINT_BLOCKED'}
     if not isinstance(model,str) or not model.strip() or not isinstance(prompt,str):return {**result,'errorClass':'INVALID_REQUEST'}
-    if not isinstance(timeout_seconds,(float,int)) or not 0<timeout_seconds<=120:return {**result,'errorClass':'INVALID_TIMEOUT'}
+    if type(timeout_seconds) not in (int,float) or not 0<timeout_seconds<=300:return {**result,'errorClass':'INVALID_TIMEOUT'}
     if cancel_check is not None and cancel_check():return {**result,'errorClass':'CANCELLED'}
     options={}
     if temperature is not None:options['temperature']=temperature
     if seed is not None:options['seed']=seed
+    if type(format_json) is not bool:return {**result,'errorClass':'INVALID_FORMAT_MODE'}
     payload={'model':model,'prompt':prompt,'stream':False}
+    if format_json:payload['format']='json'
     if options:payload['options']=options
     raw_payload=json.dumps(payload,ensure_ascii=False).encode('utf-8')
     if len(raw_payload)>MAX_REQUEST_BYTES:return {**result,'errorClass':'REQUEST_TOO_LARGE'}
@@ -61,7 +63,7 @@ def run_local_ollama_trial(endpoint:str, model:str, prompt:str,temperature:float
         if not isinstance(data,dict) or not isinstance(data.get('response'),str):return {**result,'errorClass':'INVALID_RESPONSE'}
         return {**result,'ok':True,'provider':'ollama-local','model':data.get('model',model),
                 'requestedModel':model,'requestedOptions':options,'outputText':data['response'],
-                'rawResponse':decoded,'elapsedSeconds':round(time.monotonic()-started,3),'errorClass':None}
+                'rawResponse':decoded,'rawRequest':raw_payload.decode('utf-8'),'elapsedSeconds':round(time.monotonic()-started,3),'errorClass':None}
     except (socket.timeout,TimeoutError):return {**result,'errorClass':'TIMEOUT'}
     except (OSError,http.client.HTTPException):return {**result,'errorClass':'CONNECTION_OR_NETWORK_ERROR'}
     except (UnicodeError,ValueError):return {**result,'errorClass':'INVALID_RESPONSE'}
