@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - index.html
+      - GNOME-Field-Manual.html
+      - tests/fixtures/reader-prompts/**
       - tests/browser_smoke.mjs
       - package.json
       - package-lock.json
@@ -12,6 +14,8 @@ on:
     branches: [main]
     paths:
       - index.html
+      - GNOME-Field-Manual.html
+      - tests/fixtures/reader-prompts/**
       - tests/browser_smoke.mjs
       - package.json
       - package-lock.json

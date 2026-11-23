@@ -19,6 +19,7 @@ const scenarios = [
 ];
 
 try {
+  await assertReaderPublication();
   await assertPromptCopy();
   for (const scenario of scenarios) {
     const page = await browser.newPage({ viewport: scenario.viewport });
@@ -159,4 +160,52 @@ async function assertPromptCopy() {
   assert.ok(await selected.evaluate(field => field.selectionStart === 0 && field.selectionEnd === field.value.length));
   await page.close();
   await offline.close();
+}
+
+async function assertReaderPublication() {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.goto(manualUrl);
+  const canonical = await page.locator('article.manual-page-card').evaluateAll(cards =>
+    cards.map(card => [card.id, card.querySelector('pre').textContent])
+  );
+  const file = resolve('GNOME-Field-Manual.html');
+  const html = readFileSync(file, 'utf8');
+  const match = html.match(/^ *var BOOK_PAGES = (.+);$/m);
+  assert.ok(match, 'Expected the embedded search dataset');
+  const pages = JSON.parse(match[1]);
+  assert.equal(pages.length, 315);
+  assert.deepEqual(pages.map(p => [p.cardId, p.text]), canonical);
+  assert.deepEqual(pages.map(p => p.pageNumber), canonical.map((_, i) => i + 1));
+
+  const url = pathToFileURL(file).href;
+  await page.goto(url + '#page-1');
+  await page.locator('#main-root .book-page').waitFor();
+  assert.ok(page.url().endsWith('#book/page-1'));
+  await page.locator('#book-contents summary').click();
+  await page.locator('#book-search').fill('Weakest Link Isolator');
+  await page.locator('[data-pnum="19"]').click();
+  assert.ok(page.url().endsWith('#book/page-19'));
+  await page.locator('#toggle-bm').press('Enter');
+  assert.equal(await page.locator('#toggle-bm').getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('#toggle-bm').evaluate(b => b === document.activeElement), true);
+  await page.reload();
+  assert.equal(await page.locator('#toggle-bm').getAttribute('aria-pressed'), 'true');
+  await assertStandaloneWidth(page);
+  await page.close();
+
+  const staticPage = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  await staticPage.goto(url + '#page-1');
+  const directory = staticPage.locator('#page-directory');
+  const links = await directory.locator('nav a').evaluateAll(nodes => nodes.map(a => a.hash));
+  assert.deepEqual(links, pages.map(p => '#page-' + p.pageNumber));
+  for (const selector of ['#page-1', '#page-3', '#page-19', '#page-315']) {
+    assert.ok(await staticPage.locator(selector).isVisible(), selector);
+  }
+  await assertStandaloneWidth(staticPage);
+  await staticPage.close();
+}
+
+async function assertStandaloneWidth(page) {
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+    'Standalone reader should fit the mobile viewport');
 }

@@ -18,7 +18,7 @@ The repository is also the production workspace for the manual. That means the p
 
 ## Start here
 
-- **Read on mobile:** [GNOME Field Manual — 315-page reader](https://gnomeman4201.github.io/gnome-prompt-field-manual/GNOME-Field-Manual.html)
+- **Read on mobile:** [GNOME Field Manual — 315-page reader](https://gnomeman4201.github.io/gnome-prompt-field-manual/GNOME-Field-Manual.html#page-1)
 - **Read/use the manual:** [published workspace and embedded reader](https://gnomeman4201.github.io/gnome-prompt-field-manual/)
 - **Inspect identity and scope:** [`docs/IDENTITY_AND_SCOPE.md`](docs/IDENTITY_AND_SCOPE.md)
 - **Inspect the measured release baseline:** [`docs/BASELINE_AUDIT_2026-08-06.md`](docs/BASELINE_AUDIT_2026-08-06.md)
