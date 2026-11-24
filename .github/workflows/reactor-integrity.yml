@@ -76,7 +76,7 @@ jobs:
           current = json.loads(Path("workbench/data/current_entry_identity_index.json").read_text())
           actual = hashlib.sha256(current_path.read_bytes()).hexdigest()
           assert actual == current["sourceIndexSha256"], "current identity source mismatch"
-          assert actual == "ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab"
+          assert actual == "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448"
           assert current == build_inventory(current_path), "current identity inventory not reproducible"
           assert current["counts"] == {"pending": 11, "drafted": 80, "total": 91, "pages": 315}
           assert current["bodyCoverage"] == 0

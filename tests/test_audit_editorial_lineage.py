@@ -46,7 +46,7 @@ class EditorialLineageAuditTests(unittest.TestCase):
         result = audit(REPOSITORY_ROOT / "index.html", REPOSITORY_ROOT)
         self.assertTrue(result.passed)
         self.assertEqual(self.failed_checks(result), set())
-        self.assertEqual(len(result.affected_pages), 10)
+        self.assertEqual(len(result.affected_pages), 11)
         self.assertTrue(all(item.parity for item in result.affected_pages))
 
     def test_field_journal_collision_fails_closed_even_with_surface_parity(self) -> None:

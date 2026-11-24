@@ -58,6 +58,7 @@ Authoritative records:
 - [`docs/BATCH2_DISPOSITION_2026-08-24.md`](docs/BATCH2_DISPOSITION_2026-08-24.md) — SHA-bound Batch 2 disposition record
 - [`docs/BATCH3_DISPOSITION_2026-08-24.md`](docs/BATCH3_DISPOSITION_2026-08-24.md) — SHA-bound Batch 3 disposition record
 - [`docs/BATCH4_DISPOSITION_2026-11-23.md`](docs/BATCH4_DISPOSITION_2026-11-23.md) — source-bound S-01/S-02/S-03 disposition; frozen page bytes preserved.
+- [`docs/BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md`](docs/BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md) — four-category risk-summary correction and source-bound identity crosswalk; Batch 5 remains REVISE/HOLD.
 
 </details>
 

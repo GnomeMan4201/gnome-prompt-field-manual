@@ -150,6 +150,23 @@ async function assertBatch5MigrationPage() {
         assert.ok(pageText.includes(required), `${layout.name}: page 133 missing ${required}`);
       }
 
+      await page.goto(url + '#book/page-130');
+      const summaryPage = page.locator('#main-root .book-page');
+      await summaryPage.waitFor();
+      const summary = normalize(await summaryPage.innerText()).toUpperCase();
+      for (const category of [
+        'MANDATORY FOUR-CATEGORY RISK SUMMARY',
+        'DATA COMPATIBILITY RISK',
+        'BEHAVIORAL RISK',
+        'INTEGRATION RISK',
+        'ROLLBACK COMPLEXITY RISK',
+        'UNASSESSED',
+      ]) {
+        assert.ok(summary.includes(category), `${layout.name}: page 130 missing ${category}`);
+      }
+      await page.goto(url + '#book/page-133');
+      await rendered.waitFor();
+
       const metrics = await page.evaluate(() => {
         const card = document.querySelector('#main-root .book-page').getBoundingClientRect();
         return { viewport: innerWidth, scroll: document.documentElement.scrollWidth,
