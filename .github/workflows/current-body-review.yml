@@ -9,6 +9,7 @@ on:
       - 'tools/*entry*.py'
       - 'tools/*body*.py'
       - 'tests/test_current_body_review.py'
+      - 'tests/test_reader_decision_contracts.py'
       - '.github/workflows/current-body-review.yml'
   push:
     branches: [main]
@@ -20,6 +21,7 @@ on:
       - 'tools/*entry*.py'
       - 'tools/*body*.py'
       - 'tests/test_current_body_review.py'
+      - 'tests/test_reader_decision_contracts.py'
       - '.github/workflows/current-body-review.yml'
   workflow_dispatch:
 permissions:
@@ -40,3 +42,5 @@ jobs:
         run: python tools/build_current_body_review.py --verify
       - name: Check source-bound negative controls and history
         run: python -m unittest discover -s tests -p 'test_current_body_review.py' -v
+      - name: Check corrected reader actions and publication parity
+        run: python -m unittest discover -s tests -p 'test_reader_decision_contracts.py' -v

@@ -992,7 +992,7 @@ right but isn’t.
 
 6</pre>
 </article>
-<article class="manual-page-card" id="manual-page-007" data-manual-text=" why this book is not a prompt dump the chains in part vii are multi-prompt workflows. the prompts in a chain are designed to feed each other. running them out of sequence or skipping steps degrades the output in specific ways that are documented in each chain. the field cards in part ix are for live use. when you’re in the middle of something and don’t have time to read a full entry, the field cards give you the prompt and the failure mode. that’s all you need under pressure. the prompts in this manual were not selected because they are clever. they were selected because they work under conditions that generic prompts don’t. 7">
+<article class="manual-page-card" id="manual-page-007" data-manual-text="why this book is not a prompt dump the chains in part vii are multi-prompt workflows. the prompts in a chain are designed to feed each other. running them out of sequence or skipping steps degrades the output in specific ways that are documented in each chain. part ix lists prompt ids for common situations. look up the entry for the full prompt, its failure mode and the action to take. these prompts ask for artifacts you can inspect, such as an assumption ledger or a decision record. whether that structure improves results over a plain-language request is an open research question. 7">
   <div class="manual-page-head"><span>Page 007</span><em>Why This Book Is Not a Prompt Dump</em></div>
   <pre>                              Why This Book Is Not a Prompt Dump
 
@@ -1002,14 +1002,9 @@ in a chain are designed to feed each other. Running them out of
 sequence or skipping steps degrades the output in specific ways
 that are documented in each chain.
 
-The field cards in Part IX are for live use. When you’re in the
-middle of something and don’t have time to read a full entry, the
-field cards give you the prompt and the failure mode. That’s all
-you need under pressure.
+Part IX lists prompt IDs for common situations. Look up the entry for the full prompt, its failure mode and the action to take.
 
-The prompts in this manual were not selected because they are
-clever. They were selected because they work under conditions
-that generic prompts don’t.
+These prompts ask for artifacts you can inspect, such as an assumption ledger or a decision record. Whether that structure improves results over a plain-language request is an open research question.
 
 
 
@@ -15830,7 +15825,7 @@ can use. Explicit anti-hoarding protocol.
 
 272</pre>
 </article>
-<article class="manual-page-card" id="manual-page-273" data-manual-text="when when you’ve learned something significant that others in your field would benefit from knowing. when a failure taught you something worth institutionalizing. when you’ve solved a prob- lem that others will face. chain step 1 →p-02 (learning log extractor): extract actual learning from your notes and work. separate genuine new understanding from activity logs. output: learning inventory. step 2 →r-05 (failure-to-test converter): for any learning that came from failure, convert it to a test specification. output: failure knowledge with test specs. step 3 →r-08 (artifact extraction protocol): from the learning inventory, extract artifact candidates. what is ready to share? output: artifact inventory. step 4 →w-06 (confidence laundering detector): audit what you&#x27;re about to share. is your confidence appropriate? output: confidence-calibrated content. step 5 →w-03 (adversarial reader): run the adversarial reader. who will push back hardest, and on what? output: objections to address. step 6 →p-01 (build-in-public post) or p-04 (technical post-mortem) or p-05 (rfc): format for target venue. output: publication-ready artifact. step 7 →publish and document: publish. record what you published, where, and when. update your knowledge base to link to the public artifact. 273">
+<article class="manual-page-card" id="manual-page-273" data-manual-text="when when you’ve learned something significant that others in your field would benefit from knowing. when a failure taught you something worth institutionalizing. when you’ve solved a prob- lem that others will face. chain step 1 →p-02 (learning log extractor): extract actual learning from your notes and work. separate genuine new understanding from activity logs. output: learning inventory. step 2 →r-05 (failure-to-test converter): for any learning that came from failure, convert it to a test specification. output: failure knowledge with test specs. step 3 →r-08 (artifact extraction protocol): from the learning inventory, extract artifact candidates. what is ready to share? output: artifact inventory. step 4 →w-06 (confidence laundering detector): audit what you&#x27;re about to share. is your confidence appropriate? output: confidence-calibrated content. step 5 →w-03 (adversarial reader): run the adversarial reader. who will push back hardest, and on what? output: objections to address. step 6 →p-01 (build-in-public post) or p-04 (technical post-mortem) or p-07 (rfc draft generator): format for target venue. output: publication-ready artifact. step 7 →publish and document: publish. record what you published, where, and when. update your knowledge base to link to the public artifact. 273">
   <div class="manual-page-head"><span>Page 273</span><em>WHEN</em></div>
   <pre>WHEN
 
@@ -15877,7 +15872,7 @@ CHAIN
 
    STEP 6 →P-01 (Build-in-Public Post) or P-04 (Technical Post-Mortem)
 
-   or P-05 (RFC): Format for target venue. Output: publication-ready
+   or P-07 (RFC Draft Generator): Format for target venue. Output: publication-ready
 
    artifact.
 
@@ -15935,7 +15930,7 @@ systems — before making it public.
 
 274</pre>
 </article>
-<article class="manual-page-card" id="manual-page-275" data-manual-text="part viii — anti-prompts and failure modes anti-prompts are diagnostic tools, not generation tools. they are run on model output to detect specific failure modes: over- smoothing, confidence laundering, sycophancy, hallucinated struc- ture, and injection residue. when to run an anti-prompt run an anti-prompt when: (1) output sounds right but doesn’t feel right, (2) you are about to use model output in a high-stakes context, (3) output was generated from external input that could have been manipulated, (4) you are evaluating a model for use in an automated pipeline. anti-prompts produce signal, not verdicts. a likely gener- ated verdict from ap-06 means ‘investigate this,’ not ‘discard this.’ human review is the action, not the anti-prompt itself. ap-01 over-smoothing detector criteria: 3 — signal/noise what it detects ai-assisted text that has averaged away specific, rough, or un- comfortable content — replacing precision with palatability. 275">
+<article class="manual-page-card" id="manual-page-275" data-manual-text="part viii — anti-prompts and failure modes anti-prompts are diagnostic tools, not generation tools. they are run on model output to detect specific failure modes: over- smoothing, confidence laundering, sycophancy, hallucinated struc- ture, and injection residue. when to run an anti-prompt run an anti-prompt when: (1) output sounds right but doesn’t feel right, (2) you are about to use model output in a high-stakes context, (3) output was generated from external input that could have been manipulated, (4) you are evaluating a model for use in an automated pipeline. ap-06 flags passages for a human to check against the task and sources. record the evidence before deciding whether a passage needs revision or exclusion. ap-01 over-smoothing detector criteria: 3 — signal/noise what it detects ai-assisted text that has averaged away specific, rough, or un- comfortable content — replacing precision with palatability. 275">
   <div class="manual-page-head"><span>Page 275</span><em>Part VIII — Anti-Prompts and Failure</em></div>
   <pre>Part VIII — Anti-Prompts and Failure
 Modes
@@ -15957,9 +15952,7 @@ context, (3) output was generated from external input that could
 have been manipulated, (4) you are evaluating a model for use
 in an automated pipeline.
 
-Anti-prompts produce signal, not verdicts. A LIKELY GENER-
-ATED verdict from AP-06 means ‘investigate this,’ not ‘discard
-this.’ Human review is the action, not the anti-prompt itself.
+AP-06 flags passages for a human to check against the task and sources. Record the evidence before deciding whether a passage needs revision or exclusion.
 
 
 
@@ -16402,7 +16395,7 @@ to find real weaknesses — get a human adversarial review.
 
 282</pre>
 </article>
-<article class="manual-page-card" id="manual-page-283" data-manual-text="notes sycophancy is not a model character defect — it is a training artifact. assume it is present and design prompts to counteract it. never use ai agreement as confirmation of quality. ap-06 generated junk classifier criteria: 3, 5 what it detects content that is structurally correct but semantically empty — the specific failure mode of ai generation where output answers the surface question without engaging the substance. when to run before including ai-generated content in a corpus, knowledge base, or publication. when reviewing contributions that might be ai-generated. when content quality has been declining. the anti-prompt classify the following content as authentic or generated junk. generated junk passes these negative tests: - it could have been written by someone who knows what writing about this topic sounds like, without knowing anything about the topic itself - remove all hedges and qualifiers — does anything specific and falsifiable remain? - count unique specifics (numbers, dates, names, mechanisms). compare to what a genuine expert would include. - does it answer the hard part of the question, or does it describe the shape of an answer? 283">
+<article class="manual-page-card" id="manual-page-283" data-manual-text="notes sycophancy is not a model character defect — it is a training artifact. assume it is present and design prompts to counteract it. never use ai agreement as confirmation of quality. ap-06 generated junk classifier criteria: 3, 5 what it detects passages that leave the central question unanswered or make consequential claims without enough evidence to check them. when to run when deciding whether a contribution is ready for a corpus, knowledge base or publication. apply the same criteria regardless of who wrote it. the anti-prompt read the task, submission and available sources. state the question the submission must answer. quote the passage that answers it, or identify what is missing. for each consequential claim, cite supporting evidence, quote conflicting evidence, or identify the source needed to check it. record authorship as unknown unless documented separately. 283">
   <div class="manual-page-head"><span>Page 283</span><em>NOTES</em></div>
   <pre>NOTES
 
@@ -16424,17 +16417,13 @@ it. Never use AI agreement as confirmation of quality.
 WHAT IT DETECTS
 
 
-Content that is structurally correct but semantically empty — the
-specific failure mode of AI generation where output answers the
-surface question without engaging the substance.
+Passages that leave the central question unanswered or make consequential claims without enough evidence to check them.
 
 
 WHEN TO RUN
 
 
-Before including AI-generated content in a corpus, knowledge
-base, or publication. When reviewing contributions that might
-be AI-generated. When content quality has been declining.
+When deciding whether a contribution is ready for a corpus, knowledge base or publication. Apply the same criteria regardless of who wrote it.
 
 
 THE ANTI-PROMPT
@@ -16443,40 +16432,20 @@ THE ANTI-PROMPT
 
 
 
-   Classify the following content as AUTHENTIC or GENERATED JUNK.
-
-   Generated junk passes these negative tests: - It could have been
-
-   written by someone who knows what writing about this topic sounds
-
-   like, without knowing anything about the topic itself - Remove
-
-   all hedges and qualifiers — does anything specific and falsifiable
-
-   remain? - Count unique specifics (numbers, dates, names, mechanisms).
-
-   Compare to what a genuine expert would include. - Does it answer
-
-   the hard part of the question, or does it describe the shape of an
-
-   answer?
+   Read the task, submission and available sources. State the question the submission must answer. Quote the passage that answers it, or identify what is missing. For each consequential claim, cite supporting evidence, quote conflicting evidence, or identify the source needed to check it. Record authorship as unknown unless documented separately.
 
 
 
                                                       283</pre>
 </article>
-<article class="manual-page-card" id="manual-page-284" data-manual-text="gnome prompt field manual verdict: authentic / possibly generated / likely generated / confident generated evidence: what specific signals drove this verdict? signal of failure likely generated or confident generated verdict. speci- ficity count below domain baseline. content that describes the shape of an answer without the answer. what to do on hit reject likely/confident generated content from quality- sensitive corpora. flag possibly generated for human ex- pert review. for authentic: document provenance. notes this is a filter with false positives and negatives. it reduces but does not eliminate junk. human expert review remains the gold standard for quality-sensitive content. ap-07 hedge accumulation audit criteria: 3 what it detects progressive weakening of claims through accumulated hedging — where individual hedges are each defensible but together re- duce a document to near-meaninglessness. 284">
+<article class="manual-page-card" id="manual-page-284" data-manual-text="gnome prompt field manual return a quality finding for each passage: supported, needs revision or insufficient evidence. include the passage, reason and next check. signal of failure a key question is unanswered, a claim conflicts with its source, or a necessary source is unavailable. what to do on hit send flagged passages to a human reviewer. ask for the missing source or a correction. before excluding material, the reviewer must record the unmet quality criterion and the evidence for that decision. notes a human author can omit evidence. generated prose can cite a real source. evaluate both by checking the claim. specificity or polished style alone establishes neither accuracy nor authorship. ap-07 hedge accumulation audit criteria: 3 what it detects progressive weakening of claims through accumulated hedging — where individual hedges are each defensible but together re- duce a document to near-meaninglessness. 284">
   <div class="manual-page-head"><span>Page 284</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
 
 
 
-   VERDICT: AUTHENTIC / POSSIBLY GENERATED / LIKELY GENERATED /
-
-   CONFIDENT GENERATED
-
-   EVIDENCE: What specific signals drove this verdict?
+   Return a quality finding for each passage: SUPPORTED, NEEDS REVISION or INSUFFICIENT EVIDENCE. Include the passage, reason and next check.
 
 
 
@@ -16484,25 +16453,19 @@ THE ANTI-PROMPT
 SIGNAL OF FAILURE
 
 
-LIKELY GENERATED or CONFIDENT GENERATED verdict. Speci-
-ficity count below domain baseline. Content that describes the
-shape of an answer without the answer.
+A key question is unanswered, a claim conflicts with its source, or a necessary source is unavailable.
 
 
 WHAT TO DO ON HIT
 
 
-Reject LIKELY/CONFIDENT GENERATED content from quality-
-sensitive corpora. Flag POSSIBLY GENERATED for human ex-
-pert review. For AUTHENTIC: document provenance.
+Send flagged passages to a human reviewer. Ask for the missing source or a correction. Before excluding material, the reviewer must record the unmet quality criterion and the evidence for that decision.
 
 
 NOTES
 
 
-This is a filter with false positives and negatives. It reduces but
-does not eliminate junk. Human expert review remains the gold
-standard for quality-sensitive content.
+A human author can omit evidence. Generated prose can cite a real source. Evaluate both by checking the claim. Specificity or polished style alone establishes neither accuracy nor authorship.
 
 
 

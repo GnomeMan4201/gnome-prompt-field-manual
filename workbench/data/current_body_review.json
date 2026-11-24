@@ -1,7 +1,7 @@
 {
   "schemaVersion": "gnome.manual.current-body-review.v1",
-  "sourceHtmlSha256": "fd76d2727545b202968664cbba4137537859536c979b3597ab943abd283858cf",
-  "identityIndexSha256": "cfda18b9934fb9e27fc4f4d6b37aa4fa4a2370690390255a5acc9ce1ccd0a61a",
+  "sourceHtmlSha256": "1c7e3c4719612b3bcdb6f0b8754db1ef36c0f594ad6106d7ef5b7936c9f26bf0",
+  "identityIndexSha256": "b81e9234f077a7fec000af00e20923331f2ede366888a01f271f0db1103af460",
   "historicalBindings": {
     "workbench/data/entry_identity_index.json": "b9c760567f678fa7599ebb2e0de8527e2d875cd3ec72ca58c307905b9acf7a40",
     "workbench/data/entry_declaration_candidates.json": "00d4fa9dbdcda884de79ec5d8c4f53e501481f316468d1d01840564264b33cb7",
@@ -35,7 +35,7 @@
     "S-10"
   ],
   "offsetConvention": "Half-open Unicode codepoint offsets in decoded page <pre> text; end may point to next page offset zero.",
-  "reviewQueueManifestSha256": "4e05c970059bbf3fb4ae54aea5cebfca1ce2b3b34c377bd242cf878e1aed047e",
+  "reviewQueueManifestSha256": "cff8f5977673d49ecca2a128d0da1154461a1d375e02cecce991e4c0071f62b2",
   "entries": [
     {
       "entryId": "T-01",
@@ -11220,9 +11220,9 @@
       "boundaryReason": [
         "SECTION_TRANSITION: Part VIII — Anti-Prompts and Failure"
       ],
-      "rawSpanSha256": "c18ab9cdb16945e9b01bd099699b9d8aeb7214545cca2c2e078a2f74306ba89d",
-      "proposedCleanTextSha256": "bdb5bc34f675925ccfb0bc7c3fdae8fe15b637e8bca0658a2853cbf512f3d757",
-      "proposedCleanTextLength": 2298,
+      "rawSpanSha256": "45ad6e527ac22f0b9d6e7819fe96d5984a1c09217b7a568ed165b4aef90f4233",
+      "proposedCleanTextSha256": "242b4ceb4f2875600a6a89054623e7ead4c7eef6bcf0d4294b7cfc306882dee4",
+      "proposedCleanTextLength": 2314,
       "pageSlices": [
         [
           272,
@@ -11233,8 +11233,8 @@
         [
           273,
           0,
-          1435,
-          "ea9263f18672cda4124deda809531de2bd7bba149f10d33c4f0cd1d64ea5bc52"
+          1451,
+          "cf9fa433a3c33e239a29847d1ead65510e9688a46122dbb4125bf6a9f1a997a4"
         ],
         [
           274,
@@ -11300,8 +11300,8 @@
         ],
         [
           273,
-          1378,
-          1435,
+          1394,
+          1451,
           "PAGE_FOOTER"
         ],
         [
@@ -11331,7 +11331,7 @@
       "reviewRequired": true,
       "start": {
         "page": 275,
-        "offset": 769
+        "offset": 739
       },
       "endExclusive": {
         "page": 277,
@@ -11348,8 +11348,8 @@
       "pageSlices": [
         [
           275,
-          769,
-          1038,
+          739,
+          1008,
           "916125bbddededff17762c01b976d50a69c98f2f8999c5970ac930178c87dc0c"
         ],
         [
@@ -11369,8 +11369,8 @@
         [
           "WHAT IT DETECTS",
           275,
-          833,
-          849
+          803,
+          819
         ],
         [
           "WHEN TO RUN",
@@ -11416,8 +11416,8 @@
       "proposedExclusions": [
         [
           275,
-          981,
-          1038,
+          951,
+          1008,
           "PAGE_FOOTER"
         ],
         [
@@ -11879,28 +11879,28 @@
       },
       "endExclusive": {
         "page": 284,
-        "offset": 723
+        "offset": 729
       },
       "previousEntry": "AP-05",
       "nextEntry": "AP-07",
       "boundaryReason": [
         "NEXT_DECLARATION"
       ],
-      "rawSpanSha256": "114c32957dfc888b30e992eba458941a6b34239c27f7054574c8b634ae133c55",
-      "proposedCleanTextSha256": "12968116bb2071ba3caa75d86914e9f2b2a516837b25926c6201937695edd979",
-      "proposedCleanTextLength": 1742,
+      "rawSpanSha256": "bc597ace25e058ffe705beb4cc796155cfdb626cee341994ab2c524bc66db4bf",
+      "proposedCleanTextSha256": "833ae273fff92de9dbeafb8c7c81739b3d01fd455c9bd857fb1e7ccc31ccbb2c",
+      "proposedCleanTextLength": 1431,
       "pageSlices": [
         [
           283,
           192,
-          1294,
-          "76654462e7235b17cb0876ac1868f45420c299f67c3a27eab9d3b69a4bd62cfd"
+          977,
+          "5c1df124dae5e96b77e1f73a776674b04b011212adc5b49d2a49cd153682555b"
         ],
         [
           284,
           0,
-          723,
-          "aae0c5754b22ef27668e6bb600c964c9e636ef8506a31936bcd86218338cd371"
+          729,
+          "fc828f73a1372c2a34bf5d9bdbf27f8133a594f76a480e55dbfdcff2fff4e315"
         ]
       ],
       "sectionMarkers": [
@@ -11913,32 +11913,32 @@
         [
           "WHEN TO RUN",
           283,
-          447,
-          459
+          388,
+          400
         ],
         [
           "THE ANTI-PROMPT",
           283,
-          644,
-          660
+          547,
+          563
         ],
         [
           "SIGNAL OF FAILURE",
           284,
-          178,
-          196
+          176,
+          194
         ],
         [
           "WHAT TO DO ON HIT",
           284,
-          358,
-          376
+          301,
+          319
         ],
         [
           "NOTES",
           284,
-          542,
-          548
+          526,
+          532
         ]
       ],
       "expectedSectionLabels": [
@@ -11954,8 +11954,8 @@
       "proposedExclusions": [
         [
           283,
-          1237,
-          1294,
+          920,
+          977,
           "PAGE_FOOTER"
         ],
         [
@@ -11979,7 +11979,7 @@
       "reviewRequired": true,
       "start": {
         "page": 284,
-        "offset": 723
+        "offset": 729
       },
       "endExclusive": {
         "page": 286,
@@ -11996,8 +11996,8 @@
       "pageSlices": [
         [
           284,
-          723,
-          965,
+          729,
+          971,
           "ab32a06ee70795028f40945bbbf9e1205bcb213c0fa772bfa2f758b06f618c86"
         ],
         [
@@ -12017,8 +12017,8 @@
         [
           "WHAT IT DETECTS",
           284,
-          775,
-          791
+          781,
+          797
         ],
         [
           "WHEN TO RUN",
@@ -12064,8 +12064,8 @@
       "proposedExclusions": [
         [
           284,
-          962,
-          965,
+          968,
+          971,
           "PAGE_FOOTER"
         ],
         [
@@ -13508,8 +13508,8 @@
         "offset": 244
       },
       "kind": "FRONT_MATTER",
-      "rawSha256": "4017d8b42683043d4279477a89f8249a7bf67dbd0efe04bb8699b85bca6cc9af",
-      "codepoints": 5676,
+      "rawSha256": "75043cd6d82290452a91ce4d64ecfc78c31393628e306545d23bd6161d302326",
+      "codepoints": 5632,
       "decision": "NEEDS_REVIEW"
     },
     {
@@ -13603,11 +13603,11 @@
       },
       "end": {
         "page": 275,
-        "offset": 769
+        "offset": 739
       },
       "kind": "PART_TRANSITION",
-      "rawSha256": "e70ad38e6f83092f4357458745e835f169c577bc5e006b5ff2fa59207d67a1dc",
-      "codepoints": 769,
+      "rawSha256": "5a3745b2ad23e287ccc12a8d24344f52a83775b0a48f746d0ba1a9158ce1535f",
+      "codepoints": 739,
       "decision": "NEEDS_REVIEW"
     },
     {
