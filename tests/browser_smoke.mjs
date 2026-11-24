@@ -32,6 +32,14 @@ const reviewedPages = [
   [195, 'FOLLOW-UP — BEFORE EVALUATION'],
   [196, 'FOLLOW-UP — AFTER EVALUATION'],
   [197, 'Authorized self-assessment'],
+  [209, 'Build-in-Public Post (Structured)'],
+  [210, 'WHAT WAS BUILT/DONE'],
+  [211, 'OBSERVED FAILURE'],
+  [212, 'an invented locator'],
+  [213, 'PRIOR ASSUMPTION UNCONFIRMED'],
+  [214, 'DISPROVEN ASSUMPTIONS'],
+  [215, 'QUALITY CHECK'],
+  [216, 'Artifact Extraction Protocol'],
 ];
 const browser = await engines[browserName].launch({ headless: true });
 
