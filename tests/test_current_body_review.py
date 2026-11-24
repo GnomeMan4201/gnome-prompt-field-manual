@@ -53,12 +53,11 @@ class CurrentBodyReviewTests(unittest.TestCase):
   paths=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE],cwd=ROOT,text=True).splitlines()
   # Entire baseline data/evidence + readers; not only the seven named inputs.
   protected=[p for p in paths if p in (SOURCE,'GNOME-Field-Manual.html') or p.startswith(('workbench/data/','workbench/adjudication/','research/','examples/','tests/fixtures/','docs/'))]
-  # The reader correction changes both readers and the current identity input.
-  # Verify Phase 12's original publication against its own immutable revision.
-  from test_reader_decision_contracts import previous
-  for p in (SOURCE, 'GNOME-Field-Manual.html', IDENTITY):
-   protected.remove(p)
-   self.assertEqual(previous(p), subprocess.check_output(['git','show',f'{BASE}:{p}'],cwd=ROOT))
+  # The two current readers have a page-scoped comparison in ReaderDecisionContracts.
+  # The live index must reproduce from the actual current manuscript.
+  from export_entry_identity_index import build_inventory
+  self.assertEqual(json.loads((ROOT/IDENTITY).read_text()), build_inventory(ROOT/SOURCE))
+  protected = [p for p in protected if p not in (SOURCE, 'GNOME-Field-Manual.html', IDENTITY)]
   for p in protected:
    with self.subTest(path=p):self.assertEqual((ROOT/p).read_bytes(),subprocess.check_output(['git','show',f'{BASE}:{p}'],cwd=ROOT))
  def test_existing_output_refused(self):

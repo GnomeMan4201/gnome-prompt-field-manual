@@ -56,7 +56,11 @@ class ReaderDecisionContracts(unittest.TestCase):
         for n, card in self.pages.items():
             refs = re.findall(r"\b([A-Z]+-\d{2})\s*\(([^()]{3,85})\)", visible(card))
             for ref, label in refs:
-                matches = titles.get(normalize(label))
+                subject = normalize(label)
+                matches = titles.get(subject)
+                if not matches:
+                    matches = {identifier for title, identifiers in titles.items()
+                               if title.startswith(subject + " ") for identifier in identifiers}
                 if matches:
                     with self.subTest(page=n, reference=ref, label=label):
                         self.assertIn(ref, matches)

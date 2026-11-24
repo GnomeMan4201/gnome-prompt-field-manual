@@ -6,6 +6,10 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- 2026-11-24, PR #53. Page 7 previously claimed these prompts work where generic prompts fail. The revised introduction describes inspectable outputs and identifies comparative effectiveness as an open research question. It also describes Part IX as an entry lookup aid.
+- AP-06 (pages 275, 283–284) previously allowed exclusion based on inferred authorship. The revised instruction requires passage-level evidence and a human decision against a stated quality criterion. SEC-08 (pages 200–202) still uses style-based authorship labels and needs separate editorial correction.
+- Corrected the destinations for architecture decisions (page 260, S-10), incident reports (pages 262 and 265, S-09), and RFC drafts (page 273, P-07) in both reader versions.
+
 - Batch 5 contract correction (REVISE/HOLD): canonical S-07 Migration Risk Classifier now requires the frozen planned S-10 brief's four separately rated categories, explicit category-to-dimension evidence mapping, and an UNASSESSED/DO NOT MIGRATE YET gate for absent evidence. The already-adopted rollback-trigger criteria remain mandatory.
 - Added a machine-checkable planned S-10 / canonical S-07 / distinct canonical S-10 ADR crosswalk, with byte-preservation and standalone-reader regression tests. No entry promotion or independent body verification is claimed.
 
