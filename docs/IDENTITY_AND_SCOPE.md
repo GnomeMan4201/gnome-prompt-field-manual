@@ -77,7 +77,7 @@ Page 133 now includes mandatory **ROLLBACK TRIGGER CONDITIONS**: observable sign
 
 This was a **candidate correction**, not itself a Batch 5 PASS or new-body promotion. The subsequent source-bound SUBSUMED disposition closes the planned brief without creating an additional canonical entry. Current state: **10 pending / 81 non-pending IDs**. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
 
-## Batch 5 four-category contract: repaired, identity disposition still open
+## Batch 5 four-category contract and SUBSUMED disposition
 
 The standard S-07 Migration Risk Classifier prompt now explicitly requires the
 four independently rated categories defined by the frozen S-10 brief. The eight
