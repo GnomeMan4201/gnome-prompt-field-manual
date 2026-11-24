@@ -21,12 +21,13 @@ The corrected canonical page 133 explicitly requires **ROLLBACK TRIGGER CONDITIO
 - immediate halt or rollback action with safety preconditions;
 - escalation procedure.
 
-This is **planning criteria**, not real-time migration monitoring or rollback execution. The canonical page 140, historical embedded v9 PDF, and 314 other page cards remain untouched.
+This is **planning criteria**, not real-time migration monitoring or rollback execution. The standalone reader GNOME-Field-Manual.html now includes the same corrected page 133 in both its static fallback and BOOK_PAGES dataset, with matching per-page SHA-256. The canonical page 140, historical embedded v9 PDF, and 314 other page cards remain untouched.
 
 ## Hash-bound preservation evidence
 
 - Baseline main commit: 55c603d976563a29817ecfffc8e5b00f0d207a89.
 - Before source index.html SHA-256: 8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd.
+- Candidate standalone reader GNOME-Field-Manual.html SHA-256: 37fa881e887eb6ac9f18aadaa92759e55baab505fc7ce3d2bea993053a3ffb56.
 - Candidate source index.html SHA-256: ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab.
 - Candidate NUL-separated ascending 315 page-card SHA-256: 4b5e506301981930a1efce5211fd4ad15225ea07b62f562ced0db1d2bb9127fe.
 - Unchanged 314-card SHA-256 (excluding page 133): 75e3cc4fee094ea766390b8d0cc19cfc8c86cef3d9098cd4dc56baca8b995190.
