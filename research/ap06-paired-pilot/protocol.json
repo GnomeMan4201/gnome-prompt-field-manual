@@ -1,0 +1,21 @@
+{
+  "source": "f592c6a6d3d1dfaaaa87b39112555497cc94478a, AP-06 pages 283–284",
+  "model": "Qwen/Qwen2.5-0.5B-Instruct-GGUF, qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "runtime": "ggml-org/llama.cpp b5092 ubuntu x64, archive SHA-256 36663ade5c921c51f95bb9bd4107752de8d036b24ffef482ac6507a4e1abf0e5",
+  "control": "Review the submission for accuracy using the supplied sources. For each claim, explain your finding and what the reviewer should do next.",
+  "gnome": "Read the task, submission and available sources. State the question the submission must answer. Quote the passage that answers it, or identify what is missing. For each consequential claim, use only supplied, inspectable sources. Cite a source locator and its supporting detail, quote conflicting evidence, or identify the missing source. Record authorship as unknown unless documented separately. Return a quality finding for each passage: SUPPORTED, NEEDS REVISION or INSUFFICIENT EVIDENCE. Include the passage, reason and next check.",
+  "shared": "Task: Check each numbered claim for the editor. For each number give one finding: SUPPORTED, NEEDS REVISION (contradicted), or INSUFFICIENT EVIDENCE. Give a short reason.",
+  "cases": [
+    ["A","A1: The mural inventory lists copper, chalk and linen. A2: Inventory staff counted 18 panels.","1. The inventory includes linen. 2. Staff counted 81 panels."],
+    ["B","B1: Inspection covered the north stair only. B2: Inspectors found two loose treads there.","1. The south stair has loose treads. 2. Two loose treads were found on the north stair."],
+    ["C","C1: The Tuesday bulletin replaced Monday's 09:00 opening with 11:00 for Wednesday. C2: The bulletin gives no closing hour.","1. Wednesday opening remains 09:00. 2. Wednesday closing is 16:00."],
+    ["D","D1: Batch L yielded 42 usable tiles. D2: No kiln temperature was logged for batch L.","1. Batch L was fired at 800 degrees. 2. Batch L yielded 24 usable tiles."],
+    ["E","E1: At station Blue, the 2024 count was 9 and the 2025 count was 12. E2: The counting method was unchanged.","1. The count rose by three. 2. A new shelter caused the increase."],
+    ["F","F1: A trial used three paper grades. F2: Only grade R passed the fold test.","1. All three grades passed. 2. Grade R passed."]
+  ],
+  "gold": ["SR","US","RU","UR","SU","RS"],
+  "order": ["control","gnome","gnome","control","control","gnome"],
+  "scoring": "Each case is one paired unit. Second arm is the other condition. Primary endpoint is the difference in fully correct cases out of six. Both numbered claims must receive one unambiguous correct finding; equivalent wording counts. A wrong, absent or internally contradictory final finding earns zero on that claim. Invalid or missing output earns zero and stays in the denominator. Secondary endpoint: correct claims out of twelve. Report ties and paired wins/losses. Gold codes: S supported, R needs revision, U insufficient evidence. Two labels are equally represented in each arm per case by construction. Gold totals are four of each class. Independently score without arm labels before opening the mapping. Report suspected unblinding because output style may reveal the arm. No significance or general efficacy claim.",
+  "collection": "One fresh process per request, fixed ChatML wrapper, no system prompt, temperature zero, seed 42, 256 generated tokens, two CPU threads, 2048 context. Record complete prompt, stdout, stderr, exit code and timing. No retries of model answers. Cases are new synthetic fixtures held out from the preceding walkthrough, not a random sample. No pilot outputs examined before this protocol was committed."
+}
