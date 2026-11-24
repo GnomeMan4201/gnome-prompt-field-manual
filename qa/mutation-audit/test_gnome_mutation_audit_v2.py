@@ -64,6 +64,40 @@ class HarnessTests(unittest.TestCase):
             out=p/'out.json'; r=subprocess.run([sys.executable,str(SCRIPT),str(root),str(out),'--commit',sha,'--only','M01'],capture_output=True,text=True)
             self.assertEqual(r.returncode,2); self.assertEqual(json.loads(out.read_text())['mutations'],[])
 
+    def test_history_survives_snapshot(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d); root=p/'repo'; root.mkdir(); first=self.fixture(root)
+            (root/'extra.txt').write_text('second commit')
+            subprocess.check_call(['git','-C',str(root),'add','extra.txt'])
+            subprocess.check_call(['git','-C',str(root),'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','second'])
+            sha=audit.git(root,'rev-parse','HEAD').decode().strip()
+            dest=p/'snapshot'; dest.mkdir()
+            audit.extract_snapshot(root,sha,dest)
+            self.assertEqual(audit.git(dest,'show',first+':index.html'),audit.git(root,'show',first+':index.html'))
+            self.assertEqual(audit.git(dest,'remote').strip(),b'')
+            self.assertFalse((dest/'.git/objects/info/alternates').exists())
+            self.assertFalse(any(k.startswith('.git/') for k in audit.hashes(dest)))
+            (dest/'index.html').write_text('mutated')
+            self.assertIn(b'failed badly',audit.git(dest,'show','HEAD:index.html'))
+            self.assertFalse(audit.git(root,'status','--porcelain').strip())
+
+    def test_unittest_failure_and_skip_classification(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d); t=p/'test_example.py'
+            cmd=[sys.executable,'-m','unittest','discover']
+            for body,want in [
+                ('self.assertTrue(False)','REJECTED_UNREVIEWED'),
+                ('raise RuntimeError("oops")','ERROR'),
+                ('self.skipTest("missing dependency")','ERROR'),
+                ('self.assertTrue(True)','PASS'),
+            ]:
+                t.write_text('import unittest\nclass T(unittest.TestCase):\n def test_case(self): '+body+'\n')
+                import shutil
+                shutil.rmtree(p/'__pycache__',ignore_errors=True)
+                self.assertEqual(audit.run(cmd,p,5)['state'],want)
+            t.unlink()
+            self.assertEqual(audit.run(cmd,p,5)['state'],'ERROR')
+
     def test_wrong_commit_and_dirty_checkout(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d); root=p/'repo'; root.mkdir(); sha=self.fixture(root); dest=p/'snapshot'; dest.mkdir()
