@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "8735ebe991b4428fe9a210649d699365f449f2efc87450397df6fec039b0e97a",
+  "sourceIndexSha256": "8ba47c93f4561c0daffa6bfce5d16401cded9f34a887bd8f300bcea38612e084",
   "counts": {
     "pending": 9,
     "drafted": 82,
@@ -616,7 +616,7 @@
     },
     {
       "id": "CH-09",
-      "titleCandidate": "(Agent Build-",
+      "titleCandidate": "Agent Build-Break-Harden Chain",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
       "status": "NON_PENDING",
       "pendingInventory": false,
@@ -1548,7 +1548,7 @@
     },
     {
       "id": "SEC-07",
-      "titleCandidate": "(Human",
+      "titleCandidate": "(Human Confirmation Gate Designer).",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
       "status": "NON_PENDING",
       "pendingInventory": false,

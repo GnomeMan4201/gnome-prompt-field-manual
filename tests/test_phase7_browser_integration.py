@@ -1,6 +1,7 @@
 """Phase VII integration tests grounded in merged Phase VI queue schema."""
-import json,sys,unittest
+import json,sys,tempfile,unittest
 from pathlib import Path
+from frozen_source import BASELINE_SHA, materialize_batch3_source
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"tools"))
 from adjudicate_entry_regions import build_queue,validate
@@ -25,7 +26,10 @@ class TestPhaseVIIIntegration(unittest.TestCase):
   self.assertEqual(report["pendingDecisions"],629)
   self.assertEqual(report["approvedBodies"],0)
  def test_page_source_offsets_match_original(self):
-  pages={i+1:c["text"] for i,c in enumerate(parse_cards((ROOT/"index.html").read_text()))}
+  self.assertEqual(self.queue["sourceHtmlSha256"], BASELINE_SHA)
+  with tempfile.TemporaryDirectory() as directory:
+   source=materialize_batch3_source(Path(directory))
+   pages={i+1:c["text"] for i,c in enumerate(parse_cards(source.read_text()))}
   self.assertEqual(len(pages),315)
   for e in self.queue["entries"]:
    for x in e["exclusions"]:

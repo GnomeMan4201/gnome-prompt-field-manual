@@ -7,7 +7,8 @@ import re
 import unittest
 from pathlib import Path
 
-from batch6_baseline import PARTIAL_SOURCE_SHA, baseline_bytes
+from batch6_baseline import baseline_bytes
+from batch7_baseline import BATCH7_SOURCE_SHA
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,7 +72,7 @@ class Batch5DispositionTests(unittest.TestCase):
         self.assertEqual(r.summary.source_counts.batches, 5)
         self.assertEqual(r.summary.source_counts.caution, 5)
         self.assertEqual(self.identity["counts"], {"pending": 9, "drafted": 82, "total": 91, "pages": 315})
-        self.assertEqual(self.identity["sourceIndexSha256"], PARTIAL_SOURCE_SHA)
+        self.assertEqual(self.identity["sourceIndexSha256"], BATCH7_SOURCE_SHA)
         self.assertEqual(self.identity["bodyCoverage"], 0)
         self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", self.source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)
