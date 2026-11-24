@@ -54,8 +54,8 @@ class Batch1DispositionTests(unittest.TestCase):
         result = reconcile(INDEX)
         failures = validate_expectations(
             result,
-            expected_pending=10,
-            expected_drafted=81,
+            expected_pending=9,
+            expected_drafted=82,
             expected_total=91,
             expected_pages=315,
         )
@@ -133,7 +133,7 @@ class Batch1DispositionTests(unittest.TestCase):
         for stale in ("b-t01", "b-t02", "b-w01", "b-w02", "b-s01", "b-s02", "b-s03"):
             self.assertNotIn(f"document.getElementById('{stale}').classList.add('open');", source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", source)
-        self.assertIn("document.getElementById('b-sec02').classList.add('open');", source)
+        self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", source)
 
 
 if __name__ == "__main__":

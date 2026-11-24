@@ -1,0 +1,15 @@
+  <div class="brief" id="b-sec02">
+    <div class="brief-hdr" onclick="toggle('b-sec02')" style="border-top-color:var(--red);">
+      <span class="brief-id" style="color:var(--red);">SEC-02</span>
+      <span class="brief-name">Prompt Firewall Designer</span>
+      <span class="brief-criteria">CRITERIA 5, 7, 9</span>
+      <span class="audit-chip ac-keep">Keep</span>
+      <span class="brief-chevron">▶</span>
+    </div>
+    <div class="brief-body">
+      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">Part 0 audit: KEEP. "Canary strategy section is distinctive. Most firewall guidance stops at input sanitization." Upgrade: "Expand canary section. Add behavioral baseline definition."</div></div>
+      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">SEC-01 (Prompt Injection Recognizer — PRIOR: classify the injection surface before designing the firewall), SEC-09 (Indirect Injection Tracer — FOLLOW-UP: after the firewall is designed, trace all indirect injection paths to verify coverage), SEC-10 (Trust Boundary Mapper — the firewall architecture must respect the trust boundaries mapped by SEC-10)</div></div>
+      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Teaching injection in order to explain what the firewall defends against. SEC-01 handles the taxonomy of attacks. SEC-02 handles the defense architecture — it does not need to re-explain what injection is. Canary strategy: specific sequences inserted by the system that should never appear in outputs; if they do, an injection has occurred. Behavioral baseline: what the model's output distribution looks like under normal operation, so statistical deviations can trigger alerts.</div></div>
+      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Firewall architecture specification: INPUT VALIDATION LAYER (what gets validated before reaching the model), CANARY TOKEN DESIGN (specific canary sequences and monitoring logic), BEHAVIORAL BASELINE DEFINITION (output characteristics that define normal behavior), ALERT THRESHOLDS (what triggers a firewall response), FALLBACK BEHAVIOR (what the system does when a firewall fires).</div></div>
+    </div>
+  </div>

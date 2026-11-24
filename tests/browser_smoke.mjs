@@ -43,6 +43,7 @@ try {
     await page.goto(manualUrl, { waitUntil: 'domcontentloaded' });
 
     await assertInitialState(page);
+    await assertPartialDisposition(page);
     await assertSearch(page);
     await assertTabInteractions(page);
     await assertReflow(page, scenario);
@@ -65,6 +66,31 @@ async function assertInitialState(page) {
   const page093 = normalize(await page.locator('#manual-page-093').innerText());
   assert.ok(page091.includes('R-07 Competing Hypotheses Table'));
   assert.ok(page093.includes('R-10 Source-of-Truth Conflict Resolver'));
+}
+
+async function assertPartialDisposition(page) {
+  const inventory = page.locator('#inventory');
+  const sec05 = inventory.locator('.entry-row').filter({ hasText: 'SEC-05' });
+  assert.equal(await inventory.locator('.entry-row').count(), 9);
+  assert.equal(await inventory.locator('.er-id').filter({ hasText: 'SEC-02' }).count(), 0);
+  assert.equal(await page.locator('#b-sec02').count(), 0);
+  assert.ok(await sec05.isVisible());
+  assert.equal(await sec05.getByRole('link', { name: 'Unresolved evidence record' }).getAttribute('href'),
+    'docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md');
+  await sec05.getByRole('link', { name: 'Open drafting brief' }).click();
+  assert.ok(await page.locator('#b-sec05.open:target .brief-body').isVisible());
+
+  await page.getByRole('link', { name: 'SEC-02 disposition and current guidance' }).click();
+  const disposition = page.locator('#sec02-disposition:target');
+  assert.ok(await disposition.isVisible());
+  assert.equal(await disposition.getByRole('link', { name: 'the superseding interpretation' }).getAttribute('href'),
+    'docs/BATCH6_ADJUDICATION_AMENDMENT_2026-11-24.md');
+  await disposition.getByRole('link', { name: 'current canary evidence guidance on page 156' }).click();
+  assert.ok(await page.locator('#manual-page-156:target').isVisible());
+
+  assert.equal(await page.locator('.batch-table tbody tr').count(), 5);
+  assert.deepEqual(await page.locator('.batch-table tbody tr').first().locator('td').allTextContents(),
+    ['6', 'SEC-05', '1', 'Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.']);
 }
 
 async function assertSearch(page) {

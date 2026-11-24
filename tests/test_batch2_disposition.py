@@ -54,8 +54,8 @@ class Batch2DispositionTests(unittest.TestCase):
         result = reconcile(INDEX)
         failures = validate_expectations(
             result,
-            expected_pending=10,
-            expected_drafted=81,
+            expected_pending=9,
+            expected_drafted=82,
             expected_total=91,
             expected_pages=315,
         )
@@ -135,10 +135,10 @@ class Batch2DispositionTests(unittest.TestCase):
     def test_remaining_batch_and_startup_state(self) -> None:
         source = INDEX.read_text(encoding="utf-8")
         self.assertNotIn('<td class="batch-entries">W-01, W-02, W-03</td>', source)
-        self.assertIn("10 pending entries · 5 remaining batches · drafting authority", source)
-        self.assertIn("Production state: 81 drafted · 0 restore · 10 pending", source)
+        self.assertIn("9 pending entries · 5 remaining batches · drafting authority", source)
+        self.assertIn("Production state: 82 drafted · 0 restore · 9 pending", source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", source)
-        self.assertIn("document.getElementById('b-sec02').classList.add('open');", source)
+        self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", source)
         self.assertNotIn("document.getElementById('b-w01').classList.add('open');", source)
         self.assertNotIn("document.getElementById('b-w02').classList.add('open');", source)
 

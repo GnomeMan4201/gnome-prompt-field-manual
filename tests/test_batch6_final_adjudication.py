@@ -4,7 +4,7 @@ import re
 import subprocess
 import unittest
 
-from batch6_baseline import FINAL_SOURCE_SHA, PR39_MERGE, ROOT, correction_bytes
+from batch6_baseline import FINAL_SOURCE_SHA, PR39_MERGE, ROOT, adjudication_bytes, correction_bytes
 from examples.batch6_runtime_policy import CounterBoundary, Outcome, run_controls, verify_controls
 from test_batch6_correction import (
     ADAPTER_PATH, CANONICAL, DATASET, HISTORICAL_ROOTS, INDEX_PATH, STATIC, canonical_surface,
@@ -51,10 +51,11 @@ def history_changes(paths, read_current):
 
 
 class CanaryAndSourceTests(unittest.TestCase):
+    """Verify PR #40 on its pinned adjudication tree."""
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / "index.html").read_bytes()
-        cls.reader = (ROOT / "GNOME-Field-Manual.html").read_bytes()
+        cls.raw = adjudication_bytes("index.html")
+        cls.reader = adjudication_bytes("GNOME-Field-Manual.html")
         cls.pages = cards(cls.raw)
         cls.static = cards(cls.reader, STATIC)
         cls.rows, cls.serialized = dataset_rows(cls.reader)
@@ -124,10 +125,10 @@ class CanaryAndSourceTests(unittest.TestCase):
         self.assertEqual(history_changes([path], lambda p: correction_bytes(p) + b" "), {path})
 
     def test_current_identity_is_bound_to_actual_bytes_without_promotion(self):
-        identity = json.loads((ROOT / INDEX_PATH).read_bytes())
+        identity = json.loads(adjudication_bytes(INDEX_PATH))
         historical = json.loads(correction_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), FINAL_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{FINAL_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{FINAL_SOURCE_SHA}';", adjudication_bytes(ADAPTER_PATH).decode())
         self.assertNotEqual(identity["sourceIndexSha256"], historical["sourceIndexSha256"])
         self.assertEqual(identity, dict(historical, sourceIndexSha256=FINAL_SOURCE_SHA))
 

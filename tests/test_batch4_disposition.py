@@ -11,7 +11,7 @@ import re
 import unittest
 from pathlib import Path
 
-from batch6_baseline import FINAL_SOURCE_SHA, baseline_bytes
+from batch6_baseline import PARTIAL_SOURCE_SHA, baseline_bytes
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,7 +61,7 @@ class Batch4DispositionTests(unittest.TestCase):
 
     def test_current_source_hash_and_frozen_batch4_doc_binding(self):
         self.assertEqual(hashlib.sha256(baseline_bytes("index.html")).hexdigest(), BATCH5_POST_STATE_SHA)
-        self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), FINAL_SOURCE_SHA)
+        self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), PARTIAL_SOURCE_SHA)
         self.assertIn("Final `index.html` SHA-256: `8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd`", DOC.read_text())
 
     def test_315_canonical_pages_and_frozen_batch4_pages(self):
@@ -70,13 +70,13 @@ class Batch4DispositionTests(unittest.TestCase):
         self.assertEqual(fingerprint(cards(baseline_bytes("index.html").decode()), list(range(1, 316))), ALL_PAGE_SHA)
         self.assertEqual(fingerprint(self.cards, range(107, 122)), BATCH4_PAGE_SHA)
 
-    def test_reconciles_11_80_91_315_without_missing_inventory(self):
+    def test_reconciles_9_82_91_315_without_missing_inventory(self):
         r = reconcile(INDEX)
         self.assertEqual(validate_expectations(r,
-            expected_pending=10, expected_drafted=81, expected_total=91, expected_pages=315), [])
+            expected_pending=9, expected_drafted=82, expected_total=91, expected_pages=315), [])
         self.assertEqual(r.summary.pending_missing_from_embedded, 0)
-        self.assertEqual(r.summary.pending_present_in_embedded, 10)
-        self.assertEqual(r.summary.drafting_briefs, 10)
+        self.assertEqual(r.summary.pending_present_in_embedded, 9)
+        self.assertEqual(r.summary.drafting_briefs, 9)
 
     def test_s01_frozen_brief_requirement(self):
         body = display(self.cards, range(107, 112)).upper()
@@ -103,13 +103,13 @@ class Batch4DispositionTests(unittest.TestCase):
             self.assertNotRegex(self.source, rf'<div class="brief" id="{brief_id}"')
         self.assertNotIn('<td class="batch-entries">S-01, S-02, S-03</td>', self.source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)
-        self.assertIn("document.getElementById('b-sec02').classList.add('open');", self.source)
+        self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", self.source)
 
     def test_identity_is_current_but_historical_review_queue_is_not_rewritten(self):
         identity = json.loads(IDENTITY.read_text())
         queue = json.loads(HISTORICAL_QUEUE.read_text())
-        self.assertEqual(identity["sourceIndexSha256"], FINAL_SOURCE_SHA)
-        self.assertEqual(identity["counts"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
+        self.assertEqual(identity["sourceIndexSha256"], PARTIAL_SOURCE_SHA)
+        self.assertEqual(identity["counts"], {"pending": 9, "drafted": 82, "total": 91, "pages": 315})
         self.assertEqual(identity["bodyCoverage"], 0)
         self.assertEqual(queue["sourceHtmlSha256"], BASELINE_SHA)
         self.assertEqual(json.loads(HISTORICAL_INDEX.read_text())["sourceIndexSha256"], BASELINE_SHA)
