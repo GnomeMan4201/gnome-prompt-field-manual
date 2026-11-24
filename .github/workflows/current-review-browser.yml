@@ -1,0 +1,58 @@
+name: Current Review Browser
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'workbench/data/current*'
+      - 'workbench/adjudication/current/**'
+      - 'workbench/adjudication/style.css'
+      - 'tools/build_current_body_review.py'
+      - 'tools/validate_current_review_session.py'
+      - 'tests/test_current_review_session.py'
+      - 'tests/current_review_browser.mjs'
+      - 'tests/current_review_state.mjs'
+      - 'package*.json'
+      - '.github/workflows/current-review-browser.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'workbench/data/current*'
+      - 'workbench/adjudication/current/**'
+      - 'workbench/adjudication/style.css'
+      - 'tools/build_current_body_review.py'
+      - 'tools/validate_current_review_session.py'
+      - 'tests/test_current_review_session.py'
+      - 'tests/current_review_browser.mjs'
+      - 'tests/current_review_state.mjs'
+      - 'package*.json'
+      - '.github/workflows/current-review-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    name: ${{ matrix.browser }} current review
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: python -m unittest discover -s tests -p 'test_current_review_session.py' -v
+      - run: node tests/current_review_state.mjs
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: node tests/current_review_browser.mjs ${{ matrix.browser }}

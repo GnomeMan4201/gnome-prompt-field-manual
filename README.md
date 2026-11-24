@@ -102,6 +102,8 @@ The live editorial inventory now records **1 pending / 90 non-pending IDs**, wit
 
 Previously issued Phase V–VIII source-bound evidence (including the 629-decision adjudication queue) is **not relabeled** as current: it remains pinned to the original Batch 3 `index.html` digest `1f06445e…`. A byte-identical standalone HTML snapshot is preserved at `tests/fixtures/batch3-canonical-1f06445e.html` for offline verification and historical test replay. The adjudication workbench requires the matching original HTML, not the latest `index.html`, for source-hash verification. Recreating or rebinding its research manifest requires a separate, independently tested migration.
 
+**Current-source review (Phase 12B):** the [current adjudication workbench](workbench/adjudication/current/index.html) is a separate mode using the current 91-candidate packet, with 669 pending review records (629 core decisions, 31 title discrepancies, nine unassigned regions). Run it through GitHub Pages or a localhost HTTP server. Local review records are not independently verified bodies; validate exports with `tools/validate_current_review_session.py`. See [the workflow and evidence limits](docs/PHASE12B_CURRENT_REVIEW_WORKBENCH_2026-11-24.md).
+
 ## Validate locally
 
 The standalone validators require Python 3.11 or newer. The full regression suite also uses Node.js and Python `jsonschema`, as configured in Reactor Integrity CI.
