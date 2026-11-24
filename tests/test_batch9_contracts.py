@@ -6,7 +6,7 @@ import subprocess
 import unittest
 
 from batch8_baseline import BATCH8_DISPOSITION_SOURCE_SHA, PR45_MERGE, ROOT, batch8_disposition_bytes
-from batch9_baseline import BATCH9_SOURCE_SHA
+from batch9_baseline import BATCH9_SOURCE_SHA, batch9_correction_bytes
 from test_batch6_correction import (
     ADAPTER_PATH, CANONICAL, DATASET, EXPECTED_PDF_SHA256, HISTORICAL_ROOTS, INDEX_PATH, STATIC,
     canonical_surface, cards, changed_pages, dataset_rows, digest, parity_errors, visible,
@@ -63,8 +63,8 @@ def rfc_suffix(raw):
 class Batch9ContractsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / "index.html").read_bytes()
-        cls.reader = (ROOT / READER).read_bytes()
+        cls.raw = batch9_correction_bytes("index.html")
+        cls.reader = batch9_correction_bytes(READER)
         cls.base = batch8_disposition_bytes("index.html")
         cls.base_reader = batch8_disposition_bytes(READER)
         cls.pages = cards(cls.raw)
@@ -179,12 +179,12 @@ class Batch9ContractsTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertEqual((ROOT / path).read_bytes(), batch8_disposition_bytes(path))
 
-    def test_current_binding_and_unchanged_editorial_status(self):
-        current = json.loads((ROOT / INDEX_PATH).read_bytes())
+    def test_correction_binding_and_unchanged_editorial_status(self):
+        current = json.loads(batch9_correction_bytes(INDEX_PATH))
         prior = json.loads(batch8_disposition_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), BATCH9_SOURCE_SHA)
         self.assertEqual(current["sourceIndexSha256"], BATCH9_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH9_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH9_SOURCE_SHA}';", batch9_correction_bytes(ADAPTER_PATH).decode())
         self.assertEqual(current["counts"], {"pending": 6, "drafted": 85, "total": 91, "pages": 315})
         self.assertEqual(current["bodyCoverage"], 0)
         for old, new in zip(prior["entries"], current["entries"], strict=True):

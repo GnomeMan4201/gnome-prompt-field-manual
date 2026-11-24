@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "gnome.batch9.crosswalk.v1",
+  "sourceIndexSha256": "208211b102aa75bf9f35fefbd2c33cf7f89365a8468058abd8567b8b442937d6",
+  "approvedBasis": {
+    "correctionPullRequest": 46,
+    "approvedHeadCommit": "d286682a4c78e58f74d99e9f285e837a95cc6325",
+    "mergeCommit": "859658e479206ed3311629190a0f2f5e7e410b2d",
+    "sourceIndexSha256": "8e3ec363f32f200ac8b01f479986043a9854a8b4868efec8497b62a4288403d6",
+    "adjudication": {
+      "path": "docs/BATCH9_P06_P07_ADJUDICATION_2026-11-24.md",
+      "sha256": "197cc9f5f2645d0db9a10b20a27b50ef14da34705d2d95914775b02e99c17d97"
+    }
+  },
+  "entries": [
+    {
+      "disposition": "SUBSUMED",
+      "planned": {
+        "briefId": "b-p06",
+        "entryId": "P-06",
+        "title": "Work Sample Annotator",
+        "status": "CLOSED_AS_SUBSUMED"
+      },
+      "canonicalSubject": {
+        "entryId": "P-05",
+        "title": "Work Sample Annotator",
+        "firstPage": 222,
+        "lastPage": 228,
+        "endsBeforeHeading": "P-06 Changelog Curation Engine",
+        "status": "ACCEPTED_AS_SUBJECT_EQUIVALENT_NOT_ID_RENAME"
+      },
+      "canonicalCollision": {
+        "entryId": "P-06",
+        "title": "Changelog Curation Engine",
+        "firstPage": 228,
+        "status": "DISTINCT_BODY_PRESERVED"
+      },
+      "editorialInventory": {
+        "entryId": "P-06",
+        "statusBefore": "PENDING",
+        "statusAfter": "NON_PENDING",
+        "pendingInventory": false,
+        "draftingBrief": false
+      },
+      "frozenBriefArchive": {
+        "path": "tests/fixtures/batch9-frozen-planned-p06.html",
+        "sha256": "250bc2841a5218ce7d26506a3234573a630f626c391733cc089bde2ffa0210fc",
+        "sourceCommit": "88f1a6399eff6655bf511f24fb848f51bdb1ce88",
+        "sourceIndexSha256": "108d443e3f39e745bddbcbb030de1876f36f328180308a32eae2cb107d133f80"
+      }
+    },
+    {
+      "disposition": "SUBSUMED",
+      "planned": {
+        "briefId": "b-p07",
+        "entryId": "P-07",
+        "title": "Changelog Curation Engine",
+        "status": "CLOSED_AS_SUBSUMED"
+      },
+      "canonicalSubject": {
+        "entryId": "P-06",
+        "title": "Changelog Curation Engine",
+        "firstPage": 228,
+        "lastPage": 232,
+        "endsBeforeHeading": "P-07 RFC Draft Generator",
+        "status": "ACCEPTED_AS_SUBJECT_EQUIVALENT_NOT_ID_RENAME"
+      },
+      "canonicalCollision": {
+        "entryId": "P-07",
+        "title": "RFC Draft Generator",
+        "firstPage": 232,
+        "status": "DISTINCT_BODY_PRESERVED"
+      },
+      "editorialInventory": {
+        "entryId": "P-07",
+        "statusBefore": "PENDING",
+        "statusAfter": "NON_PENDING",
+        "pendingInventory": false,
+        "draftingBrief": false
+      },
+      "frozenBriefArchive": {
+        "path": "tests/fixtures/batch9-frozen-planned-p07.html",
+        "sha256": "611090f14065fdf6b024707d5a357d058ecbdd3a3d58972932efee6ee183c879",
+        "sourceCommit": "88f1a6399eff6655bf511f24fb848f51bdb1ce88",
+        "sourceIndexSha256": "108d443e3f39e745bddbcbb030de1876f36f328180308a32eae2cb107d133f80"
+      }
+    }
+  ],
+  "crossReferenceResolutions": [
+    {
+      "frozen": {
+        "briefId": "b-p07",
+        "entryId": "S-09",
+        "title": "Architecture Decision Record Generator"
+      },
+      "canonicalSubject": {
+        "entryId": "S-10",
+        "title": "Architecture Decision Record Generator",
+        "firstPage": 140
+      },
+      "canonicalCollision": {
+        "entryId": "S-09",
+        "title": "Incident Report Scaffold",
+        "firstPage": 138
+      },
+      "resolution": "BY_SUBJECT",
+      "correctedReferencePage": 232
+    }
+  ],
+  "canonicalBodyVerification": "UNVERIFIED",
+  "promotionAuthorized": false,
+  "countsAfter": {
+    "pending": 4,
+    "drafted": 87,
+    "total": 91,
+    "pages": 315
+  },
+  "nonemptyBatchesAfter": 2,
+  "independentlyVerifiedCanonicalBodies": 0
+}

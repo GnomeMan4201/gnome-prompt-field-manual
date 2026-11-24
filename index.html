@@ -327,11 +327,11 @@
 <header class="hdr">
   <div>
     <h1 class="hdr-title">PTSP — <span>Pending Entry Draft Plan</span></h1>
-    <div style="font-size:12px;color:var(--dim);margin-top:4px;">6 pending entries · 3 remaining batches · drafting authority</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px;">4 pending entries · 2 remaining batches · drafting authority</div>
   </div>
   <div class="hdr-meta">
     Source: GNOME_Prompt_Field_Manual_v3_final.docx<br>
-    Production state: 85 drafted · 0 restore · 6 pending<br>
+    Production state: 87 drafted · 0 restore · 4 pending<br>
     Restore phase: LOCKED
   </div>
 </header>
@@ -348,10 +348,10 @@
 </nav>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num sn-pending">6</div><div class="stat-label">Pending Entries</div></div>
-  <div class="stat"><div class="stat-num sn-drafted">85</div><div class="stat-label">Drafted</div></div>
+  <div class="stat"><div class="stat-num sn-pending">4</div><div class="stat-label">Pending Entries</div></div>
+  <div class="stat"><div class="stat-num sn-drafted">87</div><div class="stat-label">Drafted</div></div>
   <div class="stat"><div class="stat-num sn-caution">5</div><div class="stat-label">Special Caution</div></div>
-  <div class="stat"><div class="stat-num sn-batch">3</div><div class="stat-label">Remaining Batches</div></div>
+  <div class="stat"><div class="stat-num sn-batch">2</div><div class="stat-label">Remaining Batches</div></div>
   <div class="stat"><div class="stat-num sn-total">91</div><div class="stat-label">Total Entries</div></div>
 </div>
 
@@ -364,7 +364,7 @@
   <div class="section-hdr">
     <span class="section-kicker">Section 1</span>
     <h2 class="section-title">Pending Entry Inventory by Part</h2>
-    <span class="section-count">6 entries · 2 parts</span>
+    <span class="section-count">4 entries · 2 parts</span>
   </div>
 
   <div class="callout" style="margin-bottom:20px;border-left-color:var(--purple);">
@@ -377,9 +377,7 @@
   </div>
 
   <div class="part-block">
-    <div class="part-label">Part VI — Publishing Serious Artifacts · 5 pending</div>
-    <div class="entry-row"><span class="er-id">P-06</span><span class="er-name">Work Sample Annotator</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
-    <div class="entry-row"><span class="er-id">P-07</span><span class="er-name">Changelog Curation Engine</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
+    <div class="part-label">Part VI — Publishing Serious Artifacts · 3 pending</div>
     <div class="entry-row"><span class="er-id">P-08</span><span class="er-name">Peer Review Responder</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
     <div class="entry-row"><span class="er-id">P-09</span><span class="er-name">Correction / Retraction Writer</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
     <div class="entry-row"><span class="er-id">P-10</span><span class="er-name">Open Source Contribution Guide Generator</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
@@ -397,7 +395,7 @@
   </div>
 
   <p style="font-size:13px;color:var(--text);line-height:1.8;margin-bottom:16px;">
-    Batch 6 remains open for SEC-05 pending independent behavioral evidence. Batches 7 and 8 are closed. Batch 9 is the next manuscript review. SEC-05 evidence remains on a separate track.
+    Batch 6 remains open for SEC-05 pending independent behavioral evidence. Batches 7 through 9 are closed. Batch 10 is the final scheduled manuscript review. SEC-05 evidence remains on a separate track.
   </p>
 
   <div class="callout" style="margin-bottom:16px;border-left-color:var(--green);">
@@ -428,6 +426,16 @@
     <a href="docs/BATCH8_P01_P02_DISPOSITION_2026-11-24.md">Read the disposition record</a>.
   </div>
 
+  <div class="callout" id="batch9-disposition" style="margin-bottom:16px;border-left-color:var(--green);">
+    <strong>Batch 9 closed as SUBSUMED at manuscript-contract level.</strong>
+    The planned P-06 brief maps to <a href="#manual-page-222">canonical P-05 Work Sample Annotator</a>.
+    The planned P-07 brief maps to <a href="#manual-page-228">canonical P-06 Changelog Curation Engine</a>.
+    <a href="#manual-page-232">Canonical P-07 RFC Draft Generator</a> remains a separate entry.
+    Use <a href="#manual-page-140">canonical S-10 Architecture Decision Record Generator</a> for the ADR subject wherever frozen briefs cite S-09.
+    <a href="docs/BATCH9_P06_P07_DISPOSITION_2026-11-24.md">Read the disposition record</a> and
+    <a href="workbench/data/batch9_identity_crosswalk.json">the identity crosswalk</a>.
+  </div>
+
   <table class="batch-table">
     <thead>
       <tr>
@@ -440,8 +448,7 @@
     <tbody>
 
       <tr><td class="batch-num">6</td><td class="batch-entries">SEC-05</td><td class="batch-size">1</td><td class="batch-rationale">Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.</td></tr>
-      <tr><td class="batch-num">9</td><td class="batch-entries">P-06, P-07</td><td class="batch-size">2</td><td class="batch-rationale">Work Sample Annotator and Changelog Curation Engine. Operationally specific — lower generic-prompt risk than P-08–P-10.</td></tr>
-      <tr><td class="batch-num">10</td><td class="batch-entries">P-08, P-09, P-10</td><td class="batch-size">3</td><td class="batch-rationale">Peer Review Responder, Correction Writer, OS Contribution Guide. Highest collective generic-prompt risk in the book. Draft last, review hardest.</td></tr>
+      <tr><td class="batch-num">10</td><td class="batch-entries">P-08, P-09, P-10</td><td class="batch-size">3</td><td class="batch-rationale">Planned briefs for Peer Review Responder, Correction / Retraction Writer, and Open Source Contribution Guide Generator. Establish canonical subjects first, then review the practical utility of each required artifact.</td></tr>
     </tbody>
   </table>
 </div>
@@ -456,7 +463,7 @@
     <h2 class="section-title">Batch Grouping Logic</h2>
   </div>
   <p style="font-size:13px;color:var(--text);line-height:1.8;">
-    Group work within a part by shared quality risks or related entries. Batches 9 and 10 group the remaining Part VI entries. Batch 8 is complete. SEC-05 is the sole pending entry in Batch 6.
+    Group work within a part by shared quality risks or related entries. Batch 10 groups the remaining Part VI drafting briefs. Resolve planned identifiers against canonical headings by subject before evaluating the briefs. SEC-05 is the sole pending entry in Batch 6.
   </p>
 </div>
 
@@ -544,7 +551,7 @@
   <div class="section-hdr">
     <span class="section-kicker">Section 5</span>
     <h2 class="section-title">Per-Entry Drafting Briefs</h2>
-    <span class="section-count">6 entries</span>
+    <span class="section-count">4 entries</span>
   </div>
 
   <!-- S-01 -->
@@ -570,40 +577,6 @@
       <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">S-04 (Command/Data Boundary Audit — PRIOR: the audit identifies where separation is needed; SEC-05 performs the actual refactor), SEC-01 (Prompt Injection Recognizer — PRIOR: classify injection risk before refactoring), SEC-02 (Prompt Firewall Designer — the refactored code should be compatible with the firewall architecture)</div></div>
       <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Producing advice instead of code. The annotated refactor output means: actual modified code with comments explaining each separation decision. The testing protocol for escaped delimiters (the audit upgrade) means: the EXPECTED OUTPUT must include test cases that verify the separator holds under adversarial inputs — inputs specifically designed to break the delimiter scheme.</div></div>
       <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Two outputs: (1) Refactored code/prompt with annotations at each separation point explaining the change. (2) Test suite: at minimum, normal-input passing test, delimiter-escape attempt that should fail, injection attempt that should be blocked. The test suite must be copy-paste executable.</div></div>
-    </div>
-  </div>
-
-  <!-- P-06 -->
-  <div class="brief" id="b-p06">
-    <div class="brief-hdr" onclick="toggle('b-p06')">
-      <span class="brief-id">P-06</span>
-      <span class="brief-name">Work Sample Annotator</span>
-      <span class="brief-criteria">CRITERIA 6, 10</span>
-      <span class="audit-chip ac-new">New</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">New entry from v3 master selection. Not in Part 0 audit.</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">P-04 (Technical Post-Mortem Publisher — annotation often accompanies the post-mortem format), P-03 (README Quality Auditor — for when the work sample is code with a README)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Describing the work rather than annotating it. Annotation adds context to the work without altering it — decision reasoning, constraints that weren't obvious, choices that weren't made and why. The work sample itself is not summarized or modified. The annotation appears alongside it. The output is the work + annotation, not a description of the work.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Annotated work sample: DECISION ANNOTATIONS (at specific points in the work: what decision was made here and why), CONSTRAINT ANNOTATIONS (what limitations shaped this section), ALTERNATIVE PATHS NOT TAKEN (what was considered and rejected), REUSABILITY NOTES (what would need to change to adapt this for a different context). Work itself is reproduced verbatim with annotations inline or referenced.</div></div>
-    </div>
-  </div>
-
-  <!-- P-07 -->
-  <div class="brief" id="b-p07">
-    <div class="brief-hdr" onclick="toggle('b-p07')">
-      <span class="brief-id">P-07</span>
-      <span class="brief-name">Changelog Curation Engine</span>
-      <span class="brief-criteria">CRITERIA 6, 9</span>
-      <span class="audit-chip ac-new">New</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">New entry from v3 master selection. Not in Part 0 audit.</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">S-09 (Architecture Decision Record Generator — ADRs become source material for a curated changelog), P-04 (Technical Post-Mortem Publisher — when changelog entries document incident-related changes)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Bullet list of what changed. A curated changelog tells readers what MATTERS and why — it has a significance rating, a user impact statement, and a reasoning note for non-obvious changes. Entries with no user impact should be marked as internal and placed in a separate section, not omitted. The changelog is not a commit log.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Curated changelog: USER-FACING CHANGES section (each entry with: change description, user impact, significance: HIGH/MEDIUM/LOW), INTERNAL CHANGES section (separate, lower prominence), REMOVED/DEPRECATED section (explicitly called out). Each HIGH-significance entry gets a one-sentence rationale.</div></div>
     </div>
   </div>
 

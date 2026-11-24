@@ -54,8 +54,8 @@ class Batch1DispositionTests(unittest.TestCase):
         result = reconcile(INDEX)
         failures = validate_expectations(
             result,
-            expected_pending=6,
-            expected_drafted=85,
+            expected_pending=4,
+            expected_drafted=87,
             expected_total=91,
             expected_pages=315,
         )

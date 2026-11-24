@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "8e3ec363f32f200ac8b01f479986043a9854a8b4868efec8497b62a4288403d6",
+  "sourceIndexSha256": "208211b102aa75bf9f35fefbd2c33cf7f89365a8468058abd8567b8b442937d6",
   "counts": {
-    "pending": 6,
-    "drafted": 85,
+    "pending": 4,
+    "drafted": 87,
     "total": 91,
     "pages": 315
   },
@@ -782,11 +782,11 @@
     },
     {
       "id": "P-06",
-      "titleCandidate": "Work Sample Annotator",
+      "titleCandidate": "Changelog Curation Engine",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         228
       ],
@@ -802,11 +802,11 @@
     },
     {
       "id": "P-07",
-      "titleCandidate": "Changelog Curation Engine",
+      "titleCandidate": "RFC Draft Generator",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         232,
         236
