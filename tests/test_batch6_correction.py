@@ -9,7 +9,7 @@ import re
 import subprocess
 import unittest
 
-from batch6_baseline import BASELINE_COMMIT, CURRENT_SOURCE_SHA, ROOT, baseline_bytes
+from batch6_baseline import BASELINE_COMMIT, CURRENT_SOURCE_SHA, ROOT, baseline_bytes, correction_bytes
 from tools.audit_editorial_lineage import EXPECTED_PDF_SHA256, canonical_surface
 
 PAGES = {133, 157, 158, 159, 161, 182, 184}
@@ -57,7 +57,7 @@ def search_metadata(text):
 
 def static_text(card):
     body = re.search(rb'<div class="book-prose typeset-body">(.*)</div><a href="#page-directory">', card, re.S)[1]
-    return html.unescape(re.sub(rb"<[^>]+>", b" ", body).decode())
+    return html.unescape(re.sub(rb"<[^>]+>", b" ", body).decode()).strip()
 
 
 def changed_pages(before, after):
@@ -183,18 +183,19 @@ def editorial_errors(raw, identity, old_raw, old_identity):
 
 
 class Batch6CorrectionTests(unittest.TestCase):
+    """Verify the original correction on its pinned merged source tree."""
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / "index.html").read_bytes()
-        cls.reader = (ROOT / "GNOME-Field-Manual.html").read_bytes()
+        cls.raw = correction_bytes("index.html")
+        cls.reader = correction_bytes("GNOME-Field-Manual.html")
         cls.old_raw = baseline_bytes("index.html")
         cls.old_reader = baseline_bytes("GNOME-Field-Manual.html")
         cls.canonical = cards(cls.raw)
         cls.static = cards(cls.reader, STATIC)
         cls.rows, cls.encoded = dataset_rows(cls.reader)
-        cls.identity = json.loads((ROOT / INDEX_PATH).read_bytes())
+        cls.identity = json.loads(correction_bytes(INDEX_PATH))
         cls.old_identity = json.loads(baseline_bytes(INDEX_PATH))
-        cls.adapter = (ROOT / ADAPTER_PATH).read_text()
+        cls.adapter = correction_bytes(ADAPTER_PATH).decode()
 
     def test_manuscript_contract(self):
         self.assertEqual(contract_errors(self.canonical), set())

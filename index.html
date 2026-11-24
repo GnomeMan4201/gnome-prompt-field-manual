@@ -9804,7 +9804,7 @@ Treat Classification 6 results without a pre-scan as “partial signal
 
                                                       153</pre>
 </article>
-<article class="manual-page-card" id="manual-page-154" data-manual-text="gnome prompt field manual sec-02 prompt firewall designer criteria: 5, 7, 9 — protect system from bad inputs + expose trust boundary + ship safer what it does designs a prompt firewall architecture for a specific ai system: a defensive layer that sits between untrusted inputs and the model context, classifies inputs by trust class, enforces an allow/block/quarantine policy, deploys canary tokens to detect policy escape, defines what normal model behavior looks like so deviations are detectable, and specifies what the system does when the firewall is uncertain. the output is an architecture specification, not a list of best prac- tices. it defines precisely where the firewall sits, what it permits, what it blocks, what it quarantines, and what happens when clas- sification confidence is insufficient. this is not a content filter. a content filter removes objectionable material. a prompt firewall enforces trust policy on the instruc- tion/data boundary — its job is to prevent untrusted inputs from controlling model behavior, extracting system state, or produc- ing outputs the system operator did not authorize. when to use when deploying any ai system that processes inputs from sources the operator does not fully control: user messages, retrieved documents, api responses, file uploads, web content, database records. before adding a new input channel to an existing ai system. after an injection incident to design the architectural response. when sec-01 (prompt injection recognizer) has iden- tified injection signals and the next step is systemic hardening rather than per-content filtering. when a trust boundary map from s-01 (system map with trust boundaries) has identified unprotected external-to-internal crossings. not appropriate as a one-time document — a prompt firewall de- sign must be versioned and updated when the system’s capabili- 154">
+<article class="manual-page-card" id="manual-page-154" data-manual-text="gnome prompt field manual sec-02 prompt firewall designer criteria: 5, 7, 9 — protect system from bad inputs + expose trust boundary + ship safer what it does designs a prompt firewall architecture for a specific ai system: a defensive layer that sits between untrusted inputs and the model context, classifies inputs by trust class, enforces an allow/block/quarantine policy, uses canary observations to flag possible policy escape for review, defines what normal model behavior looks like so deviations are detectable, and specifies what the system does when the firewall is uncertain. the output is an architecture specification, not a list of best prac- tices. it defines precisely where the firewall sits, what it permits, what it blocks, what it quarantines, and what happens when clas- sification confidence is insufficient. this is not a content filter. a content filter removes objectionable material. a prompt firewall enforces trust policy on the instruc- tion/data boundary — its job is to prevent untrusted inputs from controlling model behavior, extracting system state, or produc- ing outputs the system operator did not authorize. when to use when deploying any ai system that processes inputs from sources the operator does not fully control: user messages, retrieved documents, api responses, file uploads, web content, database records. before adding a new input channel to an existing ai system. after an injection incident to design the architectural response. when sec-01 (prompt injection recognizer) has iden- tified injection signals and the next step is systemic hardening rather than per-content filtering. when a trust boundary map from s-01 (system map with trust boundaries) has identified unprotected external-to-internal crossings. not appropriate as a one-time document — a prompt firewall de- sign must be versioned and updated when the system’s capabili- 154">
   <div class="manual-page-head"><span>Page 154</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -9824,7 +9824,8 @@ WHAT IT DOES
 Designs a prompt firewall architecture for a specific AI system: a
 defensive layer that sits between untrusted inputs and the model
 context, classifies inputs by trust class, enforces an allow/block/quarantine
-policy, deploys canary tokens to detect policy escape, defines
+policy, uses canary observations to flag possible
+policy escape for review, defines
 what normal model behavior looks like so deviations are detectable,
 and specifies what the system does when the firewall is uncertain.
 The output is an architecture specification, not a list of best prac-
@@ -9935,7 +9936,7 @@ THE PROMPT
 
                                                       155</pre>
 </article>
-<article class="manual-page-card" id="manual-page-156" data-manual-text="gnome prompt field manual for each input class this system receives, specify the policy: input class: [name and source of this input type] trust level: trusted / semi-trusted / untrusted / adversarial policy: allowed / blocked / quarantined rationale: [why this policy for this input class] validation required: [what check or classification must pass before allowed inputs enter the model context?] quarantine condition: [for quarantined: what triggers quarantine vs. block? what happens to quarantined content?] canary strategy canary tokens are specific sequences that the system injects into its own context which the model should never reproduce in output directed toward external recipients. their appearance in output signals that injection has caused the model to expose or echo system-internal content. canary design: canary format: [describe the format of canary tokens for this system — they must be: (a) unlikely to appear in legitimate output naturally (b) distinct from system prompt content users could guess (c) parseable programmatically in output monitoring] example canary structure: [a representative abstract example — e.g., a randomly-generated delimited token like &quot;|cnry-[uuid]-end|&quot; — do not use real tokens here] placement: [where in the model context are canaries placed? beginning of system prompt? end? randomly positioned?] rotation policy: [how frequently are canary tokens rotated? static canaries that leak once are permanently compromised] canary trigger conditions: specify exactly what constitutes a trigger for each canary: trigger 1 — verbatim reproduction: canary token appears verbatim in model output to any external channel trigger 2 — partial reproduction: recognizable fragment of the canary token structure appears in output trigger 3 — structured reproduction: output follows the formatting pattern of canary tokens even without the specific token value (pattern-level detection) for each trigger: response action (see escalation section) behavioral baseline a behavioral baseline defines what normal model output looks like for this system so that deviations can be detected as potential policy-escape signals. 156">
+<article class="manual-page-card" id="manual-page-156" data-manual-text="gnome prompt field manual for each input class this system receives, specify the policy: input class: [name and source of this input type] trust level: trusted / semi-trusted / untrusted / adversarial policy: allowed / blocked / quarantined rationale: [why this policy for this input class] validation required: [what check or classification must pass before allowed inputs enter the model context?] quarantine condition: [for quarantined: what triggers quarantine vs. block? what happens to quarantined content?] canary strategy canaries are system-generated tokens intended to stay inside an authorized boundary. a canary match may trigger quarantine or investigation under the chosen policy. a match alone does not establish injection. canary design: specify the format, placement, rotation interval, and detection rules. choose a format unlikely to occur naturally and easy for the monitor to recognize. use values that users cannot readily guess. cover all external output channels and retire exposed tokens. give a schematic example. generate actual token values in the deployment environment and protect them from shared output and logs. exact match — the complete issued token appears verbatim. verify it against the protected issuance record and confirm its channel and audience. treat a verified exact match outside its authorized boundary as potential unauthorized disclosure. hold the affected output or investigate under policy. fragment match — a defined portion of an issued token appears. state the minimum fragment and how it is compared. confidence in token identity depends on distinctiveness. check for truncation and accidental collision. log or quarantine under policy and seek independent evidence. pattern-only match — output resembles the format without matching an issued value. this establishes format similarity. check for ordinary formatted output or accidental collision. log or review under policy. potential unauthorized disclosure — a token or credible fragment appears to have crossed an authorization boundary. verify the audience, provenance, and scope. restrict exposure and escalate under the disclosure policy while investigating the cause. corroborated injection evidence — require independent, trustworthy evidence connecting untrusted input to a policy-violating change in behavior. record the link, competing explanations, and remaining uncertainty. escalate under incident policy when that evidence supports attribution. for every observation, record the evidence classification, confidence limitations, alternative explanations, and appropriate response with its owner. record output provenance, intended audience, and authorization. check legitimate reproduction, accidental collision, contaminated logs, and authorized testing. keep fixtures and their results labeled and separate from production incident evidence. if provenance is unreliable, preserve the record, mark attribution indeterminate, and seek corroboration. behavioral baseline a behavioral baseline defines what normal model output looks like for this system so that deviations can be detected as potential policy-escape signals. 156">
   <div class="manual-page-head"><span>Page 156</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -9958,53 +9959,54 @@ THE PROMPT
 
    quarantined content?]
 
-   CANARY STRATEGY
+CANARY STRATEGY
 
-   Canary tokens are specific sequences that the system injects into its
+Canaries are system-generated tokens intended to stay inside an
+authorized boundary. A canary match may trigger quarantine or
+investigation under the chosen policy. A match alone does not establish
+injection.
 
-   own context which the model should never reproduce in output directed
+CANARY DESIGN: Specify the format, placement, rotation interval, and
+detection rules. Choose a format unlikely to occur naturally and easy
+for the monitor to recognize. Use values that users cannot readily
+guess. Cover all external output channels and retire exposed tokens.
+Give a schematic example. Generate actual token values in the deployment
+environment and protect them from shared output and logs.
 
-   toward external recipients. Their appearance in output signals that
+EXACT MATCH — The complete issued token appears verbatim. Verify it
+against the protected issuance record and confirm its channel and
+audience. Treat a verified exact match outside its authorized boundary
+as potential unauthorized disclosure. Hold the affected output or
+investigate under policy.
 
-   injection has caused the model to expose or echo system-internal
+FRAGMENT MATCH — A defined portion of an issued token appears. State the
+minimum fragment and how it is compared. Confidence in token identity
+depends on distinctiveness. Check for truncation and accidental
+collision. Log or quarantine under policy and seek independent evidence.
 
-   content.
+PATTERN-ONLY MATCH — Output resembles the format without matching an
+issued value. This establishes format similarity. Check for ordinary
+formatted output or accidental collision. Log or review under policy.
 
-   CANARY DESIGN: CANARY FORMAT: [Describe the format of canary tokens
+POTENTIAL UNAUTHORIZED DISCLOSURE — A token or credible fragment appears
+to have crossed an authorization boundary. Verify the audience,
+provenance, and scope. Restrict exposure and escalate under the
+disclosure policy while investigating the cause.
 
-   for this system — they must be: (a) unlikely to appear in legitimate
+CORROBORATED INJECTION EVIDENCE — Require independent, trustworthy
+evidence connecting untrusted input to a policy-violating change in
+behavior. Record the link, competing explanations, and remaining
+uncertainty. Escalate under incident policy when that evidence supports
+attribution.
 
-   output naturally (b) distinct from system prompt content users could
-
-   guess (c) parseable programmatically in output monitoring] EXAMPLE
-
-   CANARY STRUCTURE: [A representative abstract example — e.g., a
-
-   randomly-generated delimited token like &quot;|CNRY-[UUID]-END|&quot; — do
-
-   not use real tokens here] PLACEMENT: [Where in the model context
-
-   are canaries placed? Beginning of system prompt? End? Randomly
-
-   positioned?] ROTATION POLICY: [How frequently are canary tokens
-
-   rotated? Static canaries that leak once are permanently compromised]
-
-   CANARY TRIGGER CONDITIONS: Specify exactly what constitutes a trigger
-
-   for each canary: TRIGGER 1 — VERBATIM REPRODUCTION: Canary token
-
-   appears verbatim in model output to any external channel TRIGGER 2
-
-   — PARTIAL REPRODUCTION: Recognizable fragment of the canary token
-
-   structure appears in output TRIGGER 3 — STRUCTURED REPRODUCTION:
-
-   Output follows the formatting pattern of canary tokens even without
-
-   the specific token value (pattern-level detection) For each trigger:
-
-   RESPONSE ACTION (see ESCALATION section)
+For every observation, record the evidence classification, confidence
+limitations, alternative explanations, and appropriate response with its
+owner. Record output provenance, intended audience, and authorization.
+Check legitimate reproduction, accidental collision, contaminated logs,
+and authorized testing. Keep fixtures and their results labeled and
+separate from production incident evidence. If provenance is unreliable,
+preserve the record, mark attribution indeterminate, and seek
+corroboration.
 
    BEHAVIORAL BASELINE
 
@@ -10121,7 +10123,7 @@ TRIGGERS: [Which events result in immediate block?]
 
                                                     157</pre>
 </article>
-<article class="manual-page-card" id="manual-page-158" data-manual-text="gnome prompt field manual level 5 — escalate: block plus security team notification triggers: [canary fires, critical injection signals, or confirmed policy escape — what constitutes escalation?] fallback behavior define a safe default for each block, quarantine, escalation, uncertain classification, and monitoring failure. specify the user-facing response and the event, decision, and review outcome to log. use a clear message that omits sensitive detection details. safe degradation — on stale, missing, or unhealthy monitoring, mark the relevant decision state unavailable. continue only explicitly approved low-risk functions that do not depend on the unavailable control. suspend dependent actions and side effects and route them to quarantine or block. never silently fail open. quarantine — hold the response and any associated action. specify the reviewer, deadline, and release criteria. if review expires or evidence remains insufficient, block and return the safe fallback. block — withhold the response and prevent the action. return the safe fallback and record the decision. escalation — block critical events and notify the designated security owner. specify the notification channel, acknowledgement deadline, and backup owner. recovery — resume dependent operations only after telemetry is healthy and the decision owner verifies the applicable release criteria. firewall test plan specify the test cases required to validate this firewall design. for each test case: test id: [t-01, t-02, ...] test type: positive (legitimate input, should allow) / negative (injection attempt, should block) / boundary (edge case, should quarantine or flag) input: [describe the test input abstractly — do not write actual injection payloads here; describe the category and structural characteristics] expected firewall response: [allow / block / quarantine / flag] pass criterion: [the observable output or log entry that confirms the firewall responded correctly] include at minimum: 2 positive tests (legitimate inputs that should pass) 2 negative tests (injection-category inputs that should block — described by injection type, not payload) 1 canary test (a synthetic output containing a canary trigger — should fire escalation) 1 uncertainty test (ambiguous input — should follow uncertainty handling policy, not block or allow silently) 1 fallback test (verify the safe fallback response is delivered and logged correctly when a block fires). add a monitoring-loss test for safe degradation or blocking, a quarantine timeout test, and an escalation delivery test. 158">
+<article class="manual-page-card" id="manual-page-158" data-manual-text="gnome prompt field manual level 5 — escalate: block plus security team notification triggers: [which observations require escalation under policy? distinguish canary investigation from corroborated injection evidence.] fallback behavior define a safe default for each block, quarantine, escalation, uncertain classification, and monitoring failure. specify the user-facing response and the event, decision, and review outcome to log. use a clear message that omits sensitive detection details. safe degradation — on stale, missing, or unhealthy monitoring, mark the relevant decision state unavailable. continue only explicitly approved low-risk functions that do not depend on the unavailable control. suspend dependent actions and side effects and route them to quarantine or block. never silently fail open. quarantine — hold the response and any associated action. specify the reviewer, deadline, and release criteria. if review expires or evidence remains insufficient, block and return the safe fallback. block — withhold the response and prevent the action. return the safe fallback and record the decision. escalation — block critical events and notify the designated security owner. specify the notification channel, acknowledgement deadline, and backup owner. recovery — resume dependent operations only after telemetry is healthy and the decision owner verifies the applicable release criteria. firewall test plan specify the test cases required to validate this firewall design. for each test case: test id: [t-01, t-02, ...] test type: positive (legitimate input, should allow) / negative (injection attempt, should block) / boundary (edge case, should quarantine or flag) input: [describe the test input abstractly — do not write actual injection payloads here; describe the category and structural characteristics] expected firewall response: [allow / block / quarantine / flag] pass criterion: [the observable output or log entry that confirms the firewall responded correctly] include at minimum: 2 positive tests (legitimate inputs that should pass) 2 negative tests (injection-category inputs that should block — described by injection type, not payload) canary tests (use synthetic output for exact, fragment, and pattern-only matches. verify the evidence class and policy response, including an exact match from an authorized test.) 1 uncertainty test (ambiguous input — should follow uncertainty handling policy, not block or allow silently) 1 fallback test (verify the safe fallback response is delivered and logged correctly when a block fires). add a monitoring-loss test for safe degradation or blocking, a quarantine timeout test, and an escalation delivery test. 158">
   <div class="manual-page-head"><span>Page 158</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -10130,9 +10132,9 @@ TRIGGERS: [Which events result in immediate block?]
 
    LEVEL 5 — ESCALATE: Block plus security team notification TRIGGERS:
 
-   [Canary fires, CRITICAL injection signals, or confirmed policy escape
+   [Which observations require escalation under policy? Distinguish
 
-   — what constitutes escalation?]
+   canary investigation from corroborated injection evidence.]
 
 FALLBACK BEHAVIOR
 
@@ -10185,9 +10187,11 @@ and the decision owner verifies the applicable release criteria.
 
    pass) 2 negative tests (injection-category inputs that should block —
 
-   described by injection type, not payload) 1 canary test (a synthetic
+   described by injection type, not payload) canary tests (use synthetic output for exact, fragment, and pattern-only
 
-   output containing a canary trigger — should fire escalation) 1
+   matches. Verify the evidence class and policy response, including an
+
+   exact match from an authorized test.) 1
 
    uncertainty test (ambiguous input — should follow uncertainty
 

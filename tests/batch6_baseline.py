@@ -14,3 +14,17 @@ def baseline_bytes(path: str) -> bytes:
         return subprocess.check_output(["git", "show", f"{BASELINE_COMMIT}:{path}"], cwd=ROOT)
     except subprocess.CalledProcessError as error:
         raise RuntimeError(f"Batch 6 requires Git history containing {BASELINE_COMMIT}") from error
+
+
+# PR #39's correction tree is immutable. Keep its digest above pinned while
+# current-source bindings move forward.
+PR39_MERGE = "0615d10bcc446796d8f97603f72594c18d9fd26f"
+FINAL_SOURCE_SHA = "25fff84e54dd4db8d4131f65fdebcc5941b1c90738f4ebef82d4612a705b3c44"
+
+
+@cache
+def correction_bytes(path: str) -> bytes:
+    try:
+        return subprocess.check_output(["git", "show", f"{PR39_MERGE}:{path}"], cwd=ROOT)
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError(f"Final Batch 6 verification requires Git history containing {PR39_MERGE}") from error

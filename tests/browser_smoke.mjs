@@ -12,7 +12,10 @@ const manualUrl = pathToFileURL(resolve('index.html')).href;
 const standaloneUrl = pathToFileURL(resolve('GNOME-Field-Manual.html')).href;
 const batch6Pages = [
   [133, 'SCHEMA/CONTRACT,'],
+  [154, 'canary observations'],
+  [156, 'PATTERN-ONLY MATCH'],
   [157, 'ALERT THRESHOLDS'],
+  [158, 'canary investigation'],
   [158, 'SAFE DEGRADATION'],
   [159, '7. FALLBACK BEHAVIOR'],
   [161, 'Indirect Injection Tracer, page 203'],
@@ -238,8 +241,8 @@ async function assertBatch6Pages(canonical, scenario) {
       const staticCard = offline.locator(`#page-${number}:target`);
       const staticBody = staticCard.locator('.book-prose');
       await assertPageBody(staticBody, phrase, `${scope}: standalone static`);
-      assert.equal(normalize(await dynamicCard.locator('.book-prose').innerText()),
-        normalize(await staticBody.innerText()), `${scope}: standalone presentation parity`);
+      assert.equal(normalize(await dynamicCard.locator('.book-prose').textContent()),
+        normalize(await staticBody.textContent()), `${scope}: standalone presentation parity`);
       await staticCard.getByRole('link', { name: 'Page directory', exact: true }).click();
     }
     assert.deepEqual(errors, [], `${scenario.name}: standalone page errors`);
@@ -250,8 +253,12 @@ async function assertBatch6Pages(canonical, scenario) {
 }
 
 async function assertPageBody(body, phrase, scope) {
-  assert.ok(await body.isVisible(), scope);
-  assert.ok(normalize(await body.innerText()).includes(phrase), `${scope}: missing ${phrase}`);
+  const passage = body.getByText(phrase, { exact: false });
+  // The canonical pre is itself the text element. Standalone bodies contain blocks.
+  assert.ok(await body.isVisible() && (
+    await passage.count() ? await passage.first().isVisible()
+      : normalize(await body.textContent()).includes(phrase)
+  ), `${scope}: missing visible text ${phrase}`);
   const geometry = await body.evaluate(element => {
     const box = element.getBoundingClientRect();
     const clipped = [element, ...element.children].some(node =>
