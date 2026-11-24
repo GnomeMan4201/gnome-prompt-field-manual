@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448",
+  "sourceIndexSha256": "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d",
   "counts": {
-    "pending": 11,
-    "drafted": 80,
+    "pending": 10,
+    "drafted": 81,
     "total": 91,
     "pages": 315
   },
@@ -1365,11 +1365,11 @@
     },
     {
       "id": "S-10",
-      "titleCandidate": "Migration Risk Classifier",
+      "titleCandidate": "Architecture Decision Record Generator",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         140
       ],

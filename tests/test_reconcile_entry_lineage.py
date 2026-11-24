@@ -148,14 +148,14 @@ class LineageTests(unittest.TestCase):
         result = reconcile(REPOSITORY_ROOT / "index.html")
         failures = validate_expectations(
             result,
-            expected_pending=11,
-            expected_drafted=80,
+            expected_pending=10,
+            expected_drafted=81,
             expected_total=91,
             expected_pages=315,
         )
         self.assertEqual(failures, [])
         self.assertEqual(result.summary.pending_missing_from_embedded, 0)
-        self.assertEqual(result.summary.pending_present_in_embedded, 11)
+        self.assertEqual(result.summary.pending_present_in_embedded, 10)
         self.assertEqual(result.conflicts["pending_missing_with_numbering_rationale"], [])
 
 

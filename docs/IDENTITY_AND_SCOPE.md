@@ -17,11 +17,11 @@ It is not yet a final stable manual release.
 
 The deterministic entry-lineage baseline confirms:
 
-- 11 pending inventory IDs;
-- 11 matching drafting briefs;
-- 80 embedded non-pending entry IDs;
+- 10 pending inventory IDs;
+- 10 matching drafting briefs;
+- 81 embedded non-pending entry IDs;
 - 91 reconciled semantic manual entries;
-- 6 remaining production batches;
+- 5 remaining production batches;
 - 5 special-caution entries;
 - 315 embedded reader page cards.
 
@@ -75,9 +75,9 @@ The frozen PTSP brief b-s10 plans **S-10 Migration Risk Classifier**. The canoni
 
 Page 133 now includes mandatory **ROLLBACK TRIGGER CONDITIONS**: observable signal, threshold or operational-confirmation marker, evaluation window, evidence source, decision owner, immediate halt or rollback action, and escalation. Defining criteria is **not** live monitoring or automatic rollback. Canonical MODERATE corresponds to the frozen brief's MEDIUM label; the original four-level scale is retained.
 
-This is a **candidate correction**, not a Batch 5 PASS or promotion. The inventory remains **11 pending / 80 drafted** until a separate reviewed disposition is recorded. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
+This was a **candidate correction**, not itself a Batch 5 PASS or new-body promotion. The subsequent source-bound SUBSUMED disposition closes the planned brief without creating an additional canonical entry. Current state: **10 pending / 81 non-pending IDs**. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
 
-## Batch 5 four-category contract: repaired, identity disposition still open
+## Batch 5 four-category contract and SUBSUMED disposition
 
 The standard S-07 Migration Risk Classifier prompt now explicitly requires the
 four independently rated categories defined by the frozen S-10 brief. The eight
@@ -85,17 +85,18 @@ underlying dimensions and the explicit rollback-trigger criteria remain.
 The exact **planned S-10 / canonical S-07 / canonical S-10 ADR** crosswalk is
 recorded in [Batch 5 contract review](BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md)
 and [machine-readable identity crosswalk](../workbench/data/batch5_identity_crosswalk.json).
-No pending entry has been promoted by this correction. A separately approved
-editorial identity decision remains required. The previous correction document
+This correction did not itself change the pending inventory. The subsequent
+SUBSUMED disposition resolves the plan as already covered by canonical S-07,
+without reassigning canonical S-10. See the Batch 5 disposition record. The previous correction document
 records its own historical source hash and has not been overwritten.
 
 ## Remaining release blockers
 
-Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 11 pending entries remain after the 2026-11-23 Batch 4 disposition.
+Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 10 pending entries remain after the 2026-11-23 Batch 5 disposition.
 
 Remaining blockers:
 
-- editorial disposition of the 11 remaining pending entries;
+- editorial disposition of the 10 remaining pending entries;
 - regression browser/accessibility validation after the final content mutation;
 - stable-release versioning, independent or documented-equivalent editorial review, and publication evidence.
 

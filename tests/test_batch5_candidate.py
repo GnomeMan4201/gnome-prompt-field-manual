@@ -17,7 +17,7 @@ from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "index.html"
-EXPECTED_SOURCE_SHA = "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448"
+EXPECTED_SOURCE_SHA = "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d"
 EXPECTED_STANDALONE_SHA = "558fec69b1dc5f2ceb3821d7918a1601d017e93b289c97c4f8e6afcb35895fb3"
 UNCHANGED_313_SHA = "31f9f2d953c9bc5c8392f4010cc80eb26524cff54e92ff2fc633f2f67cf918e0"
 PAGE140_SHA = "66a08d8d367d91ae61221fa48865e5f217247e2af8aab7003a43be6bd4b32276"
@@ -114,12 +114,13 @@ class Batch5CorrectionCandidateTests(unittest.TestCase):
         self.assertIn("S-07 Migration Risk Classifier", self.pages[129])
         reconciled = reconcile(SOURCE)
         self.assertEqual(validate_expectations(
-            reconciled, expected_pending=11, expected_drafted=80,
+            reconciled, expected_pending=10, expected_drafted=81,
             expected_total=91, expected_pages=315
         ), [])
-        self.assertIn("S-10", {item.entry_id for item in reconciled.pending_entries})
-        self.assertIn("S-10", {item.entry_id for item in reconciled.briefs})
-        self.assertIn('id="b-s10"', self.source)
+        self.assertNotIn("S-10", {item.entry_id for item in reconciled.pending_entries})
+        self.assertNotIn("S-10", {item.entry_id for item in reconciled.briefs})
+        self.assertNotIn('id="b-s10"', self.source)
+        self.assertIn('id="b-s10"', (ROOT / "tests/fixtures/batch5-frozen-planned-s10.html").read_text())
 
 
 if __name__ == "__main__":

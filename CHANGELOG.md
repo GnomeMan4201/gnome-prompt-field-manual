@@ -31,6 +31,8 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Changed
 
+- Resolved the planned Batch 5 S-10 Migration Risk Classifier as **SUBSUMED** by the existing canonical S-07 after checking all frozen required artifacts. The different canonical S-10 ADR remains unchanged; no new body or identifier was minted. Current 10 pending / 81 non-pending IDs / 91 total / 315 pages / 5 batches. Frozen S-10 brief preserved separately.
+
 - Promoted R-01 and R-03 from pending to drafted after bounded disposition; current state is 14 pending / 77 drafted / 91 semantic entries / 315 pages / 7 remaining batches.
 - Removed R-01/R-03 from active pending inventory and drafting briefs, removed Batch 3 from the remaining-batch table without renumbering later batches, and retargeted startup defaults to S-01/S-02.
 - Added a fail-closed Batch 3 disposition regression gate and SHA-bound audit record.
