@@ -5,6 +5,7 @@ import re
 import subprocess
 import unittest
 
+from test_reader_decision_contracts import previous
 from batch10_baseline import (
     BATCH10_DISPOSITION_SOURCE_SHA, BATCH10_SOURCE_SHA, PR47_MERGE, PR48_MERGE, ROOT,
     batch10_base_bytes, batch10_correction_bytes,
@@ -33,11 +34,11 @@ SUBJECTS = {
 class Batch10DispositionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = SOURCE.read_bytes()
+        cls.raw = previous("index.html")
         cls.original = batch10_base_bytes("index.html")
         cls.approved = batch10_correction_bytes("index.html")
         cls.pages = cards(cls.raw)
-        cls.identity = json.loads((ROOT / INDEX_PATH).read_bytes())
+        cls.identity = json.loads(previous(INDEX_PATH))
 
     def test_only_sec05_remains_in_the_inventory_and_schedule(self):
         result = reconcile(SOURCE)
@@ -105,18 +106,18 @@ class Batch10DispositionTests(unittest.TestCase):
         record = (ROOT / DISPOSITION).read_text()
         self.assertEqual(digest(self.raw), BATCH10_DISPOSITION_SOURCE_SHA)
         self.assertEqual(self.identity["sourceIndexSha256"], BATCH10_DISPOSITION_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH10_DISPOSITION_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH10_DISPOSITION_SOURCE_SHA}';", previous(ADAPTER_PATH).decode())
         self.assertEqual(list(self.pages), list(range(1, 316)))
         self.assertEqual(self.pages, cards(self.approved))
         self.assertEqual(digest(b"\0".join(self.pages.values())), CANONICAL_PAGES_SHA)
-        reader = (ROOT / READER).read_bytes()
+        reader = previous(READER)
         self.assertEqual(reader, batch10_correction_bytes(READER))
         pdf_pattern = rb'data="data:application/pdf;base64,([^"]+)"'
         pdf = base64.b64decode(re.search(pdf_pattern, self.raw)[1], validate=True)
         approved_pdf = base64.b64decode(re.search(pdf_pattern, self.approved)[1], validate=True)
         self.assertEqual(pdf, approved_pdf)
         self.assertEqual(digest(pdf), EXPECTED_PDF_SHA256)
-        for binding in (BATCH10_DISPOSITION_SOURCE_SHA, digest((ROOT / INDEX_PATH).read_bytes()),
+        for binding in (BATCH10_DISPOSITION_SOURCE_SHA, digest(previous(INDEX_PATH)),
                         CANONICAL_PAGES_SHA, digest(reader), EXPECTED_PDF_SHA256):
             self.assertIn(binding, record)
 

@@ -1,6 +1,6 @@
 # Phase 12B — Current-source review workbench
 
-**Status:** implemented review interface; independent adjudication not performed. The live identity inventory remains 0/91 independently verified bodies, 90 non-pending semantic identifiers and SEC-05 pending. No manuscript or historical review record is changed.
+**Status:** implemented review interface; independent adjudication not performed. The live identity inventory remains 0/91 independently verified bodies, 90 non-pending semantic identifiers and SEC-05 pending. PR #53 corrects the manuscript and rebuilds its review packet.
 
 ## Entry point
 
@@ -32,23 +32,24 @@ The validator regenerates the candidate basis using the existing current-source 
 
 ## Source bindings and preservation
 
-Baseline main: `03285ac8c57bfa8c40bddd2b2c53c0692927f8d3`, tree `b655aca7f0e0fc6ccc192016165ed7a73cba47c5` (merged PR #51).
+Pre-correction baseline main: `03285ac8c57bfa8c40bddd2b2c53c0692927f8d3`, tree `b655aca7f0e0fc6ccc192016165ed7a73cba47c5` (merged PR #51).
+
+Reader and packet for the SEC-08 and SEC-05 status correction. These hashes identify the exact inputs used by the current workbench.
 
 | Artifact | SHA-256 |
 | --- | --- |
-| Canonical HTML | `fd76d2727545b202968664cbba4137537859536c979b3597ab943abd283858cf` |
-| Standalone reader | `cfa5a6bff04cc1d4ada3c1ce410ee6bc8893db2bc903599927de15115ca95393` |
+| Canonical HTML | `fef4f9812014d1970d67151db49ee0aff82b03ea19dafc5a70a579b90a624625` |
+| Standalone reader | `1b33983d0d5346f0f140cc4558641374c8305e91d60315b52f825ce183b9b9b8` |
 | Historical PDF | `97482787a2471cbea5a837a0023a0aa5d0317eb149d8dd6c47e6924222b7f1e9` |
-| Current candidate packet | `da2c6a03d12f1af1e9ed8363aea7a66666c8cdda7353683b18d934e323135336` |
-| Live identity index | `cfda18b9934fb9e27fc4f4d6b37aa4fa4a2370690390255a5acc9ce1ccd0a61a` |
+| Current candidate packet | `db6e1a5e0380be3b791e89d68aab60d5fc50ec735d60c4ec142b0900b0c1133b` |
+| Live identity index | `55a6f03bdab55a57248fcce54df424ee3d4ff7656328af694fc101d9e8c4efd4` |
 
-The only existing file edited is README for discoverability. New workbench files are a separate route under the existing adjudication directory, sharing the historic stylesheet without modifying it. The historical app, manifests, archives, frozen briefs, crosswalks and reader files are unchanged. Future authorized source transitions require a newly reproduced candidate packet and updated pinned hash/decision inventory; old local sessions must not be rebound automatically.
+The workbench binds each session to its source packet. After a manuscript correction, reproduce the packet and update the pins before collecting decisions. Retain exports against the original source. A stale tab must reload before saving over a newer session.
 
 ## Validation and limitations
 
-- 331/331 Python tests across 48 isolated modules, zero skips or failures; six added session validation tests. Includes existing 131 Reactor regressions and historical preservation tests.
-- Direct Node state test passed using the exact canonical source, all candidate/gap hashes, 669 keys, Unicode offsets, accepted versus rejected exclusions, defer, metadata and source mutations, and cross-runtime Python validation of a synthetic session. JavaScript syntax checks passed.
-- Current body packet reproduced; strict manual validation zero errors/warnings; editorial lineage 34/34; entry reconciliation unchanged (1 pending / 90 non-pending / 91 / 315, one batch). No independent reviewer decisions were collected.
-- Local Playwright browser installation attempts were interrupted in the resource-limited sandbox. The full browser workflow was **not** executed locally. A dedicated Chromium/Firefox/WebKit CI matrix exercises boot, filters, source selection, record save/reload, accepted/rejected/deferred decisions, source-bound export and Python validation, stale imports, tampered source/packet rejection and mobile/desktop/reflow widths. CI and independent review are separate gates; no browser conformance or accessibility certification is claimed.
+At `7d6c5a8`, 336 Python tests passed. All seven GitHub Actions workflows passed, including reader and review-workbench tests in Chromium, Firefox and WebKit. The two-tab test verifies that a stale save preserves the draft and the first tab’s recorded decision. See the [revision checks](https://github.com/GnomeMan4201/gnome-prompt-field-manual/commit/7d6c5a8e13f480ddd9fa86109ecd18910f2c40df/checks).
 
-This workbench enables review, not verified-body export. Keep the release candidate status and the open SEC-05 requirement intact.
+The SEC-08 and SEC-05 status revision passed 338 local Python tests. The [paired walkthrough](AP06_SEC08_PAIRED_WALKTHROUGH.md) exercises the two reading instructions with the same supplied evidence.
+
+The source packet reproduces with 91 candidate bodies and zero independently verified bodies. Screen-reader acceptance, independent adjudication and SEC-05 remain open.
