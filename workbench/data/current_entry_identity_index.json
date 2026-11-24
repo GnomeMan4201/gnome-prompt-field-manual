@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "108d443e3f39e745bddbcbb030de1876f36f328180308a32eae2cb107d133f80",
+  "sourceIndexSha256": "8e3ec363f32f200ac8b01f479986043a9854a8b4868efec8497b62a4288403d6",
   "counts": {
     "pending": 6,
     "drafted": 85,
@@ -132,7 +132,7 @@
     },
     {
       "id": "AP-06",
-      "titleCandidate": "(Generated Junk Classifier) on any anno-",
+      "titleCandidate": "(Generated Junk Classifier) when",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
       "status": "NON_PENDING",
       "pendingInventory": false,
@@ -740,6 +740,7 @@
       "occurrencePages": [
         210,
         219,
+        227,
         232,
         237,
         258,
@@ -765,8 +766,6 @@
       "draftingBrief": false,
       "occurrencePages": [
         222,
-        226,
-        227,
         258,
         273,
         307
@@ -789,8 +788,7 @@
       "pendingInventory": true,
       "draftingBrief": true,
       "occurrencePages": [
-        228,
-        231
+        228
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
@@ -1373,7 +1371,8 @@
       "pendingInventory": false,
       "draftingBrief": false,
       "occurrencePages": [
-        140
+        140,
+        232
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",

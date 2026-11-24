@@ -2,13 +2,15 @@
 import base64
 from collections import Counter
 import json
+from pathlib import Path
 import re
 import subprocess
+from tempfile import TemporaryDirectory
 import unittest
 
 from batch8_baseline import (
     BATCH8_DISPOSITION_SOURCE_SHA, BATCH8_SOURCE_SHA, PR44_MERGE, ROOT,
-    batch8_base_bytes, corrected_batch8_bytes,
+    batch8_base_bytes, batch8_disposition_bytes, corrected_batch8_bytes,
 )
 from test_batch6_correction import (
     ADAPTER_PATH, EXPECTED_PDF_SHA256, HISTORICAL_ROOTS, INDEX_PATH, cards, digest,
@@ -16,7 +18,6 @@ from test_batch6_correction import (
 from test_batch6_partial_disposition import extract_brief
 from tools.reconcile_entry_lineage import TreeParser, field_text, reconcile, validate_expectations
 
-SOURCE = ROOT / "index.html"
 ADJUDICATION = "docs/BATCH8_P01_P02_ADJUDICATION_2026-11-24.md"
 DISPOSITION = "docs/BATCH8_P01_P02_DISPOSITION_2026-11-24.md"
 SEC05_RECORD = "docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md"
@@ -27,13 +28,16 @@ OBSOLETE_ORDER = re.compile(r"batch 8 (?:covers|pairs|is the next)", re.I)
 class Batch8DispositionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = SOURCE.read_bytes()
+        cls.raw = batch8_disposition_bytes("index.html")
         cls.base = corrected_batch8_bytes("index.html")
         parser = TreeParser()
         parser.feed(cls.raw.decode())
         parser.close()
         cls.workspace = parser.root
-        cls.lineage = reconcile(SOURCE)
+        with TemporaryDirectory() as directory:
+            source = Path(directory) / "index.html"
+            source.write_bytes(cls.raw)
+            cls.lineage = reconcile(source)
 
     def test_pending_inventory_and_schedule(self):
         self.assertEqual(validate_expectations(
@@ -57,10 +61,10 @@ class Batch8DispositionTests(unittest.TestCase):
         self.assertIn(f'href="{SEC05_RECORD}"'.encode(), self.raw)
 
     def test_only_p01_p02_editorial_flags_change(self):
-        current = json.loads((ROOT / INDEX_PATH).read_bytes())
+        current = json.loads(batch8_disposition_bytes(INDEX_PATH))
         expected = json.loads(corrected_batch8_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), BATCH8_DISPOSITION_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH8_DISPOSITION_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH8_DISPOSITION_SOURCE_SHA}';", batch8_disposition_bytes(ADAPTER_PATH).decode())
         expected["sourceIndexSha256"] = BATCH8_DISPOSITION_SOURCE_SHA
         expected["counts"].update(pending=6, drafted=85)
         for row in expected["entries"]:
@@ -83,7 +87,7 @@ class Batch8DispositionTests(unittest.TestCase):
         self.assertIn(b'href="#manual-page-209"', self.raw)
         self.assertIn(b'href="#manual-page-213"', self.raw)
         self.assertIn(f'href="{DISPOSITION}"'.encode(), self.raw)
-        readme = (ROOT / "README.md").read_text()
+        readme = batch8_disposition_bytes("README.md").decode()
         self.assertNotRegex(readme, OBSOLETE_ORDER)
         self.assertIn("Batch 9 is the next manuscript review", readme)
 
@@ -100,7 +104,7 @@ class Batch8DispositionTests(unittest.TestCase):
         self.assertEqual(matrix, corrected_batch8_bytes(ADJUDICATION))
         for binding in (
             PR44_MERGE, digest(original), BATCH8_SOURCE_SHA, BATCH8_DISPOSITION_SOURCE_SHA,
-            digest(matrix), digest((ROOT / INDEX_PATH).read_bytes()),
+            digest(matrix), digest(batch8_disposition_bytes(INDEX_PATH)),
         ):
             self.assertIn(binding, record)
 
@@ -108,7 +112,7 @@ class Batch8DispositionTests(unittest.TestCase):
         current = cards(self.raw)
         self.assertEqual(list(current), list(range(1, 316)))
         self.assertEqual(current, cards(self.base))
-        self.assertEqual((ROOT / "GNOME-Field-Manual.html").read_bytes(),
+        self.assertEqual(batch8_disposition_bytes("GNOME-Field-Manual.html"),
                          corrected_batch8_bytes("GNOME-Field-Manual.html"))
         pdf = re.search(rb'data="data:application/pdf;base64,([^"]+)"', self.raw)[1]
         self.assertEqual(digest(base64.b64decode(pdf, validate=True)), EXPECTED_PDF_SHA256)
