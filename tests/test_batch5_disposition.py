@@ -8,7 +8,8 @@ import unittest
 from pathlib import Path
 
 from batch6_baseline import baseline_bytes
-from batch8_baseline import BATCH8_DISPOSITION_SOURCE_SHA
+from batch8_baseline import batch8_disposition_bytes
+from batch9_baseline import BATCH9_SOURCE_SHA
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,7 +60,10 @@ class Batch5DispositionTests(unittest.TestCase):
         self.assertEqual(s10["titleCandidate"], "Architecture Decision Record Generator")
         self.assertEqual(s10["status"], "NON_PENDING")
         self.assertFalse(s10["draftingBrief"])
-        self.assertEqual(s10["occurrencePages"], [140])
+        historical = json.loads(batch8_disposition_bytes("workbench/data/current_entry_identity_index.json"))
+        historical_s10 = next(row for row in historical["entries"] if row["id"] == "S-10")
+        self.assertEqual(historical_s10["occurrencePages"], [140])
+        self.assertEqual(s10["occurrencePages"], [140, 232])
         self.assertIsNone(s10["canonicalBody"])
 
     def test_counts_and_next_active_brief(self):
@@ -72,7 +76,7 @@ class Batch5DispositionTests(unittest.TestCase):
         self.assertEqual(r.summary.source_counts.batches, 3)
         self.assertEqual(r.summary.source_counts.caution, 5)
         self.assertEqual(self.identity["counts"], {"pending": 6, "drafted": 85, "total": 91, "pages": 315})
-        self.assertEqual(self.identity["sourceIndexSha256"], BATCH8_DISPOSITION_SOURCE_SHA)
+        self.assertEqual(self.identity["sourceIndexSha256"], BATCH9_SOURCE_SHA)
         self.assertEqual(self.identity["bodyCoverage"], 0)
         self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", self.source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)

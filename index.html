@@ -13510,7 +13510,7 @@ ities.
 
                                                       221</pre>
 </article>
-<article class="manual-page-card" id="manual-page-222" data-manual-text="gnome prompt field manual p-05 work sample annotator criteria: 6, 9, 10 — reusable artifact + ship cleaner + reusable output what it does converts raw work output — commits, screenshots, logs, pro- totypes, deployed artifacts, design documents, or any concrete evidence of work — into an annotated work sample that explains what the work is, what problem it addressed, what the author ac- tually contributed, and what constraints and trade-offs shaped the outcome. distinct from a portfolio template because the an- notation enforces honesty: the author’s contribution is separated from the team’s, failures and revisions are required, and the claim boundary section prevents the sample from asserting more than the evidence supports. when to use when turning a specific project artifact into a work sample for a portfolio, job application, case study, or public showcase. when a raw commit history, design document, or deployed artifact needs contextual framing before it can be shown to an external audi- ence. when a previous sample was criticized for being vague, over-claiming, or failing to explain the author’s specific role. when an artifact exists but the story behind it — the problem, the con- straints, the decisions — has not been written down. not appro- priate for compiling a retrospective across many projects — run once per artifact. not a substitute for the actual artifact: the annotation references evidence but cannot replace it. the prompt 222">
+<article class="manual-page-card" id="manual-page-222" data-manual-text="gnome prompt field manual p-05 work sample annotator criteria: 6, 9, 10 — reusable artifact + ship cleaner + reusable output what it does pairs an unchanged work sample with anchored annotations that explain decisions, constraints, rejected alternatives, and what could be reused. each technical, contribution, and outcome claim has a source a reviewer can inspect. separate original work, collaboration, and third-party components before assigning credit. when to use use one stable artifact at a time, with the revision, supporting records, and the intended audience&#x27;s access and disclosure permissions. an artifact can be code, a design, writing, a process, or a shipped product. if the work or its evidence is unavailable, prepare an evidence-gap list and hold the work sample. the prompt 222">
   <div class="manual-page-head"><span>Page 222</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -13527,349 +13527,195 @@ ities.
 
 WHAT IT DOES
 
-
-Converts raw work output — commits, screenshots, logs, pro-
-totypes, deployed artifacts, design documents, or any concrete
-evidence of work — into an annotated work sample that explains
-what the work is, what problem it addressed, what the author ac-
-tually contributed, and what constraints and trade-offs shaped
-the outcome. Distinct from a portfolio template because the an-
-notation enforces honesty: the author’s contribution is separated
-from the team’s, failures and revisions are required, and the
-CLAIM BOUNDARY section prevents the sample from asserting
-more than the evidence supports.
-
+Pairs an unchanged work sample with anchored annotations that explain
+decisions, constraints, rejected alternatives, and what could be reused.
+Each technical, contribution, and outcome claim has a source a reviewer
+can inspect. Separate original work, collaboration, and third-party
+components before assigning credit.
 
 WHEN TO USE
 
-
-When turning a specific project artifact into a work sample for a
-portfolio, job application, case study, or public showcase. When
-a raw commit history, design document, or deployed artifact needs
-contextual framing before it can be shown to an external audi-
-ence. When a previous sample was criticized for being vague,
-over-claiming, or failing to explain the author’s specific role. When
-an artifact exists but the story behind it — the problem, the con-
-straints, the decisions — has not been written down. Not appro-
-priate for compiling a retrospective across many projects — run
-once per artifact. Not a substitute for the actual artifact: the
-annotation references evidence but cannot replace it.
-
+Use one stable artifact at a time, with the revision, supporting
+records, and the intended audience&#x27;s access and disclosure permissions.
+An artifact can be code, a design, writing, a process, or a shipped
+product. If the work or its evidence is unavailable, prepare an
+evidence-gap list and hold the work sample.
 
 THE PROMPT
 
 
-
-
-
 222</pre>
 </article>
-<article class="manual-page-card" id="manual-page-223" data-manual-text="produce an annotated work sample for the following artifact. artifact: [name or describe the artifact — what it is and what it does] evidence available: [list what you have — commits, screenshots, logs, deployed url, documentation, design docs, test results] author’s role: [describe what you specifically built, wrote, or decided — not what the team did] produce each section in order. 1. work sample title a title that names the artifact and what it does — not a job title or a project name. “real-time anomaly detector for iot sensor streams” not “my work at company x.” 2. artifact type what kind of artifact is this? code — a library, script, service, or tool design — a system design, architecture diagram, or technical specification writing — documentation, research, analysis, or published content process — a workflow, methodology, or operational change product — a shipped feature, deployed system, or released artifact other: [describe] 3. source / evidence list the specific evidence that this work sample exists and that the author contributed to it. for each: evidence item: [specific artifact — commit hash, pr url, deployed url, document title, screenshot description] what it shows: [what this evidence confirms — not what it suggests] accessible: yes / no / restricted — whether a reviewer can independently verify it 4. problem / context what problem did this work address? state it specifically — what was broken, missing, or needed. include the scale and stakes: who was affected and what happened if the problem went unsolved. do not start with background on the organization — start with the problem. 5. author role / contribution what specifically did the author do? this section must distinguish: what the author did individually: [lines written, decisions made, systems designed, tests written — things that would not exist without this person] what the team did: [what others contributed — do not claim team work as individual work] what was outside scope: [what the author was not responsible for] if the contribution cannot be separated from the team’s, state that explicitly — do not present collaborative work as individual work. 6. constraints what constraints shaped the work? — technical 223">
-  <div class="manual-page-head"><span>Page 223</span><em>Produce an annotated work sample for the following artifact.</em></div>
-  <pre>Produce an annotated work sample for the following artifact.
+<article class="manual-page-card" id="manual-page-223" data-manual-text="produce an annotated work sample from the supplied original artifact. keep the work unchanged and put annotations alongside it, anchored to its exact version and location. inputs — [verbatim work or unchanged attachment] [artifact version or snapshot] [problem and context] [contribution records] [decision and revision records] [outcome evidence] [intended audience and disclosure permission]. 1. work sample title — name the artifact and its concrete purpose. 2. artifact type — state what kind of work is supplied and identify its immutable version or snapshot. 3. source / evidence — give a supplied locator, such as a versioned file and line range, section, commit, approval record, or measurement. state what it supports and whether the intended reviewer has access. do not invent a locator or imply an inaccessible source has been inspected. 4. problem / context — describe the concrete problem, affected users, and scale supported by the source. mark missing facts. 5. author role / contribution — separate original individual work, collaborative work, and third-party work or dependencies. for each claim cite the portion of the artifact and the source for attribution. name work outside the author&#x27;s responsibility. if contributions are inseparable or ambiguous, mark attribution unverified and limit the claim. 223">
+  <div class="manual-page-head"><span>Page 223</span><em>Produce an annotated work sample from the supplied original artifact.</em></div>
+  <pre>Produce an annotated work sample from the supplied original artifact.
+Keep the work unchanged and put annotations alongside it, anchored to
+its exact version and location.
 
-Artifact: [NAME OR DESCRIBE THE ARTIFACT — what it is and what it
+INPUTS — [Verbatim work or unchanged attachment] [Artifact version or
+snapshot] [Problem and context] [Contribution records] [Decision and
+revision records] [Outcome evidence] [Intended audience and disclosure
+permission].
 
-does] Evidence available: [LIST WHAT YOU HAVE — commits, screenshots,
+1. WORK SAMPLE TITLE — Name the artifact and its concrete purpose.
 
-logs, deployed URL, documentation, design docs, test results]
+2. ARTIFACT TYPE — State what kind of work is supplied and identify its
+immutable version or snapshot.
 
-Author’s role: [DESCRIBE WHAT YOU SPECIFICALLY BUILT, WROTE, OR
+3. SOURCE / EVIDENCE — Give a supplied locator, such as a versioned file
+and line range, section, commit, approval record, or measurement. State
+what it supports and whether the intended reviewer has access. Do not
+invent a locator or imply an inaccessible source has been inspected.
 
-DECIDED — not what the team did]
+4. PROBLEM / CONTEXT — Describe the concrete problem, affected users,
+and scale supported by the source. Mark missing facts.
 
-Produce each section in order.
-
-1. WORK SAMPLE TITLE A title that names the artifact and what it does
-
-— not a job title or a project name. “Real-time anomaly detector for
-
-IoT sensor streams” not “My work at Company X.”
-
-2. ARTIFACT TYPE What kind of artifact is this? CODE — a library,
-
-script, service, or tool DESIGN — a system design, architecture
-
-diagram, or technical specification WRITING — documentation,
-
-research, analysis, or published content PROCESS — a workflow,
-
-methodology, or operational change PRODUCT — a shipped feature,
-
-deployed system, or released artifact OTHER: [Describe]
-
-3. SOURCE / EVIDENCE List the specific evidence that this work
-
-sample exists and that the author contributed to it. For each:
-
-EVIDENCE ITEM: [Specific artifact — commit hash, PR URL, deployed
-
-URL, document title, screenshot description] WHAT IT SHOWS: [What
-
-this evidence confirms — not what it suggests] ACCESSIBLE: yes / no /
-
-restricted — whether a reviewer can independently verify it
-
-4. PROBLEM / CONTEXT What problem did this work address? State it
-
-specifically — what was broken, missing, or needed. Include the scale
-
-and stakes: who was affected and what happened if the problem went
-
-unsolved. Do not start with background on the organization — start
-
-with the problem.
-
-5. AUTHOR ROLE / CONTRIBUTION What specifically did the author do?
-
-This section must distinguish: WHAT THE AUTHOR DID INDIVIDUALLY:
-
-[Lines written, decisions made, systems designed, tests written —
-
-things that would not exist without this person] WHAT THE TEAM DID:
-
-[What others contributed — do not claim team work as individual work]
-
-WHAT WAS OUTSIDE SCOPE: [What the author was not responsible for]
-
-If the contribution cannot be separated from the team’s, state that
-
-explicitly — do not present collaborative work as individual work.
-
-6. CONSTRAINTS What constraints shaped the work? — Technical
+5. AUTHOR ROLE / CONTRIBUTION — Separate ORIGINAL INDIVIDUAL WORK,
+COLLABORATIVE WORK, and THIRD-PARTY WORK OR DEPENDENCIES. For each claim
+cite the portion of the artifact and the source for attribution. Name
+work outside the author&#x27;s responsibility. If contributions are
+inseparable or ambiguous, mark ATTRIBUTION UNVERIFIED and limit the
+claim.
 
 
-
-                                                    223</pre>
+223</pre>
 </article>
-<article class="manual-page-card" id="manual-page-224" data-manual-text="gnome prompt field manual constraints: language, platform, infrastructure, legacy systems — time constraints: deadline pressure, sprint boundaries — resource constraints: budget, team size, access — knowledge constraints: areas of uncertainty or unfamiliar territory — organizational constraints: policies, approvals, process requirements 7. decisions made list the significant decisions the author made during this work. for each: decision: [what was decided] option rejected: [what was not chosen and why] reasoning: [why this decision was made given the constraints] outcome: [what actually happened as a result] 8. trade-offs what was given up to achieve the result? name them — performance for reliability, speed for correctness, scope for delivery date. if no trade-offs were made, re-examine the work. 9. failure / revision history required. what did not work the first time? what was abandoned, rebuilt, or changed significantly after the first attempt? if the work went smoothly from start to finish without revision, state that — but the model should flag this as unusual for complex work. 10. skills or judgment demonstrated what does this artifact demonstrate the author can do? be specific — not “strong problem-solving skills” but “designed a stateless retry protocol under network partition conditions.” each skill statement must be supported by a specific entry in decisions made or failure / revision history. 11. claim boundary required. what does this work sample not prove? list the claims that should not be made from this sample: — what remains unproven about the author’s capabilities — what scale, context, or conditions this work does not generalize to — what contributions the author cannot take credit for — what limitations the artifact has that a reviewer should know 12. public presentation notes what adjustments are needed before this sample is shared publicly? — what sensitive content must be removed: credentials, internal system names, client data, unreleased product details, private communications — what context a reader needs that is not in the artifact itself — what format is appropriate for the target audience — whether the artifact itself can be shared or only 224">
+<article class="manual-page-card" id="manual-page-224" data-manual-text="gnome prompt field manual for each annotation, name the exact work point first. use a section, line range, frame, or other stable locator in the supplied version. keep each note adjacent to its anchor or link it from a separate annotation list. 6. constraint annotations — name the constraint and how it shaped the artifact at this point. state the source or mark the explanation unverified. 7. decision annotations — state what was decided here, why, and what record supports that reasoning. keep the observed outcome separate from the decision rationale. 8. alternative paths not taken — identify a considered alternative, the recorded reason it was rejected, and the trade-off. mark the alternative or reason as unrecorded if it is missing. 9. failure / revision history — identify an observed weakness, discarded approach, or revision with a locator and the effect on the artifact. report missing records rather than creating a failure or claiming that there were none. 10. skills or judgment demonstrated — limit skill claims to attributable work and observable decisions. for impact, record the measured result, comparison basis, and scope when supplied. mark unverified impact explicitly and omit unsupported change, expertise, or causation claims from the public annotation. 11. claim boundary — state known limitations, unresolved weaknesses, unsupported impact, and contributions that cannot be credited to the author. identify what further evidence would resolve an important uncertainty. 224">
   <div class="manual-page-head"><span>Page 224</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
+For each annotation, name the exact work point first. Use a section,
+line range, frame, or other stable locator in the supplied version. Keep
+each note adjacent to its anchor or link it from a separate annotation
+list.
 
+6. CONSTRAINT ANNOTATIONS — Name the constraint and how it shaped the
+artifact at this point. State the source or mark the explanation
+unverified.
 
+7. DECISION ANNOTATIONS — State what was decided here, why, and what
+record supports that reasoning. Keep the observed outcome separate from
+the decision rationale.
 
-   constraints: language, platform, infrastructure, legacy systems —
+8. ALTERNATIVE PATHS NOT TAKEN — Identify a considered alternative, the
+recorded reason it was rejected, and the trade-off. Mark the alternative
+or reason as unrecorded if it is missing.
 
-   Time constraints: deadline pressure, sprint boundaries — Resource
+9. FAILURE / REVISION HISTORY — Identify an observed weakness, discarded
+approach, or revision with a locator and the effect on the artifact.
+Report missing records rather than creating a failure or claiming that
+there were none.
 
-   constraints: budget, team size, access — Knowledge constraints: areas
+10. SKILLS OR JUDGMENT DEMONSTRATED — Limit skill claims to attributable
+work and observable decisions. For impact, record the measured result,
+comparison basis, and scope when supplied. Mark unverified impact
+explicitly and omit unsupported change, expertise, or causation claims
+from the public annotation.
 
-   of uncertainty or unfamiliar territory — Organizational constraints:
-
-   policies, approvals, process requirements
-
-   7. DECISIONS MADE List the significant decisions the author made
-
-   during this work. For each: DECISION: [What was decided]
-
-   OPTION REJECTED: [What was not chosen and why]
-
-   REASONING: [Why this decision was made given the constraints]
-
-   OUTCOME: [What actually happened as a result]
-
-   8. TRADE-OFFS What was given up to achieve the result? Name them
-
-   — performance for reliability, speed for correctness, scope for
-
-   delivery date. If no trade-offs were made, re-examine the work.
-
-   9. FAILURE / REVISION HISTORY Required. What did not work the first
-
-   time? What was abandoned, rebuilt, or changed significantly after the
-
-   first attempt? If the work went smoothly from start to finish without
-
-   revision, state that — but the model should flag this as unusual for
-
-   complex work.
-
-   10. SKILLS OR JUDGMENT DEMONSTRATED What does this artifact
-
-   demonstrate the author can do? Be specific — not “strong
-
-   problem-solving skills” but “designed a stateless retry protocol
-
-   under network partition conditions.” Each skill statement must be
-
-   supported by a specific entry in DECISIONS MADE or FAILURE / REVISION
-
-   HISTORY.
-
-   11. CLAIM BOUNDARY Required. What does this work sample NOT prove?
-
-   List the claims that should not be made from this sample: — What
-
-   remains unproven about the author’s capabilities — What scale,
-
-   context, or conditions this work does not generalize to — What
-
-   contributions the author cannot take credit for — What limitations
-
-   the artifact has that a reviewer should know
-
-   12. PUBLIC PRESENTATION NOTES What adjustments are needed before this
-
-   sample is shared publicly? — What sensitive content must be removed:
-
-   credentials, internal system names, client data, unreleased product
-
-   details, private communications — What context a reader needs that
-
-   is not in the artifact itself — What format is appropriate for the
-
-   target audience — Whether the artifact itself can be shared or only
-
-
+11. CLAIM BOUNDARY — State known limitations, unresolved weaknesses,
+unsupported impact, and contributions that cannot be credited to the
+author. Identify what further evidence would resolve an important
+uncertainty.
 
 
 224</pre>
 </article>
-<article class="manual-page-card" id="manual-page-225" data-manual-text=" the annotation 13. final work sample annotation produce the complete annotation using the sections above. the annotation is the text that accompanies the artifact when it is presented publicly. it must be readable without access to the full structured sections above and must not include anything flagged for removal in public presentation notes. inputs needed the artifact itself or a description of it, plus enough context to answer: what is this, what was it built for, who built which parts, and what constraints were operating. minimum viable input: a description of the artifact, the problem it addressed, and the au- thor’s specific role. the more specific the evidence — actual com- mits, actual decisions, actual failure descriptions — the more spe- cific the annotation. generic descriptions produce generic work samples. expected output a thirteen-section work sample annotation package: artifact iden- tification and evidence inventory; problem context; author contri- bution isolated from team contributions; constraints, decisions, and trade-offs that shaped the work; failure and revision history; specific skills demonstrated; claim boundary; public presenta- tion notes; and a final annotation ready to accompany the artifact. the claim boundary section is the critical output — it states what the sample does not prove, preventing the annotation from asserting more than the evidence supports. 225">
-  <div class="manual-page-head"><span>Page 225</span><em>the annotation</em></div>
-  <pre>   the annotation
+<article class="manual-page-card" id="manual-page-225" data-manual-text="12. public presentation notes — confirm what the intended audience may inspect. keep private links, secrets, client details and restricted source inside the authorized review boundary. if permission is unclear or a necessary source is inaccessible, mark the gap and hold the public package. do not silently alter the original to make it shareable. 13. reusability notes — anchor each note to the part that could be reused. specify prerequisites, changes for a different context, and what does not transfer. identify dependencies and known limits. final work sample annotation return the supplied work verbatim, either reproduced unchanged or as the supplied unchanged attachment, with the anchored notes alongside it. a description or shortened substitute cannot satisfy the artifact requirement. if the original work, access, or clearance is missing, mark the package blocked and name what is needed for completion. inputs needed supply the unchanged artifact, its version, contributor and decision records, a problem statement, and evidence locators the reviewer can inspect. provide outcome measures only where available. state who may view the work and sources. expected output an unchanged work sample plus point-specific decision, constraint, rejected-alternative and reusability notes. include the evidence inventory, attributed role, revision history, claim boundary and disclosure review. a reviewer can trace each consequential claim to the exact work and supporting record. 225">
+  <div class="manual-page-head"><span>Page 225</span><em>12. PUBLIC PRESENTATION NOTES — Confirm what the intended audience may</em></div>
+  <pre>12. PUBLIC PRESENTATION NOTES — Confirm what the intended audience may
+inspect. Keep private links, secrets, client details and restricted
+source inside the authorized review boundary. If permission is unclear
+or a necessary source is inaccessible, mark the gap and hold the public
+package. Do not silently alter the original to make it shareable.
 
-   13. FINAL WORK SAMPLE ANNOTATION Produce the complete annotation
+13. REUSABILITY NOTES — Anchor each note to the part that could be
+reused. Specify prerequisites, changes for a different context, and what
+does not transfer. Identify dependencies and known limits.
 
-   using the sections above. The annotation is the text that accompanies
+FINAL WORK SAMPLE ANNOTATION
 
-   the artifact when it is presented publicly. It must be readable
-
-   without access to the full structured sections above and must not
-
-   include anything flagged for removal in PUBLIC PRESENTATION NOTES.
-
-
-
+Return the supplied work verbatim, either reproduced unchanged or as the
+supplied unchanged attachment, with the anchored notes alongside it. A
+description or shortened substitute cannot satisfy the artifact
+requirement. If the original work, access, or clearance is missing, mark
+the package BLOCKED and name what is needed for completion.
 
 INPUTS NEEDED
 
-
-The artifact itself or a description of it, plus enough context to
-answer: what is this, what was it built for, who built which parts,
-and what constraints were operating. Minimum viable input: a
-description of the artifact, the problem it addressed, and the au-
-thor’s specific role. The more specific the evidence — actual com-
-mits, actual decisions, actual failure descriptions — the more spe-
-cific the annotation. Generic descriptions produce generic work
-samples.
-
+Supply the unchanged artifact, its version, contributor and decision
+records, a problem statement, and evidence locators the reviewer can
+inspect. Provide outcome measures only where available. State who may
+view the work and sources.
 
 EXPECTED OUTPUT
 
-
-A thirteen-section work sample annotation package: artifact iden-
-tification and evidence inventory; problem context; author contri-
-bution isolated from team contributions; constraints, decisions,
-and trade-offs that shaped the work; failure and revision history;
-specific skills demonstrated; claim boundary; public presenta-
-tion notes; and a final annotation ready to accompany the artifact.
-The CLAIM BOUNDARY section is the critical output — it states
-what the sample does not prove, preventing the annotation from
-asserting more than the evidence supports.
+An unchanged work sample plus point-specific decision, constraint,
+rejected-alternative and reusability notes. Include the evidence
+inventory, attributed role, revision history, claim boundary and
+disclosure review. A reviewer can trace each consequential claim to the
+exact work and supporting record.
 
 
-
-
-
-                                                      225</pre>
+225</pre>
 </article>
-<article class="manual-page-card" id="manual-page-226" data-manual-text="gnome prompt field manual knobs add “audience: [employer / client / open source community / conference]” to calibrate final work sample annotation length and framing. add “sensitivity check: yes” to force the public presentation notes section to surface any sensi- tive content in the source material that should not appear pub- licly. add “format: [portfolio page / case study / readme section / resume bullet]” to format the final work sample annota- tion for a specific publication context. add “team context: [de- scribe team size and other contributors]” to force the author role / contribution section to explicitly separate individual from collaborative work. failure mode the model will turn the work sample into generic portfolio copy — aspirational language about impact, vague references to work- ing with the team, and a claim boundary that says nothing. signs: author role / contribution does not distinguish what the author specifically did from what the broader project accomplished; failure / revision history is empty or says “some challenges were overcome”; source / evidence says “the project” without naming a specific artifact, commit, or record; claim boundary says “results may vary.” a valid p-05 output must anchor every claim to evidence, identify the author’s actual contribution, name constraints and trade-offs, preserve failure and revision history, and state what the sample does not prove. if the annotation could describe any project without modification, it failed. 226">
+<article class="manual-page-card" id="manual-page-226" data-manual-text="gnome prompt field manual knobs set the audience and annotation format. prefer line notes for code and section or figure notes for designs or writing. keep evidence, attribution, disclosure and the original artifact mandatory in every format. failure mode a polished portfolio paragraph cannot replace the work sample. a complete result reproduces the original work verbatim and locates every required annotation. reject an edited sample, ambiguity presented as individual ownership, project-wide metrics claimed as personal impact, unexplained skills, and access claims a reviewer cannot check. before publication, compare the included work with the supplied version. verify anchors, source access, permissions, third-party attribution, and unresolved limitations. if any essential claim or the original cannot be inspected within the permitted boundary, label the relevant gap and withhold a complete public sample. 226">
   <div class="manual-page-head"><span>Page 226</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
-
-
 KNOBS
 
-
-Add “audience: [employer / client / open source community /
-conference]” to calibrate FINAL WORK SAMPLE ANNOTATION
-length and framing. Add “sensitivity check: yes” to force the
-PUBLIC PRESENTATION NOTES section to surface any sensi-
-tive content in the source material that should not appear pub-
-licly. Add “format: [portfolio page / case study / README section
-/ resume bullet]” to format the FINAL WORK SAMPLE ANNOTA-
-TION for a specific publication context. Add “team context: [de-
-scribe team size and other contributors]” to force the AUTHOR
-ROLE / CONTRIBUTION section to explicitly separate individual
-from collaborative work.
-
+Set the audience and annotation format. Prefer line notes for code and
+section or figure notes for designs or writing. Keep evidence,
+attribution, disclosure and the original artifact mandatory in every
+format.
 
 FAILURE MODE
 
+A polished portfolio paragraph cannot replace the work sample. A
+complete result reproduces the original work verbatim and locates every
+required annotation. Reject an edited sample, ambiguity presented as
+individual ownership, project-wide metrics claimed as personal impact,
+unexplained skills, and access claims a reviewer cannot check.
 
-The model will turn the work sample into generic portfolio copy
-— aspirational language about impact, vague references to work-
-ing with the team, and a CLAIM BOUNDARY that says nothing.
-Signs: AUTHOR ROLE / CONTRIBUTION does not distinguish
-what the author specifically did from what the broader project
-accomplished; FAILURE / REVISION HISTORY is empty or says
-“some challenges were overcome”; SOURCE / EVIDENCE says
-“the project” without naming a specific artifact, commit, or record;
-CLAIM BOUNDARY says “results may vary.” A valid P-05 output
-must anchor every claim to evidence, identify the author’s actual
-contribution, name constraints and trade-offs, preserve failure
-and revision history, and state what the sample does not prove.
-If the annotation could describe any project without modification,
-it failed.
-
-
-
+Before publication, compare the included work with the supplied version.
+Verify anchors, source access, permissions, third-party attribution, and
+unresolved limitations. If any essential claim or the original cannot be
+inspected within the permitted boundary, label the relevant gap and
+withhold a complete public sample.
 
 
 226</pre>
 </article>
-<article class="manual-page-card" id="manual-page-227" data-manual-text="follow-up run w-09 (claim-evidence separator) on the final work sam- ple annotation before publication — every claim in the anno- tation must trace to a specific entry in source / evidence, de- cisions made, or failure / revision history. run ap-02 (confidence laundering probe) on any entry in skills or judg- ment demonstrated — skills demonstrated by a project should be supported by the annotation, not asserted. run w-04 (over- smoothing detector) on the final work sample annota- tion if it was revised after the first draft — annotations tend to gain polish and lose honesty with each edit. run r-08 (artifact extraction protocol) on the work artifact itself before annotation — r-08 extracts the artifact into a reusable record; p-05 anno- tates it for public presentation; run r-08 first if the artifact is not yet documented. run p-01 (build-in-public post) if the work sample will be published as an active project update rather than a completed artifact — p-05 annotates completed or stable work; p-01 handles work-in-progress publishing. run p-03 (readme quality auditor) if the work sample is a code project or library — the readme is the primary public-facing document alongside the annotation; gaps in the readme will undermine claims in the annotation. run ap-06 (generated junk classifier) on any anno- tation produced from a vague or summary-level input — the clas- sifier will identify which sections are generic rather than artifact- specific. safety notes raw work material — commits, logs, screenshots, design doc- uments, internal conversation excerpts — may contain sensitive content including credentials, internal system names, unreleased product details, client data, or private communications. none of this should appear in the public annotation. review source / evidence and public presentation notes against what is safe to reference before sharing the final work sample annotation. private repository links, internal ticket numbers, and client-identifying details must be removed or generalized be- 227">
+<article class="manual-page-card" id="manual-page-227" data-manual-text="follow-up run p-03 (readme quality auditor) when the sample is a code project or library with a readme. use p-04 (technical post-mortem publisher) for incident context when this annotation accompanies a post-mortem. keep the original work and its point-specific notes available for review. run w-09 (claim-evidence separator) on consequential technical and attribution claims. use ap-02 (confidence laundering probe) for inflated confidence and w-04 (over-smoothing detector) for softened limitations. use r-08 (artifact extraction protocol) first if the material does not yet identify a stable artifact. use p-01 (build-in-public post) for a work-in-progress update. use ap-06 (generated junk classifier) when vague material yields generic claims. safety notes review credentials, internal identifiers, screenshots, client material, private links and third-party permissions before sharing. if the original cannot be cleared, preserve it only in the authorized review environment and hold publication. private repository links, internal ticket numbers, and client-identifying details must be removed or generalized be- 227">
   <div class="manual-page-head"><span>Page 227</span><em>FOLLOW-UP</em></div>
   <pre>FOLLOW-UP
 
+Run P-03 (README Quality Auditor) when the sample is a code project or
+library with a README. Use P-04 (Technical Post-Mortem Publisher) for
+incident context when this annotation accompanies a post-mortem. Keep
+the original work and its point-specific notes available for review.
 
-Run W-09 (Claim-Evidence Separator) on the FINAL WORK SAM-
-PLE ANNOTATION before publication — every claim in the anno-
-tation must trace to a specific entry in SOURCE / EVIDENCE, DE-
-CISIONS MADE, or FAILURE / REVISION HISTORY. Run AP-02
-(Confidence Laundering Probe) on any entry in SKILLS OR JUDG-
-MENT DEMONSTRATED — skills demonstrated by a project should
-be supported by the annotation, not asserted. Run W-04 (Over-
-Smoothing Detector) on the FINAL WORK SAMPLE ANNOTA-
-TION if it was revised after the first draft — annotations tend to
-gain polish and lose honesty with each edit. Run R-08 (Artifact
-Extraction Protocol) on the work artifact itself before annotation
-— R-08 extracts the artifact into a reusable record; P-05 anno-
-tates it for public presentation; run R-08 first if the artifact is
-not yet documented. Run P-01 (Build-in-Public Post) if the work
-sample will be published as an active project update rather than
-a completed artifact — P-05 annotates completed or stable work;
-P-01 handles work-in-progress publishing. Run P-03 (README
-Quality Auditor) if the work sample is a code project or library
-— the README is the primary public-facing document alongside
-the annotation; gaps in the README will undermine claims in the
-annotation. Run AP-06 (Generated Junk Classifier) on any anno-
-tation produced from a vague or summary-level input — the clas-
-sifier will identify which sections are generic rather than artifact-
-specific.
-
+Run W-09 (Claim-Evidence Separator) on consequential technical and
+attribution claims. Use AP-02 (Confidence Laundering Probe) for inflated
+confidence and W-04 (Over-Smoothing Detector) for softened limitations.
+Use R-08 (Artifact Extraction Protocol) first if the material does not
+yet identify a stable artifact. Use P-01 (Build-in-Public Post) for a
+work-in-progress update. Use AP-06 (Generated Junk Classifier) when
+vague material yields generic claims.
 
 SAFETY NOTES
 
-
-Raw work material — commits, logs, screenshots, design doc-
-uments, internal conversation excerpts — may contain sensitive
-content including credentials, internal system names, unreleased
-product details, client data, or private communications. None of
-this should appear in the public annotation. Review SOURCE /
-EVIDENCE and PUBLIC PRESENTATION NOTES against what
-is safe to reference before sharing the FINAL WORK SAMPLE
-ANNOTATION. Private repository links, internal ticket numbers,
-and client-identifying details must be removed or generalized be-
+Review credentials, internal identifiers, screenshots, client material,
+private links and third-party permissions before sharing. If the
+original cannot be cleared, preserve it only in the authorized review
+environment and hold publication. Private repository links, internal
+ticket numbers, and client-identifying details must be removed or
+generalized be-
 
 
-
-                                                      227</pre>
+227</pre>
 </article>
-<article class="manual-page-card" id="manual-page-228" data-manual-text="gnome prompt field manual fore the annotation is published. p-06 changelog curation engine criteria: 6, 9, 10 — reusable artifact + ship cleaner + reusable output what it does converts raw commit history, release notes, issue tracker en- tries, or work logs into a curated changelog — organized by change category, verified against evidence, and separated into user-facing entries and internal-only work. distinct from a commit dump because it requires evidence for each claim, flags breaking and security-relevant changes explicitly, and produces a final changelog entry ready to publish without manual editing. the test: a changelog entry that cannot be traced to a specific commit, issue, or pr should not exist in the output. when to use before a release, when raw commits or issue lists need to become human-readable release notes. when the changelog has accumu- lated noise — merged prs that touched tests, dependency bumps, internal refactors — that would confuse users reading for what changed. when a previous changelog drew questions because a shipped feature wasn’t in the notes, or a breaking change wasn’t flagged. not appropriate as a substitute for reading the actual code diff — the curation is only as accurate as the source material provided. the prompt 228">
+<article class="manual-page-card" id="manual-page-228" data-manual-text="gnome prompt field manual fore the annotation is published. p-06 changelog curation engine criteria: 6, 9, 10 — reusable artifact + ship cleaner + reusable output what it does curates supplied change records into release notes that explain what matters to users and why. each published row traces to verified release membership and an observable impact. user-facing changes, internal work, and removals or deprecations have separate sections. the source inventory exposes gaps and unverified claims before publication. when to use use when you have an identified release and records that can connect changes to it. for an unreleased plan or incomplete history, prepare a provisional record with explicit coverage gaps. check the final release evidence before calling work shipped. the prompt 228">
   <div class="manual-page-head"><span>Page 228</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -13889,253 +13735,154 @@ fore the annotation is published.
 
 WHAT IT DOES
 
-
-Converts raw commit history, release notes, issue tracker en-
-tries, or work logs into a curated changelog — organized by change
-category, verified against evidence, and separated into user-facing
-entries and internal-only work.  Distinct from a commit dump
-because it requires evidence for each claim, flags breaking and
-security-relevant changes explicitly, and produces a final changelog
-entry ready to publish without manual editing. The test: a changelog
-entry that cannot be traced to a specific commit, issue, or PR
-should not exist in the output.
-
+Curates supplied change records into release notes that explain what
+matters to users and why. Each published row traces to verified release
+membership and an observable impact. User-facing changes, internal work,
+and removals or deprecations have separate sections. The source
+inventory exposes gaps and unverified claims before publication.
 
 WHEN TO USE
 
-
-Before a release, when raw commits or issue lists need to become
-human-readable release notes. When the changelog has accumu-
-lated noise — merged PRs that touched tests, dependency bumps,
-internal refactors — that would confuse users reading for what
-changed. When a previous changelog drew questions because a
-shipped feature wasn’t in the notes, or a breaking change wasn’t
-flagged. Not appropriate as a substitute for reading the actual
-code diff — the curation is only as accurate as the source material
-provided.
-
+Use when you have an identified release and records that can connect
+changes to it. For an unreleased plan or incomplete history, prepare a
+provisional record with explicit coverage gaps. Check the final release
+evidence before calling work shipped.
 
 THE PROMPT
 
 
-
-
-
 228</pre>
 </article>
-<article class="manual-page-card" id="manual-page-229" data-manual-text="produce a curated changelog for the following release. release/version/date: [release identifier — version number, release name, or date range] source material: [paste commits, issue list, pr descriptions, or release notes] produce each section in order. 1. release / version / date state the release identifier, version number, and date covered by this changelog. if the date range is approximate, state what range of commits or issues were included. 2. source material reviewed list the sources you are working from: commit log, issue tracker entries, pr descriptions, or other records. state the date range and number of commits or issues reviewed. if source material is ambiguous or missing for any change, flag it here before proceeding. 3. change classification for each change in the source material, assign exactly one primary category. if a change spans multiple categories, assign the highest-impact one and note the secondary category. change category options: user-facing change — behavior, output, or interface the user directly observes internal change — implementation, refactor, test, or tooling with no user-facing effect bug fix — corrects documented or observable incorrect behavior breaking change — existing behavior changes in a way that requires user action security / safety note — addresses a vulnerability, unsafe default, or data exposure risk documentation change — only documentation, comments, or readme content changed known limitation — acknowledged as incomplete, incorrect, or deferred for each classified change: change: [one-line description in plain language. no commit hashes here.] category: [from the list above] evidence source: [specific commit hash, issue number, pr number, or record. required. if no evidence source exists, flag the change as unverified.] breaking: yes / no security-relevant: yes / no 4. migration / upgrade note list any action required by users or operators to adapt to changes in this release. required for every breaking change entry. if there are no breaking changes, state that explicitly. 5. final changelog entry produce the final user-facing changelog: 229">
-  <div class="manual-page-head"><span>Page 229</span><em>Produce a curated changelog for the following release.</em></div>
-  <pre>Produce a curated changelog for the following release.
+<article class="manual-page-card" id="manual-page-229" data-manual-text="produce a curated changelog from supplied source records. use these five parts. 1. release / version / date — cite the supplied release record, tag, or manifest and date if known. use release not verified when the release identity, version, or membership cannot be verified. a merge or closed issue alone does not show that a change shipped. 2. source material reviewed — list specific commits, pull requests, issues, release records, or supplied work-log items. record the reviewed range and known gaps. mark incomplete history. state counts only if available and distinguish the reviewed scope from the entire release. 3. change classification — for each candidate, record description, evidence locator, release status, user impact or internal classification, and breaking or security flags. distinguish shipped, planned, reverted and unverified. keep planned and unverified work out of the shipped notes. mark unsupported claims and state what evidence is missing. group duplicate records for the same released effect into one item and retain the contributing locators. check the net effect of reverts in the stated release. omit reverted net-zero work from the shipped list and retain its disposition in the source inventory. include a reversal of an already shipped effect only where evidence proves the chronology and user impact. 4. migration / upgrade note — for each breaking change, name the affected users, the old and new behavior, and the concrete action to migrate. if the required action or coverage is unknown, mark the gap and hold publication. claim no breaking changes only for a reviewed scope that supports it. 229">
+  <div class="manual-page-head"><span>Page 229</span><em>Produce a curated changelog from supplied source records. Use these five</em></div>
+  <pre>Produce a curated changelog from supplied source records. Use these five
+parts.
 
-Release/version/date: [RELEASE IDENTIFIER — version number, release
+1. RELEASE / VERSION / DATE — Cite the supplied release record, tag, or
+manifest and date if known. Use RELEASE NOT VERIFIED when the release
+identity, version, or membership cannot be verified. A merge or closed
+issue alone does not show that a change shipped.
 
-name, or date range] Source material: [PASTE COMMITS, ISSUE LIST, PR
+2. SOURCE MATERIAL REVIEWED — List specific commits, pull requests,
+issues, release records, or supplied work-log items. Record the reviewed
+range and known gaps. Mark incomplete history. State counts only if
+available and distinguish the reviewed scope from the entire release.
 
-DESCRIPTIONS, OR RELEASE NOTES]
+3. CHANGE CLASSIFICATION — For each candidate, record description,
+evidence locator, release status, user impact or internal
+classification, and breaking or security flags. Distinguish SHIPPED,
+PLANNED, REVERTED and UNVERIFIED. Keep planned and unverified work out
+of the shipped notes. Mark unsupported claims and state what evidence is
+missing.
 
-Produce each section in order.
+Group duplicate records for the same released effect into one item and
+retain the contributing locators. Check the net effect of reverts in the
+stated release. Omit reverted net-zero work from the shipped list and
+retain its disposition in the source inventory. Include a reversal of an
+already shipped effect only where evidence proves the chronology and
+user impact.
 
-1. RELEASE / VERSION / DATE State the release identifier, version
-
-number, and date covered by this changelog. If the date range is
-
-approximate, state what range of commits or issues were included.
-
-2. SOURCE MATERIAL REVIEWED List the sources you are working from:
-
-commit log, issue tracker entries, PR descriptions, or other records.
-
-State the date range and number of commits or issues reviewed. If
-
-source material is ambiguous or missing for any change, flag it here
-
-before proceeding.
-
-3. CHANGE CLASSIFICATION For each change in the source material,
-
-assign exactly one primary category. If a change spans multiple
-
-categories, assign the highest-impact one and note the secondary
-
-category.
-
-CHANGE CATEGORY options: USER-FACING CHANGE — behavior, output,
-
-or interface the user directly observes INTERNAL CHANGE —
-
-implementation, refactor, test, or tooling with no user-facing
-
-effect BUG FIX — corrects documented or observable incorrect behavior
-
-BREAKING CHANGE — existing behavior changes in a way that requires
-
-user action SECURITY / SAFETY NOTE — addresses a vulnerability,
-
-unsafe default, or data exposure risk DOCUMENTATION CHANGE — only
-
-documentation, comments, or README content changed KNOWN LIMITATION —
-
-acknowledged as incomplete, incorrect, or deferred
-
-For each classified change: CHANGE: [One-line description in plain
-
-language. No commit hashes here.] CATEGORY: [From the list above]
-
-EVIDENCE SOURCE: [Specific commit hash, issue number, PR number, or
-
-record. Required. If no evidence source exists, flag the change as
-
-UNVERIFIED.] BREAKING: yes / no SECURITY-RELEVANT: yes / no
-
-4. MIGRATION / UPGRADE NOTE List any action required by users or
-
-operators to adapt to changes in this release. Required for every
-
-BREAKING CHANGE entry. If there are no breaking changes, state that
-
-explicitly.
-
-5. FINAL CHANGELOG ENTRY Produce the final user-facing changelog:
+4. MIGRATION / UPGRADE NOTE — For each breaking change, name the
+affected users, the old and new behavior, and the concrete action to
+migrate. If the required action or coverage is unknown, mark the gap and
+hold publication. Claim no breaking changes only for a reviewed scope
+that supports it.
 
 
-
-                                                    229</pre>
+229</pre>
 </article>
-<article class="manual-page-card" id="manual-page-230" data-manual-text="gnome prompt field manual [release identifier] — [date] breaking changes (if any): [one bullet per breaking change — what changed and what action the user must take] security notes (if any): [one bullet per security-relevant change] what’s new: [user-facing change entries, one bullet each, in plain language] fixes: [bug fix entries, one bullet each] known limitations: [known limitation entries, one bullet each] internal notes (optional, for operators): [relevant internal change entries if operators need to know] inputs needed raw source material containing the changes to document: com- mit log, closed issues, merged pr descriptions, or a handwritten work log. the more specific the source material — actual commit messages, actual issue descriptions, actual pr titles — the more traceable the evidence source fields. vague source material produces unverifiable changelog entries. minimum viable input: a list of changes with enough description to classify each as user- facing or internal. expected output a five-section curated changelog: release header; source inven- tory confirming what was reviewed; change classification table with category, evidence, and breaking/security flags for every item; migration notes for breaking changes; and a final format- ted changelog entry ready to publish. the evidence source field is required for every classified change — a changelog entry with no evidence source is an assertion, not a record. 230">
+<article class="manual-page-card" id="manual-page-230" data-manual-text="gnome prompt field manual 5. final changelog entry — present sourced shipped changes under these headings. attach a source locator to each entry. user-facing changes — each entry has a plain-language change description, observable user impact, and significance: high / medium / low. high covers consequential risk, required action, or major workflow impact. medium covers a material effect without that urgency. low covers a localized effect. give a one-sentence rationale for every high entry and an evidence-based reasoning note for non-obvious changes. include verified fixes and reviewed security notes where appropriate. removed/deprecated — state what is gone or deprecated for this release, the user impact, the replacement and migration action if known, and the evidence. keep announced future plans separate. preserve migration notes for breaking removals. internal changes — list verified internal implementation, tests or tooling in a separate, lower-prominence section. internal work with no user-facing impact still belongs here. inputs needed supply a release identifier and evidence of membership, locatable change records, the intended audience, and affected behavior or migration details. record unavailable ranges and sources. expected output a scoped draft with release metadata, source inventory, classified candidates and their disposition, migration notes, and the three distinct changelog sections. if release evidence, migration, or coverage is unresolved, mark the draft provisional and identify the specific blocker. use none verified for a section with no supported entries and show any coverage limits. 230">
   <div class="manual-page-head"><span>Page 230</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
+5. FINAL CHANGELOG ENTRY — Present sourced shipped changes under these
+headings. Attach a source locator to each entry.
 
+USER-FACING CHANGES — Each entry has a plain-language change
+description, observable USER IMPACT, and SIGNIFICANCE: HIGH / MEDIUM /
+LOW. HIGH covers consequential risk, required action, or major workflow
+impact. MEDIUM covers a material effect without that urgency. LOW covers
+a localized effect. Give a one-sentence rationale for every HIGH entry
+and an evidence-based reasoning note for non-obvious changes. Include
+verified fixes and reviewed security notes where appropriate.
 
+REMOVED/DEPRECATED — State what is gone or deprecated for this release,
+the user impact, the replacement and migration action if known, and the
+evidence. Keep announced future plans separate. Preserve migration notes
+for breaking removals.
 
-   [RELEASE IDENTIFIER] — [DATE]
-
-   BREAKING CHANGES (if any): [One bullet per breaking change — what
-
-   changed and what action the user must take]
-
-   SECURITY NOTES (if any): [One bullet per security-relevant change]
-
-   WHAT’S NEW: [USER-FACING CHANGE entries, one bullet each, in plain
-
-   language]
-
-   FIXES: [BUG FIX entries, one bullet each]
-
-   KNOWN LIMITATIONS: [KNOWN LIMITATION entries, one bullet each]
-
-   INTERNAL NOTES (optional, for operators): [Relevant INTERNAL CHANGE
-
-   entries if operators need to know]
-
-
-
+INTERNAL CHANGES — List verified internal implementation, tests or
+tooling in a separate, lower-prominence section. Internal work with no
+user-facing impact still belongs here.
 
 INPUTS NEEDED
 
-
-Raw source material containing the changes to document: com-
-mit log, closed issues, merged PR descriptions, or a handwritten
-work log. The more specific the source material — actual commit
-messages, actual issue descriptions, actual PR titles — the more
-traceable the EVIDENCE SOURCE fields. Vague source material
-produces unverifiable changelog entries. Minimum viable input:
-a list of changes with enough description to classify each as user-
-facing or internal.
-
+Supply a release identifier and evidence of membership, locatable change
+records, the intended audience, and affected behavior or migration
+details. Record unavailable ranges and sources.
 
 EXPECTED OUTPUT
 
-
-A five-section curated changelog: release header; source inven-
-tory confirming what was reviewed; change classification table
-with category, evidence, and breaking/security flags for every
-item; migration notes for breaking changes; and a final format-
-ted changelog entry ready to publish. The EVIDENCE SOURCE
-field is required for every classified change — a changelog entry
-with no evidence source is an assertion, not a record.
-
-
-
+A scoped draft with release metadata, source inventory, classified
+candidates and their disposition, migration notes, and the three
+distinct changelog sections. If release evidence, migration, or coverage
+is unresolved, mark the draft PROVISIONAL and identify the specific
+blocker. Use NONE VERIFIED for a section with no supported entries and
+show any coverage limits.
 
 
 230</pre>
 </article>
-<article class="manual-page-card" id="manual-page-231" data-manual-text="knobs add “audience: [end users / developers / operators / all]” to cal- ibrate which change category entries appear in the final changelog entry and which are suppressed as internal. add “format: [keep a changelog / github releases / semantic ver- sioning]” to format the final changelog entry to a specific changelog standard. add “flag only: [breaking change / se- curity / safety note]” for a fast pre-release check before writing the full entry. failure mode the model will convert commit noise into a polished but inaccu- rate changelog — treating refactors as features, omitting break- ing changes because they weren’t labeled, or combining multi- ple changes into one entry that loses specificity. signs: evi- dence source is absent or says “multiple commits” without specifics; breaking change entries are missing despite be- havior changes in the source material; user-facing change entries describe internal implementation details users don’t ob- serve. a valid p-06 output must preserve evidence, distinguish internal work from user-facing change, identify breaking and security-relevant changes specifically, and avoid claiming a fea- ture shipped just because related work occurred. if the final changelog entry could have been written without reading the source material, it failed. 231">
+<article class="manual-page-card" id="manual-page-231" data-manual-text="knobs set the audience or house format while retaining the source inventory, classification, migration notes and all three final sections. a breaking-change review is a focused check with the same release and evidence gates. failure mode reject a commit dump, a merged item presented as shipped, an inferred version, duplicated effects, or net-zero reverted work described as a new feature. a supposedly complete changelog built from partial records fails the coverage check. before publishing, trace each shipped row to a record and its release. check that every user-facing item explains who is affected and why, every high item has its rationale, removals and deprecations are visible, and every verified breaking change has migration guidance. keep unsupported claims out of shipped text. review provisional blockers before publishing anything as a complete release record. 231">
   <div class="manual-page-head"><span>Page 231</span><em>KNOBS</em></div>
   <pre>KNOBS
 
-
-Add “audience: [end users / developers / operators / all]” to cal-
-ibrate which CHANGE CATEGORY entries appear in the FINAL
-CHANGELOG ENTRY and which are suppressed as internal. Add
-“format: [Keep a Changelog / GitHub Releases / semantic ver-
-sioning]” to format the FINAL CHANGELOG ENTRY to a specific
-changelog standard. Add “flag only: [BREAKING CHANGE / SE-
-CURITY / SAFETY NOTE]” for a fast pre-release check before
-writing the full entry.
-
+Set the audience or house format while retaining the source inventory,
+classification, migration notes and all three final sections. A
+breaking-change review is a focused check with the same release and
+evidence gates.
 
 FAILURE MODE
 
+Reject a commit dump, a merged item presented as shipped, an inferred
+version, duplicated effects, or net-zero reverted work described as a
+new feature. A supposedly complete changelog built from partial records
+fails the coverage check.
 
-The model will convert commit noise into a polished but inaccu-
-rate changelog — treating refactors as features, omitting break-
-ing changes because they weren’t labeled, or combining multi-
-ple changes into one entry that loses specificity.  Signs: EVI-
-DENCE SOURCE is absent or says “multiple commits” without
-specifics; BREAKING CHANGE entries are missing despite be-
-havior changes in the source material; USER-FACING CHANGE
-entries describe internal implementation details users don’t ob-
-serve. A valid P-06 output must preserve evidence, distinguish
-internal work from user-facing change, identify breaking and
-security-relevant changes specifically, and avoid claiming a fea-
-ture shipped just because related work occurred.  If the FINAL
-CHANGELOG ENTRY could have been written without reading
-the source material, it failed.
+Before publishing, trace each shipped row to a record and its release.
+Check that every user-facing item explains who is affected and why,
+every HIGH item has its rationale, removals and deprecations are
+visible, and every verified breaking change has migration guidance. Keep
+unsupported claims out of shipped text. Review provisional blockers
+before publishing anything as a complete release record.
 
 
-
-
-
-                                                      231</pre>
+231</pre>
 </article>
-<article class="manual-page-card" id="manual-page-232" data-manual-text="gnome prompt field manual follow-up run w-09 (claim-evidence separator) on the final changelog entry before publication — each changelog bullet is a claim, and the evidence source field is its evidence. if any bullet cannot be traced to a source, it should not be in the changelog. run ap-06 (generated junk classifier) on the final changelog entry if the source material was low-quality — noisy input pro- duces plausible-sounding but inaccurate entries. run r-08 (arti- fact extraction protocol) on any user-facing change that in- troduced a new capability — the changelog entry is the minimum description; significant capabilities warrant a complete artifact record. run p-03 (readme quality auditor) after a release that introduced significant new features — the changelog notes what changed, but the readme may need to reflect the new state. run p-04 (technical post-mortem publisher) if any change in this release traces to a previous incident — the post-mortem record and the changelog entry should reference each other. safety notes security / safety note entries should be reviewed by a tech- nical lead before publication. the changelog is a public record — premature disclosure of a vulnerability before users can patch is a risk. when in doubt, use a coordinated disclosure process rather than the changelog as the first public notice of a security fix. p-07 rfc draft generator criteria: 6, 8, 10 — reusable artifact + decision quality + reusable output 232">
+<article class="manual-page-card" id="manual-page-232" data-manual-text="gnome prompt field manual follow-up use s-10 (architecture decision record generator) for a decision&#x27;s rationale. an adr supplies reasoning evidence; independent release membership still determines whether the change shipped. use p-04 (technical post-mortem publisher) for incident-related changes and link the approved records where disclosure permits. run w-09 (claim-evidence separator) on the final changelog. use ap-06 (generated junk classifier) when weak inputs lead to generic rows. use r-08 (artifact extraction protocol) for a substantial capability that needs a reusable evidence record. use p-03 (readme quality auditor) when the release changes the documented way users get started. safety notes have a technical lead review any security or safety entry before publication. use authorized disclosure channels and the approved timing. keep sensitive implementation detail out of the public record. record a withheld entry as a disclosure limit in the authorized review material. p-07 rfc draft generator criteria: 6, 8, 10 — reusable artifact + decision quality + reusable output 232">
   <div class="manual-page-head"><span>Page 232</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
-
-
 FOLLOW-UP
 
+Use S-10 (Architecture Decision Record Generator) for a decision&#x27;s
+rationale. An ADR supplies reasoning evidence; independent release
+membership still determines whether the change shipped. Use P-04
+(Technical Post-Mortem Publisher) for incident-related changes and link
+the approved records where disclosure permits.
 
-Run W-09 (Claim-Evidence Separator) on the FINAL CHANGELOG
-ENTRY before publication — each changelog bullet is a claim,
-and the EVIDENCE SOURCE field is its evidence.  If any bullet
-cannot be traced to a source, it should not be in the changelog.
-Run AP-06 (Generated Junk Classifier) on the FINAL CHANGELOG
-ENTRY if the source material was low-quality — noisy input pro-
-duces plausible-sounding but inaccurate entries. Run R-08 (Arti-
-fact Extraction Protocol) on any USER-FACING CHANGE that in-
-troduced a new capability — the changelog entry is the minimum
-description; significant capabilities warrant a complete artifact
-record. Run P-03 (README Quality Auditor) after a release that
-introduced significant new features — the changelog notes what
-changed, but the README may need to reflect the new state.
-Run P-04 (Technical Post-Mortem Publisher) if any change in this
-release traces to a previous incident — the post-mortem record
-and the changelog entry should reference each other.
-
+Run W-09 (Claim-Evidence Separator) on the final changelog. Use AP-06
+(Generated Junk Classifier) when weak inputs lead to generic rows. Use
+R-08 (Artifact Extraction Protocol) for a substantial capability that
+needs a reusable evidence record. Use P-03 (README Quality Auditor) when
+the release changes the documented way users get started.
 
 SAFETY NOTES
 
-
-SECURITY / SAFETY NOTE entries should be reviewed by a tech-
-nical lead before publication. The changelog is a public record
-— premature disclosure of a vulnerability before users can patch
-is a risk. When in doubt, use a coordinated disclosure process
-rather than the changelog as the first public notice of a security
-fix.
+Have a technical lead review any security or safety entry before
+publication. Use authorized disclosure channels and the approved timing.
+Keep sensitive implementation detail out of the public record. Record a
+withheld entry as a disclosure limit in the authorized review material.
 
 
   P-07 RFC Draft Generator

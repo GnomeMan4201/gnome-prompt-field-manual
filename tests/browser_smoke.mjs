@@ -40,6 +40,17 @@ const reviewedPages = [
   [214, 'DISPROVEN ASSUMPTIONS'],
   [215, 'QUALITY CHECK'],
   [216, 'Artifact Extraction Protocol'],
+  [222, 'Work Sample Annotator'],
+  [223, 'ATTRIBUTION UNVERIFIED'],
+  [224, 'CONSTRAINT ANNOTATIONS'],
+  [225, 'REUSABILITY NOTES'],
+  [226, 'A polished portfolio paragraph'],
+  [227, 'Technical Post-Mortem Publisher'],
+  [228, 'Changelog Curation Engine'],
+  [229, 'SOURCE MATERIAL REVIEWED'],
+  [230, 'REMOVED/DEPRECATED'],
+  [231, 'net-zero reverted work'],
+  [232, 'RFC Draft Generator'],
 ];
 const browser = await engines[browserName].launch({ headless: true });
 

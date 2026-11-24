@@ -20,3 +20,11 @@ BATCH8_DISPOSITION_SOURCE_SHA = "108d443e3f39e745bddbcbb030de1876f36f328180308a3
 @cache
 def corrected_batch8_bytes(path: str) -> bytes:
     return subprocess.check_output(["git", "show", f"{PR44_MERGE}:{path}"], cwd=ROOT)
+
+
+PR45_MERGE = "88f1a6399eff6655bf511f24fb848f51bdb1ce88"
+
+
+@cache
+def batch8_disposition_bytes(path: str) -> bytes:
+    return subprocess.check_output(["git", "show", f"{PR45_MERGE}:{path}"], cwd=ROOT)

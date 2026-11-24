@@ -12,7 +12,7 @@ import unittest
 from pathlib import Path
 
 from batch6_baseline import baseline_bytes
-from batch8_baseline import BATCH8_DISPOSITION_SOURCE_SHA
+from batch9_baseline import BATCH9_SOURCE_SHA
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,7 +62,7 @@ class Batch4DispositionTests(unittest.TestCase):
 
     def test_current_source_hash_and_frozen_batch4_doc_binding(self):
         self.assertEqual(hashlib.sha256(baseline_bytes("index.html")).hexdigest(), BATCH5_POST_STATE_SHA)
-        self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), BATCH8_DISPOSITION_SOURCE_SHA)
+        self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), BATCH9_SOURCE_SHA)
         self.assertIn("Final `index.html` SHA-256: `8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd`", DOC.read_text())
 
     def test_315_canonical_pages_and_frozen_batch4_pages(self):
@@ -109,7 +109,7 @@ class Batch4DispositionTests(unittest.TestCase):
     def test_identity_is_current_but_historical_review_queue_is_not_rewritten(self):
         identity = json.loads(IDENTITY.read_text())
         queue = json.loads(HISTORICAL_QUEUE.read_text())
-        self.assertEqual(identity["sourceIndexSha256"], BATCH8_DISPOSITION_SOURCE_SHA)
+        self.assertEqual(identity["sourceIndexSha256"], BATCH9_SOURCE_SHA)
         self.assertEqual(identity["counts"], {"pending": 6, "drafted": 85, "total": 91, "pages": 315})
         self.assertEqual(identity["bodyCoverage"], 0)
         self.assertEqual(queue["sourceHtmlSha256"], BASELINE_SHA)
