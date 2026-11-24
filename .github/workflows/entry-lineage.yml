@@ -7,6 +7,8 @@ on:
       - 'tools/reconcile_entry_lineage.py'
       - 'tests/test_reconcile_entry_lineage.py'
       - 'tests/test_batch4_disposition.py'
+      - 'tests/test_batch5_hold.py'
+      - 'docs/BATCH5_REVISE_HOLD_2026-11-23.md'
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
@@ -23,6 +25,8 @@ on:
       - 'tools/reconcile_entry_lineage.py'
       - 'tests/test_reconcile_entry_lineage.py'
       - 'tests/test_batch4_disposition.py'
+      - 'tests/test_batch5_hold.py'
+      - 'docs/BATCH5_REVISE_HOLD_2026-11-23.md'
       - '.github/workflows/entry-lineage.yml'
       - 'docs/IDENTITY_AND_SCOPE.md'
       - 'docs/ENTRY_LINEAGE_BASELINE_2026-08-06.md'
@@ -58,13 +62,16 @@ jobs:
           python-version: '3.11'
 
       - name: Syntax check
-        run: python -m compileall -q tools/reconcile_entry_lineage.py tests/test_reconcile_entry_lineage.py tests/test_batch4_disposition.py
+        run: python -m compileall -q tools/reconcile_entry_lineage.py tests/test_reconcile_entry_lineage.py tests/test_batch4_disposition.py tests/test_batch5_hold.py
 
       - name: Unit tests
         run: python -m unittest discover -s tests -p 'test_reconcile_entry_lineage.py' -v
 
       - name: Batch 4 frozen-body and post-state regressions
         run: python -m unittest discover -s tests -p 'test_batch4_disposition.py' -v
+
+      - name: Batch 5 REVISE hold — no manuscript promotion
+        run: python -m unittest discover -s tests -p 'test_batch5_hold.py' -v
 
       - name: Generate and enforce source-grounded lineage evidence
         run: |

@@ -260,6 +260,28 @@ def audit(path: Path, repository_root: Path | None = None) -> AuditResult:
         f"count={len(failure_to_test_bodies)}",
     )
 
+    # A known editorial HOLD, not proof of a completed planned-to-reader ID map.
+    # Do not let the S-10 ID occurrence (ADR generator, page 140) count as the
+    # body satisfying PTSP's pending S-10 Migration Risk Classifier brief.
+    pending_s10 = [item for item in extract_pending(root) if item.entry_id == "S-10"]
+    brief_s10 = [item for item in extract_briefs(root) if item.entry_id == "S-10"]
+    page129 = cards.get("manual-page-129")
+    page140 = cards.get("manual-page-140")
+    page129_text = canonical_surface(page129.first_tag("pre").raw_text()) if page129 and page129.first_tag("pre") else ""
+    page140_text = canonical_surface(page140.first_tag("pre").raw_text()) if page140 and page140.first_tag("pre") else ""
+    known_hold = (
+        len(pending_s10) == 1
+        and len(brief_s10) == 1
+        and pending_s10[0].name == brief_s10[0].name == "Migration Risk Classifier"
+        and "s-07 migration risk classifier" in page129_text
+        and "s-10 architecture decision record generator" in page140_text
+    )
+    add_check(
+        checks,
+        "batch5-s10-collision-hold-documented",
+        known_hold,
+        "PTSP planned S-10 Migration Risk Classifier != canonical S-07 Migration Risk Classifier != canonical S-10 ADR; HOLD, not PASS",
+    )
     pending_ids = {item.entry_id for item in extract_pending(root)}
     brief_ids = {item.entry_id for item in extract_briefs(root)}
     add_check(
@@ -369,6 +391,7 @@ def audit(path: Path, repository_root: Path | None = None) -> AuditResult:
             "The authoritative editable v3 manuscript and editable v9 source remain unavailable.",
             "The embedded PDF is intentionally preserved as an uncorrected historical v9 snapshot.",
             "The cut W-04 Field Journal Scaffolder remains visible only in historical provenance; it has no live entry identifier.",
+            "Batch 5 S-10 remains REVISE: the planned migration-risk brief collides with canonical S-10 ADR and is missing explicit rollback trigger conditions.",
         ],
     )
 

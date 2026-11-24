@@ -120,6 +120,13 @@ class EditorialLineageAuditTests(unittest.TestCase):
             self.failed_checks(result),
         )
 
+    def test_batch5_known_identity_collision_is_explicit_and_fails_closed(self) -> None:
+        result = audit(REPOSITORY_ROOT / "index.html", REPOSITORY_ROOT)
+        self.assertIn("batch5-s10-collision-hold-documented", {c.name for c in result.checks if c.passed})
+        broken = self.source.replace("S-10 Architecture Decision Record Generator", "S-10 Migration Risk Classifier", 1)
+        modified = audit(self.write_source(broken), REPOSITORY_ROOT)
+        self.assertIn("batch5-s10-collision-hold-documented", self.failed_checks(modified))
+
     def test_historical_pdf_mutation_fails_closed(self) -> None:
         broken = self.source.replace("JVBERi0x", "KVBERi0x", 1)
         result = audit(self.write_source(broken), REPOSITORY_ROOT)

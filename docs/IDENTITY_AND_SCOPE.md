@@ -69,6 +69,12 @@ For the current `1.0.0-rc.1` release candidate:
 
 The repository uses a **combined product** boundary: PTSP remains visible as production state, corrected searchable text is the canonical/default manual reader, and the historical v9 PDF remains available as a separately labelled provenance artifact with an independent hash.
 
+## Batch 5 identity hold — planned S-10 versus canonical S-07 / S-10
+
+**REVISE, not PASS.** PTSP's frozen `b-s10` means **planned S-10 Migration Risk Classifier**, while the canonical searchable manual calls that entry **S-07 Migration Risk Classifier** (starting page 129), and uses **S-10** for the *different* **Architecture Decision Record Generator** (starting page 140). The unresolved title/ID mapping must be documented before changing the pending state. The current identity index records ID occurrences, not canonical-body attribution; its `S-10` occurrence on page 140 cannot establish a body match for the planned migration-risk brief.
+
+The current migration-risk prompt lacks the brief's required output artifact **ROLLBACK TRIGGER CONDITIONS**. Do not promote S-10 until a separately authorized manuscript revision, deliberate crosswalk decision, and regression tests establish compliance. This hold leaves the live state at **11 pending / 80 drafted**. See [Batch 5 REVISE hold](BATCH5_REVISE_HOLD_2026-11-23.md).
+
 ## Remaining release blockers
 
 Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 11 pending entries remain after the 2026-11-23 Batch 4 disposition.
