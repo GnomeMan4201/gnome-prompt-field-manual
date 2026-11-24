@@ -23,7 +23,7 @@ for index, (case, source, submission) in enumerate(protocol["cases"]):
     for arm in (first, "gnome" if first == "control" else "control"):
         question = "\n\n".join([protocol[arm], protocol["shared"], source, submission])
         prompt = "<|im_start|>user\n" + question + "<|im_end|>\n<|im_start|>assistant\n"
-        args = ["--no-conversation", "--no-display-prompt", "--simple-io", "--log-disable",
+        args = ["--no-conversation", "--no-display-prompt", "--simple-io",
                 "--no-warmup", "--temp", "0", "--seed", "42", "-t", "2", "-c", "2048",
                 "-n", "256", "-m", str(model), "-p", prompt]
         started = time.monotonic()
