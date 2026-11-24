@@ -144,18 +144,18 @@ class LineageTests(unittest.TestCase):
         self.assertIn("AP-00", first)
         self.assertNotIn("Generated:", first)
 
-    def test_repository_post_state_reconciles_to_8_83_91(self) -> None:
+    def test_repository_post_state_reconciles_to_6_85_91(self) -> None:
         result = reconcile(REPOSITORY_ROOT / "index.html")
         failures = validate_expectations(
             result,
-            expected_pending=8,
-            expected_drafted=83,
+            expected_pending=6,
+            expected_drafted=85,
             expected_total=91,
             expected_pages=315,
         )
         self.assertEqual(failures, [])
         self.assertEqual(result.summary.pending_missing_from_embedded, 0)
-        self.assertEqual(result.summary.pending_present_in_embedded, 8)
+        self.assertEqual(result.summary.pending_present_in_embedded, 6)
         self.assertEqual(result.conflicts["pending_missing_with_numbering_rationale"], [])
 
 

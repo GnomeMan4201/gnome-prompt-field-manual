@@ -90,7 +90,11 @@ async function assertInitialState(page) {
 async function assertEditorDispositions(page) {
   const inventory = page.locator('#inventory');
   const sec05 = inventory.locator('.entry-row').filter({ hasText: 'SEC-05' });
-  assert.equal(await inventory.locator('.entry-row').count(), 8);
+  assert.equal(await inventory.locator('.entry-row').count(), 6);
+  for (const id of ['P-01', 'P-02']) {
+    assert.equal(await inventory.locator('.er-id').filter({ hasText: id }).count(), 0);
+    assert.equal(await page.locator('#b-' + id.toLowerCase().replace('-', '')).count(), 0);
+  }
   assert.equal(await inventory.locator('.er-id').filter({ hasText: 'SEC-06' }).count(), 0);
   assert.equal(await page.locator('#b-sec06').count(), 0);
   assert.equal(await inventory.locator('.er-id').filter({ hasText: 'SEC-02' }).count(), 0);
@@ -116,7 +120,14 @@ async function assertEditorDispositions(page) {
   await readerGuidance.getByRole('link').click();
   await page.locator('#manual-page-187:target').waitFor({ state: 'visible' });
 
-  assert.deepEqual(await page.locator('.batch-table .batch-num').allTextContents(), ['6', '8', '9', '10']);
+  const batch8 = page.locator('#batch8-disposition');
+  assert.match(await batch8.innerText(), /Batch 8 closed at manuscript-contract level/);
+  await batch8.getByRole('link', { name: 'P-01 content scaffold' }).click();
+  await page.locator('#manual-page-209:target').waitFor({ state: 'visible' });
+  await batch8.getByRole('link', { name: 'P-02 learning inventory' }).click();
+  await page.locator('#manual-page-213:target').waitFor({ state: 'visible' });
+
+  assert.deepEqual(await page.locator('.batch-table .batch-num').allTextContents(), ['6', '9', '10']);
   assert.deepEqual(await page.locator('.batch-table tbody tr').first().locator('td').allTextContents(),
     ['6', 'SEC-05', '1', 'Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.']);
 }

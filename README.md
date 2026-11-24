@@ -28,7 +28,7 @@ The repository is also the production workspace for the manual. That means the p
 
 Current repository version: **1.0.0-rc.1**.
 
-This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 8 pending IDs, 83 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
+This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 6 pending IDs, 85 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
 
 <details>
 <summary><strong>Editorial lineage and numbering state</strong></summary>
@@ -67,7 +67,8 @@ Authoritative records:
 - [Partial Batch 6 disposition](docs/BATCH6_SEC02_DISPOSITION_2026-11-24.md) — historical closure of SEC-02 at manuscript-contract level.
 
 - [Batch 7 disposition](docs/BATCH7_SEC06_DISPOSITION_2026-11-24.md) closes SEC-06 at manuscript-contract level. For all SEC-06 references, use the current defensive evaluation contract on pages 187–197. It requires written authorization, isolated synthetic checks, and evidence-backed runtime verdicts. The archived brief and older probe wording serve as provenance.
-- Four batches remain. Batch 6 contains [SEC-05, which awaits independent evidence](docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md). Batch 8 is the next manuscript review, followed by Batches 9 and 10.
+- [Batch 8 disposition](docs/BATCH8_P01_P02_DISPOSITION_2026-11-24.md) closes P-01 and P-02 at manuscript-contract level. Pages 209–212 define the P-01 scaffold. Pages 213–217 define the P-02 learning inventory. The original briefs are preserved as archival evidence.
+- Three batches remain. Batch 6 contains [SEC-05, which awaits independent evidence](docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md). Batch 9 is the next manuscript review, followed by Batch 10.
 
 ## Repository structure
 
@@ -75,7 +76,7 @@ Authoritative records:
 - `VERSION` — repository-package version.
 - `CHANGELOG.md` — material repository and publication changes.
 - `tools/validate_manual.py` — deterministic structural validator.
-- `tools/reconcile_entry_lineage.py` — deterministic 8/83/91 entry-lineage reconciler.
+- `tools/reconcile_entry_lineage.py` — deterministic 6/85/91 entry-lineage reconciler.
 - `tools/audit_editorial_lineage.py` — fail-closed renumbering, parity, PDF-boundary, and provenance audit.
 - `tools/classify_editorial_occurrences.py` — deterministic generator for the frozen token classifier.
 - `tools/inspect_manual.py` — bounded structural inventory for the large HTML artifact.
@@ -95,7 +96,7 @@ Authoritative records:
 
 ## Source-bound research history
 
-The live editorial inventory now records **8 pending / 83 non-pending IDs**, with **0/91 independently verified canonical bodies**. The Reactor identity adapter uses `workbench/data/current_entry_identity_index.json`, deterministically derived from the current `index.html`.
+The live editorial inventory now records **6 pending / 85 non-pending IDs**, with **0/91 independently verified canonical bodies**. The Reactor identity adapter uses `workbench/data/current_entry_identity_index.json`, deterministically derived from the current `index.html`.
 
 Previously issued Phase V–VIII source-bound evidence (including the 629-decision adjudication queue) is **not relabeled** as current: it remains pinned to the original Batch 3 `index.html` digest `1f06445e…`. A byte-identical standalone HTML snapshot is preserved at `tests/fixtures/batch3-canonical-1f06445e.html` for offline verification and historical test replay. The adjudication workbench requires the matching original HTML, not the latest `index.html`, for source-hash verification. Recreating or rebinding its research manifest requires a separate, independently tested migration.
 
@@ -116,8 +117,8 @@ python tools/reconcile_entry_lineage.py \
   --input index.html \
   --json entry-lineage.json \
   --markdown entry-lineage.md \
-  --expect-pending 8 \
-  --expect-drafted 83 \
+  --expect-pending 6 \
+  --expect-drafted 85 \
   --expect-total 91 \
   --expect-pages 315 \
   --enforce
@@ -128,11 +129,11 @@ python tools/audit_editorial_lineage.py \
   --markdown editorial-lineage.md
 ```
 
-The reports record the exact SHA-256 of `index.html`. They establish structure, 8/83/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
+The reports record the exact SHA-256 of `index.html`. They establish structure, 6/85/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
 
 ## Release policy
 
-Stable release remains blocked by disposition of the 8 remaining pending entries, final regression browser/accessibility review after content closeout, independent or equivalent editorial review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
+Stable release remains blocked by disposition of the 6 remaining pending entries, final regression browser/accessibility review after content closeout, independent or equivalent editorial review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
 
 ## Project
 
