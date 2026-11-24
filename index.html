@@ -327,11 +327,11 @@
 <header class="hdr">
   <div>
     <h1 class="hdr-title">PTSP — <span>Pending Entry Draft Plan</span></h1>
-    <div style="font-size:12px;color:var(--dim);margin-top:4px;">10 pending entries · 5 remaining batches · drafting authority</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px;">9 pending entries · 5 remaining batches · drafting authority</div>
   </div>
   <div class="hdr-meta">
     Source: GNOME_Prompt_Field_Manual_v3_final.docx<br>
-    Production state: 81 drafted · 0 restore · 10 pending<br>
+    Production state: 82 drafted · 0 restore · 9 pending<br>
     Restore phase: LOCKED
   </div>
 </header>
@@ -348,8 +348,8 @@
 </nav>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num sn-pending">10</div><div class="stat-label">Pending Entries</div></div>
-  <div class="stat"><div class="stat-num sn-drafted">81</div><div class="stat-label">Drafted</div></div>
+  <div class="stat"><div class="stat-num sn-pending">9</div><div class="stat-label">Pending Entries</div></div>
+  <div class="stat"><div class="stat-num sn-drafted">82</div><div class="stat-label">Drafted</div></div>
   <div class="stat"><div class="stat-num sn-caution">5</div><div class="stat-label">Special Caution</div></div>
   <div class="stat"><div class="stat-num sn-batch">5</div><div class="stat-label">Remaining Batches</div></div>
   <div class="stat"><div class="stat-num sn-total">91</div><div class="stat-label">Total Entries</div></div>
@@ -364,7 +364,7 @@
   <div class="section-hdr">
     <span class="section-kicker">Section 1</span>
     <h2 class="section-title">Pending Entry Inventory by Part</h2>
-    <span class="section-count">10 entries · 2 parts</span>
+    <span class="section-count">9 entries · 2 parts</span>
   </div>
 
   <div class="callout" style="margin-bottom:20px;border-left-color:var(--purple);">
@@ -372,9 +372,8 @@
   </div>
 
   <div class="part-block">
-    <div class="part-label">Part V — Prompts That Survive Attack · 3 pending</div>
-    <div class="entry-row caution"><span class="er-id">SEC-02</span><span class="er-name">Prompt Firewall Designer</span><span class="er-why">Part 0 audit: KEEP — canary strategy is distinctive. Security boundary: must not teach injection.</span><span class="er-badge badge-keep">Keep</span></div>
-    <div class="entry-row caution"><span class="er-id">SEC-05</span><span class="er-name">Command/Data Separator (Refactor)</span><span class="er-why">Part 0 audit: KEEP — annotated refactor output is genuinely useful. Must produce code, not advice.</span><span class="er-badge badge-keep">Keep</span></div>
+    <div class="part-label">Part V — Prompts That Survive Attack · 2 pending</div>
+    <div class="entry-row caution"><span class="er-id">SEC-05</span><span class="er-name">Command/Data Separator (Refactor)</span><span class="er-why">Part 0 audit: KEEP — annotated refactor output is genuinely useful. Must produce code, not advice. Insufficient evidence for closure. <a href="#b-sec05">Open drafting brief</a> · <a href="docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md">Unresolved evidence record</a>.</span><span class="er-badge badge-keep">Keep</span></div>
     <div class="entry-row caution"><span class="er-id">SEC-06</span><span class="er-name">Tool-Agent Offense Probe</span><span class="er-why">Part 0 audit: KEEP — dual-use framing is honest. HIGHEST caution. Must draft alone. Must pair every attack vector with a defensive control.</span><span class="er-badge badge-keep">Keep</span></div>
   </div>
 
@@ -401,25 +400,34 @@
   </div>
 
   <p style="font-size:13px;color:var(--text);line-height:1.8;margin-bottom:16px;">
-    Batches 1 through 5 are adjudicated. Remaining drafting begins with Batch 6 / Part V, using the adjudicated Parts I through III as the entry-level quality bar. Part V security entries come before Part VI to keep the book's hardest entries out of the final pass, where fatigue risk is highest. SEC-06 drafts alone. Part VI completes last because it carries the highest generic-prompt risk — the book's voice must be fully set before attempting entries that are intrinsically closest to commodity territory.
+    Batches 1 through 5 are adjudicated. Batch 6 remains open for SEC-05. Its outstanding evidence is tracked separately from the Batch 7 manuscript review. Part V security entries come before Part VI to keep the book's hardest entries out of the final pass, where fatigue risk is highest. SEC-06 drafts alone. Part VI completes last because it carries the highest generic-prompt risk — the book's voice must be fully set before attempting entries that are intrinsically closest to commodity territory.
   </p>
 
   <div class="callout" style="margin-bottom:16px;border-left-color:var(--green);">
-    <strong>Batches 1 through 3 completed 2026-08-24:</strong> T-01/T-02, W-01/W-02/W-03, and R-01/R-03 passed bounded disposition and were promoted from pending to drafted state. The table below contains the seven remaining production batches; the original Batch 1 drafting prompt remains preserved in Section 6 as historical provenance.
+    <strong>Batches 1 through 3 completed 2026-08-24:</strong> T-01/T-02, W-01/W-02/W-03, and R-01/R-03 passed bounded disposition and were promoted from pending to drafted state. The original Batch 1 drafting prompt remains preserved in Section 6 as historical provenance.
+  </div>
+
+  <div class="callout" id="sec02-disposition" style="margin-bottom:16px;border-left-color:var(--green);">
+    <strong>SEC-02 closed with a manuscript-contract PASS.</strong>
+    Follow the <a href="#manual-page-156">current canary evidence guidance on page 156</a>.
+    A match may trigger quarantine or investigation under policy. Injection attribution requires independent corroborating evidence.
+    The original drafting brief is archived as historical evidence.
+    <a href="docs/BATCH6_SEC02_DISPOSITION_2026-11-24.md">Read the disposition record</a> and
+    <a href="docs/BATCH6_ADJUDICATION_AMENDMENT_2026-11-24.md">the superseding interpretation</a>.
   </div>
 
   <table class="batch-table">
     <thead>
       <tr>
-        <th>Priority</th>
         <th>Batch</th>
         <th>Entries</th>
+        <th>Count</th>
         <th>Rationale</th>
       </tr>
     </thead>
     <tbody>
 
-      <tr><td class="batch-num">6</td><td class="batch-entries">SEC-02, SEC-05</td><td class="batch-size">2</td><td class="batch-rationale">Part V — lower-caution security entries. Both are explicitly defensive (firewall design, refactoring). Can draft together.</td></tr>
+      <tr><td class="batch-num">6</td><td class="batch-entries">SEC-05</td><td class="batch-size">1</td><td class="batch-rationale">Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.</td></tr>
       <tr><td class="batch-num">7</td><td class="batch-entries">SEC-06</td><td class="batch-size">1</td><td class="batch-rationale">Tool-Agent Offense Probe. Highest dual-use risk. Drafts alone. Full defensive framing review before DOCX insertion.</td></tr>
       <tr><td class="batch-num">8</td><td class="batch-entries">P-01, P-02</td><td class="batch-size">2</td><td class="batch-rationale">Part VI UPGRADE entries. Both have specific audit mandates. Draft first in Part VI to establish the section's quality floor before the new entries.</td></tr>
       <tr><td class="batch-num">9</td><td class="batch-entries">P-06, P-07</td><td class="batch-size">2</td><td class="batch-rationale">Work Sample Annotator and Changelog Curation Engine. Operationally specific — lower generic-prompt risk than P-08–P-10.</td></tr>
@@ -482,7 +490,12 @@
       <span class="caution-level">Security Boundary</span>
     </div>
     <div class="caution-body">
-      SEC-02 designs defenses, not attacks. The failure mode is producing content that teaches injection techniques in order to "explain what the firewall defends against." SEC-01 handles attack classification — SEC-02 must not duplicate it. <strong>The firewall design output is an architecture specification: what gets validated, where, at what confidence threshold, with what fallback.</strong> The canary strategy section (flagged by the Part 0 audit as the distinctive element) must be expanded: canary tokens are specific sequences injected by the system that only the model should know, whose appearance in output signals a successful injection. Add behavioral baseline definition: what normal model behavior looks like, so deviations can be detected. Draft this after SEC-01 is fully locked.
+      <a href="#sec02-disposition">SEC-02 disposition and current guidance</a>.
+      The firewall architecture specifies where validation occurs, decision thresholds, and safe fallback.
+      Its behavioral baseline defines expected behavior and measurable alert thresholds.
+      Exact, fragment, and pattern-only canary matches are observations. Verify their provenance and authorization.
+      A match may trigger quarantine or investigation under policy.
+      Attribute injection only when independent, trustworthy evidence links untrusted input to a policy-violating change.
     </div>
   </div>
 
@@ -525,7 +538,7 @@
   <div class="section-hdr">
     <span class="section-kicker">Section 5</span>
     <h2 class="section-title">Per-Entry Drafting Briefs</h2>
-    <span class="section-count">10 entries</span>
+    <span class="section-count">9 entries</span>
   </div>
 
   <!-- S-01 -->
@@ -536,23 +549,6 @@
 
   <!-- S-03 -->
 
-
-  <!-- SEC-02 -->
-  <div class="brief" id="b-sec02">
-    <div class="brief-hdr" onclick="toggle('b-sec02')" style="border-top-color:var(--red);">
-      <span class="brief-id" style="color:var(--red);">SEC-02</span>
-      <span class="brief-name">Prompt Firewall Designer</span>
-      <span class="brief-criteria">CRITERIA 5, 7, 9</span>
-      <span class="audit-chip ac-keep">Keep</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">Part 0 audit: KEEP. "Canary strategy section is distinctive. Most firewall guidance stops at input sanitization." Upgrade: "Expand canary section. Add behavioral baseline definition."</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">SEC-01 (Prompt Injection Recognizer — PRIOR: classify the injection surface before designing the firewall), SEC-09 (Indirect Injection Tracer — FOLLOW-UP: after the firewall is designed, trace all indirect injection paths to verify coverage), SEC-10 (Trust Boundary Mapper — the firewall architecture must respect the trust boundaries mapped by SEC-10)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Teaching injection in order to explain what the firewall defends against. SEC-01 handles the taxonomy of attacks. SEC-02 handles the defense architecture — it does not need to re-explain what injection is. Canary strategy: specific sequences inserted by the system that should never appear in outputs; if they do, an injection has occurred. Behavioral baseline: what the model's output distribution looks like under normal operation, so statistical deviations can trigger alerts.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Firewall architecture specification: INPUT VALIDATION LAYER (what gets validated before reaching the model), CANARY TOKEN DESIGN (specific canary sequences and monitoring logic), BEHAVIORAL BASELINE DEFINITION (output characteristics that define normal behavior), ALERT THRESHOLDS (what triggers a firewall response), FALLBACK BEHAVIOR (what the system does when a firewall fires).</div></div>
-    </div>
-  </div>
 
   <!-- SEC-05 -->
   <div class="brief" id="b-sec05">
@@ -19447,9 +19443,8 @@ function toggle(id) {
   const el = document.getElementById(id);
   el.classList.toggle('open');
 }
-// Open first two briefs by default
+// Open the first pending brief by default
 document.getElementById('b-sec05').classList.add('open');
-document.getElementById('b-sec02').classList.add('open');
 
 
 function switchManualView(view) {

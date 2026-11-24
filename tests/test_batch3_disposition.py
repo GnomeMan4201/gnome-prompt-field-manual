@@ -54,8 +54,8 @@ class Batch3DispositionTests(unittest.TestCase):
         self.assertEqual(
             validate_expectations(
                 result,
-                expected_pending=10,
-                expected_drafted=81,
+                expected_pending=9,
+                expected_drafted=82,
                 expected_total=91,
                 expected_pages=315,
             ),
@@ -122,10 +122,10 @@ class Batch3DispositionTests(unittest.TestCase):
         self.assertIn("separate assessment-status outcome", search)
         self.assertIn("r-05 (failure-to-test converter)", search)
 
-    def test_startup_targets_first_two_remaining_briefs(self) -> None:
+    def test_startup_targets_first_remaining_brief(self) -> None:
         source = INDEX.read_text(encoding="utf-8")
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", source)
-        self.assertIn("document.getElementById('b-sec02').classList.add('open');", source)
+        self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", source)
         self.assertNotIn("document.getElementById('b-r01').classList.add('open');", source)
         self.assertNotIn("document.getElementById('b-r03').classList.add('open');", source)
         self.assertNotIn('<td class="batch-entries">R-01, R-03</td>', source)

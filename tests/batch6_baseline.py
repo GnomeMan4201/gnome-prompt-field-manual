@@ -28,3 +28,15 @@ def correction_bytes(path: str) -> bytes:
         return subprocess.check_output(["git", "show", f"{PR39_MERGE}:{path}"], cwd=ROOT)
     except subprocess.CalledProcessError as error:
         raise RuntimeError(f"Final Batch 6 verification requires Git history containing {PR39_MERGE}") from error
+
+
+PR40_MERGE = "cc155b1190c968a8fe5c8f5448f49ea50742feff"
+PARTIAL_SOURCE_SHA = "8735ebe991b4428fe9a210649d699365f449f2efc87450397df6fec039b0e97a"
+
+
+@cache
+def adjudication_bytes(path: str) -> bytes:
+    try:
+        return subprocess.check_output(["git", "show", f"{PR40_MERGE}:{path}"], cwd=ROOT)
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError(f"Partial Batch 6 verification requires Git history containing {PR40_MERGE}") from error

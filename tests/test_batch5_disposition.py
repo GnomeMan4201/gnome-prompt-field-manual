@@ -7,7 +7,7 @@ import re
 import unittest
 from pathlib import Path
 
-from batch6_baseline import FINAL_SOURCE_SHA, baseline_bytes
+from batch6_baseline import PARTIAL_SOURCE_SHA, baseline_bytes
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,19 +61,19 @@ class Batch5DispositionTests(unittest.TestCase):
         self.assertEqual(s10["occurrencePages"], [140])
         self.assertIsNone(s10["canonicalBody"])
 
-    def test_counts_and_next_active_briefs(self):
+    def test_counts_and_next_active_brief(self):
         r = reconcile(SOURCE)
         self.assertEqual(validate_expectations(
-            r, expected_pending=10, expected_drafted=81,
+            r, expected_pending=9, expected_drafted=82,
             expected_total=91, expected_pages=315
         ), [])
-        self.assertEqual(r.summary.drafting_briefs, 10)
+        self.assertEqual(r.summary.drafting_briefs, 9)
         self.assertEqual(r.summary.source_counts.batches, 5)
         self.assertEqual(r.summary.source_counts.caution, 5)
-        self.assertEqual(self.identity["counts"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
-        self.assertEqual(self.identity["sourceIndexSha256"], FINAL_SOURCE_SHA)
+        self.assertEqual(self.identity["counts"], {"pending": 9, "drafted": 82, "total": 91, "pages": 315})
+        self.assertEqual(self.identity["sourceIndexSha256"], PARTIAL_SOURCE_SHA)
         self.assertEqual(self.identity["bodyCoverage"], 0)
-        self.assertIn("document.getElementById('b-sec02').classList.add('open');", self.source)
+        self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", self.source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)
 
     def test_crosswalk_is_approved_as_subsumed_not_a_new_body(self):
