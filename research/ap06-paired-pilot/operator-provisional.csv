@@ -1,0 +1,13 @@
+id,claim_1,claim_2,rationale
+ddbba4377a6d,X,X,Grades the source opening statement and gives incompatible closing explanations.
+ed0f289a37e5,S,X,Explicitly supports 09:00 and alternately affirms and rejects the closing assertion.
+3886d663f061,X,R,No direct finding about the south stair. Calls the two north treads claim incorrect.
+e9d3e23a670e,S,S,Explicitly endorses both submitted claims.
+09a7b0c81947,S,X,Final conclusion affirms the south stair claim. No finding on the second claim.
+855be3d27421,X,R,Grades the three-grades source statement instead of all passing. Calls only R passing contradicted.
+a1e2e4482cee,X,X,Inconsistent linen conclusions and uses panel totals as purported evidence about linen.
+a458118bc8d1,S,X,Affirms linen. Insufficient-evidence label conflicts with explanation of contrary count.
+a88a391152a1,S,X,Concludes increase of three despite a bad calculation. Discusses counting method without deciding shelter causation.
+53221e462689,X,X,Both submissions are alternately supported and contradicted.
+866cade421ad,S,U,Recognizes increase of three and explicitly states reason for increase is unavailable despite irrelevant method discussion.
+50e437580bb2,S,S,Endorses both submissions even though they conflict.

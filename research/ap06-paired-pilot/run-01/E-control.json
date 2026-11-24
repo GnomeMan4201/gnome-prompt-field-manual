@@ -1,0 +1,9 @@
+{
+  "case": "E",
+  "arm": "control",
+  "prompt": "<|im_start|>user\nReview the submission for accuracy using the supplied sources. For each claim, explain your finding and what the reviewer should do next.\n\nTask: Check each numbered claim for the editor. For each number give one finding: SUPPORTED, NEEDS REVISION (contradicted), or INSUFFICIENT EVIDENCE. Give a short reason.\n\nE1: At station Blue, the 2024 count was 9 and the 2025 count was 12. E2: The counting method was unchanged.\n\n1. The count rose by three. 2. A new shelter caused the increase.<|im_end|>\n<|im_start|>assistant\n",
+  "exit_code": 0,
+  "elapsed_seconds": 5.317,
+  "stdout": "",
+  "stderr": ""
+}

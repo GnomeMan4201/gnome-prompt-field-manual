@@ -1,0 +1,9 @@
+{
+  "case": "D",
+  "arm": "control",
+  "prompt": "<|im_start|>user\nReview the submission for accuracy using the supplied sources. For each claim, explain your finding and what the reviewer should do next.\n\nTask: Check each numbered claim for the editor. For each number give one finding: SUPPORTED, NEEDS REVISION (contradicted), or INSUFFICIENT EVIDENCE. Give a short reason.\n\nD1: Batch L yielded 42 usable tiles. D2: No kiln temperature was logged for batch L.\n\n1. Batch L was fired at 800 degrees. 2. Batch L yielded 24 usable tiles.<|im_end|>\n<|im_start|>assistant\n",
+  "exit_code": 0,
+  "elapsed_seconds": 3.699,
+  "stdout": "",
+  "stderr": ""
+}
