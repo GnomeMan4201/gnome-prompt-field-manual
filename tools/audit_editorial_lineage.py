@@ -45,6 +45,25 @@ HISTORICAL_RECORDS = {
 CLASSIFIER_PATH = "docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv"
 
 PAGE_RULES = {
+    "manual-page-133": {
+        "required": (
+            "rollback trigger conditions",
+            "observable failure signal",
+            "measurable threshold or condition",
+            "[requires operational confirmation]",
+            "evaluation window",
+            "evidence source or monitoring mechanism",
+            "responsible decision owner",
+            "immediate halt or rollback action",
+            "escalation procedure",
+            "does not monitor production",
+        ),
+        "forbidden": (),
+    },
+    "manual-page-140": {
+        "required": ("s-10 architecture decision record generator",),
+        "forbidden": ("s-10 migration risk classifier",),
+    },
     "manual-page-076": {
         "required": ("r-07 (competing hypotheses table)",),
         "forbidden": (),

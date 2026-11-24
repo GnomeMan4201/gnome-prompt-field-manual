@@ -21,10 +21,10 @@ HISTORICAL_QUEUE = ROOT / "workbench/data/adjudication_queue.json"
 HISTORICAL_INDEX = ROOT / "workbench/data/entry_identity_index.json"
 HISTORICAL_HTML = ROOT / "tests/fixtures/batch3-canonical-1f06445e.html"
 
-CURRENT_SHA = "8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd"
+CURRENT_SHA = "ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab"
 BASELINE_SHA = "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
 BATCH4_PAGE_SHA = "145b5fe00fedfa43d2a098f3bca1e59e6a9d7ffef8e4a378bc0852626a2d9a1a"
-ALL_PAGE_SHA = "a05c4eaa08489f8125dcd242e2b4d0059de6627920eb7a3f04b6f48150b94e0d"
+ALL_PAGE_SHA = "4b5e506301981930a1efce5211fd4ad15225ea07b62f562ced0db1d2bb9127fe"
 CARD_PATTERN = re.compile(
     r'<article class="manual-page-card" id="manual-page-(\d{3})"[^>]*>.*?</article>',
     re.S,
@@ -58,11 +58,11 @@ class Batch4DispositionTests(unittest.TestCase):
         cls.source = INDEX.read_text(encoding="utf-8")
         cls.cards = cards(cls.source)
 
-    def test_exact_source_hash_and_document_binding(self):
+    def test_current_source_hash_and_frozen_batch4_doc_binding(self):
         self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), CURRENT_SHA)
-        self.assertIn("Final `index.html` SHA-256: `" + CURRENT_SHA + "`", DOC.read_text())
+        self.assertIn("Final `index.html` SHA-256: `8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd`", DOC.read_text())
 
-    def test_all_315_canonical_pages_are_frozen(self):
+    def test_315_canonical_pages_and_frozen_batch4_pages(self):
         self.assertEqual(len(self.cards), 315)
         self.assertEqual(sorted(self.cards), list(range(1, 316)))
         self.assertEqual(fingerprint(self.cards, list(range(1, 316))), ALL_PAGE_SHA)

@@ -1,5 +1,5 @@
 (function(root){'use strict';
-const EXPECTED_SOURCE='8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd';
+const EXPECTED_SOURCE='ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab';
 async function loadIndex(path){
  const response=await fetch(path||'../data/current_entry_identity_index.json',{cache:'no-store'});
  if(!response.ok)throw Error('SOURCE_INDEX_FETCH_FAILED:'+response.status);
