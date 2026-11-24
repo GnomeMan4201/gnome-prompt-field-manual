@@ -101,8 +101,8 @@ async function assertInitialState(page) {
 async function assertEditorDispositions(page) {
   const inventory = page.locator('#inventory');
   const sec05 = inventory.locator('.entry-row').filter({ hasText: 'SEC-05' });
-  assert.equal(await inventory.locator('.entry-row').count(), 6);
-  for (const id of ['P-01', 'P-02']) {
+  assert.equal(await inventory.locator('.entry-row').count(), 4);
+  for (const id of ['P-01', 'P-02', 'P-06', 'P-07']) {
     assert.equal(await inventory.locator('.er-id').filter({ hasText: id }).count(), 0);
     assert.equal(await page.locator('#b-' + id.toLowerCase().replace('-', '')).count(), 0);
   }
@@ -138,7 +138,21 @@ async function assertEditorDispositions(page) {
   await batch8.getByRole('link', { name: 'P-02 learning inventory' }).click();
   await page.locator('#manual-page-213:target').waitFor({ state: 'visible' });
 
-  assert.deepEqual(await page.locator('.batch-table .batch-num').allTextContents(), ['6', '9', '10']);
+  const batch9 = page.locator('#batch9-disposition');
+  assert.match(await batch9.innerText(), /Batch 9 closed as SUBSUMED at manuscript-contract level/);
+  for (const [name, number] of [
+    ['canonical P-05 Work Sample Annotator', 222],
+    ['canonical P-06 Changelog Curation Engine', 228],
+    ['Canonical P-07 RFC Draft Generator', 232],
+    ['canonical S-10 Architecture Decision Record Generator', 140],
+  ]) {
+    await batch9.getByRole('link', { name, exact: true }).click();
+    await page.locator('#manual-page-' + number + ':target').waitFor({ state: 'visible' });
+  }
+  assert.equal(await batch9.getByRole('link', { name: 'the identity crosswalk' }).getAttribute('href'),
+    'workbench/data/batch9_identity_crosswalk.json');
+  assert.deepEqual(await inventory.locator('.er-id').allTextContents(), ['SEC-05', 'P-08', 'P-09', 'P-10']);
+  assert.deepEqual(await page.locator('.batch-table .batch-num').allTextContents(), ['6', '10']);
   assert.deepEqual(await page.locator('.batch-table tbody tr').first().locator('td').allTextContents(),
     ['6', 'SEC-05', '1', 'Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.']);
 }

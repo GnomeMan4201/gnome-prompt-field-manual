@@ -1,0 +1,15 @@
+  <div class="brief" id="b-p07">
+    <div class="brief-hdr" onclick="toggle('b-p07')">
+      <span class="brief-id">P-07</span>
+      <span class="brief-name">Changelog Curation Engine</span>
+      <span class="brief-criteria">CRITERIA 6, 9</span>
+      <span class="audit-chip ac-new">New</span>
+      <span class="brief-chevron">▶</span>
+    </div>
+    <div class="brief-body">
+      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">New entry from v3 master selection. Not in Part 0 audit.</div></div>
+      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">S-09 (Architecture Decision Record Generator — ADRs become source material for a curated changelog), P-04 (Technical Post-Mortem Publisher — when changelog entries document incident-related changes)</div></div>
+      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Bullet list of what changed. A curated changelog tells readers what MATTERS and why — it has a significance rating, a user impact statement, and a reasoning note for non-obvious changes. Entries with no user impact should be marked as internal and placed in a separate section, not omitted. The changelog is not a commit log.</div></div>
+      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Curated changelog: USER-FACING CHANGES section (each entry with: change description, user impact, significance: HIGH/MEDIUM/LOW), INTERNAL CHANGES section (separate, lower prominence), REMOVED/DEPRECATED section (explicitly called out). Each HIGH-significance entry gets a one-sentence rationale.</div></div>
+    </div>
+  </div>
