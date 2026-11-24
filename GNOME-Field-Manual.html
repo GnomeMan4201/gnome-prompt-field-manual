@@ -81,7 +81,7 @@
       transition: color 160ms var(--ease), background 160ms var(--ease);
     }
     .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-    .nav-link[aria-selected="true"] { color: var(--text); background: rgba(255,255,255,0.1); }
+    .nav-link[aria-current="page"] { color: var(--text); background: rgba(255,255,255,0.1); }
 
     .container { max-width: 1120px; margin: 0 auto; padding: 36px 20px 96px; }
     @media (max-width: 600px) { .container { padding: 20px 16px 72px; } }
@@ -6135,16 +6135,16 @@ Previous Draft</div>
         <span class="brand-dot" aria-hidden="true"></span>
         <span>GNOME</span>
       </button>
-      <nav class="nav-links" role="tablist" aria-label="Primary Navigation">
-        <button type="button" role="tab" class="nav-link" data-view="home" aria-selected="true">Overview</button>
-        <button type="button" role="tab" class="nav-link" data-view="book" aria-selected="false">Book</button>
-        <button type="button" role="tab" class="nav-link" data-view="reactor" aria-selected="false">Reactor</button>
-        <button type="button" role="tab" class="nav-link" data-view="workbench" aria-selected="false">Workbench</button>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <button type="button" class="nav-link" data-view="home" aria-current="page">Overview</button>
+        <button type="button" class="nav-link" data-view="book" aria-current="false">Book</button>
+        <button type="button" class="nav-link" data-view="reactor" aria-current="false">Reactor</button>
+        <button type="button" class="nav-link" data-view="workbench" aria-current="false">Workbench</button>
       </nav>
     </div>
   </header>
 
-  <main class="container" id="main-root" hidden aria-live="polite"></main>
+  <main class="container" id="main-root" hidden></main>
 
   <script>
     (function () {
@@ -6330,7 +6330,7 @@ Previous Draft</div>
                   '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
                     '<button type="button" class="btn-ivory" id="prev-pg" ' + (state.pageIndex === 0 ? 'disabled' : '') + '>&larr; Previous</button>' +
                     '<button type="button" class="btn-ivory" id="next-pg" ' + (state.pageIndex === state.pages.length - 1 ? 'disabled' : '') + '>Next &rarr;</button>' +
-                    '<button type="button" class="btn-ivory ' + (isBm ? 'is-active' : '') + '" id="toggle-bm">' + (isBm ? 'Bookmarked' : 'Bookmark') + '</button>' +
+                    '<button type="button" class="btn-ivory ' + (isBm ? 'is-active' : '') + '" id="toggle-bm" aria-pressed="' + isBm + '">' + (isBm ? 'Bookmarked' : 'Bookmark') + '</button>' +
                   '</div>' +
                   (cur.reactorScenario ? '<button type="button" class="btn-primary" id="open-linked-reactor" data-rscen="' + esc(cur.reactorScenario) + '">Open Reactor Scenario &rarr;</button>' : '') +
                 '</div>' +
@@ -6378,7 +6378,7 @@ Previous Draft</div>
       }
 
       function render() {
-        navLinks.forEach(function (n) { n.setAttribute('aria-selected', n.getAttribute('data-view') === state.view ? 'true' : 'false'); });
+        navLinks.forEach(function (n) { n.setAttribute('aria-current', n.getAttribute('data-view') === state.view ? 'page' : 'false'); });
         if (state.view === 'home') root.innerHTML = renderHome();
         else if (state.view === 'book') root.innerHTML = renderBook();
         else if (state.view === 'reactor') root.innerHTML = renderReactor();
@@ -6434,6 +6434,7 @@ Previous Draft</div>
           var i = state.bookmarks.indexOf(id);
           if (i === -1) state.bookmarks.push(id); else state.bookmarks.splice(i, 1);
           saveBookmarks(); render();
+          document.getElementById('toggle-bm').focus();
         });
         var olr = document.getElementById('open-linked-reactor');
         if (olr) olr.addEventListener('click', function () { state.scenario = olr.getAttribute('data-rscen'); navigate('reactor', '#reactor', true); });
