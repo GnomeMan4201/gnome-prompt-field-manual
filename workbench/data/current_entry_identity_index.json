@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "208211b102aa75bf9f35fefbd2c33cf7f89365a8468058abd8567b8b442937d6",
+  "sourceIndexSha256": "28fd210da6ec549d64d31b2aa79433843df3c04e6aeab3aa31b53ee5007c6dbd",
   "counts": {
     "pending": 4,
     "drafted": 87,
@@ -68,7 +68,7 @@
     },
     {
       "id": "AP-03",
-      "titleCandidate": "(Source Flattening Alarm) if the error origi-",
+      "titleCandidate": "(Source Flattening Alarm) when the source was misattributed. Use",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
       "status": "NON_PENDING",
       "pendingInventory": false,
@@ -718,6 +718,7 @@
         217,
         227,
         232,
+        248,
         252
       ],
       "canonicalBody": null,
@@ -743,6 +744,7 @@
         227,
         232,
         237,
+        247,
         258,
         273,
         307
@@ -829,9 +831,7 @@
       "pendingInventory": true,
       "draftingBrief": true,
       "occurrencePages": [
-        238,
-        241,
-        242
+        238
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
@@ -851,9 +851,7 @@
       "pendingInventory": true,
       "draftingBrief": true,
       "occurrencePages": [
-        242,
-        246,
-        247
+        242
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
@@ -873,8 +871,7 @@
       "pendingInventory": true,
       "draftingBrief": true,
       "occurrencePages": [
-        247,
-        252
+        247
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
@@ -1112,6 +1109,7 @@
         91,
         101,
         105,
+        247,
         307
       ],
       "canonicalBody": null,
@@ -1351,6 +1349,7 @@
         117,
         135,
         138,
+        252,
         260
       ],
       "canonicalBody": null,
@@ -1372,7 +1371,9 @@
       "draftingBrief": false,
       "occurrencePages": [
         140,
-        232
+        232,
+        251,
+        252
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
@@ -1630,6 +1631,7 @@
         111,
         161,
         205,
+        252,
         260,
         261,
         271,
@@ -1796,6 +1798,7 @@
       "occurrencePages": [
         23,
         216,
+        239,
         267,
         307
       ],
@@ -2114,6 +2117,7 @@
         216,
         227,
         232,
+        242,
         247,
         269,
         307

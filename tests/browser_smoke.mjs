@@ -51,6 +51,20 @@ const reviewedPages = [
   [230, 'REMOVED/DEPRECATED'],
   [231, 'net-zero reverted work'],
   [232, 'RFC Draft Generator'],
+  [239, 'CLASSIFICATION'],
+  [240, 'SUMMARY TABLE'],
+  [241, 'three-part response package'],
+  [242, 'SAFETY NOTES'],
+  [244, 'ERROR DESCRIPTION'],
+  [245, 'MATERIAL CORRECTION'],
+  [246, 'EXPECTED OUTPUT'],
+  [247, 'Negative Result Documenter'],
+  [248, 'THE PROMPT'],
+  [249, 'CONTRIBUTION SCOPE'],
+  [250, 'ACCEPTANCE CRITERIA'],
+  [251, 'FIRST CONTRIBUTION GUIDE'],
+  [252, 'FAILURE MODE'],
+  [253, 'SAFETY NOTES'],
 ];
 const browser = await engines[browserName].launch({ headless: true });
 
