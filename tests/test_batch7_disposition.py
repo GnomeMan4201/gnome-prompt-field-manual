@@ -4,19 +4,21 @@ from collections import Counter
 import json
 import re
 import subprocess
+from pathlib import Path
+import tempfile
 import unittest
 
 from batch7_baseline import (
     BATCH7_DISPOSITION_SOURCE_SHA, BATCH7_SOURCE_SHA, PR42_MERGE, ROOT,
     corrected_sec06_bytes, merged_disposition_bytes,
 )
+from batch8_baseline import batch8_base_bytes
 from test_batch6_correction import (
     ADAPTER_PATH, EXPECTED_PDF_SHA256, HISTORICAL_ROOTS, INDEX_PATH, cards, digest,
 )
 from test_batch6_partial_disposition import extract_brief
 from tools.reconcile_entry_lineage import TreeParser, field_text, reconcile, validate_expectations
 
-SOURCE = ROOT / "index.html"
 ARCHIVE = "tests/fixtures/batch7-sec06-frozen-brief.html"
 ADJUDICATION = "docs/BATCH7_SEC06_ADJUDICATION_2026-11-24.md"
 DISPOSITION = "docs/BATCH7_SEC06_DISPOSITION_2026-11-24.md"
@@ -40,10 +42,13 @@ def sec06_caution(root):
 class Batch7DispositionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = SOURCE.read_bytes()
+        cls.raw = batch8_base_bytes("index.html")
         cls.base = corrected_sec06_bytes("index.html")
         cls.workspace = parse_workspace(cls.raw)
-        cls.lineage = reconcile(SOURCE)
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "index.html"
+            source.write_bytes(cls.raw)
+            cls.lineage = reconcile(source)
 
     def test_inventory_and_schedule(self):
         self.assertEqual(validate_expectations(
@@ -67,10 +72,10 @@ class Batch7DispositionTests(unittest.TestCase):
         self.assertIn(f'href="{SEC05_EVIDENCE}"'.encode(), self.raw)
 
     def test_only_sec06_editorial_flags_change(self):
-        identity = json.loads((ROOT / INDEX_PATH).read_bytes())
+        identity = json.loads(batch8_base_bytes(INDEX_PATH))
         expected = json.loads(corrected_sec06_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), BATCH7_DISPOSITION_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH7_DISPOSITION_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH7_DISPOSITION_SOURCE_SHA}';", batch8_base_bytes(ADAPTER_PATH).decode())
         expected["sourceIndexSha256"] = BATCH7_DISPOSITION_SOURCE_SHA
         expected["counts"].update(pending=8, drafted=83)
         sec06 = next(row for row in expected["entries"] if row["id"] == "SEC-06")
@@ -97,7 +102,7 @@ class Batch7DispositionTests(unittest.TestCase):
             self.assertNotRegex(section.text(), SUPERSEDED)
         self.assertIn(b'older probe wording on pages 121, 261, and 271 is preserved for provenance', self.raw)
         self.assertIn(f'href="{DISPOSITION}"'.encode(), self.raw)
-        readme = (ROOT / "README.md").read_text()
+        readme = batch8_base_bytes("README.md").decode()
         self.assertIn("current defensive evaluation contract on pages 187–197", readme)
         self.assertIn("archived brief and older probe wording serve as provenance", readme)
         self.assertNotRegex(readme, SUPERSEDED)
@@ -113,7 +118,7 @@ class Batch7DispositionTests(unittest.TestCase):
         record = (ROOT / DISPOSITION).read_text()
         for binding in (
             PR42_MERGE, digest(original), digest(archived), digest(report), BATCH7_SOURCE_SHA,
-            BATCH7_DISPOSITION_SOURCE_SHA, digest((ROOT / INDEX_PATH).read_bytes()),
+            BATCH7_DISPOSITION_SOURCE_SHA, digest(batch8_base_bytes(INDEX_PATH)),
         ):
             self.assertIn(binding, record)
 
@@ -121,7 +126,7 @@ class Batch7DispositionTests(unittest.TestCase):
         actual = cards(self.raw)
         self.assertEqual(list(actual), list(range(1, 316)))
         self.assertEqual(actual, cards(self.base))
-        self.assertEqual((ROOT / "GNOME-Field-Manual.html").read_bytes(),
+        self.assertEqual(batch8_base_bytes("GNOME-Field-Manual.html"),
                          corrected_sec06_bytes("GNOME-Field-Manual.html"))
         pdf = re.search(rb'data="data:application/pdf;base64,([^"]+)"', self.raw)[1]
         self.assertEqual(digest(base64.b64decode(pdf, validate=True)), EXPECTED_PDF_SHA256)

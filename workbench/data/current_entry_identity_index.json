@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "3b02599e745910f647d4800160b6f22ef0192ff9520d61e4e08ae6f63ddd63ef",
+  "sourceIndexSha256": "bf6e9a6ee4c32d4ae517c4f8a5d9eebadc0e0a2da3d2bf2398667c1525353e25",
   "counts": {
     "pending": 8,
     "drafted": 83,
@@ -43,7 +43,7 @@
     },
     {
       "id": "AP-02",
-      "titleCandidate": "(Confidence",
+      "titleCandidate": "(Confidence Laundering Probe).",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
       "status": "NON_PENDING",
       "pendingInventory": false,
@@ -966,6 +966,7 @@
       "draftingBrief": false,
       "occurrencePages": [
         86,
+        216,
         263
       ],
       "canonicalBody": null,
@@ -1038,6 +1039,7 @@
       "occurrencePages": [
         96,
         212,
+        216,
         227,
         232,
         257,
@@ -2159,6 +2161,7 @@
         38,
         50,
         64,
+        212,
         277,
         307
       ],

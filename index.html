@@ -12909,7 +12909,7 @@ map has a significant advantage.
 
 208</pre>
 </article>
-<article class="manual-page-card" id="manual-page-209" data-manual-text="part vi — publishing serious artifacts prompts for converting work into publishable form. the stan- dard is: would this artifact be useful to someone who wasn’t involved in creating it? generic, safe, and vague fails that stan- dard. p-01 build-in-public post (structured) criteria: 6, 9, 10 — reusable artifact + ship cleaner + reusable output what it does converts project state into a structured build-in-public post skele- ton. not a draft — a scaffold that captures the actual state of the work, names a failure or constraint, and separates what was learned from what remains unproven. distinct from a general writing prompt because the structure enforces honesty: the fail- ure section is required, the evidence field is required, and a publication risk check prevents overclaiming before the post is shared. when to use when you have something concrete to share about a project in progress — a working thing, a fixed bug, a published artifact, a changed approach. when you want to build in public without 209">
+<article class="manual-page-card" id="manual-page-209" data-manual-text="part vi — publishing serious artifacts prompts for converting work into publishable form. the stan- dard is: would this artifact be useful to someone who wasn’t involved in creating it? generic, safe, and vague fails that stan- dard. p-01 build-in-public post (structured) criteria: 6, 9, 10 — reusable artifact + ship cleaner + reusable output what it does turns a project update into a fill-in-the-blank content skeleton. it gives the author five slots to check before writing: what changed, what worked, what failed, what changed in the working approach, and what to do next. evidence locators let a reviewer check the supplied claims. the publication risk check flags gaps the author must resolve. when to use use when you have a concrete change from work in progress, an observable result, and an actual attempt that did not work. the skeleton is for a reader who was outside the work. if you only have plans or a list of activities, record what evidence is missing before writing the post. 209">
   <div class="manual-page-head"><span>Page 209</span><em>Part VI — Publishing Serious</em></div>
   <pre>Part VI — Publishing Serious
 Artifacts
@@ -12933,218 +12933,141 @@ dard.
 
 WHAT IT DOES
 
-
-Converts project state into a structured build-in-public post skele-
-ton. Not a draft — a scaffold that captures the actual state of
-the work, names a failure or constraint, and separates what was
-learned from what remains unproven.  Distinct from a general
-writing prompt because the structure enforces honesty: the fail-
-ure section is required, the evidence field is required, and a
-publication risk check prevents overclaiming before the post is
-shared.
-
+Turns a project update into a fill-in-the-blank content skeleton. It
+gives the author five slots to check before writing: what changed, what
+worked, what failed, what changed in the working approach, and what to
+do next. Evidence locators let a reviewer check the supplied claims. The
+publication risk check flags gaps the author must resolve.
 
 WHEN TO USE
 
+Use when you have a concrete change from work in progress, an observable
+result, and an actual attempt that did not work. The skeleton is for a
+reader who was outside the work. If you only have plans or a list of
+activities, record what evidence is missing before writing the post.
 
-When you have something concrete to share about a project in
-progress — a working thing, a fixed bug, a published artifact, a
-changed approach. When you want to build in public without
 
-
-                                                      209</pre>
+209</pre>
 </article>
-<article class="manual-page-card" id="manual-page-210" data-manual-text="gnome prompt field manual producing self-promotional content. when a previous post drew criticism for vagueness or overclaiming. not for announcements of completed work with no remaining uncertainty — use p-04 (technical post-mortem publisher) for post-incident publication. the prompt produce a structured build-in-public post skeleton for the following project update. project/artifact: [project name / what you’re building] produce each section in order. 1. context project / artifact: [what you’re building — one sentence] current state: [what exists right now — specific, not aspirational. working code, deployed draft, 30% through x.] specific change made: [what actually changed since the last update — one concrete action with a result] what failed or did not work: [required. one specific thing that didn’t work, broke, or was harder than expected. if nothing failed, describe the most significant constraint or trade-off accepted.] what was learned: [what is now understood that wasn’t before — must be tied to the failure or change above, not a general observation] evidence to include: [screenshot, log output, commit hash, metric, or deployed url. state what you have. if nothing is available, flag this — a post with no evidence should not claim progress.] what i am not claiming yet: [what the evidence does not yet prove — what is still a hypothesis, not a result] next concrete step: [the specific next action, not a general direction] 2. publication risk check review each item and flag any that apply: fake progress: does the post claim progress without showing what changed? if yes, cut or add evidence. vague lessons learned: is “what i learned” tied to a specific event, not a general reflection? if not, rework or cut. premature claim: does the post claim something the current evidence does not support? flag each claim that needs qualification. over-polished narrative: are failures, dead ends, or trade-offs absent? if the post reads as a success story, it is not accurate. missing evidence: does the post assert results without showing them? link or attach evidence for every non-trivial claim. 210">
+<article class="manual-page-card" id="manual-page-210" data-manual-text="gnome prompt field manual for an incident account with a timeline and corrective actions, use p-04 (technical post-mortem publisher). the prompt produce a fill-in-the-blank content skeleton for an author to complete. inputs: project or artifact, work interval, specific change, observed success and failure, and available evidence. use supplied facts and identified evidence only. label statements about future work as plans. do not assemble a post. five mandatory slots — output these labels in order, with a fill-in field and a source locator for each factual claim. 1. what was built/done — [concrete artifact or change] [prior state, if known] [supplied evidence locator]. 2. one thing that worked — [specific result] [measure or observable success criterion and actual result] [supplied evidence locator]. 3. one thing that didn’t work — [actual failed attempt] [expected versus observed result] [supplied evidence locator]. a constraint or trade-off alone does not satisfy this slot. 4. what was learned — [operational lesson] [decision or working practice that should change] [which observation supports this lesson]. 5. next step — [specific action for the author or team] [owner if known] [observable completion check]. this is planned work. an appeal to the audience does not fill the slot. 210">
   <div class="manual-page-head"><span>Page 210</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
-
-producing self-promotional content. When a previous post drew
-criticism for vagueness or overclaiming. Not for announcements
-of completed work with no remaining uncertainty — use P-04
-(Technical Post-Mortem Publisher) for post-incident publication.
-
+For an incident account with a timeline and corrective actions, use P-04
+(Technical Post-Mortem Publisher).
 
 THE PROMPT
 
+Produce a fill-in-the-blank content skeleton for an author to complete.
+Inputs: project or artifact, work interval, specific change, observed
+success and failure, and available evidence. Use supplied facts and
+identified evidence only. Label statements about future work as plans.
+Do not assemble a post.
 
+FIVE MANDATORY SLOTS — Output these labels in order, with a fill-in
+field and a source locator for each factual claim.
 
+1. WHAT WAS BUILT/DONE — [Concrete artifact or change] [Prior state, if
+known] [Supplied evidence locator].
 
+2. ONE THING THAT WORKED — [Specific result] [Measure or observable
+success criterion and actual result] [Supplied evidence locator].
 
-   Produce a structured build-in-public post skeleton for the following
+3. ONE THING THAT DIDN’T WORK — [Actual failed attempt] [Expected versus
+observed result] [Supplied evidence locator]. A constraint or trade-off
+alone does not satisfy this slot.
 
-   project update.
+4. WHAT WAS LEARNED — [Operational lesson] [Decision or working practice
+that should change] [Which observation supports this lesson].
 
-   Project/artifact: [PROJECT NAME / WHAT YOU’RE BUILDING]
-
-   Produce each section in order.
-
-   1. CONTEXT PROJECT / ARTIFACT: [What you’re building — one sentence]
-
-   CURRENT STATE: [What exists right now — specific, not aspirational.
-
-   Working code, deployed draft, 30% through X.] SPECIFIC CHANGE MADE:
-
-   [What actually changed since the last update — one concrete action
-
-   with a result] WHAT FAILED OR DID NOT WORK: [Required. One specific
-
-   thing that didn’t work, broke, or was harder than expected. If
-
-   nothing failed, describe the most significant constraint or trade-off
-
-   accepted.] WHAT WAS LEARNED: [What is now understood that wasn’t
-
-   before — must be tied to the failure or change above, not a general
-
-   observation] EVIDENCE TO INCLUDE: [Screenshot, log output, commit
-
-   hash, metric, or deployed URL. State what you have. If nothing is
-
-   available, flag this — a post with no evidence should not claim
-
-   progress.] WHAT I AM NOT CLAIMING YET: [What the evidence does not
-
-   yet prove — what is still a hypothesis, not a result] NEXT CONCRETE
-
-   STEP: [The specific next action, not a general direction]
-
-   2. PUBLICATION RISK CHECK Review each item and flag any that apply:
-
-   FAKE PROGRESS: Does the post claim progress without showing what
-
-   changed? If yes, cut or add evidence. VAGUE LESSONS LEARNED: Is “what
-
-   I learned” tied to a specific event, not a general reflection? If
-
-   not, rework or cut. PREMATURE CLAIM: Does the post claim something
-
-   the current evidence does not support? Flag each claim that needs
-
-   qualification. OVER-POLISHED NARRATIVE: Are failures, dead ends, or
-
-   trade-offs absent? If the post reads as a success story, it is not
-
-   accurate. MISSING EVIDENCE: Does the post assert results without
-
-   showing them? Link or attach evidence for every non-trivial claim.
-
-
+5. NEXT STEP — [Specific action for the author or team] [Owner if known]
+[Observable completion check]. This is planned work. An appeal to the
+audience does not fill the slot.
 
 
 210</pre>
 </article>
-<article class="manual-page-card" id="manual-page-211" data-manual-text=" hiding the failure: is the failure section present and specific? “things took longer than expected” is not a named failure. 3. output scaffold post title options: [three options — one specific, one question-form, one lesson-forward] one-sentence context: [opening sentence — what you’re building and where you are] final post draft: [assembled draft using the sections above: context, specific change, failure, lesson, evidence, what remains unproven, next step] inputs needed a project or artifact in progress, a specific change or update from a recent work session, and at least one concrete failure or con- straint encountered. the more specific the input — names of things, numbers, error messages, specific decisions — the more specific the output. generic inputs produce generic post drafts. expected output a three-section build-in-public post skeleton: a context block cap- turing current project state and specific change; a publication risk check flagging overclaiming, missing evidence, hidden fail- ures, and vague lessons; and an output scaffold with title options, opening sentence, and assembled draft. the draft is a functional starting point, not a finished post. if the publication risk check finds no issues in a post describing a project in progress, the input was not specific enough. knobs add “platform: [dev.to / hacker news / linkedin / substack]” to calibrate length, link style, and audience assumption. add “evi- dence available: [describe what you have]” to anchor evidence to include to what actually exists rather than what could be gathered. add “tone: [peer-to-peer / technical / casual]” to cali- brate voice without relaxing structural honesty. 211">
-  <div class="manual-page-head"><span>Page 211</span><em>HIDING THE FAILURE: Is the failure section present and specific?</em></div>
-  <pre>   HIDING THE FAILURE: Is the failure section present and specific?
+<article class="manual-page-card" id="manual-page-211" data-manual-text="evidence and publication risk check link each factual claim to supplied evidence with a locator such as a note item, log line, commit, screenshot, or named measurement. flag unverified assumptions and claims whose supporting material was not supplied. record what i am not claiming yet as a short limits list. if evidence or a required fact is missing, show [missing: needed evidence or fact] in the affected slot and mark the scaffold blocked. if the source supplies no observed failure, use [missing: observed failure] and keep the scaffold blocked. keep all five labels visible. missing markers are prompts to collect evidence and do not fill required slots. check for progress claims without a change, vague outcomes, softened failures, lessons without a consequence, and a next step that lacks a completion check. report specific findings or no flags with the checks performed and the evidence reviewed. a clean checklist can be valid when the inputs support it. inputs needed provide what changed, an observed success and an observed failure, and the evidence that allows someone else to check the claims. include intended audience and what the author plans to do next if those are known. expected output five labeled fill-in slots in order, followed by the limits and publication risk check. use bullets or placeholders that the author can edit. a complete scaffold has a specific failed attempt and traceable evidence. a blocked scaffold preserves the missing items and the smallest clarification needed. knobs set audience and level of technical detail. keep the same five slots, evidence rules, and review gate. 211">
+  <div class="manual-page-head"><span>Page 211</span><em>EVIDENCE AND PUBLICATION RISK CHECK</em></div>
+  <pre>EVIDENCE AND PUBLICATION RISK CHECK
 
-   “Things took longer than expected” is not a named failure.
+Link each factual claim to supplied evidence with a locator such as a
+note item, log line, commit, screenshot, or named measurement. Flag
+unverified assumptions and claims whose supporting material was not
+supplied. Record WHAT I AM NOT CLAIMING YET as a short limits list.
 
-   3. OUTPUT SCAFFOLD POST TITLE OPTIONS: [Three options — one specific,
+If evidence or a required fact is missing, show [MISSING: needed
+evidence or fact] in the affected slot and mark the scaffold BLOCKED. If
+the source supplies no observed failure, use [MISSING: OBSERVED FAILURE]
+and keep the scaffold BLOCKED. Keep all five labels visible. Missing
+markers are prompts to collect evidence and do not fill required slots.
 
-   one question-form, one lesson-forward] ONE-SENTENCE CONTEXT: [Opening
-
-   sentence — what you’re building and where you are] FINAL POST DRAFT:
-
-   [Assembled draft using the sections above: context, specific change,
-
-   failure, lesson, evidence, what remains unproven, next step]
-
-
-
+Check for progress claims without a change, vague outcomes, softened
+failures, lessons without a consequence, and a next step that lacks a
+completion check. Report specific findings or NO FLAGS with the checks
+performed and the evidence reviewed. A clean checklist can be valid when
+the inputs support it.
 
 INPUTS NEEDED
 
-
-A project or artifact in progress, a specific change or update from
-a recent work session, and at least one concrete failure or con-
-straint encountered. The more specific the input — names of
-things, numbers, error messages, specific decisions — the more
-specific the output. Generic inputs produce generic post drafts.
-
+Provide what changed, an observed success and an observed failure, and
+the evidence that allows someone else to check the claims. Include
+intended audience and what the author plans to do next if those are
+known.
 
 EXPECTED OUTPUT
 
-
-A three-section build-in-public post skeleton: a context block cap-
-turing current project state and specific change; a publication
-risk check flagging overclaiming, missing evidence, hidden fail-
-ures, and vague lessons; and an output scaffold with title options,
-opening sentence, and assembled draft. The draft is a functional
-starting point, not a finished post.  If the PUBLICATION RISK
-CHECK finds no issues in a post describing a project in progress,
-the input was not specific enough.
-
+Five labeled fill-in slots in order, followed by the limits and
+publication risk check. Use bullets or placeholders that the author can
+edit. A complete scaffold has a specific failed attempt and traceable
+evidence. A blocked scaffold preserves the missing items and the
+smallest clarification needed.
 
 KNOBS
 
-
-Add “platform: [DEV.to / Hacker News / LinkedIn / Substack]” to
-calibrate length, link style, and audience assumption. Add “evi-
-dence available: [describe what you have]” to anchor EVIDENCE
-TO INCLUDE to what actually exists rather than what could be
-gathered. Add “tone: [peer-to-peer / technical / casual]” to cali-
-brate voice without relaxing structural honesty.
+Set audience and level of technical detail. Keep the same five slots,
+evidence rules, and review gate.
 
 
-
-                                                      211</pre>
+211</pre>
 </article>
-<article class="manual-page-card" id="manual-page-212" data-manual-text="gnome prompt field manual failure mode the model will produce a polished inspirational update — sounds like a founder update, cites hard work, mentions challenges in passing, ends with excitement about what’s next. signs: what failed or did not work is empty, softened, or described as a challenge overcome; evidence to include is absent or describes what evidence could be gathered; what i am not claiming yet is missing or perfunctory. a valid p-01 output must preserve the actual state of the work, name one concrete failure or constraint, include evidence, and distinguish what was learned from what remains unproven. run the publication risk check against the assembled draft — if it finds no issues, the input was not specific enough or the prompt produced a san- itized version. follow-up run w-04 (over-smoothing detector) on the final post draft if the publication risk check found issues — the draft may have absorbed a sanitizing pass rather than the honest one. run w-06 (confidence laundering detector) on any claim in the draft us- ing passive voice or hedged future tense. run ap-02 (confidence laundering probe) on the what i am not claiming yet sec- tion if the disavowals are themselves vague — vague disavowals usually mean the underlying claims are overclaiming. run r-08 (artifact extraction protocol) if the post references a concrete artifact that has not been packaged for reuse. safety notes build-in-public posts about active projects with undisclosed vul- nerabilities, pending patent applications, or non-public propri- etary methods should have a disclosure review before publica- tion. p-01 produces a skeleton from what you provide — sensitive technical detail in the input will appear in the draft. 212">
+<article class="manual-page-card" id="manual-page-212" data-manual-text="gnome prompt field manual failure mode a finished p-01 narrative, an empty failure slot, a constraint passed off as a failure, or an invented locator fails the contract. so does a lesson with no observable source or no consequence for the work. before publishing, verify that a reader can trace the change, success, and failure, and distinguish observed outcomes from the next planned step. treat unresolved required fields as blocked. follow-up run w-11 (the anti-summary) first when the underlying work should not be compressed into a summary. keep the source detail and reconsider whether a short post is appropriate. run w-04 (over-smoothing detector) on the scaffold, especially the required failure slot. if a claim&#x27;s confidence is inflated, use w-06 (confidence laundering detector) or ap-02 (confidence laundering probe). use r-08 (artifact extraction protocol) when evidence exists but the referenced artifact needs to be prepared for reuse. safety notes check disclosure permissions before using internal logs, screenshots, or work with unpublished vulnerabilities or proprietary details. give the prompt material cleared for review and cite a shareable locator. mark a withheld source as unavailable to the intended reader. remove unsupported public claims or obtain evidence that can be shared. 212">
   <div class="manual-page-head"><span>Page 212</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
-
-
 FAILURE MODE
 
-
-The model will produce a polished inspirational update — sounds
-like a founder update, cites hard work, mentions challenges in
-passing, ends with excitement about what’s next. Signs: WHAT
-FAILED OR DID NOT WORK is empty, softened, or described
-as a challenge overcome; EVIDENCE TO INCLUDE is absent or
-describes what evidence could be gathered; WHAT I AM NOT
-CLAIMING YET is missing or perfunctory. A valid P-01 output
-must preserve the actual state of the work, name one concrete
-failure or constraint, include evidence, and distinguish what was
-learned from what remains unproven. Run the PUBLICATION
-RISK CHECK against the assembled draft — if it finds no issues,
-the input was not specific enough or the prompt produced a san-
-itized version.
-
+A finished P-01 narrative, an empty failure slot, a constraint passed
+off as a failure, or an invented locator fails the contract. So does a
+lesson with no observable source or no consequence for the work. Before
+publishing, verify that a reader can trace the change, success, and
+failure, and distinguish observed outcomes from the next planned step.
+Treat unresolved required fields as blocked.
 
 FOLLOW-UP
 
+Run W-11 (The Anti-Summary) first when the underlying work should not be
+compressed into a summary. Keep the source detail and reconsider whether
+a short post is appropriate.
 
-Run W-04 (Over-Smoothing Detector) on the FINAL POST DRAFT
-if the publication risk check found issues — the draft may have
-absorbed a sanitizing pass rather than the honest one. Run W-06
-(Confidence Laundering Detector) on any claim in the draft us-
-ing passive voice or hedged future tense. Run AP-02 (Confidence
-Laundering Probe) on the WHAT I AM NOT CLAIMING YET sec-
-tion if the disavowals are themselves vague — vague disavowals
-usually mean the underlying claims are overclaiming. Run R-08
-(Artifact Extraction Protocol) if the post references a concrete
-artifact that has not been packaged for reuse.
-
+Run W-04 (Over-Smoothing Detector) on the scaffold, especially the
+required failure slot. If a claim&#x27;s confidence is inflated, use W-06
+(Confidence Laundering Detector) or AP-02 (Confidence Laundering Probe).
+Use R-08 (Artifact Extraction Protocol) when evidence exists but the
+referenced artifact needs to be prepared for reuse.
 
 SAFETY NOTES
 
-
-Build-in-public posts about active projects with undisclosed vul-
-nerabilities, pending patent applications, or non-public propri-
-etary methods should have a disclosure review before publica-
-tion. P-01 produces a skeleton from what you provide — sensitive
-technical detail in the input will appear in the draft.
-
-
-
+Check disclosure permissions before using internal logs, screenshots, or
+work with unpublished vulnerabilities or proprietary details. Give the
+prompt material cleared for review and cite a shareable locator. Mark a
+withheld source as unavailable to the intended reader. Remove
+unsupported public claims or obtain evidence that can be shared.
 
 
 212</pre>
 </article>
-<article class="manual-page-card" id="manual-page-213" data-manual-text=" p-02 learning log extractor criteria: 1, 6, 10 — hidden assumption + reusable artifact + reusable output what it does extracts structured learning entries from work logs, debugging sessions, research notes, experiments, or build sessions — sepa- rating what was done from what was actually learned. the for- mat enforces a specific test: a belief must have changed, an as- sumption must have been disproven or weakened, and evidence must support the update. activity that produced no belief change produces no learning entry. the output in that case is “activity logged, no learning extracted.” when to use after a debugging session that produced unexpected results. af- ter a research session where multiple sources conflicted or a working assumption failed. after building something that required multiple failed approaches before one worked. when review- ing accumulated notes and wanting to extract what has actually changed in understanding, not just what was done. when prepar- ing a retrospective, an assumption ledger update, or a learning summary. not appropriate for session documentation where the goal is capture rather than extraction — use a structured session record when no belief changes are expected. the prompt extract learning entries from the following work session or notes. source material: [paste notes, log, debugging session, experiment record, or describe the session] 213">
+<article class="manual-page-card" id="manual-page-213" data-manual-text="p-02 learning log extractor criteria: 1, 6, 10 — hidden assumption + reusable artifact + reusable output what it does extracts a learning inventory from work notes, logs, and experiments. it connects a documented prior belief to an observed result, a bounded change in understanding, and a condition that could reverse it. activity without a supported belief update goes into a separate filter. when to use use after debugging, an experiment, or a work session with an uncertain outcome. use it to prepare evidence for a retrospective, an assumption-ledger update, or a reusable research artifact. a chronological record can supply input. it does not establish what anyone believed or learned. when the goal is capture rather than analysis, use a structured session record when no belief changes are expected. the prompt extract a learning inventory from the supplied notes. inputs: what was done, what was expected beforehand, what was actually observed, and where a reviewer can find that evidence. assign a reference to each accepted learning so the same belief can be traced across the output sections. if a prior belief is unstated, mark [prior assumption unconfirmed] and ask for confirmation. put the proposed item in the non-learning filter pending evidence or confirmation. do not reconstruct a prior belief from its outcome. 213">
   <div class="manual-page-head"><span>Page 213</span><em>P-02 Learning Log Extractor</em></div>
   <pre>  P-02 Learning Log Extractor
 
@@ -13156,213 +13079,154 @@ technical detail in the input will appear in the draft.
 
 WHAT IT DOES
 
-
-Extracts structured learning entries from work logs, debugging
-sessions, research notes, experiments, or build sessions — sepa-
-rating what was done from what was actually learned. The for-
-mat enforces a specific test: a belief must have changed, an as-
-sumption must have been disproven or weakened, and evidence
-must support the update. Activity that produced no belief change
-produces no learning entry. The output in that case is “activity
-logged, no learning extracted.”
-
+Extracts a learning inventory from work notes, logs, and experiments. It
+connects a documented prior belief to an observed result, a bounded
+change in understanding, and a condition that could reverse it. Activity
+without a supported belief update goes into a separate filter.
 
 WHEN TO USE
 
+Use after debugging, an experiment, or a work session with an uncertain
+outcome. Use it to prepare evidence for a retrospective, an
+assumption-ledger update, or a reusable research artifact. A
+chronological record can supply input. It does not establish what anyone
+believed or learned.
 
-After a debugging session that produced unexpected results. Af-
-ter a research session where multiple sources conflicted or a
-working assumption failed. After building something that required
-multiple failed approaches before one worked. When review-
-ing accumulated notes and wanting to extract what has actually
-changed in understanding, not just what was done. When prepar-
-ing a retrospective, an assumption ledger update, or a learning
-summary. Not appropriate for session documentation where the
-goal is capture rather than extraction — use a structured session
+When the goal is capture rather than analysis, use a structured session
 record when no belief changes are expected.
-
 
 THE PROMPT
 
+Extract a learning inventory from the supplied notes. Inputs: what was
+done, what was expected beforehand, what was actually observed, and
+where a reviewer can find that evidence. Assign a reference to each
+accepted learning so the same belief can be traced across the output
+sections.
+
+If a prior belief is unstated, mark [PRIOR ASSUMPTION UNCONFIRMED] and
+ask for confirmation. Put the proposed item in the NON-LEARNING FILTER
+pending evidence or confirmation. Do not reconstruct a prior belief from
+its outcome.
 
 
-
-
-   Extract learning entries from the following work session or notes.
-
-   Source material: [PASTE NOTES, LOG, DEBUGGING SESSION, EXPERIMENT
-
-   RECORD, OR DESCRIBE THE SESSION]
-
-
-
-                                                      213</pre>
+213</pre>
 </article>
-<article class="manual-page-card" id="manual-page-214" data-manual-text="gnome prompt field manual for each learning entry, produce all fields: learning entry source activity: [what was done — one sentence, behavioral, not evaluative] observation: [what was directly observed or encountered — what the work returned, not what it means] previous assumption: [what was believed or expected before this observation — required. if not stated in the source, reconstruct it from what the observation contradicts.] disproven or weakened assumption: [required. the assumption the observation invalidates or weakens. cannot be empty or “none identified.”] new understanding: [what is now understood differently — must follow from the observation and the disproven assumption, not restate the observation] evidence for update: [the specific output, error message, measurement, or behavior that forced the belief change — quote or describe the specific artifact. paraphrases do not qualify.] confidence level: high / medium / low — based on reproducibility, number of observations, and whether confounds have been ruled out revert condition: [required. the specific future observation that would cause the author to revert to the previous assumption or revise the new understanding. “more evidence” is not a revert condition — name the specific finding.] reusable lesson: [the generalized version of the new understanding — what this teaches beyond this specific session, in one sentence] next test / application: [the specific next action that would test, extend, or apply this understanding] non-learning filter after processing all entries, list any activities from the source material that produced no learning entry. for each: “activity logged, no learning extracted” — state whether the activity confirmed existing beliefs without new evidence, or produced no assumption update. 214">
+<article class="manual-page-card" id="manual-page-214" data-manual-text="gnome prompt field manual new understandings for each accepted learning, record source activity, observation, previous assumption, new understanding, evidence for update, confidence level, reusable lesson, and next test / application. distinguish the observed result from its interpretation. cite a supplied source locator and the specific measurement, output, or short quotation. give high / medium / low confidence with the evidence strength and relevant confounds. keep the reusable lesson within the supported scope. disproven assumptions this section is mandatory. for each linked item, give the prior assumption, what was observed, the evidence locator, and the strength of disproof. distinguish disproven from weakened. if experimental or uncertain work is covered, a complete inventory requires at least one evidenced disproof. if none is supported, mark [disproof not established] and the inventory incomplete. keep weakened findings labeled. do not upgrade them to disproof to fill the section. reversal conditions for every accepted learning, state what observable finding would make the author revert or revise the belief. link it to that learning and name the decision that would change. “more evidence” is too vague. if the available material cannot support a specific condition, show [reversal condition missing] and leave the inventory incomplete. open questions generated list the uncertainties arising from the learning, each linked to its source learning and the evidence needed to answer it. if there are none in the supplied material, record none identified. non-learning filter for activities without a supported update, record “activity logged, no learning extracted” and why. identify missing prior beliefs, outcome evidence, or reasonable alternative explanations that prevent an update. 214">
   <div class="manual-page-head"><span>Page 214</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
+NEW UNDERSTANDINGS
 
+For each accepted learning, record SOURCE ACTIVITY, OBSERVATION,
+PREVIOUS ASSUMPTION, NEW UNDERSTANDING, EVIDENCE FOR UPDATE, CONFIDENCE
+LEVEL, REUSABLE LESSON, and NEXT TEST / APPLICATION. Distinguish the
+observed result from its interpretation. Cite a supplied source locator
+and the specific measurement, output, or short quotation. Give HIGH /
+MEDIUM / LOW confidence with the evidence strength and relevant
+confounds. Keep the reusable lesson within the supported scope.
 
+DISPROVEN ASSUMPTIONS
 
-   For each learning entry, produce all fields:
+This section is mandatory. For each linked item, give the prior
+assumption, what was observed, the evidence locator, and the strength of
+disproof. Distinguish DISPROVEN from WEAKENED. If experimental or
+uncertain work is covered, a complete inventory requires at least one
+evidenced disproof. If none is supported, mark [DISPROOF NOT
+ESTABLISHED] and the inventory INCOMPLETE. Keep weakened findings
+labeled. Do not upgrade them to disproof to fill the section.
 
-   LEARNING ENTRY
+REVERSAL CONDITIONS
 
-   SOURCE ACTIVITY: [What was done — one sentence, behavioral, not
+For every accepted learning, state what observable finding would make
+the author revert or revise the belief. Link it to that learning and
+name the decision that would change. “More evidence” is too vague. If
+the available material cannot support a specific condition, show
+[REVERSAL CONDITION MISSING] and leave the inventory INCOMPLETE.
 
-   evaluative] OBSERVATION: [What was directly observed or encountered
+OPEN QUESTIONS GENERATED
 
-   — what the work returned, not what it means] PREVIOUS ASSUMPTION:
+List the uncertainties arising from the learning, each linked to its
+source learning and the evidence needed to answer it. If there are none
+in the supplied material, record NONE IDENTIFIED.
 
-   [What was believed or expected before this observation — required. If
+NON-LEARNING FILTER
 
-   not stated in the source, reconstruct it from what the observation
-
-   contradicts.] DISPROVEN OR WEAKENED ASSUMPTION: [Required. The
-
-   assumption the observation invalidates or weakens. Cannot be empty
-
-   or “none identified.”] NEW UNDERSTANDING: [What is now understood
-
-   differently — must follow from the observation and the disproven
-
-   assumption, not restate the observation] EVIDENCE FOR UPDATE: [The
-
-   specific output, error message, measurement, or behavior that
-
-   forced the belief change — quote or describe the specific artifact.
-
-   Paraphrases do not qualify.] CONFIDENCE LEVEL: HIGH / MEDIUM / LOW
-
-   — based on reproducibility, number of observations, and whether
-
-   confounds have been ruled out REVERT CONDITION: [Required. The
-
-   specific future observation that would cause the author to revert
-
-   to the previous assumption or revise the new understanding. “More
-
-   evidence” is not a revert condition — name the specific finding.]
-
-   REUSABLE LESSON: [The generalized version of the new understanding
-
-   — what this teaches beyond this specific session, in one sentence]
-
-   NEXT TEST / APPLICATION: [The specific next action that would test,
-
-   extend, or apply this understanding]
-
-   NON-LEARNING FILTER After processing all entries, list any activities
-
-   from the source material that produced no learning entry. For each:
-
-   “Activity logged, no learning extracted” — state whether the activity
-
-   confirmed existing beliefs without new evidence, or produced no
-
-   assumption update.
-
-
-
+For activities without a supported update, record “Activity logged, no
+learning extracted” and why. Identify missing prior beliefs, outcome
+evidence, or reasonable alternative explanations that prevent an update.
 
 
 214</pre>
 </article>
-<article class="manual-page-card" id="manual-page-215" data-manual-text="inputs needed notes, logs, session records, debugging output, or a described work session. works on any format — raw text, bullet notes, structured logs. minimum viable input: what was done, what happened, and what was unexpected. the more specific the source material — actual error messages, actual measurements, actual outputs — the more specific the evidence for update and revert condition entries. vague inputs produce vague learning entries and an empty disproven or weakened as- sumption field. expected output one learning entry per belief change found in the source mate- rial, each with all ten fields, followed by the non-learning fil- ter listing activities that generated no entry. the disproven or weakened assumption field is the critical output — it is what separates a learning extraction from a session summary. if this field is absent or marked “none identified” across multiple entries, either no learning occurred or the extraction did not do its job. knobs add “domain: [security research / systems engineering / writing / data analysis]” to calibrate what counts as a prior assumption versus domain-standard expectation. add “minimum confidence level: medium” to filter low-confidence entries — useful when the log is noisy and only robust belief changes are relevant. add “output format: assumption ledger row” to format each entry as a direct row for t-03 (assumption ledger). add “compare against: [previous learning log or assumption list]” to surface re- curring disproven assumptions — an assumption disproved and re-adopted repeatedly is a more significant finding than a single update. 215">
+<article class="manual-page-card" id="manual-page-215" data-manual-text="inputs needed supply notes, logs, or session records with a prior expectation, an observed outcome, and a locator for the relevant evidence. a timeline with no prior belief or outcome evidence can populate only the non-learning filter. mark inaccessible or missing sources and ask for the smallest clarification that would resolve the gap. expected output a learning inventory with four required sections in order: new understandings, disproven assumptions, reversal conditions, and open questions generated. include the non-learning filter afterward. each accepted learning has its own evidence-backed change, confidence, and linked reversal condition. if uncertain or experimental work has no supported disproof, retain the mandatory section with its missing-evidence marker and label the inventory incomplete. quality check a reviewer should be able to trace each new belief to a before-state and distinguish observation, inference, and proposed next test. check that every accepted learning has a reversal condition and that missing evidence remains visible. an empty new understandings section is valid when the notes establish no belief change. knobs set a minimum confidence for accepted learnings while retaining rejected items and the reason in the non-learning filter. use “output format: assumption ledger row” to map accepted entries into t-03 (assumption ledger with consequence scoring). compare with earlier logs to find recurring assumptions only when the records support the comparison. 215">
   <div class="manual-page-head"><span>Page 215</span><em>INPUTS NEEDED</em></div>
   <pre>INPUTS NEEDED
 
-
-Notes, logs, session records, debugging output, or a described
-work session. Works on any format — raw text, bullet notes,
-structured logs. Minimum viable input: what was done, what
-happened, and what was unexpected.  The more specific the
-source material — actual error messages, actual measurements,
-actual outputs — the more specific the EVIDENCE FOR UPDATE
-and REVERT CONDITION entries. Vague inputs produce vague
-learning entries and an empty DISPROVEN OR WEAKENED AS-
-SUMPTION field.
-
+Supply notes, logs, or session records with a prior expectation, an
+observed outcome, and a locator for the relevant evidence. A timeline
+with no prior belief or outcome evidence can populate only the
+non-learning filter. Mark inaccessible or missing sources and ask for
+the smallest clarification that would resolve the gap.
 
 EXPECTED OUTPUT
 
+A learning inventory with four required sections in order: NEW
+UNDERSTANDINGS, DISPROVEN ASSUMPTIONS, REVERSAL CONDITIONS, and OPEN
+QUESTIONS GENERATED. Include the NON-LEARNING FILTER afterward. Each
+accepted learning has its own evidence-backed change, confidence, and
+linked reversal condition. If uncertain or experimental work has no
+supported disproof, retain the mandatory section with its
+missing-evidence marker and label the inventory INCOMPLETE.
 
-One learning entry per belief change found in the source mate-
-rial, each with all ten fields, followed by the NON-LEARNING FIL-
-TER listing activities that generated no entry. The DISPROVEN
-OR WEAKENED ASSUMPTION field is the critical output — it is
-what separates a learning extraction from a session summary. If
-this field is absent or marked “None identified” across multiple
-entries, either no learning occurred or the extraction did not do
-its job.
+QUALITY CHECK
 
+A reviewer should be able to trace each new belief to a before-state and
+distinguish observation, inference, and proposed next test. Check that
+every accepted learning has a reversal condition and that missing
+evidence remains visible. An empty NEW UNDERSTANDINGS section is valid
+when the notes establish no belief change.
 
 KNOBS
 
-
-Add “domain: [security research / systems engineering / writing
-/ data analysis]” to calibrate what counts as a prior assumption
-versus domain-standard expectation. Add “minimum confidence
-level: MEDIUM” to filter low-confidence entries — useful when
-the log is noisy and only robust belief changes are relevant. Add
-“output format: assumption ledger row” to format each entry
-as a direct row for T-03 (Assumption Ledger). Add “compare
-against: [previous learning log or assumption list]” to surface re-
-curring disproven assumptions — an assumption disproved and
-re-adopted repeatedly is a more significant finding than a single
-update.
+Set a minimum confidence for accepted learnings while retaining rejected
+items and the reason in the non-learning filter. Use “output format:
+assumption ledger row” to map accepted entries into T-03 (Assumption
+Ledger with Consequence Scoring). Compare with earlier logs to find
+recurring assumptions only when the records support the comparison.
 
 
-
-
-
-                                                      215</pre>
+215</pre>
 </article>
-<article class="manual-page-card" id="manual-page-216" data-manual-text="gnome prompt field manual failure mode the model will convert activity into fake learning — producing en- tries that describe what was done in observation and restate it in new understanding without identifying a belief change. signs: previous assumption is empty, says “none,” or is ob- viously reconstructed to match the observation; disproven or weakened assumption is absent, vague, or restates the new understanding; revert condition says “if future evidence contradicts this” without naming specific evidence; non-learning filter is empty on a session where outcomes were as expected. a valid p-02 output must identify what belief changed, what as- sumption was disproven or weakened, what evidence forced the update, and what future evidence would make the author revert the belief. if no belief changed, the correct output is “activity logged, no learning extracted.” follow-up run t-03 (assumption ledger) after extracting entries — the dis- proven or weakened assumption fields from p-02 become direct inputs to the ledger’s correction pass. run t-06 (belief up- date scaffold) on any entry where confidence level is low — t-06 structures the evidence threshold required to raise confi- dence before the belief update is treated as load-bearing. run w- 09 (claim-evidence separator) on any document incorporating a reusable lesson — p-02 extracts the learning; w-09 verifies the claim is supported by evidence, not just by the session having occurred. run p-01 (build-in-public post) if one or more entries are significant enough to publish — the reusable lesson and disproven or weakened assumption fields map directly to p-01’s required structure. 216">
+<article class="manual-page-card" id="manual-page-216" data-manual-text="gnome prompt field manual failure mode reject p-02 entries that paraphrase activity as learning, invent a prior belief, label weakened evidence as disproof, or give a generic reversal condition. a high confidence label cannot replace evidence. if no belief changed, report “activity logged, no learning extracted.” if the evidence is incomplete, show the missing item and the smallest clarification needed. follow-up run r-08 (artifact extraction protocol) first when working from raw notes that need an artifact inventory. use r-04, research artifact generator (schema-locked), on supported learnings that meet the bar for an inspectable research artifact. use t-03 (assumption ledger with consequence scoring) for documented disproven or weakened assumptions. use t-06 (belief update scaffold) to specify what further evidence would justify relying on a low-confidence update. use w-09 (claim-evidence separator) on claims drawn from the learning. use p-01 (build-in-public post (structured)) for a learning worth publishing. transfer only the observed failure and operational lesson supported by the cited evidence. keep the remaining p-01 slots and disclosure review mandatory. 216">
   <div class="manual-page-head"><span>Page 216</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
-
-
 FAILURE MODE
 
-
-The model will convert activity into fake learning — producing en-
-tries that describe what was done in OBSERVATION and restate
-it in NEW UNDERSTANDING without identifying a belief change.
-Signs: PREVIOUS ASSUMPTION is empty, says “none,” or is ob-
-viously reconstructed to match the observation; DISPROVEN OR
-WEAKENED ASSUMPTION is absent, vague, or restates the new
-understanding; REVERT CONDITION says “if future evidence
-contradicts this” without naming specific evidence; NON-LEARNING
-FILTER is empty on a session where outcomes were as expected.
-A valid P-02 output must identify what belief changed, what as-
-sumption was disproven or weakened, what evidence forced the
-update, and what future evidence would make the author revert
-the belief.  If no belief changed, the correct output is “activity
-logged, no learning extracted.”
-
+Reject P-02 entries that paraphrase activity as learning, invent a prior
+belief, label weakened evidence as disproof, or give a generic reversal
+condition. A high confidence label cannot replace evidence. If no belief
+changed, report “Activity logged, no learning extracted.” If the
+evidence is incomplete, show the missing item and the smallest
+clarification needed.
 
 FOLLOW-UP
 
+Run R-08 (Artifact Extraction Protocol) first when working from raw
+notes that need an artifact inventory. Use R-04, Research Artifact
+Generator (Schema-Locked), on supported learnings that meet the bar for
+an inspectable research artifact.
 
-Run T-03 (Assumption Ledger) after extracting entries — the DIS-
-PROVEN OR WEAKENED ASSUMPTION fields from P-02 become
-direct inputs to the ledger’s correction pass. Run T-06 (Belief Up-
-date Scaffold) on any entry where CONFIDENCE LEVEL is LOW
-— T-06 structures the evidence threshold required to raise confi-
-dence before the belief update is treated as load-bearing. Run W-
-09 (Claim-Evidence Separator) on any document incorporating a
-REUSABLE LESSON — P-02 extracts the learning; W-09 verifies
-the claim is supported by evidence, not just by the session having
-occurred. Run P-01 (Build-in-Public Post) if one or more entries
-are significant enough to publish — the REUSABLE LESSON and
-DISPROVEN OR WEAKENED ASSUMPTION fields map directly
-to P-01’s required structure.
+Use T-03 (Assumption Ledger with Consequence Scoring) for documented
+disproven or weakened assumptions. Use T-06 (Belief Update Scaffold) to
+specify what further evidence would justify relying on a low-confidence
+update. Use W-09 (Claim-Evidence Separator) on claims drawn from the
+learning.
 
-
-
+Use P-01 (Build-in-Public Post (Structured)) for a learning worth
+publishing. Transfer only the observed failure and operational lesson
+supported by the cited evidence. Keep the remaining P-01 slots and
+disclosure review mandatory.
 
 
 216</pre>
