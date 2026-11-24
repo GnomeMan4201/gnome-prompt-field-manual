@@ -14,7 +14,7 @@ const batch6Pages = [
   [133, 'SCHEMA/CONTRACT,'],
   [157, 'ALERT THRESHOLDS'],
   [158, 'SAFE DEGRADATION'],
-  [159, 'eight structured sections'],
+  [159, '7. FALLBACK BEHAVIOR'],
   [161, 'Indirect Injection Tracer, page 203'],
   [182, 'EDT-00: Use'],
   [184, 'seven cases'],
