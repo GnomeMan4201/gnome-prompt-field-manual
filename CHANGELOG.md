@@ -6,6 +6,10 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- Adjudicated S-01 System Map with Trust Boundaries, S-02 Code Archaeology, and S-03 Failure Mode Inventory against their frozen Batch 4 briefs without drafting replacement bodies.
+- Classified all three Batch 4 entries PASS because the canonical bodies already contain the requested upgrades: S-01 names specific `WHO CAN INJECT` actors and observability status, S-02 names `HIDDEN STATE DEPENDENCIES`, and S-03 makes `DETECTABILITY` explicit.
+- Preserved canonical manual pages 107–121 byte-for-byte while removing only the completed pending/brief surfaces and advancing production metadata.
+
 - Adjudicated R-01 Source Map with Contested Zones and R-03 Replication Risk Auditor against their frozen Batch 3 briefs without drafting replacement bodies.
 - Added R-01's explicit cross-source `INSTITUTIONAL INTEREST MAP` while preserving the existing per-source institutional-interest disclosure and source-flattening controls.
 - Restored R-03's `VERY HIGH RISK` level, retained `NOT REPLICATION-READY` as a separate insufficient-information status, and added the frozen R-05 Failure-to-Test Converter follow-up.
@@ -28,7 +32,11 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Changed
 
-- Promoted R-01 and R-03 from pending to drafted after bounded disposition; current state is 14 pending / 77 drafted / 91 semantic entries / 315 pages / 7 remaining batches.
+- Promoted S-01, S-02, and S-03 from pending to drafted after bounded PASS disposition; current state is 11 pending / 80 drafted / 91 semantic entries / 315 pages / 6 remaining batches.
+- Removed S-01/S-02/S-03 from active pending inventory and drafting briefs, removed Batch 4 from the remaining-batch table without renumbering later batches, and retargeted startup defaults to S-10/SEC-02.
+- Added a SHA-bound Batch 4 disposition record and permanent regression coverage for the PASS boundary.
+
+- Promoted R-01 and R-03 from pending to drafted after bounded disposition; current state was 14 pending / 77 drafted / 91 semantic entries / 315 pages / 7 remaining batches.
 - Removed R-01/R-03 from active pending inventory and drafting briefs, removed Batch 3 from the remaining-batch table without renumbering later batches, and retargeted startup defaults to S-01/S-02.
 - Added a fail-closed Batch 3 disposition regression gate and SHA-bound audit record.
 

@@ -327,11 +327,11 @@
 <header class="hdr">
   <div>
     <h1 class="hdr-title">PTSP — <span>Pending Entry Draft Plan</span></h1>
-    <div style="font-size:12px;color:var(--dim);margin-top:4px;">14 pending entries · 7 remaining batches · drafting authority</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px;">11 pending entries · 6 remaining batches · drafting authority</div>
   </div>
   <div class="hdr-meta">
     Source: GNOME_Prompt_Field_Manual_v3_final.docx<br>
-    Production state: 77 drafted · 0 restore · 14 pending<br>
+    Production state: 80 drafted · 0 restore · 11 pending<br>
     Restore phase: LOCKED
   </div>
 </header>
@@ -348,10 +348,10 @@
 </nav>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num sn-pending">14</div><div class="stat-label">Pending Entries</div></div>
-  <div class="stat"><div class="stat-num sn-drafted">77</div><div class="stat-label">Drafted</div></div>
+  <div class="stat"><div class="stat-num sn-pending">11</div><div class="stat-label">Pending Entries</div></div>
+  <div class="stat"><div class="stat-num sn-drafted">80</div><div class="stat-label">Drafted</div></div>
   <div class="stat"><div class="stat-num sn-caution">5</div><div class="stat-label">Special Caution</div></div>
-  <div class="stat"><div class="stat-num sn-batch">7</div><div class="stat-label">Remaining Batches</div></div>
+  <div class="stat"><div class="stat-num sn-batch">6</div><div class="stat-label">Remaining Batches</div></div>
   <div class="stat"><div class="stat-num sn-total">91</div><div class="stat-label">Total Entries</div></div>
 </div>
 
@@ -373,9 +373,9 @@
 
   <div class="part-block">
     <div class="part-label">Part IV — Build, Break, Observe · 4 pending</div>
-    <div class="entry-row"><span class="er-id">S-01</span><span class="er-name">System Map with Trust Boundaries</span><span class="er-why">Part 0 audit: KEEP — trust boundary enumeration makes this a security tool, not documentation.</span><span class="er-badge badge-keep">Keep</span></div>
-    <div class="entry-row"><span class="er-id">S-02</span><span class="er-name">Code Archaeology</span><span class="er-why">Part 0 audit: KEEP — intent-vs-behavior divergence and safe modification zones.</span><span class="er-badge badge-keep">Keep</span></div>
-    <div class="entry-row"><span class="er-id">S-03</span><span class="er-name">Failure Mode Inventory</span><span class="er-why">Part 0 audit: KEEP — seven-category structure covering adversarial failures.</span><span class="er-badge badge-keep">Keep</span></div>
+
+
+
     <div class="entry-row"><span class="er-id">S-10</span><span class="er-name">Migration Risk Classifier</span><span class="er-why">New entry from v3 master selection. Not in Part 0 audit — no previous draft to reference.</span><span class="er-badge badge-new">New</span></div>
   </div>
 
@@ -426,7 +426,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td class="batch-num">4</td><td class="batch-entries">S-01, S-02, S-03</td><td class="batch-size">3</td><td class="batch-rationale">Part IV openers. All KEEP entries with specific audit upgrades. S-01 is architecturally upstream of the Part V security section — draft it before the security entries.</td></tr>
+
       <tr><td class="batch-num">5</td><td class="batch-entries">S-10</td><td class="batch-size">1</td><td class="batch-rationale">Migration Risk Classifier. New entry, standalone. Drafts after the Part IV openers are locked.</td></tr>
       <tr><td class="batch-num">6</td><td class="batch-entries">SEC-02, SEC-05</td><td class="batch-size">2</td><td class="batch-rationale">Part V — lower-caution security entries. Both are explicitly defensive (firewall design, refactoring). Can draft together.</td></tr>
       <tr><td class="batch-num">7</td><td class="batch-entries">SEC-06</td><td class="batch-size">1</td><td class="batch-rationale">Tool-Agent Offense Probe. Highest dual-use risk. Drafts alone. Full defensive framing review before DOCX insertion.</td></tr>
@@ -538,55 +538,13 @@
   </div>
 
   <!-- S-01 -->
-  <div class="brief" id="b-s01">
-    <div class="brief-hdr" onclick="toggle('b-s01')">
-      <span class="brief-id">S-01</span>
-      <span class="brief-name">System Map with Trust Boundaries</span>
-      <span class="brief-criteria">CRITERIA 1, 7, 9</span>
-      <span class="audit-chip ac-keep">Keep</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">Part 0 audit: KEEP. "Trust boundary enumeration and observable gaps make this a real security tool, not just documentation." Upgrade: "Add explicit 'who can inject into each trust boundary' column."</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">SEC-09 (Indirect Injection Tracer — FOLLOW-UP: trace injection paths identified in the system map), SEC-10 (Trust Boundary Mapper — same family, different focus: SEC-10 is security-specific; S-01 is architectural), SEC-01 (Prompt Injection Recognizer — each trust boundary in the map should be checked for injection risk)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Architecture diagram description without trust analysis. Every component in the map must be assessed by: who trusts it, who it trusts, and what the maximum privilege of each trust relationship is. The audit's upgrade — "who can inject into each trust boundary" — must appear as a mandatory column in the map output. Observable gaps (places where the system should have monitoring but doesn't) are the second distinctive element.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">System map with: COMPONENT INVENTORY (each component with trust level), TRUST BOUNDARY TABLE (each boundary: Component A → Component B, trust direction, privilege level, injection surface: YES/NO, injection actor), OBSERVABLE GAPS (what monitoring is missing at each boundary), ATTACK SURFACE SUMMARY.</div></div>
-    </div>
-  </div>
+
 
   <!-- S-02 -->
-  <div class="brief" id="b-s02">
-    <div class="brief-hdr" onclick="toggle('b-s02')">
-      <span class="brief-id">S-02</span>
-      <span class="brief-name">Code Archaeology</span>
-      <span class="brief-criteria">CRITERIA 1, 7, 9</span>
-      <span class="audit-chip ac-keep">Keep</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">Part 0 audit: KEEP. "Intent-vs-behavior divergence and safe modification zones are operationally specific." Upgrade: "Add 'hidden state dependencies' as a named failure mode."</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">S-01 (System Map — PRIOR: understand the system before archaeological analysis of individual components), S-06 (Observability Gap Finder — FOLLOW-UP: after identifying safe modification zones, find what monitoring would need to exist to safely modify them)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">"Explain this code." Code archaeology is specifically about historical intent reconstruction — understanding why something was done, when it was added, and what problem it was solving — from the code itself when documentation doesn't exist or is stale. The intent-vs-behavior divergence finding (code that is doing something different from what its structure suggests) is the distinctive output. Hidden state dependencies (the audit upgrade) means: state that is implicitly shared between components in ways that aren't obvious from the code's interface.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Archaeological record: INFERRED INTENT (what this code was trying to do, based on structure and naming), CURRENT BEHAVIOR (what it actually does), INTENT-BEHAVIOR DIVERGENCE (where they differ and why that matters), SAFE MODIFICATION ZONES (areas that can be changed without cascading effects), HIDDEN STATE DEPENDENCIES (implicit shared state that would break if modified independently), MODIFICATION RISK RATING.</div></div>
-    </div>
-  </div>
+
 
   <!-- S-03 -->
-  <div class="brief" id="b-s03">
-    <div class="brief-hdr" onclick="toggle('b-s03')">
-      <span class="brief-id">S-03</span>
-      <span class="brief-name">Failure Mode Inventory</span>
-      <span class="brief-criteria">CRITERIA 2, 5, 9</span>
-      <span class="audit-chip ac-keep">Keep</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">Part 0 audit: KEEP. "Seven-category structure covering adversarial failures specifically is above commodity level." Upgrade: "Add detectability rating as mandatory field."</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">S-08 (Incident Report Scaffold — FOLLOW-UP: when a failure mode materializes), SEC-07 (Human Confirmation Gate Designer — FOLLOW-UP: design confirmation gates for HIGH-severity failure modes), R-11 (Negative Result Documenter — FOLLOW-UP: when a failure mode is tested and confirmed)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Undifferentiated list of things that could go wrong. The seven-category structure is the differentiator — each failure mode must be classified by type (the seven categories must be named in THE PROMPT). Detectability (the audit upgrade) is a mandatory field: HIGH = system would alert immediately; MEDIUM = observable in logs with investigation; LOW = may not be discovered until user impact. Without detectability, the inventory cannot be prioritized for mitigation.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Failure mode inventory: for each mode, seven classification columns, plus SEVERITY (CRITICAL/HIGH/MEDIUM/LOW), DETECTABILITY (HIGH/MEDIUM/LOW), CURRENT MITIGATION (what exists), MITIGATION GAP (what's missing). Summary table sortable by severity × detectability.</div></div>
-    </div>
-  </div>
+
 
   <!-- S-10 -->
   <div class="brief" id="b-s10">
@@ -19421,8 +19379,8 @@ function toggle(id) {
   el.classList.toggle('open');
 }
 // Open first two briefs by default
-document.getElementById('b-s01').classList.add('open');
-document.getElementById('b-s02').classList.add('open');
+document.getElementById('b-s10').classList.add('open');
+document.getElementById('b-sec02').classList.add('open');
 
 
 function switchManualView(view) {
