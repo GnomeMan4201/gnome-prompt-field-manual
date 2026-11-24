@@ -398,6 +398,12 @@ def choose_name(
     brief = brief_by_id.get(entry_id)
     if brief and brief.name:
         return brief.name
+    if entry_id == "SEC-06":
+        # The earlier S-03 reference on page 121 is prose. Keep the disposition
+        # title grounded in the heading without changing the authority of the index.
+        for occurrence in occurrences:
+            if occurrence.page_index == 187 and occurrence.context == "SEC-06 Tool-Agent Offense Probe":
+                return occurrence.context.removeprefix("SEC-06 ")
     for occurrence in occurrences:
         match = re.search(
             rf"{re.escape(entry_id)}\s*[:—–-]?\s*(.+)", occurrence.context

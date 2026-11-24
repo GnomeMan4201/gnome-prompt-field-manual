@@ -6,7 +6,7 @@ import subprocess
 import unittest
 
 from batch6_baseline import PARTIAL_SOURCE_SHA
-from batch7_baseline import BATCH7_SOURCE_SHA, PR41_MERGE, ROOT, merged_disposition_bytes
+from batch7_baseline import BATCH7_SOURCE_SHA, PR41_MERGE, ROOT, corrected_sec06_bytes, merged_disposition_bytes
 from test_batch6_correction import (
     ADAPTER_PATH, CANONICAL, DATASET, HISTORICAL_ROOTS, INDEX_PATH, STATIC,
     canonical_surface, cards, changed_pages, dataset_rows, digest, parity_errors, visible,
@@ -72,8 +72,8 @@ def contract_errors(text):
 class Batch7Sec06Tests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / "index.html").read_bytes()
-        cls.reader = (ROOT / "GNOME-Field-Manual.html").read_bytes()
+        cls.raw = corrected_sec06_bytes("index.html")
+        cls.reader = corrected_sec06_bytes("GNOME-Field-Manual.html")
         cls.base = merged_disposition_bytes("index.html")
         cls.base_reader = merged_disposition_bytes("GNOME-Field-Manual.html")
         cls.pages = cards(cls.raw)
@@ -178,10 +178,10 @@ class Batch7Sec06Tests(unittest.TestCase):
                 self.assertEqual((ROOT / path).read_bytes(), merged_disposition_bytes(path))
 
     def test_current_bindings_preserve_inventory_and_body_status(self):
-        inventory = json.loads((ROOT / INDEX_PATH).read_bytes())
+        inventory = json.loads(corrected_sec06_bytes(INDEX_PATH))
         before = json.loads(merged_disposition_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), BATCH7_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH7_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH7_SOURCE_SHA}';", corrected_sec06_bytes(ADAPTER_PATH).decode())
         self.assertEqual(inventory["sourceIndexSha256"], BATCH7_SOURCE_SHA)
         self.assertEqual(inventory["counts"], {"pending": 9, "drafted": 82, "total": 91, "pages": 315})
         self.assertEqual(inventory["bodyCoverage"], 0)
