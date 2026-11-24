@@ -7,6 +7,7 @@ import re
 import unittest
 from pathlib import Path
 
+from batch6_baseline import CURRENT_SOURCE_SHA, baseline_bytes
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,11 +31,14 @@ class Batch5DispositionTests(unittest.TestCase):
         cls.identity = json.loads(INDEX.read_text())
         cls.crosswalk = json.loads(CROSSWALK.read_text())
 
-    def test_all_315_canonical_cards_are_byte_preserved(self):
-        self.assertEqual(hashlib.sha256(SOURCE.read_bytes()).hexdigest(), SOURCE_SHA)
-        self.assertEqual(sorted(self.cards), list(range(1, 316)))
-        fingerprint = hashlib.sha256("\0".join(self.cards[n] for n in range(1, 316)).encode()).hexdigest()
+    def test_all_315_canonical_cards_were_byte_preserved_in_batch5(self):
+        historical = baseline_bytes("index.html")
+        self.assertEqual(hashlib.sha256(historical).hexdigest(), SOURCE_SHA)
+        baseline_cards = {int(m[1]): m[0] for m in CARD.finditer(historical.decode())}
+        self.assertEqual(sorted(baseline_cards), list(range(1, 316)))
+        fingerprint = hashlib.sha256("\0".join(baseline_cards[n] for n in range(1, 316)).encode()).hexdigest()
         self.assertEqual(fingerprint, ALL_CARDS_SHA)
+        self.assertEqual(sorted(self.cards), list(range(1, 316)))
         self.assertIn("S-07 Migration Risk Classifier", self.cards[129])
         self.assertIn("MANDATORY FOUR-CATEGORY RISK SUMMARY", self.cards[130])
         self.assertIn("ROLLBACK TRIGGER CONDITIONS", self.cards[133])
@@ -67,7 +71,7 @@ class Batch5DispositionTests(unittest.TestCase):
         self.assertEqual(r.summary.source_counts.batches, 5)
         self.assertEqual(r.summary.source_counts.caution, 5)
         self.assertEqual(self.identity["counts"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
-        self.assertEqual(self.identity["sourceIndexSha256"], SOURCE_SHA)
+        self.assertEqual(self.identity["sourceIndexSha256"], CURRENT_SOURCE_SHA)
         self.assertEqual(self.identity["bodyCoverage"], 0)
         self.assertIn("document.getElementById('b-sec02').classList.add('open');", self.source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)

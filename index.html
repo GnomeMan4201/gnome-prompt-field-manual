@@ -8624,7 +8624,7 @@ has not been tested; state written to the target cannot be unwound
 
 132</pre>
 </article>
-<article class="manual-page-card" id="manual-page-133" data-manual-text="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━migration verdict ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━low risk: all dimensions at low or moderate. proceed with standard migration runbook. monitoring in place. moderate risk: one or more dimensions at high. proceed only with specific mitigations listed above confirmed complete. dry run required. high risk: one or more dimensions at critical. do not migrate until critical dimensions are reduced. redesign may be required. do not migrate yet: fundamental preconditions are unmet — rollback is untested, observability is absent, or consumer impact is uncharacterized. the migration window must be rescheduled. state the verdict and list the top three conditions that must be confirmed true before migration proceeds. rollback trigger conditions for each material failure mode specify: observable failure signal; measurable threshold or condition (a number or unambiguous state); evaluation window (time or sample count); evidence source or monitoring mechanism (metric, log, probe, or reconciliation check); responsible decision owner (authorized on-call role); immediate halt or rollback action with safety preconditions; and escalation procedure. mark unknown thresholds [requires operational confirmation], never invent them. treat missing or untested rollback conditions as blockers, not implied approval. this prompt defines pre-agreed decision criteria: it does not monitor production or execute rollback. inputs needed source system description, target system description, and an account of the state or data being migrated. the more specific the input, the more specific the risk dimensions. at minimum: what is moving, what it currently connects to, and whether rollback has been tested. for schema migrations: the current and target schema or the delta. for service migrations: the api surface and known consumers. expected output eight risk dimension assessments (compatibility, schema/contract dependency, ordering/sequencing, rollback, observability, user/downstream impact, detectability), each with risk level, evidence, and required mitigation. a mandatory four-category risk summary (data compatibility risk, behavioral risk, integration risk, rollback complexity risk): each with an independent critical / high / medium / low rating, supporting evidence, source-dimension mapping, or unassessed/do not migrate yet when evidence is absent. a required test or dry run specification. a migration verdict at one of four levels with conditions that must be confirmed before proceeding. a rollback trigger conditions section stating each signal, threshold or confirmation gap, evaluation window, evidence source, decision owner, immediate halt/rollback action, and escalation procedure. the output is a migration gate document. a moderate risk or higher verdict with unaddressed conditions is a block on the migration window, not an advisory. 133">
+<article class="manual-page-card" id="manual-page-133" data-manual-text="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━migration verdict ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━low risk: all dimensions at low or moderate. proceed with standard migration runbook. monitoring in place. moderate risk: one or more dimensions at high. proceed only with specific mitigations listed above confirmed complete. dry run required. high risk: one or more dimensions at critical. do not migrate until critical dimensions are reduced. redesign may be required. do not migrate yet: fundamental preconditions are unmet — rollback is untested, observability is absent, or consumer impact is uncharacterized. the migration window must be rescheduled. state the verdict and list the top three conditions that must be confirmed true before migration proceeds. rollback trigger conditions for each material failure mode specify: observable failure signal; measurable threshold or condition (a number or unambiguous state); evaluation window (time or sample count); evidence source or monitoring mechanism (metric, log, probe, or reconciliation check); responsible decision owner (authorized on-call role); immediate halt or rollback action with safety preconditions; and escalation procedure. mark unknown thresholds [requires operational confirmation], never invent them. treat missing or untested rollback conditions as blockers, not implied approval. this prompt defines pre-agreed decision criteria: it does not monitor production or execute rollback. inputs needed source system description, target system description, and an ac- count of the state or data being migrated. the more specific the input, the more specific the risk dimensions. at minimum: what is moving, what it currently connects to, and whether rollback has been tested. for schema migrations: the current and target schema or the delta. for service migrations: the api surface and known consumers. expected output eight risk dimension assessments (compatibility, schema/contract, dependency, ordering/sequencing, rollback, observ- ability, user/downstream impact, detectability), each with risk level, evidence, and required mitigation. a mandatory four-category risk summary (data compatibility risk, behavioral risk, integration risk, rollback complexity risk): each with an independent critical / high / medium / low rating, supporting evidence, source-dimension mapping, or unassessed/do not migrate yet when evidence is absent. a required test or dry run specification. a migration verdict at one of four levels with conditions that must be confirmed before proceeding. a rollback trigger conditions section stating each signal, threshold or confirmation gap, evaluation window, evidence source, decision owner, immediate halt/rollback action, and escalation procedure. the output is a migration gate document. a mod- erate risk or higher verdict with unaddressed conditions is a block on the migration window, not an advisory. 133">
   <div class="manual-page-head"><span>Page 133</span><em>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━MIGRATION VERDICT</em></div>
   <pre>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━MIGRATION VERDICT
 
@@ -8683,7 +8683,7 @@ known consumers.
 EXPECTED OUTPUT
 
 
-Eight risk dimension assessments (COMPATIBILITY, SCHEMA/CONTRACT
+Eight risk dimension assessments (COMPATIBILITY, SCHEMA/CONTRACT,
 DEPENDENCY, ORDERING/SEQUENCING, ROLLBACK, OBSERV-
 ABILITY, USER/DOWNSTREAM IMPACT, DETECTABILITY), each
 with risk level, evidence, and required mitigation. A MANDATORY FOUR-CATEGORY RISK SUMMARY
@@ -10019,7 +10019,7 @@ THE PROMPT
 
 156</pre>
 </article>
-<article class="manual-page-card" id="manual-page-157" data-manual-text="define the baseline across these dimensions: output format profile: what structural patterns characterize normal output for this system? (length distribution, format type, presence/absence of code, citations, etc.) topic boundary: what topics, domains, and content types appear in normal operation? what is conspicuously absent? tool call pattern: if the system uses tools, what is the normal pattern of tool invocations? (which tools, in what sequence, with what parameter types?) refusal rate: what is the expected refusal rate? a sudden drop in refusals may signal persona override. output language and register: what language and tone characterize normal outputs? baseline deviation signals: list observable output signals that indicate potential policy escape and warrant automated escalation review: signal 1 — format anomaly: output violates the expected structural format without a user request that explains it signal 2 — topic boundary violation: output addresses topics outside the system&#x27;s defined scope signal 3 — tool call anomaly: tool invocations outside the expected pattern, or with parameters sourced from untrusted input signal 4 — self-referential output: model describes its own instructions, constraints, or system prompt content signal 5 — canary reproduction: any canary trigger fires signal 6 — unexpected capability demonstration: output includes capabilities the system is not designed to offer signal 7 — [system-specific]: add any additional deviation signal specific to this system&#x27;s normal behavior escalation / quarantine policy define the response actions for each firewall event: level 1 — log: record the event; do not interrupt flow triggers: [which input classifications or deviation signals warrant logging without interruption?] level 2 — flag: deliver response but mark for human review triggers: [which events warrant flagged delivery?] level 3 — quarantine: hold response pending review triggers: [which events halt delivery for human decision?] quarantine procedure: [who reviews? what is the time limit? what is the default action if review does not occur?] level 4 — block: do not deliver response; send safe fallback triggers: [which events result in immediate block?] 157">
+<article class="manual-page-card" id="manual-page-157" data-manual-text="define the baseline across these dimensions: output format profile: what structural patterns characterize normal output for this system? (length distribution, format type, presence/absence of code, citations, etc.) topic boundary: what topics, domains, and content types appear in normal operation? what is conspicuously absent? tool call pattern: if the system uses tools, what is the normal pattern of tool invocations? (which tools, in what sequence, with what parameter types?) refusal rate: what is the expected refusal rate? a sudden drop in refusals may signal persona override. output language and register: what language and tone characterize normal outputs? baseline deviation signals and alert thresholds classify each signal before assigning a response. a deterministic policy violation is an event that meets an explicit policy rule, such as a tool request for a forbidden operation. evaluate it per event. statistical anomalies are departures from an approved baseline, such as a change in refusal rate. they require sufficient observations to assess and do not establish a policy violation on their own. for each alert, specify all eight fields: 1. observable metric or event — what can the system count or detect? 2. measurement method — how is it measured? state units and denominator where relevant. 3. threshold or trigger condition — give a numeric threshold or an unambiguous condition. 4. observation window — state the time or event-count window, or per event for a deterministic rule. 5. minimum sample size — give the minimum for a statistical alert. mark not applicable for per-event rules. 6. evidence source — identify the metric, log, trace or policy decision record used. 7. associated response — select a response level and specify the action. 8. responsible decision owner — name the role accountable for the response and any release decision. mark unknown operational thresholds [requires operational confirmation]. withhold approval for dependent operations until the owner confirms the threshold. treat insufficient samples or unavailable telemetry as an unknown state and apply fallback behavior. evaluate format, topic, tool-call patterns, self-referential output, canary triggers, unexpected capabilities, and relevant system-specific signals. document how the baseline is built from reviewed legitimate traffic. exclude suspected contamination, record the population and system version, and require owner approval before recalibrating for drift. do not fold anomalous periods into the baseline automatically. test monitor health with freshness and collection checks. track false positives on reviewed legitimate events and false negatives using reviewed misses and labeled validation cases. specify who reviews these findings and who approves alert changes. escalation / quarantine policy define the response actions for each firewall event: level 1 — log: record the event; do not interrupt flow triggers: [which input classifications or deviation signals warrant logging without interruption?] level 2 — flag: deliver response but mark for human review triggers: [which events warrant flagged delivery?] level 3 — quarantine: hold response pending review triggers: [which events halt delivery for human decision?] quarantine procedure: [who reviews? what is the time limit? what is the default action if review does not occur?] level 4 — block: do not deliver response; send safe fallback triggers: [which events result in immediate block?] 157">
   <div class="manual-page-head"><span>Page 157</span><em>Define the baseline across these dimensions: OUTPUT FORMAT PROFILE:</em></div>
   <pre>Define the baseline across these dimensions: OUTPUT FORMAT PROFILE:
 
@@ -10041,31 +10041,54 @@ drop in refusals may signal persona override. OUTPUT LANGUAGE AND
 
 REGISTER: What language and tone characterize normal outputs?
 
-BASELINE DEVIATION SIGNALS: List observable output signals that
+BASELINE DEVIATION SIGNALS AND ALERT THRESHOLDS
 
-indicate potential policy escape and warrant automated escalation
+Classify each signal before assigning a response. A deterministic policy
+violation is an event that meets an explicit policy rule, such as a tool
+request for a forbidden operation. Evaluate it per event. Statistical
+anomalies are departures from an approved baseline, such as a change in
+refusal rate. They require sufficient observations to assess and do not
+establish a policy violation on their own.
 
-review: SIGNAL 1 — FORMAT ANOMALY: Output violates the expected
+For each alert, specify all eight fields:
 
-structural format without a user request that explains it SIGNAL
+1. OBSERVABLE METRIC OR EVENT — What can the system count or detect?
 
-2 — TOPIC BOUNDARY VIOLATION: Output addresses topics outside the
+2. MEASUREMENT METHOD — How is it measured? State units and denominator
+where relevant.
 
-system&#x27;s defined scope SIGNAL 3 — TOOL CALL ANOMALY: Tool invocations
+3. THRESHOLD OR TRIGGER CONDITION — Give a numeric threshold or an
+unambiguous condition.
 
-outside the expected pattern, or with parameters sourced from
+4. OBSERVATION WINDOW — State the time or event-count window, or per
+event for a deterministic rule.
 
-untrusted input SIGNAL 4 — SELF-REFERENTIAL OUTPUT: Model describes
+5. MINIMUM SAMPLE SIZE — Give the minimum for a statistical alert. Mark
+not applicable for per-event rules.
 
-its own instructions, constraints, or system prompt content SIGNAL 5
+6. EVIDENCE SOURCE — Identify the metric, log, trace or policy decision
+record used.
 
-— CANARY REPRODUCTION: Any canary trigger fires SIGNAL 6 — UNEXPECTED
+7. ASSOCIATED RESPONSE — Select a response level and specify the action.
 
-CAPABILITY DEMONSTRATION: Output includes capabilities the system
+8. RESPONSIBLE DECISION OWNER — Name the role accountable for the
+response and any release decision.
 
-is not designed to offer SIGNAL 7 — [SYSTEM-SPECIFIC]: Add any
+Mark unknown operational thresholds [REQUIRES OPERATIONAL CONFIRMATION].
+Withhold approval for dependent operations until the owner confirms the
+threshold. Treat insufficient samples or unavailable telemetry as an
+unknown state and apply FALLBACK BEHAVIOR.
 
-additional deviation signal specific to this system&#x27;s normal behavior
+Evaluate format, topic, tool-call patterns, self-referential output,
+canary triggers, unexpected capabilities, and relevant system-specific
+signals. Document how the baseline is built from reviewed legitimate
+traffic. Exclude suspected contamination, record the population and
+system version, and require owner approval before recalibrating for
+drift. Do not fold anomalous periods into the baseline automatically.
+Test monitor health with freshness and collection checks. Track false
+positives on reviewed legitimate events and false negatives using
+reviewed misses and labeled validation cases. Specify who reviews these
+findings and who approves alert changes.
 
 ESCALATION / QUARANTINE POLICY
 
@@ -10098,7 +10121,7 @@ TRIGGERS: [Which events result in immediate block?]
 
                                                     157</pre>
 </article>
-<article class="manual-page-card" id="manual-page-158" data-manual-text="gnome prompt field manual level 5 — escalate: block plus security team notification triggers: [canary fires, critical injection signals, or confirmed policy escape — what constitutes escalation?] fallback behavior specify what the system returns when the firewall blocks or quarantines a response: safe fallback response: [the exact response the system delivers when a block fires — should be: (a) helpful enough to not confuse legitimate users (b) revealing nothing about the firewall&#x27;s detection logic (c) consistent with the system&#x27;s normal voice] fallback logging: [what is logged when fallback fires?] user communication: [does the user receive any indication that the system did not complete its normal response?] uncertainty handling: [when classification confidence is insufficient to allow or block — what does the system do? route to conservative fallback, or quarantine for review?] firewall test plan specify the test cases required to validate this firewall design. for each test case: test id: [t-01, t-02, ...] test type: positive (legitimate input, should allow) / negative (injection attempt, should block) / boundary (edge case, should quarantine or flag) input: [describe the test input abstractly — do not write actual injection payloads here; describe the category and structural characteristics] expected firewall response: [allow / block / quarantine / flag] pass criterion: [the observable output or log entry that confirms the firewall responded correctly] include at minimum: 2 positive tests (legitimate inputs that should pass) 2 negative tests (injection-category inputs that should block — described by injection type, not payload) 1 canary test (a synthetic output containing a canary trigger — should fire escalation) 1 uncertainty test (ambiguous input — should follow uncertainty handling policy, not block or allow silently) 1 fallback test (verify the safe fallback response is delivered and logged correctly when a block fires) 158">
+<article class="manual-page-card" id="manual-page-158" data-manual-text="gnome prompt field manual level 5 — escalate: block plus security team notification triggers: [canary fires, critical injection signals, or confirmed policy escape — what constitutes escalation?] fallback behavior define a safe default for each block, quarantine, escalation, uncertain classification, and monitoring failure. specify the user-facing response and the event, decision, and review outcome to log. use a clear message that omits sensitive detection details. safe degradation — on stale, missing, or unhealthy monitoring, mark the relevant decision state unavailable. continue only explicitly approved low-risk functions that do not depend on the unavailable control. suspend dependent actions and side effects and route them to quarantine or block. never silently fail open. quarantine — hold the response and any associated action. specify the reviewer, deadline, and release criteria. if review expires or evidence remains insufficient, block and return the safe fallback. block — withhold the response and prevent the action. return the safe fallback and record the decision. escalation — block critical events and notify the designated security owner. specify the notification channel, acknowledgement deadline, and backup owner. recovery — resume dependent operations only after telemetry is healthy and the decision owner verifies the applicable release criteria. firewall test plan specify the test cases required to validate this firewall design. for each test case: test id: [t-01, t-02, ...] test type: positive (legitimate input, should allow) / negative (injection attempt, should block) / boundary (edge case, should quarantine or flag) input: [describe the test input abstractly — do not write actual injection payloads here; describe the category and structural characteristics] expected firewall response: [allow / block / quarantine / flag] pass criterion: [the observable output or log entry that confirms the firewall responded correctly] include at minimum: 2 positive tests (legitimate inputs that should pass) 2 negative tests (injection-category inputs that should block — described by injection type, not payload) 1 canary test (a synthetic output containing a canary trigger — should fire escalation) 1 uncertainty test (ambiguous input — should follow uncertainty handling policy, not block or allow silently) 1 fallback test (verify the safe fallback response is delivered and logged correctly when a block fires). add a monitoring-loss test for safe degradation or blocking, a quarantine timeout test, and an escalation delivery test. 158">
   <div class="manual-page-head"><span>Page 158</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -10111,31 +10134,32 @@ TRIGGERS: [Which events result in immediate block?]
 
    — what constitutes escalation?]
 
-   FALLBACK BEHAVIOR
+FALLBACK BEHAVIOR
 
-   Specify what the system returns when the firewall blocks or
+Define a safe default for each block, quarantine, escalation, uncertain
+classification, and monitoring failure. Specify the user-facing response
+and the event, decision, and review outcome to log. Use a clear message
+that omits sensitive detection details.
 
-   quarantines a response:
+SAFE DEGRADATION — On stale, missing, or unhealthy monitoring, mark the
+relevant decision state unavailable. Continue only explicitly approved
+low-risk functions that do not depend on the unavailable control.
+Suspend dependent actions and side effects and route them to quarantine
+or block. Never silently fail open.
 
-   SAFE FALLBACK RESPONSE: [The exact response the system delivers
+QUARANTINE — Hold the response and any associated action. Specify the
+reviewer, deadline, and release criteria. If review expires or evidence
+remains insufficient, block and return the safe fallback.
 
-   when a block fires — should be: (a) helpful enough to not confuse
+BLOCK — Withhold the response and prevent the action. Return the safe
+fallback and record the decision.
 
-   legitimate users (b) revealing nothing about the firewall&#x27;s
+ESCALATION — Block critical events and notify the designated security
+owner. Specify the notification channel, acknowledgement deadline, and
+backup owner.
 
-   detection logic (c) consistent with the system&#x27;s normal voice]
-
-   FALLBACK LOGGING: [What is logged when fallback fires?] USER
-
-   COMMUNICATION: [Does the user receive any indication that the system
-
-   did not complete its normal response?] UNCERTAINTY HANDLING: [When
-
-   classification confidence is insufficient to ALLOW or BLOCK — what
-
-   does the system do? Route to conservative fallback, or quarantine for
-
-   review?]
+RECOVERY — Resume dependent operations only after telemetry is healthy
+and the decision owner verifies the applicable release criteria.
 
    FIREWALL TEST PLAN
 
@@ -10171,7 +10195,8 @@ TRIGGERS: [Which events result in immediate block?]
 
    the safe fallback response is delivered and logged correctly when a
 
-   block fires)
+   block fires). Add a monitoring-loss test for safe degradation or
+   blocking, a quarantine timeout test, and an escalation delivery test.
 
 
 
@@ -10179,7 +10204,7 @@ TRIGGERS: [Which events result in immediate block?]
 
 158</pre>
 </article>
-<article class="manual-page-card" id="manual-page-159" data-manual-text="inputs needed a description of the ai system being protected — what it does, what capabilities it has, and what input channels it receives. the more specific the system description, the more specific the fire- wall design. a system with tool-calling capabilities and write per- missions requires a more detailed threat model than a read-only q&amp;a system. minimum useful input: system capabilities and in- put channels. optimal input: the system architecture from s-01 (system map with trust boundaries) plus any injection signals already identified by sec-01. expected output a prompt firewall architecture specification containing seven struc- tured sections: threat model (attack paths specific to this system), trust boundaries (the crossing points the firewall enforces), input classification table (allow/block/quarantine policy per input class), canary strategy (token design, place- ment, rotation, and trigger conditions), behavioral baseline (normal output profile and deviation signals), escalation/quarantine policy (five-level response policy), and firewall test plan (typed test cases with pass criteria). the specification is actionable: an engineer who has not read the conversation should be able to implement the described firewall from the output alone. if the output could apply to any ai system without modification, it failed. 159">
+<article class="manual-page-card" id="manual-page-159" data-manual-text="inputs needed a description of the ai system being protected — what it does, what capabilities it has, and what input channels it receives. the more specific the system description, the more specific the fire- wall design. a system with tool-calling capabilities and write per- missions requires a more detailed threat model than a read-only q&amp;a system. minimum useful input: system capabilities and in- put channels. optimal input: the system architecture from s-01 (system map with trust boundaries) plus any injection signals already identified by sec-01. expected output a prompt firewall architecture specification containing eight structured sections: 1. threat model (attack paths specific to this system). 2. trust boundaries (crossing points the firewall enforces). 3. input classification table (allow, block, or quarantine policy per input class). 4. canary strategy (token design, placement, rotation, and triggers). 5. behavioral baseline (normal output profile, deviation signals, and measurable alert thresholds). 6. escalation/quarantine policy (five-level response policy). 7. fallback behavior (safe degradation, quarantine, blocking, escalation, and handling unavailable monitoring). 8. firewall test plan (typed test cases with observable pass criteria). the specification is actionable: an engineer who has not read the conversation should be able to implement the described firewall from the output alone. if the output could apply to any ai system without modification, it failed. 159">
   <div class="manual-page-head"><span>Page 159</span><em>INPUTS NEEDED</em></div>
   <pre>INPUTS NEEDED
 
@@ -10198,15 +10223,27 @@ already identified by SEC-01.
 EXPECTED OUTPUT
 
 
-A prompt firewall architecture specification containing seven struc-
-tured sections: THREAT MODEL (attack paths specific to this
-system), TRUST BOUNDARIES (the crossing points the firewall
-enforces), INPUT CLASSIFICATION TABLE (allow/block/quarantine
-policy per input class), CANARY STRATEGY (token design, place-
-ment, rotation, and trigger conditions), BEHAVIORAL BASELINE
-(normal output profile and deviation signals), ESCALATION/QUARANTINE
-POLICY (five-level response policy), and FIREWALL TEST PLAN
-(typed test cases with pass criteria).
+A prompt firewall architecture specification containing eight structured
+sections:
+
+1. THREAT MODEL (attack paths specific to this system).
+
+2. TRUST BOUNDARIES (crossing points the firewall enforces).
+
+3. INPUT CLASSIFICATION TABLE (allow, block, or quarantine policy per
+input class).
+
+4. CANARY STRATEGY (token design, placement, rotation, and triggers).
+
+5. BEHAVIORAL BASELINE (normal output profile, deviation signals, and
+measurable alert thresholds).
+
+6. ESCALATION/QUARANTINE POLICY (five-level response policy).
+
+7. FALLBACK BEHAVIOR (safe degradation, quarantine, blocking,
+escalation, and handling unavailable monitoring).
+
+8. FIREWALL TEST PLAN (typed test cases with observable pass criteria).
 
 The specification is actionable: an engineer who has not read the
 conversation should be able to implement the described firewall
@@ -10274,7 +10311,7 @@ consider.
 
 160</pre>
 </article>
-<article class="manual-page-card" id="manual-page-161" data-manual-text="follow-up →run sec-01 (prompt injection recognizer) before finalizing the threat model — use sec-01 to classify the actual input surface of this system against the six injection classifications. the injection signals sec-01 finds become the specific attack paths in the firewall’s threat model. a threat model built with- out sec-01 output may miss the specific injection patterns this system’s input channels attract. →run s-01 (system map with trust boundaries) if the trust boundaries section cannot be completed because the system’s boundary map is incomplete. the firewall design can only be as specific as the trust boundary map it is built on. →run sec-03 (rag poisoning auditor) if the system includes a retrieval-augmented generation pipeline — the classifica- tion table entry for retrieved documents must be informed by a rag-specific audit that identifies how retrieved content is as- sembled into the model context and at which stage the firewall can intercept it. →run sec-04 (evaluator capture scanner) if the system uses a model-based evaluator or safety classifier as part of its pipeline — an evaluator that has been captured will fail to trigger the firewall’s quarantine or block levels even when it should. the firewall’s escalation policy must not rely on a potentially- captured evaluator as its sole gate. →run s-06 (observability gap finder) after producing the fire- wall design to verify that the baseline deviation signals are actually observable — that the system has the logging and monitoring infrastructure to detect each signal. a firewall de- sign that specifies signals the system cannot observe in practice is not operable. 161">
+<article class="manual-page-card" id="manual-page-161" data-manual-text="follow-up →run sec-01 (prompt injection recognizer) before finalizing the threat model — use sec-01 to classify the actual input surface of this system against the six injection classifications. the injection signals sec-01 finds become the specific attack paths in the firewall’s threat model. a threat model built with- out sec-01 output may miss the specific injection patterns this system’s input channels attract. →run s-01 (system map with trust boundaries) if the trust boundaries section cannot be completed because the system’s boundary map is incomplete. the firewall design can only be as specific as the trust boundary map it is built on. →run sec-03 (rag poisoning auditor) if the system includes a retrieval-augmented generation pipeline — the classifica- tion table entry for retrieved documents must be informed by a rag-specific audit that identifies how retrieved content is as- sembled into the model context and at which stage the firewall can intercept it. →run sec-04 (evaluator capture scanner) if the system uses a model-based evaluator or safety classifier as part of its pipeline — an evaluator that has been captured will fail to trigger the firewall’s quarantine or block levels even when it should. the firewall’s escalation policy must not rely on a potentially- captured evaluator as its sole gate. →run sec-10 (trust boundary mapper (security), page 205) before finalizing the firewall architecture. use its boundary map to place enforcement at each relevant crossing. →run sec-09 (indirect injection tracer, page 203) after designing the firewall. review whether its controls cover indirect data paths and record any uncovered crossings. →run s-06 (observability gap finder) after producing the fire- wall design to verify that the baseline deviation signals are actually observable — that the system has the logging and monitoring infrastructure to detect each signal. a firewall de- sign that specifies signals the system cannot observe in practice is not operable. 161">
   <div class="manual-page-head"><span>Page 161</span><em>FOLLOW-UP</em></div>
   <pre>FOLLOW-UP
 
@@ -10305,6 +10342,14 @@ model-based evaluator or safety classifier as part of its pipeline
 firewall’s quarantine or block levels even when it should. The
 firewall’s ESCALATION POLICY must not rely on a potentially-
 captured evaluator as its sole gate.
+
+→Run SEC-10 (Trust Boundary Mapper (Security), page 205) before
+finalizing the firewall architecture. Use its boundary map to place
+enforcement at each relevant crossing.
+
+→Run SEC-09 (Indirect Injection Tracer, page 203) after designing the
+firewall. Review whether its controls cover indirect data paths and
+record any uncovered crossings.
 
 →Run S-06 (Observability Gap Finder) after producing the fire-
 wall design to verify that the BASELINE DEVIATION SIGNALS
@@ -11519,7 +11564,7 @@ separates command from data]
 
                                                     181</pre>
 </article>
-<article class="manual-page-card" id="manual-page-182" data-manual-text="gnome prompt field manual step 3 — delimiter and escaping policy state the delimiter and escaping policy for this refactored structure: delimiter choice: [what delimiter marks the command/data boundary? why was this delimiter chosen? what makes it unlikely to appear in normal data for this system?] escaping rule: [if data content may contain the delimiter character or sequence, what is the escaping rule? state the exact escape sequence and when it applies.] escape validation: [how is the escaping rule enforced? at template construction time? at runtime? is there a programmatic check that data values have been escaped before template assembly?] nested delimiter policy: [if the template can be nested (e.g., tool output that itself contains a template), how are nested delimiters handled to prevent outer boundary collapse?] step 4 — escaped delimiter test cases produce test cases that verify the separation holds under adversarial inputs targeting the delimiter. for each test case: test id: [edt-01, edt-02, ...] input data value: [the data input that tests the delimiter boundary — describe what category of adversarial data this represents; use abstract/toy values, not real injection payloads] expected behavior: [what should happen when this input is processed by the refactored template? should the delimiter be escaped, the input rejected, or the boundary held?] pass condition: [the observable output or state that confirms the boundary held] fail condition: [the observable output or state that confirms the boundary collapsed and injection occurred] include at minimum: edt-01: data containing the delimiter character verbatim (tests: is the delimiter escaped correctly?) edt-02: data containing a partial delimiter sequence (tests: partial match does not trigger false positive or cause boundary confusion) edt-03: data containing the delimiter at maximum nesting depth for this system (tests: nested delimiters do not collapse outer boundary) edt-04: empty data value (tests: empty input is handled without template error) edt-05: data value at maximum expected length (tests: no length-related boundary failure) edt-06: data value that mimics 182">
+<article class="manual-page-card" id="manual-page-182" data-manual-text="gnome prompt field manual step 3 — delimiter and escaping policy state the delimiter and escaping policy for this refactored structure: delimiter choice: [what delimiter marks the command/data boundary? why was this delimiter chosen? what makes it unlikely to appear in normal data for this system?] escaping rule: [if data content may contain the delimiter character or sequence, what is the escaping rule? state the exact escape sequence and when it applies.] escape validation: [how is the escaping rule enforced? at template construction time? at runtime? is there a programmatic check that data values have been escaped before template assembly?] nested delimiter policy: [if the template can be nested (e.g., tool output that itself contains a template), how are nested delimiters handled to prevent outer boundary collapse?] step 4 — escaped delimiter test cases provide executable structural tests for edt-00 through edt-05 against the actual refactored separation mechanism. include imports, setup, assertions, execution commands, and expected results. use the supplied framework and real interfaces of the refactored artifact. if an api, dependency, or fixture is unavailable, identify the missing prerequisite and mark affected tests blocked. record whether each test was run. for each test, give the test id, input data, expected behavior, and observable pass and fail conditions. use only benign synthetic values in executable tests. where the mechanism uses native fields or roles, test the corresponding field boundary and state which delimiter-specific checks do not apply. edt-00: use representative non-empty benign input, such as “quarterly report” for a title field. assert that the input is accepted, reaches the intended data field with its expected value, leaves instructions unchanged, and preserves the expected legitimate result at the exercised boundary. a reject-all implementation must fail this test. edt-01: data containing the full delimiter. verify correct escaping and recovery, or the specified validation rejection. edt-02: data containing a partial delimiter. verify its expected handling and that the boundary remains intact. edt-03: data containing the delimiter at the maximum supported nesting depth. verify that outer boundaries remain intact or that the specified validation rejects the input. edt-04: empty data. verify the declared acceptance or validation behavior without a template error. edt-05: data at the maximum expected length. verify correct handling with its intended data boundary intact. report evidence separately for structural separation (trusted and untrusted fields), parser correctness (decoding and validation), runtime enforcement (checks in the execution path), and model interpretation (how the model treats the data). empirical resistance to injection requires separate behavioral evidence. structural assertions alone establish only the properties they exercise. edt-06: category-only description, with no payload or executable fixture. data value that mimics 182">
   <div class="manual-page-head"><span>Page 182</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -11556,47 +11601,52 @@ separates command from data]
 
    handled to prevent outer boundary collapse?]
 
-   STEP 4 — ESCAPED DELIMITER TEST CASES
+STEP 4 — ESCAPED DELIMITER TEST CASES
 
-   Produce test cases that verify the separation holds under adversarial
+Provide executable structural tests for EDT-00 through EDT-05 against
+the actual refactored separation mechanism. Include imports, setup,
+assertions, execution commands, and expected results. Use the supplied
+framework and real interfaces of the refactored artifact. If an API,
+dependency, or fixture is unavailable, identify the missing prerequisite
+and mark affected tests blocked. Record whether each test was run.
 
-   inputs targeting the delimiter.
+For each test, give the test ID, input data, expected behavior, and
+observable pass and fail conditions. Use only benign synthetic values in
+executable tests. Where the mechanism uses native fields or roles, test
+the corresponding field boundary and state which delimiter-specific
+checks do not apply.
 
-   For each test case: TEST ID: [EDT-01, EDT-02, ...] INPUT DATA VALUE:
+EDT-00: Use representative non-empty benign input, such as “Quarterly
+report” for a title field. Assert that the input is accepted, reaches
+the intended data field with its expected value, leaves instructions
+unchanged, and preserves the expected legitimate result at the exercised
+boundary. A reject-all implementation must fail this test.
 
-   [The data input that tests the delimiter boundary — describe what
+EDT-01: Data containing the full delimiter. Verify correct escaping and
+recovery, or the specified validation rejection.
 
-   category of adversarial data this represents; use abstract/toy
+EDT-02: Data containing a partial delimiter. Verify its expected
+handling and that the boundary remains intact.
 
-   values, not real injection payloads] EXPECTED BEHAVIOR: [What should
+EDT-03: Data containing the delimiter at the maximum supported nesting
+depth. Verify that outer boundaries remain intact or that the specified
+validation rejects the input.
 
-   happen when this input is processed by the refactored template?
+EDT-04: Empty data. Verify the declared acceptance or validation
+behavior without a template error.
 
-   Should the delimiter be escaped, the input rejected, or the boundary
+EDT-05: Data at the maximum expected length. Verify correct handling
+with its intended data boundary intact.
 
-   held?] PASS CONDITION: [The observable output or state that confirms
+Report evidence separately for structural separation (trusted and
+untrusted fields), parser correctness (decoding and validation), runtime
+enforcement (checks in the execution path), and model interpretation
+(how the model treats the data). Empirical resistance to injection
+requires separate behavioral evidence. Structural assertions alone
+establish only the properties they exercise.
 
-   the boundary held] FAIL CONDITION: [The observable output or state
-
-   that confirms the boundary collapsed and injection occurred]
-
-   Include at minimum: EDT-01: Data containing the delimiter character
-
-   verbatim (tests: is the delimiter escaped correctly?) EDT-02: Data
-
-   containing a partial delimiter sequence (tests: partial match does
-
-   not trigger false positive or cause boundary confusion) EDT-03: Data
-
-   containing the delimiter at maximum nesting depth for this system
-
-   (tests: nested delimiters do not collapse outer boundary) EDT-04:
-
-   Empty data value (tests: empty input is handled without template
-
-   error) EDT-05: Data value at maximum expected length (tests: no
-
-   length-related boundary failure) EDT-06: Data value that mimics
+EDT-06: Category-only description, with no payload or executable
+fixture. Data value that mimics
 
 
 
@@ -11667,7 +11717,7 @@ violations the audit identified.
 
                                                       183</pre>
 </article>
-<article class="manual-page-card" id="manual-page-184" data-manual-text="gnome prompt field manual expected output five-section refactor report: command/data analysis (com- mand surface, data surface, and confusion points with severity), refactored structure (the full corrected template with sep- aration annotations per change), delimiter and escaping policy (delimiter choice, escaping rule, escape validation, nested delimiter policy), escaped delimiter test cases (six typed test cases with pass/fail conditions), and residual risk (re- maining confusion points, semantic injection risk, recommended additional controls, and refactor confidence rating). the refactored structure section must contain the actual corrected template, not a description of what it should look like. an output that describes the refactor rather than producing it has failed. knobs add “framework: [langchain / llamaindex / openai api / an- thropic api / raw string / jinja2 / other]” to specialize the refac- tored output to the specific library’s native parametrization id- ioms — different frameworks have different native mechanisms for separating instruction and data roles, and the refactor should use the one appropriate to this codebase. add “data volume: [single value / list / structured object / free- form document]” to adjust the delimiter policy for the data type — a policy that works for a single user string may not hold for an embedded structured document that itself contains template-like markup. add “prior injection incident: [describe what escaped]” to focus the confusion point analysis on the specific boundary that was exploited, and ensure the refactor closes the specific gap rather than restructuring unrelated portions of the template. add “only output step 4 test cases” to run the escaped delimiter test generation as a standalone pass against an already-refactored template that needs its delimiter tests documented. 184">
+<article class="manual-page-card" id="manual-page-184" data-manual-text="gnome prompt field manual expected output five-section refactor report: command/data analysis (com- mand surface, data surface, and confusion points with severity), refactored structure (the full corrected template with sep- aration annotations per change), delimiter and escaping policy (delimiter choice, escaping rule, escape validation, nested delimiter policy), escaped delimiter test cases (seven cases, edt-00 through edt-06, with pass/fail conditions and executable structural tests for edt-00 through edt-05 against the actual refactored mechanism; edt-06 is a category-only description with no payload), and residual risk (re- maining confusion points, semantic injection risk, recommended additional controls, and refactor confidence rating). the refactored structure section must contain the actual corrected template, not a description of what it should look like. an output that describes the refactor rather than producing it has failed. knobs add “framework: [langchain / llamaindex / openai api / an- thropic api / raw string / jinja2 / other]” to specialize the refac- tored output to the specific library’s native parametrization id- ioms — different frameworks have different native mechanisms for separating instruction and data roles, and the refactor should use the one appropriate to this codebase. add “data volume: [single value / list / structured object / free- form document]” to adjust the delimiter policy for the data type — a policy that works for a single user string may not hold for an embedded structured document that itself contains template-like markup. add “prior injection incident: [describe what escaped]” to focus the confusion point analysis on the specific boundary that was exploited, and ensure the refactor closes the specific gap rather than restructuring unrelated portions of the template. add “only output step 4 test cases” to run the escaped delimiter test generation as a standalone pass against an already-refactored template that needs its delimiter tests documented. 184">
   <div class="manual-page-head"><span>Page 184</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -11681,8 +11731,11 @@ mand surface, data surface, and confusion points with severity),
 REFACTORED STRUCTURE (the full corrected template with sep-
 aration annotations per change), DELIMITER AND ESCAPING
 POLICY (delimiter choice, escaping rule, escape validation, nested
-delimiter policy), ESCAPED DELIMITER TEST CASES (six typed
-test cases with pass/fail conditions), and RESIDUAL RISK (re-
+delimiter policy), ESCAPED DELIMITER TEST CASES (seven cases,
+EDT-00 through EDT-06, with pass/fail conditions and executable
+structural tests for EDT-00 through EDT-05 against the actual
+refactored mechanism; EDT-06 is a category-only description with
+no payload), and RESIDUAL RISK (re-
 maining confusion points, semantic injection risk, recommended
 additional controls, and refactor confidence rating).
 

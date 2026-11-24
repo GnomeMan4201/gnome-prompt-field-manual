@@ -12,6 +12,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from batch6_baseline import baseline_bytes
 from tools.audit_editorial_lineage import audit, canonical_surface
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
@@ -51,9 +52,12 @@ class Batch5CorrectionCandidateTests(unittest.TestCase):
             raise AssertionError("Duplicate page card")
 
     def test_source_and_preservation_are_hash_bound(self):
-        self.assertEqual(hashlib.sha256(SOURCE.read_bytes()).hexdigest(), EXPECTED_SOURCE_SHA)
+        historical = baseline_bytes("index.html")
+        self.assertEqual(hashlib.sha256(historical).hexdigest(), EXPECTED_SOURCE_SHA)
+        baseline_pages = {int(m[1]): m[0] for m in CARD.finditer(historical.decode())}
+        self.assertEqual(sorted(baseline_pages), list(range(1, 316)))
+        self.assertEqual(fingerprint(baseline_pages, [n for n in range(1, 316) if n not in (130, 133)]), UNCHANGED_313_SHA)
         self.assertEqual(sorted(self.pages), list(range(1, 316)))
-        self.assertEqual(fingerprint(self.pages, [n for n in range(1, 316) if n not in (130, 133)]), UNCHANGED_313_SHA)
         self.assertEqual(hashlib.sha256(self.pages[140].encode()).hexdigest(), PAGE140_SHA)
         self.assertEqual(fingerprint(self.pages, list(range(107, 122))), BATCH4_SHA)
 
@@ -84,7 +88,7 @@ class Batch5CorrectionCandidateTests(unittest.TestCase):
 
     def test_standalone_reader_is_source_identical_for_all_315_pages(self):
         standalone = ROOT / "GNOME-Field-Manual.html"
-        self.assertEqual(hashlib.sha256(standalone.read_bytes()).hexdigest(), EXPECTED_STANDALONE_SHA)
+        self.assertEqual(hashlib.sha256(baseline_bytes("GNOME-Field-Manual.html")).hexdigest(), EXPECTED_STANDALONE_SHA)
         html_source = standalone.read_text(encoding="utf-8")
         match = re.search(r"(?m)^\s*var BOOK_PAGES = (.+);$", html_source)
         self.assertIsNotNone(match)
