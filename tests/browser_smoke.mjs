@@ -196,7 +196,9 @@ async function assertBatch5MigrationPage() {
 
 async function assertBatch6Pages(canonical, scenario) {
   const dynamic = await browser.newPage({ viewport: scenario.viewport });
-  const offline = await browser.newPage({ javaScriptEnabled: false, viewport: scenario.viewport });
+  const offline = await browser.newPage({
+    javaScriptEnabled: false, viewport: scenario.viewport, reducedMotion: 'reduce',
+  });
   const errors = [];
   dynamic.on('pageerror', error => errors.push(String(error)));
   try {
