@@ -45,8 +45,25 @@ HISTORICAL_RECORDS = {
 CLASSIFIER_PATH = "docs/EDITORIAL_OCCURRENCE_CLASSIFIER_2026-08-12.csv"
 
 PAGE_RULES = {
+    "manual-page-130": {
+        "required": (
+            "mandatory four-category risk summary",
+            "data compatibility risk",
+            "behavioral risk",
+            "integration risk",
+            "rollback complexity risk",
+            "critical / high / medium / low",
+            "do not migrate yet",
+        ),
+        "forbidden": (),
+    },
     "manual-page-133": {
         "required": (
+            "mandatory four-category risk summary",
+            "data compatibility risk",
+            "behavioral risk",
+            "integration risk",
+            "rollback complexity risk",
             "rollback trigger conditions",
             "observable failure signal",
             "measurable threshold or condition",

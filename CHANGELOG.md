@@ -6,6 +6,9 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- Batch 5 contract correction (REVISE/HOLD): canonical S-07 Migration Risk Classifier now requires the frozen planned S-10 brief's four separately rated categories, explicit category-to-dimension evidence mapping, and an UNASSESSED/DO NOT MIGRATE YET gate for absent evidence. The already-adopted rollback-trigger criteria remain mandatory.
+- Added a machine-checkable planned S-10 / canonical S-07 / distinct canonical S-10 ADR crosswalk, with byte-preservation and standalone-reader regression tests. No entry promotion or independent body verification is claimed.
+
 - Adjudicated R-01 Source Map with Contested Zones and R-03 Replication Risk Auditor against their frozen Batch 3 briefs without drafting replacement bodies.
 - Added R-01's explicit cross-source `INSTITUTIONAL INTEREST MAP` while preserving the existing per-source institutional-interest disclosure and source-flattening controls.
 - Restored R-03's `VERY HIGH RISK` level, retained `NOT REPLICATION-READY` as a separate insufficient-information status, and added the frozen R-05 Failure-to-Test Converter follow-up.

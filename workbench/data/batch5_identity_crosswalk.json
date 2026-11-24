@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "gnome.batch5.crosswalk.v1",
+  "sourceIndexSha256": "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448",
+  "disposition": "REVISE_HOLD",
+  "planned": {
+    "briefId": "b-s10",
+    "entryId": "S-10",
+    "title": "Migration Risk Classifier",
+    "status": "PENDING"
+  },
+  "canonicalSubject": {
+    "entryId": "S-07",
+    "title": "Migration Risk Classifier",
+    "pages": [
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135
+    ],
+    "status": "SUBJECT_MATCH_NOT_ID_MATCH"
+  },
+  "canonicalCollision": {
+    "entryId": "S-10",
+    "title": "Architecture Decision Record Generator",
+    "firstPage": 140,
+    "status": "DISTINCT_UNTOUCHED_BODY"
+  },
+  "riskCategories": [
+    {
+      "name": "DATA COMPATIBILITY RISK",
+      "sourceDimensions": [
+        "COMPATIBILITY RISK",
+        "SCHEMA / CONTRACT RISK"
+      ]
+    },
+    {
+      "name": "BEHAVIORAL RISK",
+      "sourceDimensions": [
+        "COMPATIBILITY RISK",
+        "USER / DOWNSTREAM IMPACT",
+        "DETECTABILITY"
+      ]
+    },
+    {
+      "name": "INTEGRATION RISK",
+      "sourceDimensions": [
+        "SCHEMA / CONTRACT RISK",
+        "DEPENDENCY RISK",
+        "ORDERING / SEQUENCING RISK"
+      ]
+    },
+    {
+      "name": "ROLLBACK COMPLEXITY RISK",
+      "sourceDimensions": [
+        "ROLLBACK RISK",
+        "ORDERING / SEQUENCING RISK",
+        "OBSERVABILITY RISK",
+        "DETECTABILITY"
+      ]
+    }
+  ],
+  "categoryRatingLevels": [
+    "CRITICAL",
+    "HIGH",
+    "MEDIUM",
+    "LOW"
+  ],
+  "dimensionRatingLevels": [
+    "CRITICAL",
+    "HIGH",
+    "MODERATE",
+    "LOW"
+  ],
+  "labelReconciliation": {
+    "MEDIUM": "MODERATE",
+    "scope": "SUMMARY_ONLY"
+  },
+  "missingEvidenceDecision": "UNASSESSED_AND_DO_NOT_MIGRATE_YET",
+  "canonicalBodyVerification": "UNVERIFIED",
+  "promotionAuthorized": false,
+  "canonicalIdReuseResolved": false,
+  "countsUnaffected": {
+    "pending": 11,
+    "drafted": 80,
+    "total": 91,
+    "pages": 315
+  }
+}

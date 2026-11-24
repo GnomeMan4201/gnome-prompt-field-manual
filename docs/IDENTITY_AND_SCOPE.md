@@ -77,6 +77,18 @@ Page 133 now includes mandatory **ROLLBACK TRIGGER CONDITIONS**: observable sign
 
 This is a **candidate correction**, not a Batch 5 PASS or promotion. The inventory remains **11 pending / 80 drafted** until a separate reviewed disposition is recorded. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
 
+## Batch 5 four-category contract: repaired, identity disposition still open
+
+The standard S-07 Migration Risk Classifier prompt now explicitly requires the
+four independently rated categories defined by the frozen S-10 brief. The eight
+underlying dimensions and the explicit rollback-trigger criteria remain.
+The exact **planned S-10 / canonical S-07 / canonical S-10 ADR** crosswalk is
+recorded in [Batch 5 contract review](BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md)
+and [machine-readable identity crosswalk](../workbench/data/batch5_identity_crosswalk.json).
+No pending entry has been promoted by this correction. A separately approved
+editorial identity decision remains required. The previous correction document
+records its own historical source hash and has not been overwritten.
+
 ## Remaining release blockers
 
 Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 11 pending entries remain after the 2026-11-23 Batch 4 disposition.

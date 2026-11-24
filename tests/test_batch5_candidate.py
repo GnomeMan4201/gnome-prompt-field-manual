@@ -17,9 +17,9 @@ from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "index.html"
-EXPECTED_SOURCE_SHA = "ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab"
-EXPECTED_STANDALONE_SHA = "37fa881e887eb6ac9f18aadaa92759e55baab505fc7ce3d2bea993053a3ffb56"
-UNCHANGED_314_SHA = "75e3cc4fee094ea766390b8d0cc19cfc8c86cef3d9098cd4dc56baca8b995190"
+EXPECTED_SOURCE_SHA = "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448"
+EXPECTED_STANDALONE_SHA = "558fec69b1dc5f2ceb3821d7918a1601d017e93b289c97c4f8e6afcb35895fb3"
+UNCHANGED_313_SHA = "31f9f2d953c9bc5c8392f4010cc80eb26524cff54e92ff2fc633f2f67cf918e0"
 PAGE140_SHA = "66a08d8d367d91ae61221fa48865e5f217247e2af8aab7003a43be6bd4b32276"
 BATCH4_SHA = "145b5fe00fedfa43d2a098f3bca1e59e6a9d7ffef8e4a378bc0852626a2d9a1a"
 CARD = re.compile(r'<article class="manual-page-card" id="manual-page-(\d{3})"[^>]*>.*?</article>', re.S)
@@ -53,7 +53,7 @@ class Batch5CorrectionCandidateTests(unittest.TestCase):
     def test_source_and_preservation_are_hash_bound(self):
         self.assertEqual(hashlib.sha256(SOURCE.read_bytes()).hexdigest(), EXPECTED_SOURCE_SHA)
         self.assertEqual(sorted(self.pages), list(range(1, 316)))
-        self.assertEqual(fingerprint(self.pages, [n for n in range(1, 316) if n != 133]), UNCHANGED_314_SHA)
+        self.assertEqual(fingerprint(self.pages, [n for n in range(1, 316) if n not in (130, 133)]), UNCHANGED_313_SHA)
         self.assertEqual(hashlib.sha256(self.pages[140].encode()).hexdigest(), PAGE140_SHA)
         self.assertEqual(fingerprint(self.pages, list(range(107, 122))), BATCH4_SHA)
 
@@ -98,6 +98,12 @@ class Batch5CorrectionCandidateTests(unittest.TestCase):
                 self.assertEqual(row["pageNumber"], i)
                 self.assertEqual(row["text"], pre)
                 self.assertEqual(row["textSha256"], hashlib.sha256(pre.encode()).hexdigest())
+        static130 = re.search(r'<article class="book-page" id="page-130">.*?</article>', html_source, re.S)
+        self.assertIsNotNone(static130)
+        self.assertIn("MANDATORY FOUR-CATEGORY RISK SUMMARY", static130.group(0))
+        self.assertIn("DATA COMPATIBILITY RISK", static130.group(0))
+        self.assertIn("ROLLBACK COMPLEXITY RISK", static130.group(0))
+        self.assertIn("MEDIUM", static130.group(0))
         static133 = re.search(r'<article class="book-page" id="page-133">.*?</article>', html_source, re.S)
         self.assertIsNotNone(static133)
         self.assertIn("ROLLBACK TRIGGER CONDITIONS", static133.group(0))

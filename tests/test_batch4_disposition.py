@@ -21,10 +21,10 @@ HISTORICAL_QUEUE = ROOT / "workbench/data/adjudication_queue.json"
 HISTORICAL_INDEX = ROOT / "workbench/data/entry_identity_index.json"
 HISTORICAL_HTML = ROOT / "tests/fixtures/batch3-canonical-1f06445e.html"
 
-CURRENT_SHA = "ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab"
+CURRENT_SHA = "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448"
 BASELINE_SHA = "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
 BATCH4_PAGE_SHA = "145b5fe00fedfa43d2a098f3bca1e59e6a9d7ffef8e4a378bc0852626a2d9a1a"
-ALL_PAGE_SHA = "4b5e506301981930a1efce5211fd4ad15225ea07b62f562ced0db1d2bb9127fe"
+ALL_PAGE_SHA = "e4019358cb80de25706f983ab1eb2fb66e71dfcded70b94a8bddfe80c5eb14eb"
 CARD_PATTERN = re.compile(
     r'<article class="manual-page-card" id="manual-page-(\d{3})"[^>]*>.*?</article>',
     re.S,
