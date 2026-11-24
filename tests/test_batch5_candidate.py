@@ -118,7 +118,7 @@ class Batch5CorrectionCandidateTests(unittest.TestCase):
         self.assertIn("S-07 Migration Risk Classifier", self.pages[129])
         reconciled = reconcile(SOURCE)
         self.assertEqual(validate_expectations(
-            reconciled, expected_pending=4, expected_drafted=87,
+            reconciled, expected_pending=1, expected_drafted=90,
             expected_total=91, expected_pages=315
         ), [])
         self.assertNotIn("S-10", {item.entry_id for item in reconciled.pending_entries})

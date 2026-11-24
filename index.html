@@ -327,11 +327,11 @@
 <header class="hdr">
   <div>
     <h1 class="hdr-title">PTSP — <span>Pending Entry Draft Plan</span></h1>
-    <div style="font-size:12px;color:var(--dim);margin-top:4px;">4 pending entries · 2 remaining batches · drafting authority</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px;">1 pending entry · 1 remaining batch · drafting authority</div>
   </div>
   <div class="hdr-meta">
     Source: GNOME_Prompt_Field_Manual_v3_final.docx<br>
-    Production state: 87 drafted · 0 restore · 4 pending<br>
+    Production state: 90 drafted · 0 restore · 1 pending<br>
     Restore phase: LOCKED
   </div>
 </header>
@@ -348,10 +348,10 @@
 </nav>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num sn-pending">4</div><div class="stat-label">Pending Entries</div></div>
-  <div class="stat"><div class="stat-num sn-drafted">87</div><div class="stat-label">Drafted</div></div>
+  <div class="stat"><div class="stat-num sn-pending">1</div><div class="stat-label">Pending Entries</div></div>
+  <div class="stat"><div class="stat-num sn-drafted">90</div><div class="stat-label">Drafted</div></div>
   <div class="stat"><div class="stat-num sn-caution">5</div><div class="stat-label">Special Caution</div></div>
-  <div class="stat"><div class="stat-num sn-batch">2</div><div class="stat-label">Remaining Batches</div></div>
+  <div class="stat"><div class="stat-num sn-batch">1</div><div class="stat-label">Remaining Batches</div></div>
   <div class="stat"><div class="stat-num sn-total">91</div><div class="stat-label">Total Entries</div></div>
 </div>
 
@@ -364,7 +364,7 @@
   <div class="section-hdr">
     <span class="section-kicker">Section 1</span>
     <h2 class="section-title">Pending Entry Inventory by Part</h2>
-    <span class="section-count">4 entries · 2 parts</span>
+    <span class="section-count">1 entry · 1 part</span>
   </div>
 
   <div class="callout" style="margin-bottom:20px;border-left-color:var(--purple);">
@@ -376,12 +376,6 @@
     <div class="entry-row caution"><span class="er-id">SEC-05</span><span class="er-name">Command/Data Separator (Refactor)</span><span class="er-why">Part 0 audit: KEEP — annotated refactor output is genuinely useful. Must produce code, not advice. Insufficient evidence for closure. <a href="#b-sec05">Open drafting brief</a> · <a href="docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md">Unresolved evidence record</a>.</span><span class="er-badge badge-keep">Keep</span></div>
   </div>
 
-  <div class="part-block">
-    <div class="part-label">Part VI — Publishing Serious Artifacts · 3 pending</div>
-    <div class="entry-row"><span class="er-id">P-08</span><span class="er-name">Peer Review Responder</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
-    <div class="entry-row"><span class="er-id">P-09</span><span class="er-name">Correction / Retraction Writer</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
-    <div class="entry-row"><span class="er-id">P-10</span><span class="er-name">Open Source Contribution Guide Generator</span><span class="er-why">New entry from v3 master selection.</span><span class="er-badge badge-new">New</span></div>
-  </div>
 </div>
 
 
@@ -395,7 +389,7 @@
   </div>
 
   <p style="font-size:13px;color:var(--text);line-height:1.8;margin-bottom:16px;">
-    Batch 6 remains open for SEC-05 pending independent behavioral evidence. Batches 7 through 9 are closed. Batch 10 is the final scheduled manuscript review. SEC-05 evidence remains on a separate track.
+    Batch 10 closes the scheduled manuscript review. Batch 6 remains open for SEC-05 pending independent behavioral evidence. The manual remains a release candidate.
   </p>
 
   <div class="callout" style="margin-bottom:16px;border-left-color:var(--green);">
@@ -436,6 +430,16 @@
     <a href="workbench/data/batch9_identity_crosswalk.json">the identity crosswalk</a>.
   </div>
 
+  <div class="callout" id="batch10-disposition" style="margin-bottom:16px;border-left-color:var(--green);">
+    <strong>Batch 10 closed at manuscript-contract level.</strong>
+    Use <a href="#manual-page-238">P-08 Peer Review Responder</a>,
+    <a href="#manual-page-242">P-09 Correction/Retraction Writer</a>, and
+    <a href="#manual-page-247">P-10 Open Source Contribution Guide Generator</a>.
+    The original briefs are archived. Prompt reliability and canonical body verification remain open.
+    <a href="docs/BATCH10_DISPOSITION_2026-11-24.md">Read the disposition record</a> and
+    <a href="docs/FINAL_EDITORIAL_CLOSEOUT_2026-11-24.md">the editorial closeout</a>.
+  </div>
+
   <table class="batch-table">
     <thead>
       <tr>
@@ -448,7 +452,6 @@
     <tbody>
 
       <tr><td class="batch-num">6</td><td class="batch-entries">SEC-05</td><td class="batch-size">1</td><td class="batch-rationale">Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.</td></tr>
-      <tr><td class="batch-num">10</td><td class="batch-entries">P-08, P-09, P-10</td><td class="batch-size">3</td><td class="batch-rationale">Planned briefs for Peer Review Responder, Correction / Retraction Writer, and Open Source Contribution Guide Generator. Establish canonical subjects first, then review the practical utility of each required artifact.</td></tr>
     </tbody>
   </table>
 </div>
@@ -463,7 +466,7 @@
     <h2 class="section-title">Batch Grouping Logic</h2>
   </div>
   <p style="font-size:13px;color:var(--text);line-height:1.8;">
-    Group work within a part by shared quality risks or related entries. Batch 10 groups the remaining Part VI drafting briefs. Resolve planned identifiers against canonical headings by subject before evaluating the briefs. SEC-05 is the sole pending entry in Batch 6.
+    SEC-05 is the sole pending entry in Batch 6. Its independent evidence requirement remains open. The closed-batch records preserve the outcomes and source bindings of the scheduled manuscript reviews.
   </p>
 </div>
 
@@ -551,7 +554,7 @@
   <div class="section-hdr">
     <span class="section-kicker">Section 5</span>
     <h2 class="section-title">Per-Entry Drafting Briefs</h2>
-    <span class="section-count">4 entries</span>
+    <span class="section-count">1 entry</span>
   </div>
 
   <!-- S-01 -->
@@ -577,57 +580,6 @@
       <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">S-04 (Command/Data Boundary Audit — PRIOR: the audit identifies where separation is needed; SEC-05 performs the actual refactor), SEC-01 (Prompt Injection Recognizer — PRIOR: classify injection risk before refactoring), SEC-02 (Prompt Firewall Designer — the refactored code should be compatible with the firewall architecture)</div></div>
       <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Producing advice instead of code. The annotated refactor output means: actual modified code with comments explaining each separation decision. The testing protocol for escaped delimiters (the audit upgrade) means: the EXPECTED OUTPUT must include test cases that verify the separator holds under adversarial inputs — inputs specifically designed to break the delimiter scheme.</div></div>
       <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Two outputs: (1) Refactored code/prompt with annotations at each separation point explaining the change. (2) Test suite: at minimum, normal-input passing test, delimiter-escape attempt that should fail, injection attempt that should be blocked. The test suite must be copy-paste executable.</div></div>
-    </div>
-  </div>
-
-  <!-- P-08 -->
-  <div class="brief" id="b-p08">
-    <div class="brief-hdr" onclick="toggle('b-p08')">
-      <span class="brief-id">P-08</span>
-      <span class="brief-name">Peer Review Responder</span>
-      <span class="brief-criteria">CRITERIA 4, 10</span>
-      <span class="audit-chip ac-new">New</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">New entry from v3 master selection. Not in Part 0 audit.</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">T-06 (Belief Update Scaffold — PRIOR: run T-06 first to determine whether the review actually changed your belief), W-05 (Hedge Auditor — the response must not hedge its way around legitimate criticism), W-09 (Claim-Evidence Separator — separate reviewer claims from reviewer evidence before responding)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Helping authors deflect criticism. The failure mode is a defensiveness generator. Peer review response is valuable only when it engages genuinely — accepting what is correct, contesting what is wrong with evidence, and distinguishing between the two. The output must classify each reviewer comment as: ACCEPTED (and how the work will change), CONTESTED (with the specific counter-evidence), CLARIFICATION NEEDED (the comment is based on a misunderstanding — specify what), or DEFERRED (out of scope, with explanation).</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Structured response: for each reviewer comment, a classification (ACCEPTED / CONTESTED / CLARIFICATION NEEDED / DEFERRED) with a one-to-three sentence response. ACCEPTED entries must specify the exact change being made. CONTESTED entries must cite the specific evidence being used to contest. Summary table of all comments with classifications. No diplomatic language that obscures the actual classification.</div></div>
-    </div>
-  </div>
-
-  <!-- P-09 -->
-  <div class="brief" id="b-p09">
-    <div class="brief-hdr" onclick="toggle('b-p09')">
-      <span class="brief-id">P-09</span>
-      <span class="brief-name">Correction / Retraction Writer</span>
-      <span class="brief-criteria">CRITERIA 6, 10</span>
-      <span class="audit-chip ac-new">New</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">New entry from v3 master selection. Not in Part 0 audit.</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">P-04 (Technical Post-Mortem Publisher — when the correction concerns a process failure rather than a factual error), R-11 (Negative Result Documenter — when the original work produced a result that is now known to be wrong)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Face-saving framing that minimizes what was wrong. A correction must stand alone — a reader who never saw the original should be able to understand what changed and why it matters from the correction alone. The failure mode is a correction that buries the error in diplomatic language and emphasizes the corrected version without clearly stating what was previously wrong. The SAFETY NOTES must address the tension between institutional communication norms and honest correction practice.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Standalone correction document: ORIGINAL CLAIM (what was stated), ERROR DESCRIPTION (what was wrong and how it was discovered), CORRECTED CLAIM (what is now known to be true), IMPACT ASSESSMENT (what downstream uses of the original claim need to be revisited), SCOPE OF RETRACTION (is the entire work retracted or only specific claims). Must not require the reader to have seen the original work.</div></div>
-    </div>
-  </div>
-
-  <!-- P-10 -->
-  <div class="brief" id="b-p10">
-    <div class="brief-hdr" onclick="toggle('b-p10')">
-      <span class="brief-id">P-10</span>
-      <span class="brief-name">Open Source Contribution Guide Generator</span>
-      <span class="brief-criteria">CRITERIA 6, 9</span>
-      <span class="audit-chip ac-new">New</span>
-      <span class="brief-chevron">▶</span>
-    </div>
-    <div class="brief-body">
-      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">New entry from v3 master selection. Not in Part 0 audit.</div></div>
-      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">P-03 (README Quality Auditor — PRIOR: the README must pass P-03 before a contribution guide is worth having), S-09 (Architecture Decision Record Generator — ADRs should be referenced in the contribution guide as the context for major decisions)</div></div>
-      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Generic "how to contribute" boilerplate. The output must be specific enough that a new contributor could submit a meaningful contribution without asking questions. Generic boilerplate (fork → branch → PR) is not a contribution guide — it's a git tutorial. The guide must cover: what kinds of contributions are wanted vs not wanted, the specific conventions this project uses and why, where to find the context for decisions (ADRs), how a PR gets accepted or rejected, and what "done" looks like.</div></div>
-      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Project-specific contribution guide: CONTRIBUTION SCOPE (what kinds of contributions are welcome, what are out of scope), CONVENTIONS (naming, structure, testing — each with rationale, not just rules), DECISION CONTEXT (where to find the ADRs and architectural decisions), ACCEPTANCE CRITERIA (exactly what a maintainer will check before merging), FIRST CONTRIBUTION GUIDE (the specific path for a new contributor's first PR). Must be generated from actual project inputs, not generic.</div></div>
     </div>
   </div>
 

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "28fd210da6ec549d64d31b2aa79433843df3c04e6aeab3aa31b53ee5007c6dbd",
+  "sourceIndexSha256": "fd76d2727545b202968664cbba4137537859536c979b3597ab943abd283858cf",
   "counts": {
-    "pending": 4,
-    "drafted": 87,
+    "pending": 1,
+    "drafted": 90,
     "total": 91,
     "pages": 315
   },
@@ -827,9 +827,9 @@
       "id": "P-08",
       "titleCandidate": "Peer Review Responder",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         238
       ],
@@ -845,11 +845,11 @@
     },
     {
       "id": "P-09",
-      "titleCandidate": "Correction / Retraction Writer",
+      "titleCandidate": "Correction/Retraction Writer",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         242
       ],
@@ -867,9 +867,9 @@
       "id": "P-10",
       "titleCandidate": "Open Source Contribution Guide Generator",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         247
       ],

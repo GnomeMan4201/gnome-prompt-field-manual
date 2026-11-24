@@ -4,8 +4,9 @@ import json
 import re
 import subprocess
 import unittest
-from pathlib import Path
-from batch10_baseline import BATCH10_SOURCE_SHA, PR47_MERGE, ROOT, batch10_base_bytes
+from batch10_baseline import (
+    BATCH10_SOURCE_SHA, PR47_MERGE, ROOT, batch10_base_bytes, batch10_correction_bytes,
+)
 from batch9_baseline import BATCH9_DISPOSITION_SOURCE_SHA
 from test_batch6_correction import (ADAPTER_PATH, CANONICAL, DATASET, EXPECTED_PDF_SHA256,
     HISTORICAL_ROOTS, INDEX_PATH, STATIC, cards, changed_pages, dataset_rows, digest, parity_errors, visible, canonical_surface)
@@ -39,8 +40,8 @@ def contract_errors(page_text):
 class Batch10ContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / 'index.html').read_bytes()
-        cls.reader = (ROOT / READER).read_bytes()
+        cls.raw = batch10_correction_bytes('index.html')
+        cls.reader = batch10_correction_bytes(READER)
         cls.base = batch10_base_bytes('index.html')
         cls.base_reader = batch10_base_bytes(READER)
         cls.pages = cards(cls.raw)
@@ -93,19 +94,20 @@ class Batch10ContractTests(unittest.TestCase):
         for id in (b'sec05',b'p08',b'p09',b'p10'):
             self.assertEqual(extract_brief(self.raw,id),extract_brief(self.base,id))
 
-    def test_historical_artifacts_pdf_and_current_identity(self):
+    def test_historical_artifacts_pdf_and_correction_identity(self):
         paths=subprocess.check_output(['git','ls-tree','-r','--name-only',PR47_MERGE,'--',*HISTORICAL_ROOTS],cwd=ROOT,text=True).splitlines()
         paths.remove(INDEX_PATH)
         for path in paths:
             with self.subTest(path=path): self.assertEqual((ROOT/path).read_bytes(),batch10_base_bytes(path))
         pdf=re.search(rb'data="data:application/pdf;base64,([^"]+)"',self.raw)[1]
         self.assertEqual(digest(base64.b64decode(pdf,validate=True)),EXPECTED_PDF_SHA256)
-        cur=json.loads((ROOT/INDEX_PATH).read_bytes());old=json.loads(batch10_base_bytes(INDEX_PATH))
+        cur = json.loads(batch10_correction_bytes(INDEX_PATH))
+        old = json.loads(batch10_base_bytes(INDEX_PATH))
         self.assertEqual(cur['counts'],{'pending':4,'drafted':87,'total':91,'pages':315})
         self.assertEqual(cur['bodyCoverage'],0)
         self.assertEqual(digest(self.raw),BATCH10_SOURCE_SHA)
         self.assertEqual(cur['sourceIndexSha256'],BATCH10_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH10_SOURCE_SHA}';",(ROOT/ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH10_SOURCE_SHA}';",batch10_correction_bytes(ADAPTER_PATH).decode())
         for a,b in zip(old['entries'],cur['entries'],strict=True):
             self.assertEqual({k:v for k,v in a.items() if k not in {'occurrencePages','titleCandidate'}},{k:v for k,v in b.items() if k not in {'occurrencePages','titleCandidate'}})
             self.assertFalse((set(a['occurrencePages'])^set(b['occurrencePages']))-PAGES)

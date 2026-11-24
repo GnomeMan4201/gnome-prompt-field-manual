@@ -8,6 +8,7 @@ on:
       - 'workbench/data/batch9_identity_crosswalk.json'
       - 'tools/export_entry_identity_index.py'
       - 'tests/test_batch*.py'
+      - 'tests/fixtures/batch10-*-frozen-brief.html'
       - '.github/workflows/reactor-integrity.yml'
       - 'workbench/reactor/**'
       - 'workbench/data/entry_identity_index.json'
@@ -25,6 +26,7 @@ on:
       - 'workbench/data/batch9_identity_crosswalk.json'
       - 'tools/export_entry_identity_index.py'
       - 'tests/test_batch*.py'
+      - 'tests/fixtures/batch10-*-frozen-brief.html'
       - '.github/workflows/reactor-integrity.yml'
       - 'workbench/reactor/**'
       - 'workbench/data/entry_identity_index.json'
@@ -79,9 +81,9 @@ jobs:
           current = json.loads(Path("workbench/data/current_entry_identity_index.json").read_text())
           actual = hashlib.sha256(current_path.read_bytes()).hexdigest()
           assert actual == current["sourceIndexSha256"], "current identity source mismatch"
-          assert actual == "28fd210da6ec549d64d31b2aa79433843df3c04e6aeab3aa31b53ee5007c6dbd"
+          assert actual == "fd76d2727545b202968664cbba4137537859536c979b3597ab943abd283858cf"
           assert current == build_inventory(current_path), "current identity inventory not reproducible"
-          assert current["counts"] == {"pending": 4, "drafted": 87, "total": 91, "pages": 315}
+          assert current["counts"] == {"pending": 1, "drafted": 90, "total": 91, "pages": 315}
           assert current["bodyCoverage"] == 0
 
           frozen = Path("tests/fixtures/batch3-canonical-1f06445e.html").read_bytes()
@@ -91,7 +93,7 @@ jobs:
           assert old_sha == "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
           assert historical["counts"] == {"pending": 14, "drafted": 77, "total": 91, "pages": 315}
           assert historical["bodyCoverage"] == 0
-          print("Current 4/87 identity reproducible; historical 14/77 SHA-256 preserved; 0 verified bodies.")
+          print("Current 1/90 identity reproducible; historical 14/77 SHA-256 preserved; 0 verified bodies.")
           PYVERIFY
 
       - name: Python and JavaScript syntax
@@ -113,5 +115,5 @@ jobs:
       - name: Editorial source regression gates
         run: |
           python tools/validate_manual.py --input index.html --strict-warnings
-          python tools/reconcile_entry_lineage.py --input index.html --expect-pending 4 --expect-drafted 87 --expect-total 91 --expect-pages 315 --enforce
+          python tools/reconcile_entry_lineage.py --input index.html --expect-pending 1 --expect-drafted 90 --expect-total 91 --expect-pages 315 --enforce
           python tools/audit_editorial_lineage.py --input index.html

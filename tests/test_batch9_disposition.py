@@ -79,7 +79,7 @@ class Batch9DispositionTests(unittest.TestCase):
                 entry_id, title = heading.split(" ", 1)
                 self.assertEqual(entries[entry_id]["titleCandidate"], title)
                 self.assertEqual(entries[entry_id]["titleAuthority"], "reconciler-candidate-not-verified-heading")
-        readme = (ROOT / "README.md").read_text()
+        readme = batch10_base_bytes("README.md").decode()
         self.assertIn("Canonical P-07 remains RFC Draft Generator.", readme)
         self.assertIn("Batch 10 is the final scheduled manuscript review", self.raw.decode())
         for source in (self.raw.decode(), readme):
