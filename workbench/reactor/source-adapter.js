@@ -1,7 +1,7 @@
 (function(root){'use strict';
-const EXPECTED_SOURCE='1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19';
+const EXPECTED_SOURCE='8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd';
 async function loadIndex(path){
- const response=await fetch(path||'../data/entry_identity_index.json',{cache:'no-store'});
+ const response=await fetch(path||'../data/current_entry_identity_index.json',{cache:'no-store'});
  if(!response.ok)throw Error('SOURCE_INDEX_FETCH_FAILED:'+response.status);
  const data=await response.json();
  if(data.schemaVersion!=='gnome.manual.identity-index.v1'||data.sourceIndexSha256!==EXPECTED_SOURCE||data.entries?.length!==91||data.counts?.total!==91||data.bodyCoverage!==0||new Set(data.entries.map(e=>e.id)).size!==91)throw Error('INVALID_SOURCE_INDEX');

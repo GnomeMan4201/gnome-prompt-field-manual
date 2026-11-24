@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from reconcile_entry_lineage import reconcile
 
-EXPECTED = {"pending": 14, "drafted": 77, "total": 91, "pages": 315}
+EXPECTED = {"pending": 11, "drafted": 80, "total": 91, "pages": 315}
 SCHEMA = "gnome.manual.identity-index.v1"
 
 def build_inventory(source: Path, *, expected: dict | None = None) -> dict:
@@ -78,7 +78,7 @@ def build_inventory(source: Path, *, expected: dict | None = None) -> dict:
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", type=Path, default=Path("index.html"))
-    ap.add_argument("--output", type=Path, default=Path("workbench/data/entry_identity_index.json"))
+    ap.add_argument("--output", type=Path, default=Path("workbench/data/current_entry_identity_index.json"))
     args = ap.parse_args(argv)
     data = build_inventory(args.input)
     args.output.parent.mkdir(parents=True, exist_ok=True)
