@@ -27,7 +27,7 @@ const reviewedPages = [
   [190, 'TEN COVERAGE CATEGORIES'],
   [191, 'COVERAGE CATEGORIES CONTINUED'],
   [192, 'VERDICT AND COVERAGE RULES'],
-  [193, 'TEN PER-PROBE RECORDS'],
+  [193, 'PER-PROBE RECORDS'],
   [194, 'ILLUSTRATIVE CONTROL PAIR'],
   [195, 'FOLLOW-UP — BEFORE EVALUATION'],
   [196, 'FOLLOW-UP — AFTER EVALUATION'],
@@ -363,6 +363,10 @@ async function assertReaderPublication() {
   const match = html.match(/^ *var BOOK_PAGES = (.+);$/m);
   assert.ok(match, 'Expected the embedded search dataset');
   const pages = JSON.parse(match[1]);
+  for (const [number, phrase] of reviewedPages) {
+    assert.ok(pages[number - 1].text.toLowerCase().includes(phrase.toLowerCase()),
+      `Page ${number}: search phrase must be continuous in the standalone dataset`);
+  }
   assert.equal(pages.length, 315);
   assert.deepEqual(pages.map(p => [p.cardId, p.text]), canonical);
   assert.deepEqual(pages.map(p => p.pageNumber), canonical.map((_, i) => i + 1));
