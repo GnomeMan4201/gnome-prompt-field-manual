@@ -55,9 +55,9 @@ The current index was regenerated. Semantic IDs, editorial statuses, and body-ve
 | Merged PR #43 standalone reader | `1b2a203eb8e252b6e8539fca78e82317e083a731ac08fdbc4d4e352ce66b259b` |
 | Frozen P-01 brief fragment | `fb0169e2f36a8acc6f08c6d029f2b5a12b394f372ac077a9e2ecf97587273324` |
 | Frozen P-02 brief fragment | `1a63750729d32551b40f5d19a185f7493eec7a5d89690bebfe5e4b9ea3122bc4` |
-| Corrected `index.html` | `8cd1a08d1763506dcd2c567fb116a34ea9527b8ac862f63592f3c4a6dfdc448f` |
-| Corrected standalone reader | `68712b7fd49911c763f9eafa1b4e71bca05e8bd6a3517c421ceb65b128178b0d` |
-| Regenerated current identity index | `9e51f9fdeee966c3b47d5f5acd974af452645079dde457d127d447219ac7fc40` |
+| Corrected `index.html` | `bf6e9a6ee4c32d4ae517c4f8a5d9eebadc0e0a2da3d2bf2398667c1525353e25` |
+| Corrected standalone reader | `15b8d720aade3b1f0f5bbb0e36e879ce94a0097c66a01051caf4764761481ed8` |
+| Regenerated current identity index | `2fad3961bd6ed02accc145fab629e9194f9315b1d17b0db80d1964461089bceb` |
 | 307 unaffected cards, physical order, NUL-separated | `7189b7bf3b1bf15eec827b2ea2b4665852e0187b4c1b70e9a5faa43882f5d8d5` |
 | Historical v9 PDF | `97482787a2471cbea5a837a0023a0aa5d0317eb149d8dd6c47e6924222b7f1e9` |
 

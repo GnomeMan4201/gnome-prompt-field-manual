@@ -5,7 +5,7 @@ import subprocess
 from batch6_baseline import ROOT
 
 PR43_MERGE = "b7d97eca11e2382b01d8a09ca464f2f64da5caba"
-BATCH8_SOURCE_SHA = "8cd1a08d1763506dcd2c567fb116a34ea9527b8ac862f63592f3c4a6dfdc448f"
+BATCH8_SOURCE_SHA = "bf6e9a6ee4c32d4ae517c4f8a5d9eebadc0e0a2da3d2bf2398667c1525353e25"
 
 
 @cache
