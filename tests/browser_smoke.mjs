@@ -99,22 +99,22 @@ async function assertEditorDispositions(page) {
   assert.equal(await sec05.getByRole('link', { name: 'Unresolved evidence record' }).getAttribute('href'),
     'docs/BATCH6_SEC05_UNRESOLVED_EVIDENCE_2026-11-24.md');
   await sec05.getByRole('link', { name: 'Open drafting brief' }).click();
-  assert.ok(await page.locator('#b-sec05.open:target .brief-body').isVisible());
+  await page.locator('#b-sec05.open:target .brief-body').waitFor({ state: 'visible' });
 
   await page.getByRole('link', { name: 'SEC-02 disposition and current guidance' }).click();
   const disposition = page.locator('#sec02-disposition:target');
-  assert.ok(await disposition.isVisible());
+  await disposition.waitFor({ state: 'visible' });
   assert.equal(await disposition.getByRole('link', { name: 'the superseding interpretation' }).getAttribute('href'),
     'docs/BATCH6_ADJUDICATION_AMENDMENT_2026-11-24.md');
   await disposition.getByRole('link', { name: 'current canary evidence guidance on page 156' }).click();
-  assert.ok(await page.locator('#manual-page-156:target').isVisible());
+  await page.locator('#manual-page-156:target').waitFor({ state: 'visible' });
 
   await page.getByRole('link', { name: 'SEC-06 disposition and current guidance' }).click();
-  assert.ok(await page.locator('#sec06-disposition:target').isVisible());
+  await page.locator('#sec06-disposition:target').waitFor({ state: 'visible' });
   const readerGuidance = page.locator('#sec06-reader-guidance');
   assert.match(await readerGuidance.innerText(), /pages 121, 261, and 271 is preserved for provenance/);
   await readerGuidance.getByRole('link').click();
-  assert.ok(await page.locator('#manual-page-187:target').isVisible());
+  await page.locator('#manual-page-187:target').waitFor({ state: 'visible' });
 
   assert.deepEqual(await page.locator('.batch-table .batch-num').allTextContents(), ['6', '8', '9', '10']);
   assert.deepEqual(await page.locator('.batch-table tbody tr').first().locator('td').allTextContents(),
