@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "8ba47c93f4561c0daffa6bfce5d16401cded9f34a887bd8f300bcea38612e084",
+  "sourceIndexSha256": "3b02599e745910f647d4800160b6f22ef0192ff9520d61e4e08ae6f63ddd63ef",
   "counts": {
-    "pending": 9,
-    "drafted": 82,
+    "pending": 8,
+    "drafted": 83,
     "total": 91,
     "pages": 315
   },
@@ -1524,9 +1524,9 @@
       "id": "SEC-06",
       "titleCandidate": "Tool-Agent Offense Probe",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         121,
         187,

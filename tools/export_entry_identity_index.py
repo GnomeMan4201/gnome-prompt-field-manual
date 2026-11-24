@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from reconcile_entry_lineage import reconcile
 
-EXPECTED = {"pending": 9, "drafted": 82, "total": 91, "pages": 315}
+EXPECTED = {"pending": 8, "drafted": 83, "total": 91, "pages": 315}
 SCHEMA = "gnome.manual.identity-index.v1"
 
 def build_inventory(source: Path, *, expected: dict | None = None) -> dict:

@@ -54,7 +54,7 @@ try {
     await page.goto(manualUrl, { waitUntil: 'domcontentloaded' });
 
     await assertInitialState(page);
-    await assertPartialDisposition(page);
+    await assertEditorDispositions(page);
     await assertSearch(page);
     await assertTabInteractions(page);
     await assertReflow(page, scenario);
@@ -79,10 +79,12 @@ async function assertInitialState(page) {
   assert.ok(page093.includes('R-10 Source-of-Truth Conflict Resolver'));
 }
 
-async function assertPartialDisposition(page) {
+async function assertEditorDispositions(page) {
   const inventory = page.locator('#inventory');
   const sec05 = inventory.locator('.entry-row').filter({ hasText: 'SEC-05' });
-  assert.equal(await inventory.locator('.entry-row').count(), 9);
+  assert.equal(await inventory.locator('.entry-row').count(), 8);
+  assert.equal(await inventory.locator('.er-id').filter({ hasText: 'SEC-06' }).count(), 0);
+  assert.equal(await page.locator('#b-sec06').count(), 0);
   assert.equal(await inventory.locator('.er-id').filter({ hasText: 'SEC-02' }).count(), 0);
   assert.equal(await page.locator('#b-sec02').count(), 0);
   assert.ok(await sec05.isVisible());
@@ -99,7 +101,14 @@ async function assertPartialDisposition(page) {
   await disposition.getByRole('link', { name: 'current canary evidence guidance on page 156' }).click();
   assert.ok(await page.locator('#manual-page-156:target').isVisible());
 
-  assert.equal(await page.locator('.batch-table tbody tr').count(), 5);
+  await page.getByRole('link', { name: 'SEC-06 disposition and current guidance' }).click();
+  assert.ok(await page.locator('#sec06-disposition:target').isVisible());
+  const readerGuidance = page.locator('#sec06-reader-guidance');
+  assert.match(await readerGuidance.innerText(), /pages 121, 261, and 271 is preserved for provenance/);
+  await readerGuidance.getByRole('link').click();
+  assert.ok(await page.locator('#manual-page-187:target').isVisible());
+
+  assert.deepEqual(await page.locator('.batch-table .batch-num').allTextContents(), ['6', '8', '9', '10']);
   assert.deepEqual(await page.locator('.batch-table tbody tr').first().locator('td').allTextContents(),
     ['6', 'SEC-05', '1', 'Batch 6 remains open pending independent evidence for the SEC-05 blocking requirement.']);
 }

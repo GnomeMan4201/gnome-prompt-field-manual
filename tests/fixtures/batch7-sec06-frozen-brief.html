@@ -1,0 +1,16 @@
+  <div class="brief" id="b-sec06">
+    <div class="brief-hdr" onclick="toggle('b-sec06')" style="border-top-color:var(--red);">
+      <span class="brief-id" style="color:var(--red);">SEC-06</span>
+      <span class="brief-name">Tool-Agent Offense Probe</span>
+      <span class="brief-criteria">CRITERIA 2, 7, 9</span>
+      <span class="audit-chip ac-keep">Keep</span>
+      <span class="brief-chevron">▶</span>
+    </div>
+    <div class="brief-body">
+      <div class="bf"><div class="bf-label">Why Pending</div><div class="bf-val">Part 0 audit: KEEP. "Chained tool attacks and loop induction are specific. Dual-use framing is honest." Upgrade: "Add 'data exfiltration via side channel' as a named category." DRAFT ALONE. Highest security caution in the manuscript.</div></div>
+      <div class="bf"><div class="bf-label">Cross-References</div><div class="bf-val">SEC-07 (Human Confirmation Gate Designer — FOLLOW-UP: every HIGH-severity attack vector found by the probe must be covered by a human confirmation gate), SEC-01 (Prompt Injection Recognizer — PRIOR: classify the injection surface before probing tool-agent attack vectors), S-03 (Failure Mode Inventory — the probe output feeds directly into the failure mode inventory for the agent)</div></div>
+      <div class="bf"><div class="bf-label">Failure Mode to Avoid</div><div class="bf-val">Producing an attack playbook without paired defenses. Every attack vector generated must include: ATTACK VECTOR DESCRIPTION, EXPLOITATION CONDITIONS, DETECTION SIGNAL (what observable evidence would indicate this attack is occurring), DEFENSIVE CONTROL (the specific control that mitigates this vector). Data exfiltration via side channel must be a named category: the agent leaks data through tool call metadata, response timing, error messages, or output formatting rather than through direct disclosure.</div></div>
+      <div class="bf"><div class="bf-label">Required Artifact</div><div class="bf-val">Vulnerability report: ATTACK SURFACE INVENTORY (all tool-agent interaction points), per vector: ATTACK TYPE, CHAINING POTENTIAL (can this enable further attacks), EXPLOITATION CONDITIONS, DETECTION SIGNAL, DEFENSIVE CONTROL. Must include the data-exfiltration-via-side-channel category. Separate section: AUTHORIZATION SCOPE (what this probe was run against and under what authority).</div></div>
+      <div class="bf"><div class="bf-label">Safety Notes Required</div><div class="bf-val">These must be the most extensive Safety Notes in Part V. Must include: authorized self-assessment definition, what unauthorized use looks like, explicit statement that the attack vector descriptions are for detection and mitigation purposes only, and the instruction that every attack vector finding must trigger a human security review before any remediation is deployed.</div></div>
+    </div>
+  </div>
