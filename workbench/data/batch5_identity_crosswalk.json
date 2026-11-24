@@ -1,12 +1,12 @@
 {
   "schemaVersion": "gnome.batch5.crosswalk.v1",
-  "sourceIndexSha256": "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448",
-  "disposition": "REVISE_HOLD",
+  "sourceIndexSha256": "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d",
+  "disposition": "SUBSUMED_BY_CANONICAL_S07_NOT_NEW_BODY",
   "planned": {
     "briefId": "b-s10",
     "entryId": "S-10",
     "title": "Migration Risk Classifier",
-    "status": "PENDING"
+    "status": "CLOSED_AS_SUBSUMED"
   },
   "canonicalSubject": {
     "entryId": "S-07",
@@ -20,13 +20,13 @@
       134,
       135
     ],
-    "status": "SUBJECT_MATCH_NOT_ID_MATCH"
+    "status": "ACCEPTED_AS_SUBJECT_EQUIVALENT_NOT_ID_RENAME"
   },
   "canonicalCollision": {
     "entryId": "S-10",
     "title": "Architecture Decision Record Generator",
     "firstPage": 140,
-    "status": "DISTINCT_UNTOUCHED_BODY"
+    "status": "DISTINCT_BODY_PRESERVED"
   },
   "riskCategories": [
     {
@@ -81,11 +81,17 @@
   "missingEvidenceDecision": "UNASSESSED_AND_DO_NOT_MIGRATE_YET",
   "canonicalBodyVerification": "UNVERIFIED",
   "promotionAuthorized": false,
-  "canonicalIdReuseResolved": false,
-  "countsUnaffected": {
-    "pending": 11,
-    "drafted": 80,
+  "canonicalIdReuseResolved": true,
+  "countsAfter": {
+    "pending": 10,
+    "drafted": 81,
     "total": 91,
     "pages": 315
-  }
+  },
+  "frozenBriefArchive": {
+    "path": "tests/fixtures/batch5-frozen-planned-s10.html",
+    "sha256": "7861e414160693367726f8277d430274f259a7fe779ee5672a9b39003b2440a4",
+    "sourceIndexSha256": "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448"
+  },
+  "dispositionBasis": "Frozen brief output deliverables satisfied by canonical S-07 after page 130/133 corrections; planned S-10 closed as redundant plan, not minted as new body/ID; canonical S-10 ADR distinct."
 }

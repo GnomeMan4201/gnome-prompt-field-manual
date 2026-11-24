@@ -21,7 +21,7 @@ HISTORICAL_QUEUE = ROOT / "workbench/data/adjudication_queue.json"
 HISTORICAL_INDEX = ROOT / "workbench/data/entry_identity_index.json"
 HISTORICAL_HTML = ROOT / "tests/fixtures/batch3-canonical-1f06445e.html"
 
-CURRENT_SHA = "dca538299e7a0a6ee74d627baa231089c051a1627a29a0364c8ff136e1b4e448"
+CURRENT_SHA = "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d"
 BASELINE_SHA = "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
 BATCH4_PAGE_SHA = "145b5fe00fedfa43d2a098f3bca1e59e6a9d7ffef8e4a378bc0852626a2d9a1a"
 ALL_PAGE_SHA = "e4019358cb80de25706f983ab1eb2fb66e71dfcded70b94a8bddfe80c5eb14eb"
@@ -71,10 +71,10 @@ class Batch4DispositionTests(unittest.TestCase):
     def test_reconciles_11_80_91_315_without_missing_inventory(self):
         r = reconcile(INDEX)
         self.assertEqual(validate_expectations(r,
-            expected_pending=11, expected_drafted=80, expected_total=91, expected_pages=315), [])
+            expected_pending=10, expected_drafted=81, expected_total=91, expected_pages=315), [])
         self.assertEqual(r.summary.pending_missing_from_embedded, 0)
-        self.assertEqual(r.summary.pending_present_in_embedded, 11)
-        self.assertEqual(r.summary.drafting_briefs, 11)
+        self.assertEqual(r.summary.pending_present_in_embedded, 10)
+        self.assertEqual(r.summary.drafting_briefs, 10)
 
     def test_s01_frozen_brief_requirement(self):
         body = display(self.cards, range(107, 112)).upper()
@@ -100,14 +100,14 @@ class Batch4DispositionTests(unittest.TestCase):
             self.assertNotIn(entry_id, briefs)
             self.assertNotRegex(self.source, rf'<div class="brief" id="{brief_id}"')
         self.assertNotIn('<td class="batch-entries">S-01, S-02, S-03</td>', self.source)
-        self.assertIn("document.getElementById('b-s10').classList.add('open');", self.source)
+        self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)
         self.assertIn("document.getElementById('b-sec02').classList.add('open');", self.source)
 
     def test_identity_is_current_but_historical_review_queue_is_not_rewritten(self):
         identity = json.loads(IDENTITY.read_text())
         queue = json.loads(HISTORICAL_QUEUE.read_text())
         self.assertEqual(identity["sourceIndexSha256"], CURRENT_SHA)
-        self.assertEqual(identity["counts"], {"pending": 11, "drafted": 80, "total": 91, "pages": 315})
+        self.assertEqual(identity["counts"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
         self.assertEqual(identity["bodyCoverage"], 0)
         self.assertEqual(queue["sourceHtmlSha256"], BASELINE_SHA)
         self.assertEqual(json.loads(HISTORICAL_INDEX.read_text())["sourceIndexSha256"], BASELINE_SHA)

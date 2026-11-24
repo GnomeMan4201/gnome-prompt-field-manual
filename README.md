@@ -28,7 +28,7 @@ The repository is also the production workspace for the manual. That means the p
 
 Current repository version: **1.0.0-rc.1**.
 
-This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 11 pending IDs, 80 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
+This is an auditable release candidate, not a final stable manual release. The committed structure reconciles to 10 pending IDs, 81 embedded non-pending IDs, and 91 semantic manual entries across 315 embedded page cards.
 
 <details>
 <summary><strong>Editorial lineage and numbering state</strong></summary>
@@ -58,9 +58,11 @@ Authoritative records:
 - [`docs/BATCH2_DISPOSITION_2026-08-24.md`](docs/BATCH2_DISPOSITION_2026-08-24.md) — SHA-bound Batch 2 disposition record
 - [`docs/BATCH3_DISPOSITION_2026-08-24.md`](docs/BATCH3_DISPOSITION_2026-08-24.md) — SHA-bound Batch 3 disposition record
 - [`docs/BATCH4_DISPOSITION_2026-11-23.md`](docs/BATCH4_DISPOSITION_2026-11-23.md) — source-bound S-01/S-02/S-03 disposition; frozen page bytes preserved.
-- [`docs/BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md`](docs/BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md) — four-category risk-summary correction and source-bound identity crosswalk; Batch 5 remains REVISE/HOLD.
+- [`docs/BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md`](docs/BATCH5_FOUR_CATEGORY_CONTRACT_2026-11-23.md) — four-category risk-summary correction and source-bound identity crosswalk; historical REVISE/HOLD candidate.
 
 </details>
+
+- [Batch 5 disposition record](docs/BATCH5_DISPOSITION_2026-11-23.md) — planned S-10 is resolved as SUBSUMED by canonical S-07 without creating a new body; canonical S-10 ADR remains distinct.
 
 ## Repository structure
 
@@ -68,7 +70,7 @@ Authoritative records:
 - `VERSION` — repository-package version.
 - `CHANGELOG.md` — material repository and publication changes.
 - `tools/validate_manual.py` — deterministic structural validator.
-- `tools/reconcile_entry_lineage.py` — deterministic 11/80/91 entry-lineage reconciler.
+- `tools/reconcile_entry_lineage.py` — deterministic 10/81/91 entry-lineage reconciler.
 - `tools/audit_editorial_lineage.py` — fail-closed renumbering, parity, PDF-boundary, and provenance audit.
 - `tools/classify_editorial_occurrences.py` — deterministic generator for the frozen token classifier.
 - `tools/inspect_manual.py` — bounded structural inventory for the large HTML artifact.
@@ -88,7 +90,7 @@ Authoritative records:
 
 ## Source-bound research history
 
-The live editorial inventory now records **11 pending / 80 drafted**, with **0/91 independently verified canonical bodies**. The Reactor identity adapter uses `workbench/data/current_entry_identity_index.json`, deterministically derived from the current `index.html`.
+The live editorial inventory now records **10 pending / 81 non-pending IDs**, with **0/91 independently verified canonical bodies**. The Reactor identity adapter uses `workbench/data/current_entry_identity_index.json`, deterministically derived from the current `index.html`.
 
 Previously issued Phase V–VIII source-bound evidence (including the 629-decision adjudication queue) is **not relabeled** as current: it remains pinned to the original Batch 3 `index.html` digest `1f06445e…`. A byte-identical standalone HTML snapshot is preserved at `tests/fixtures/batch3-canonical-1f06445e.html` for offline verification and historical test replay. The adjudication workbench requires the matching original HTML, not the latest `index.html`, for source-hash verification. Recreating or rebinding its research manifest requires a separate, independently tested migration.
 
@@ -109,8 +111,8 @@ python tools/reconcile_entry_lineage.py \
   --input index.html \
   --json entry-lineage.json \
   --markdown entry-lineage.md \
-  --expect-pending 11 \
-  --expect-drafted 80 \
+  --expect-pending 10 \
+  --expect-drafted 81 \
   --expect-total 91 \
   --expect-pages 315 \
   --enforce
@@ -121,11 +123,11 @@ python tools/audit_editorial_lineage.py \
   --markdown editorial-lineage.md
 ```
 
-The reports record the exact SHA-256 of `index.html`. They establish structure, 11/80/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
+The reports record the exact SHA-256 of `index.html`. They establish structure, 10/81/91 inventory arithmetic, completed identifier semantics, searchable/visible parity, the historical PDF boundary, and preservation of the frozen provenance records. They do not establish factual correctness, editorial completion of the remaining pending entries, prompt portability, external-link health, or accessibility conformance.
 
 ## Release policy
 
-Stable release remains blocked by disposition of the 11 remaining pending entries, final regression browser/accessibility review after content closeout, independent or equivalent editorial review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
+Stable release remains blocked by disposition of the 10 remaining pending entries, final regression browser/accessibility review after content closeout, independent or equivalent editorial review, and final release evidence. The former R-05 Field Journal collision is resolved without assigning a replacement ID; the predecessor was explicitly cut from the live entry set.
 
 ## Project
 

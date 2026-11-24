@@ -42,12 +42,12 @@ class Batch5ContractCrosswalkTests(unittest.TestCase):
         digest = hashlib.sha256(INDEX.read_bytes()).hexdigest()
         self.assertEqual(x["sourceIndexSha256"], digest)
         self.assertEqual(self.index["sourceIndexSha256"], digest)
-        self.assertEqual(x["disposition"], "REVISE_HOLD")
+        self.assertEqual(x["disposition"], "SUBSUMED_BY_CANONICAL_S07_NOT_NEW_BODY")
         self.assertEqual(x["planned"], {
             "briefId": "b-s10",
             "entryId": "S-10",
             "title": "Migration Risk Classifier",
-            "status": "PENDING",
+            "status": "CLOSED_AS_SUBSUMED",
         })
         self.assertEqual(x["canonicalSubject"]["entryId"], "S-07")
         self.assertEqual(x["canonicalSubject"]["title"], "Migration Risk Classifier")
@@ -58,7 +58,7 @@ class Batch5ContractCrosswalkTests(unittest.TestCase):
         self.assertIn("s-07 migration risk classifier", self.page_text(129))
         self.assertIn("s-10 architecture decision record generator", self.page_text(140))
         self.assertFalse(x["promotionAuthorized"])
-        self.assertFalse(x["canonicalIdReuseResolved"])
+        self.assertTrue(x["canonicalIdReuseResolved"])
         self.assertEqual(x["canonicalBodyVerification"], "UNVERIFIED")
 
     def test_all_four_categories_and_risk_scale_required_in_standard_prompt(self):
@@ -96,14 +96,17 @@ class Batch5ContractCrosswalkTests(unittest.TestCase):
 
     def test_current_counts_and_provenance_remain_unpromoted(self):
         x = self.crosswalk
-        self.assertEqual(x["countsUnaffected"], {"pending": 11, "drafted": 80, "total": 91, "pages": 315})
+        self.assertEqual(x["countsAfter"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
         r = reconcile(INDEX)
-        self.assertEqual(r.summary.pending_inventory_rows, 11)
-        self.assertEqual(r.summary.drafting_briefs, 11)
-        self.assertIn("S-10", {e.entry_id for e in r.pending_entries})
+        self.assertEqual(r.summary.pending_inventory_rows, 10)
+        self.assertEqual(r.summary.drafting_briefs, 10)
+        self.assertNotIn("S-10", {e.entry_id for e in r.pending_entries})
         self.assertEqual(self.index["bodyCoverage"], 0)
         self.assertEqual(sorted(self.cards), list(range(1, 316)))
-        self.assertIn('id="b-s10"', self.source)
+        self.assertNotIn('id="b-s10"', self.source)
+        archive = ROOT / "tests/fixtures/batch5-frozen-planned-s10.html"
+        self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), x["frozenBriefArchive"]["sha256"])
+        self.assertIn('id="b-s10"', archive.read_text())
         self.assertEqual(
             hashlib.sha256((ROOT / "tests/fixtures/batch3-canonical-1f06445e.html").read_bytes()).hexdigest(),
             "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19",
