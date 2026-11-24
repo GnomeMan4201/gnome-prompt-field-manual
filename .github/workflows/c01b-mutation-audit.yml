@@ -1,4 +1,4 @@
-name: C-01B pinned mutation audit
+name: C-01C history-aware mutation audit
 on:
   pull_request:
     branches: [main]
@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   pinned-audit:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'audit/c01b-mutation-03285ac'
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'audit/c01c-history-aware-mutations'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -27,12 +27,17 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install same schema validator as Reactor Integrity
+        run: python -m pip install 'jsonschema==4.23.0'
       - name: Verify uploaded harness bytes and run synthetic regressions
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object audit/qa/mutation-audit/gnome_mutation_audit_v2.py)" = cdba3366b5dbe415f917d720fedae77d3ed6035c
-          test "$(git hash-object audit/qa/mutation-audit/test_gnome_mutation_audit_v2.py)" = b5eea7b59770b1fed23fabcb5705066d96fdf99b
+          test "$(git hash-object audit/qa/mutation-audit/gnome_mutation_audit_v2.py)" = 71fbe2ccb6530e814a0790f3bb9d022d94abc674
+          test "$(git hash-object audit/qa/mutation-audit/test_gnome_mutation_audit_v2.py)" = ef8e6dd2ab2fafbb74e861c06481646a6d76a0cb
           python -B audit/qa/mutation-audit/test_gnome_mutation_audit_v2.py -v
       - name: Run initial audit against pinned main snapshot
         run: |
@@ -48,7 +53,7 @@ jobs:
               print('No audit report produced; do not infer outcomes.')
           else:
               data = json.loads(p.read_text())
-              summary = ['## C-01B diagnostic audit', 'Commit: ' + data['commit'],
+              summary = ['## C-01C diagnostic audit', 'Commit: ' + data['commit'],
                          'Source unchanged: ' + str(data.get('source_checkout_unchanged', 'not established'))]
               summary += ['Baseline ' + k + ': ' + v['state'] for k,v in (data.get('baseline') or {}).items() if k != 'generated_reports']
               for m in data['mutations']:
@@ -62,7 +67,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: c01b-pinned-mutation-results
+          name: c01c-pinned-mutation-results
           path: mutation-results.json
           if-no-files-found: warn
           retention-days: 30

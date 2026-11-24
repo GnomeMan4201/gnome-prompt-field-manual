@@ -111,12 +111,35 @@ def extract_snapshot(src, expected, dest):
             if not (m.isfile() or m.isdir()) or not (dest / m.name).resolve().is_relative_to(dest):
                 raise ValueError(f"unsafe archive member: {m.name}")
         tf.extractall(dest, members=members, filter="data")
+    # A git archive alone cannot execute lineage tests that call git show/ls-tree.
+    # Clone locally without hard links or alternates; retain independently copied
+    # Git metadata alongside the validated archive, with no remote configured.
+    with tempfile.TemporaryDirectory(prefix="gnome-history-") as tmp:
+        clone = Path(tmp) / "repo"
+        subprocess.run(["git", "clone", "--no-local", "--no-hardlinks", "--no-checkout",
+                        str(src), str(clone)], check=True, capture_output=True)
+        git(clone, "update-ref", "--no-deref", "HEAD", head)
+        git(clone, "read-tree", head)
+        git(clone, "remote", "remove", "origin")
+        if git(clone, "rev-parse", "--is-shallow-repository").strip() != b"false":
+            raise ValueError("complete Git history required")
+        shutil.move(str(clone / ".git"), str(dest / ".git"))
+    if git(dest, "rev-parse", "HEAD").decode().strip() != head:
+        raise ValueError("scratch history HEAD mismatch")
+    if git(dest, "status", "--porcelain", "--untracked-files=all").strip():
+        raise ValueError("archive and scratch Git tree disagree")
     return head
 
 
 def hashes(root):
-    return {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-            for p in sorted(root.rglob("*")) if p.is_file()}
+    result = {}
+    for directory, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs if d != ".git")
+        for name in sorted(files):
+            p = Path(directory) / name
+            if p.is_file():
+                result[p.relative_to(root).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
+    return result
 
 
 def run(cmd, cwd, timeout):
@@ -125,12 +148,23 @@ def run(cmd, cwd, timeout):
         p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True,
                            errors="replace", timeout=timeout)
         out = p.stdout + "\n" + p.stderr
-        if p.returncode == 0:
+        if cmd[1:3] == ["-m", "unittest"]:
+            # unittest prints tracebacks for ordinary assertion failures too.
+            # Require an actual nonempty, zero-skip suite and distinguish
+            # assertion failures from import/runtime errors.
+            ran = re.search(r"^Ran ([1-9][0-9]*) tests? in ", out, re.M)
+            ok = re.search(r"^OK\s*$", out, re.M)
+            failed = re.search(r"^FAILED \(failures=([1-9][0-9]*)\)\s*$", out, re.M)
+            if ran and p.returncode == 0 and ok:
+                state = "PASS"
+            elif ran and p.returncode == 1 and failed and not re.search(r"^ERROR:", out, re.M):
+                state = "REJECTED_UNREVIEWED"
+            else:
+                state = "ERROR"
+        elif p.returncode == 0:
             state = "PASS"
         elif (p.returncode != 1 or "Traceback (most recent call last)" in out
               or re.search(r"^ERROR:", out, re.M)):
-            state = "ERROR"
-        elif cmd[1:3] == ["-m", "unittest"] and not re.search(r"^FAIL:", out, re.M):
             state = "ERROR"
         else:
             # A clean nonzero exit still requires human inspection for relevance.
@@ -205,6 +239,9 @@ def main():
         if "subject_reference_gate" not in baseline: result["missing_optional_checks"].append("subject_reference_gate")
         save()
         if any(v["state"] != "PASS" for k,v in baseline.items() if k != "generated_reports"):
+            if hashes(snapshot) != pristine or git(src, "status", "--porcelain", "--untracked-files=all").strip() or git(src,"rev-parse","HEAD").decode().strip() != args.commit:
+                raise RuntimeError("source integrity check failed")
+            result["source_checkout_unchanged"] = True; save()
             print("Baseline failed; no mutation verdicts issued.", file=sys.stderr); return 2
         for mid, cat, desc, mutate in MUTATIONS:
             if mid not in selected: continue
