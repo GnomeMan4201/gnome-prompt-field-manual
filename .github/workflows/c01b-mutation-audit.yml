@@ -1,0 +1,68 @@
+name: C-01B pinned mutation audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'qa/mutation-audit/**'
+      - '.github/workflows/c01b-mutation-audit.yml'
+permissions:
+  contents: read
+jobs:
+  pinned-audit:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'audit/c01b-mutation-03285ac'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: audit
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          ref: '03285ac8c57bfa8c40bddd2b2c53c0692927f8d3'
+          path: source
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify uploaded harness bytes and run synthetic regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit/qa/mutation-audit/gnome_mutation_audit_v2.py)" = cdba3366b5dbe415f917d720fedae77d3ed6035c
+          test "$(git hash-object audit/qa/mutation-audit/test_gnome_mutation_audit_v2.py)" = b5eea7b59770b1fed23fabcb5705066d96fdf99b
+          python -B audit/qa/mutation-audit/test_gnome_mutation_audit_v2.py -v
+      - name: Run initial audit against pinned main snapshot
+        run: |
+          python -B audit/qa/mutation-audit/gnome_mutation_audit_v2.py source mutation-results.json --commit 03285ac8c57bfa8c40bddd2b2c53c0692927f8d3 --only M01,M02,M05,M06,M09,M10,M16 --timeout 240
+      - name: Report diagnostic outcomes
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib, os
+          p = pathlib.Path('mutation-results.json')
+          if not p.exists():
+              print('No audit report produced; do not infer outcomes.')
+          else:
+              data = json.loads(p.read_text())
+              summary = ['## C-01B diagnostic audit', 'Commit: ' + data['commit'],
+                         'Source unchanged: ' + str(data.get('source_checkout_unchanged', 'not established'))]
+              summary += ['Baseline ' + k + ': ' + v['state'] for k,v in (data.get('baseline') or {}).items() if k != 'generated_reports']
+              for m in data['mutations']:
+                  summary.append(m['id'] + ': ' + m['verdict'])
+                  summary += ['  ' + k + ': ' + v['state'] for k,v in m.get('checks', {}).items() if k != 'generated_reports']
+                  if 'error' in m: summary.append('  ' + m['error'])
+              summary.append('Unreviewed rejection is not a confirmed killed mutant.')
+              print('\n'.join(summary))
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f: f.write('\n'.join(summary)+'\n')
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: c01b-pinned-mutation-results
+          path: mutation-results.json
+          if-no-files-found: warn
+          retention-days: 30
