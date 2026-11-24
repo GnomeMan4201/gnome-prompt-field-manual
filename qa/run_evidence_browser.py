@@ -10,7 +10,7 @@ import shutil
 import tempfile
 import threading
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from reactor_evidence_v2 import verify_capsule, checksums_for
@@ -50,12 +50,12 @@ try:
             assert obj['manifest']['isSyntheticDemo'] is True
             verdict=verify_capsule(obj);assert verdict['valid'],verdict
             page.locator('#capsule-file').set_input_files(str(path))
-            assert 'Capsule validated' in page.locator('#status').inner_text(),page.locator('#status').inner_text()
+            expect(page.locator('#status')).to_contain_text('Capsule validated')
             tampered=json.loads(path.read_text());tampered['payload']['observations'][1]['outputText']='"tampered"'
             altered=Path(d)/'tampered.json';altered.write_text(json.dumps(tampered))
             page.locator('#capsule-file').set_input_files(str(altered))
-            assert 'CHECKSUM_MISMATCH:observations.json' in page.locator('#status').inner_text()
-            assert page.locator('#pairs').inner_text()=='—'
+            expect(page.locator('#status')).to_contain_text('CHECKSUM_MISMATCH:observations.json')
+            expect(page.locator('#pairs')).to_have_text('—')
             print('DESKTOP: source labels, synthetic demo, rescoring, Enter key, browser download, Python verify, file-input reimport, tamper rejection PASS')
         mobile=browser.new_context(viewport={'width':390,'height':844})
         mp=mobile.new_page()
