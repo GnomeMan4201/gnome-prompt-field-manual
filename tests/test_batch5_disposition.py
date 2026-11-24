@@ -65,7 +65,7 @@ class Batch5DispositionTests(unittest.TestCase):
         self.assertEqual(historical_s10["occurrencePages"], [140])
         prior = json.loads(batch10_base_bytes("workbench/data/current_entry_identity_index.json"))
         self.assertEqual(next(row for row in prior["entries"] if row["id"] == "S-10")["occurrencePages"], [140, 232])
-        self.assertEqual(s10["occurrencePages"], [140, 232, 251, 252])
+        self.assertEqual(s10["occurrencePages"], [140, 232, 251, 252, 260])
         self.assertIsNone(s10["canonicalBody"])
 
     def test_counts_and_next_active_brief(self):

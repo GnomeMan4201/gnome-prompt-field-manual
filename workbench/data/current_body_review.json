@@ -1,7 +1,7 @@
 {
   "schemaVersion": "gnome.manual.current-body-review.v1",
-  "sourceHtmlSha256": "f8c7d6543086ca8e78e5964477328f6596a4e6b1baf93a6ea51f378d8210ec22",
-  "identityIndexSha256": "de7743317e64fe68f516b3cba5acc8bfa2a18e05af488f9c7dc2535c9806d76a",
+  "sourceHtmlSha256": "095681f4b0e32b293230dcba0454a0638814e32c0c9a7ae719ce0bec0bd88b94",
+  "identityIndexSha256": "5b0be8f3ac07e4c42097d08fa229bf3762643a73462e57a4638270806382896b",
   "historicalBindings": {
     "workbench/data/entry_identity_index.json": "b9c760567f678fa7599ebb2e0de8527e2d875cd3ec72ca58c307905b9acf7a40",
     "workbench/data/entry_declaration_candidates.json": "00d4fa9dbdcda884de79ec5d8c4f53e501481f316468d1d01840564264b33cb7",
@@ -35,7 +35,7 @@
     "S-10"
   ],
   "offsetConvention": "Half-open Unicode codepoint offsets in decoded page <pre> text; end may point to next page offset zero.",
-  "reviewQueueManifestSha256": "62433c20de89b575b54781e56845464a4923e070d37ea2e49ee44f232cb0b8f9",
+  "reviewQueueManifestSha256": "63707d594634f07df48d4b8c7a51ce16f61a7dbaf69504bd50343bc1dc09a438",
   "entries": [
     {
       "entryId": "T-01",
@@ -10426,9 +10426,9 @@
       "boundaryReason": [
         "NEXT_DECLARATION"
       ],
-      "rawSpanSha256": "797a63281dc5d6592705cfb6414fe4b55220c75a1be9fb6ab4b26c776a53bbd2",
-      "proposedCleanTextSha256": "b4f08227e8698ad84e992826666a1e8b0bc92a36968263f17c78b3847aa68600",
-      "proposedCleanTextLength": 2406,
+      "rawSpanSha256": "caa8b92aed4298da45aa5f83617f088af57080ee7d6bc9c3baae30125c40b2b8",
+      "proposedCleanTextSha256": "dc2469cf0029cd19c40493ed21f9e9c2719d641aa3c4c20903f358d30990ffed",
+      "proposedCleanTextLength": 2416,
       "pageSlices": [
         [
           259,
@@ -10439,8 +10439,8 @@
         [
           260,
           0,
-          1297,
-          "c4e5ce7c6649c3a9e2848d4fe51e661e2a8272dfdbc83c640c2009a67287e6e0"
+          1307,
+          "0ed94479a09babd453fe42a0aab2313347607a336a851d5fa228421e740d4e3e"
         ]
       ],
       "sectionMarkers": [
@@ -10465,20 +10465,20 @@
         [
           "LINK LOGIC",
           260,
-          561,
-          572
+          571,
+          582
         ],
         [
           "OUTPUT",
           260,
-          943,
-          950
+          953,
+          960
         ],
         [
           "SAFETY",
           260,
-          1106,
-          1113
+          1116,
+          1123
         ]
       ],
       "expectedSectionLabels": [
@@ -10506,8 +10506,8 @@
         ],
         [
           260,
-          1294,
-          1297,
+          1304,
+          1307,
           "PAGE_FOOTER"
         ]
       ],

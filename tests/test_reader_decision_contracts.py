@@ -10,7 +10,7 @@ from test_batch6_correction import (
 )
 
 BASE = "03285ac8c57bfa8c40bddd2b2c53c0692927f8d3"
-CHANGED = {7, 262, 265, 273, 275, 283, 284}
+CHANGED = {7, 260, 262, 265, 273, 275, 283, 284}
 
 
 def previous(path):
@@ -60,6 +60,7 @@ class ReaderDecisionContracts(unittest.TestCase):
                 if matches:
                     with self.subTest(page=n, reference=ref, label=label):
                         self.assertIn(ref, matches)
+        self.assertIn("S-10 (Architecture Decision Record Generator)", visible(self.pages[260]))
         for n in (262, 265):
             self.assertIn("S-09 (Incident Report Scaffold)", visible(self.pages[n]))
 
