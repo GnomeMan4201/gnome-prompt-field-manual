@@ -10,12 +10,17 @@ from batch6_baseline import (
     FINAL_SOURCE_SHA, PARTIAL_SOURCE_SHA, PR40_MERGE, ROOT, adjudication_bytes,
 )
 from test_batch6_correction import (
-    ADAPTER_PATH, EXPECTED_PDF_SHA256, HISTORICAL_ROOTS, INDEX_PATH, cards, contract_errors, digest,
+    ADAPTER_PATH, EXPECTED_PDF_SHA256, HISTORICAL_ROOTS, INDEX_PATH, canonical_surface,
+    cards, contract_errors, digest, visible,
 )
 from test_batch6_final_adjudication import canary_errors
 from tools.reconcile_entry_lineage import TreeParser, field_text, reconcile, validate_expectations
 
 SOURCE = ROOT / "index.html"
+INITIAL_DISPOSITION = "029dc88e95ddf39dd357208b4548f0aacdb1baa9"
+UNSUPPORTED_CAUSATION = re.compile(
+    r"\b(?:signals|proves|confirms|establishes) (?:an? )?(?:successful )?injection\b", re.I
+)
 ARCHIVE = "tests/fixtures/batch6-sec02-frozen-brief.html"
 DISPOSITION = "docs/BATCH6_SEC02_DISPOSITION_2026-11-24.md"
 AMENDMENT = "docs/BATCH6_ADJUDICATION_AMENDMENT_2026-11-24.md"
@@ -31,6 +36,16 @@ REQUIRED_ARTIFACT = (
 def extract_brief(source, subject):
     pattern = rb'^  <div class="brief" id="b-' + subject + rb'">\n.*?^  </div>\n'
     return re.search(pattern, source, re.M | re.S)[0]
+
+
+def sec02_caution(source):
+    parser = TreeParser()
+    parser.feed(source.decode())
+    parser.close()
+    section = next(node for node in parser.root.walk() if node.element_id == "caution")
+    card = next(node for node in section.walk()
+                if "caution-card" in node.classes and field_text(node, "caution-id") == "SEC-02")
+    return field_text(card, "caution-body")
 
 
 class Batch6PartialDispositionTests(unittest.TestCase):
@@ -86,14 +101,45 @@ class Batch6PartialDispositionTests(unittest.TestCase):
         self.assertEqual(digest(self.before), FINAL_SOURCE_SHA)
         self.assertEqual(archive, extract_brief(self.before, b"sec02"))
         self.assertNotIn(b'id="b-sec02"', self.raw)
+        initial_source = subprocess.check_output(
+            ["git", "show", f"{INITIAL_DISPOSITION}:index.html"], cwd=ROOT
+        )
         for binding in (
-            PR40_MERGE, FINAL_SOURCE_SHA, PARTIAL_SOURCE_SHA, digest(archive),
+            PR40_MERGE, FINAL_SOURCE_SHA, digest(initial_source), digest(archive),
             digest((ROOT / AMENDMENT).read_bytes()),
         ):
             self.assertIn(binding, record)
         self.assertIn(b'href="#manual-page-156"', self.raw)
         self.assertIn(f'href="{AMENDMENT}"'.encode(), self.raw)
         self.assertIn(f'href="{DISPOSITION}"'.encode(), self.raw)
+
+    def test_active_sec02_caution_matches_canonical_and_amended_guidance(self):
+        caution = sec02_caution(self.raw)
+        self.assertNotRegex(caution, UNSUPPORTED_CAUSATION)
+        self.assertRegex(sec02_caution(self.before), UNSUPPORTED_CAUSATION)
+        for obsolete in ("must be expanded", "Add behavioral baseline definition", "Draft this after"):
+            self.assertNotIn(obsolete, caution)
+        self.assertIn("Exact, fragment, and pattern-only canary matches are observations.", caution)
+        self.assertIn("A match may trigger quarantine or investigation under policy.", caution)
+        self.assertIn(
+            "independent, trustworthy evidence links untrusted input to a policy-violating change", caution
+        )
+
+        page = canonical_surface(visible(cards(self.raw)[156]))
+        self.assertIn("a match alone does not establish injection", page)
+        self.assertIn("require independent, trustworthy evidence connecting untrusted input", page)
+        amendment = (ROOT / AMENDMENT).read_text()
+        self.assertIn("A canary match is an observation.", amendment)
+        self.assertIn(
+            "independent, trustworthy evidence connects untrusted input to a policy-violating change",
+            amendment,
+        )
+
+    def test_initial_disposition_records_and_archive_are_unchanged(self):
+        for path in (DISPOSITION, UNRESOLVED, ARCHIVE):
+            with self.subTest(path=path):
+                expected = subprocess.check_output(["git", "show", f"{INITIAL_DISPOSITION}:{path}"], cwd=ROOT)
+                self.assertEqual((ROOT / path).read_bytes(), expected)
 
     def test_sec05_brief_and_original_requirement_remain_live(self):
         sec05 = extract_brief(self.raw, b"sec05")

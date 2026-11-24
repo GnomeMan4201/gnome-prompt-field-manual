@@ -31,7 +31,7 @@ def correction_bytes(path: str) -> bytes:
 
 
 PR40_MERGE = "cc155b1190c968a8fe5c8f5448f49ea50742feff"
-PARTIAL_SOURCE_SHA = "fd20842916d8c0f28fb4be9dad7846f31cc39f792b6e21d5e0f60d8acdd11458"
+PARTIAL_SOURCE_SHA = "8735ebe991b4428fe9a210649d699365f449f2efc87450397df6fec039b0e97a"
 
 
 @cache

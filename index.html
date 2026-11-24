@@ -490,7 +490,12 @@
       <span class="caution-level">Security Boundary</span>
     </div>
     <div class="caution-body">
-      <a href="#sec02-disposition">SEC-02 disposition and current guidance</a>. SEC-02 designs defenses, not attacks. The failure mode is producing content that teaches injection techniques in order to "explain what the firewall defends against." SEC-01 handles attack classification — SEC-02 must not duplicate it. <strong>The firewall design output is an architecture specification: what gets validated, where, at what confidence threshold, with what fallback.</strong> The canary strategy section (flagged by the Part 0 audit as the distinctive element) must be expanded: canary tokens are specific sequences injected by the system that only the model should know, whose appearance in output signals a successful injection. Add behavioral baseline definition: what normal model behavior looks like, so deviations can be detected. Draft this after SEC-01 is fully locked.
+      <a href="#sec02-disposition">SEC-02 disposition and current guidance</a>.
+      The firewall architecture specifies where validation occurs, decision thresholds, and safe fallback.
+      Its behavioral baseline defines expected behavior and measurable alert thresholds.
+      Exact, fragment, and pattern-only canary matches are observations. Verify their provenance and authorization.
+      A match may trigger quarantine or investigation under policy.
+      Attribute injection only when independent, trustworthy evidence links untrusted input to a policy-violating change.
     </div>
   </div>
 
