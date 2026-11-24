@@ -10,7 +10,7 @@ assert.ok(engines[browserName], `Unsupported browser: ${browserName}`);
 
 const manualUrl = pathToFileURL(resolve('index.html')).href;
 const standaloneUrl = pathToFileURL(resolve('GNOME-Field-Manual.html')).href;
-const batch6Pages = [
+const reviewedPages = [
   [133, 'SCHEMA/CONTRACT,'],
   [154, 'canary observations'],
   [156, 'PATTERN-ONLY MATCH'],
@@ -21,6 +21,17 @@ const batch6Pages = [
   [161, 'Indirect Injection Tracer, page 203'],
   [182, 'EDT-00: Use'],
   [184, 'seven cases'],
+  [187, 'Tool-Agent Offense Probe'],
+  [188, 'AUTHORIZATION SCOPE'],
+  [189, 'ATTACK SURFACE INVENTORY'],
+  [190, 'TEN COVERAGE CATEGORIES'],
+  [191, 'COVERAGE CATEGORIES CONTINUED'],
+  [192, 'VERDICT AND COVERAGE RULES'],
+  [193, 'TEN PER-PROBE RECORDS'],
+  [194, 'ILLUSTRATIVE CONTROL PAIR'],
+  [195, 'FOLLOW-UP — BEFORE EVALUATION'],
+  [196, 'FOLLOW-UP — AFTER EVALUATION'],
+  [197, 'Authorized self-assessment'],
 ];
 const browser = await engines[browserName].launch({ headless: true });
 
@@ -47,7 +58,7 @@ try {
     await assertSearch(page);
     await assertTabInteractions(page);
     await assertReflow(page, scenario);
-    await assertBatch6Pages(page, scenario);
+    await assertReviewedPages(page, scenario);
     assert.deepEqual(pageErrors, [], `${scenario.name}: page errors`);
 
     console.log(`PASS ${browserName} ${scenario.name}`);
@@ -223,7 +234,7 @@ async function assertBatch5MigrationPage() {
   }
 }
 
-async function assertBatch6Pages(canonical, scenario) {
+async function assertReviewedPages(canonical, scenario) {
   const dynamic = await browser.newPage({ viewport: scenario.viewport });
   const offline = await browser.newPage({
     javaScriptEnabled: false, viewport: scenario.viewport, reducedMotion: 'reduce',
@@ -235,7 +246,7 @@ async function assertBatch6Pages(canonical, scenario) {
     await offline.goto(standaloneUrl + '#page-directory');
     const staticDirectory = offline.locator('#page-directory');
 
-    for (const [number, phrase] of batch6Pages) {
+    for (const [number, phrase] of reviewedPages) {
       const scope = `${scenario.name} page ${number}`;
       const card = canonical.locator('#manual-page-' + number);
       await canonical.getByLabel('Search manual text', { exact: true }).fill(phrase.toLowerCase());

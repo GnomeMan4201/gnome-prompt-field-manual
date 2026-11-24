@@ -4,11 +4,14 @@ import base64
 import json
 import re
 import subprocess
+from pathlib import Path
+import tempfile
 import unittest
 
 from batch6_baseline import (
     FINAL_SOURCE_SHA, PARTIAL_SOURCE_SHA, PR40_MERGE, ROOT, adjudication_bytes,
 )
+from batch7_baseline import merged_disposition_bytes
 from test_batch6_correction import (
     ADAPTER_PATH, EXPECTED_PDF_SHA256, HISTORICAL_ROOTS, INDEX_PATH, canonical_surface,
     cards, contract_errors, digest, visible,
@@ -16,7 +19,6 @@ from test_batch6_correction import (
 from test_batch6_final_adjudication import canary_errors
 from tools.reconcile_entry_lineage import TreeParser, field_text, reconcile, validate_expectations
 
-SOURCE = ROOT / "index.html"
 INITIAL_DISPOSITION = "029dc88e95ddf39dd357208b4548f0aacdb1baa9"
 UNSUPPORTED_CAUSATION = re.compile(
     r"\b(?:signals|proves|confirms|establishes) (?:an? )?(?:successful )?injection\b", re.I
@@ -51,9 +53,12 @@ def sec02_caution(source):
 class Batch6PartialDispositionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = SOURCE.read_bytes()
+        cls.raw = merged_disposition_bytes("index.html")
         cls.before = adjudication_bytes("index.html")
-        cls.lineage = reconcile(SOURCE)
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "index.html"
+            source.write_bytes(cls.raw)
+            cls.lineage = reconcile(source)
 
     def test_inventory_and_schedule_agree(self):
         self.assertEqual(validate_expectations(
@@ -81,10 +86,10 @@ class Batch6PartialDispositionTests(unittest.TestCase):
         self.assertEqual(self.lineage.summary.source_counts.batches, len(rows))
 
     def test_only_sec02_changes_in_current_identity(self):
-        actual = json.loads((ROOT / INDEX_PATH).read_bytes())
+        actual = json.loads(merged_disposition_bytes(INDEX_PATH))
         expected = json.loads(adjudication_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), PARTIAL_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{PARTIAL_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{PARTIAL_SOURCE_SHA}';", merged_disposition_bytes(ADAPTER_PATH).decode())
         expected["sourceIndexSha256"] = PARTIAL_SOURCE_SHA
         expected["counts"].update(pending=9, drafted=82)
         sec02 = next(row for row in expected["entries"] if row["id"] == "SEC-02")
@@ -158,7 +163,7 @@ class Batch6PartialDispositionTests(unittest.TestCase):
         pages = cards(self.raw)
         self.assertEqual(list(pages), list(range(1, 316)))
         self.assertEqual(pages, cards(self.before))
-        self.assertEqual((ROOT / "GNOME-Field-Manual.html").read_bytes(),
+        self.assertEqual(merged_disposition_bytes("GNOME-Field-Manual.html"),
                          adjudication_bytes("GNOME-Field-Manual.html"))
         pdf = re.search(rb'data="data:application/pdf;base64,([^"]+)"', self.raw)[1]
         self.assertEqual(digest(base64.b64decode(pdf, validate=True)), EXPECTED_PDF_SHA256)
