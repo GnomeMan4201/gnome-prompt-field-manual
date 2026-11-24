@@ -56,20 +56,32 @@ jobs:
       - name: Install formal schema validator
         run: python -m pip install 'jsonschema==4.23.0'
 
-      - name: Fail if source identity inventory is inconsistent
+      - name: Verify current editorial identity and frozen research provenance
         run: |
-          python - <<'PY'
-          import hashlib, json
+          python - <<'PYVERIFY'
+          import hashlib, json, sys
           from pathlib import Path
-          source = Path("index.html").read_bytes()
-          data = json.loads(Path("workbench/data/entry_identity_index.json").read_text())
-          actual = hashlib.sha256(source).hexdigest()
-          assert actual == data["sourceIndexSha256"], "canonical source hash mismatch"
-          assert actual == "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
-          assert len(data["entries"]) == data["counts"]["total"] == 91
-          assert data["bodyCoverage"] == 0
-          print("Source index anchored to canonical HTML; 91 candidates; 0 verified.")
-          PY
+          sys.path.insert(0, "tools")
+          from export_entry_identity_index import build_inventory
+
+          current_path = Path("index.html")
+          current = json.loads(Path("workbench/data/current_entry_identity_index.json").read_text())
+          actual = hashlib.sha256(current_path.read_bytes()).hexdigest()
+          assert actual == current["sourceIndexSha256"], "current identity source mismatch"
+          assert actual == "8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd"
+          assert current == build_inventory(current_path), "current identity inventory not reproducible"
+          assert current["counts"] == {"pending": 11, "drafted": 80, "total": 91, "pages": 315}
+          assert current["bodyCoverage"] == 0
+
+          frozen = Path("tests/fixtures/batch3-canonical-1f06445e.html").read_bytes()
+          historical = json.loads(Path("workbench/data/entry_identity_index.json").read_text())
+          old_sha = hashlib.sha256(frozen).hexdigest()
+          assert old_sha == historical["sourceIndexSha256"]
+          assert old_sha == "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
+          assert historical["counts"] == {"pending": 14, "drafted": 77, "total": 91, "pages": 315}
+          assert historical["bodyCoverage"] == 0
+          print("Current 11/80 identity reproducible; historical 14/77 SHA-256 preserved; 0 verified bodies.")
+          PYVERIFY
 
       - name: Python and JavaScript syntax
         run: |
@@ -90,5 +102,5 @@ jobs:
       - name: Editorial source regression gates
         run: |
           python tools/validate_manual.py --input index.html --strict-warnings
-          python tools/reconcile_entry_lineage.py --input index.html --expect-pending 14 --expect-drafted 77 --expect-total 91 --expect-pages 315 --enforce
+          python tools/reconcile_entry_lineage.py --input index.html --expect-pending 11 --expect-drafted 80 --expect-total 91 --expect-pages 315 --enforce
           python tools/audit_editorial_lineage.py --input index.html

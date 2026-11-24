@@ -1,12 +1,15 @@
 """Conservative body-span candidate regression tests."""
 import json,sys,tempfile,unittest
+from frozen_source import materialize_batch3_source
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'tools'))
 from reconstruct_body_candidates import produce,reconstruct,sha
 class BodyCandidateTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
-  cls.source=ROOT/'index.html'
+  cls._snapshot = tempfile.TemporaryDirectory()
+  cls.addClassCleanup(cls._snapshot.cleanup)
+  cls.source=materialize_batch3_source(Path(cls._snapshot.name))
   cls.ids=ROOT/'workbench/data/entry_identity_index.json'
   cls.decls=ROOT/'workbench/data/entry_declaration_candidates.json'
   cls.res=produce(cls.source,cls.ids,cls.decls)

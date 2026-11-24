@@ -1,5 +1,6 @@
 """Regression tests for Phase V lossless source-region proposals."""
 import sys, unittest, tempfile, json, hashlib
+from frozen_source import materialize_batch3_source
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"tools"))
@@ -7,7 +8,10 @@ from classify_entry_regions import classify,source_fragments,report
 class RegionClassTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
-  cls.r=report(ROOT/"index.html",ROOT/"workbench/data/entry_identity_index.json",ROOT/"workbench/data/entry_declaration_candidates.json")
+  cls._snapshot = tempfile.TemporaryDirectory()
+  cls.addClassCleanup(cls._snapshot.cleanup)
+  cls.source = materialize_batch3_source(Path(cls._snapshot.name))
+  cls.r=report(cls.source,ROOT/"workbench/data/entry_identity_index.json",ROOT/"workbench/data/entry_declaration_candidates.json")
  def test_real_counts_and_not_verified(self):
   self.assertEqual(self.r["counts"]["entries"],91)
   self.assertEqual(self.r["counts"]["VERIFIED"],0)
@@ -39,7 +43,7 @@ class RegionClassTests(unittest.TestCase):
   self.assertEqual("".join(y[3] for y in x),"bcxy")
  def test_modified_html_fails(self):
   with tempfile.TemporaryDirectory() as td:
-   altered=Path(td)/"index.html";altered.write_bytes((ROOT/"index.html").read_bytes()+b" ")
+   altered=Path(td)/"index.html";altered.write_bytes(self.source.read_bytes()+b" ")
    with self.assertRaisesRegex(ValueError,"Source hash mismatch"):
     report(altered,ROOT/"workbench/data/entry_identity_index.json",ROOT/"workbench/data/entry_declaration_candidates.json")
 if __name__=="__main__":unittest.main()

@@ -41,7 +41,12 @@ require('./workbench/reactor/experiment-core.js');require('./workbench/reactor/e
   script="""delete globalThis.crypto;require('./workbench/reactor/experiment-core.js');(async()=>{try {await globalThis.ReactorExperimentCore.sha256Hex('test');console.log(JSON.stringify('UNSAFE'))}catch(e){console.log(JSON.stringify(e.message));}})();"""
   self.assertIn('SHA256_UNAVAILABLE',self.node(script))
  def test_real_index_adapter_contract(self):
-  data=json.loads((ROOT/'workbench/data/entry_identity_index.json').read_text()) if (ROOT/'workbench/data/entry_identity_index.json').exists() else None
+  data=json.loads((ROOT/'workbench/data/current_entry_identity_index.json').read_text()) if (ROOT/'workbench/data/current_entry_identity_index.json').exists() else None
   if data is None:self.skipTest('Canonical GitHub identity index not bundled with ZIP; integration must run in checkout')
   js="const data="+json.dumps(data)+";globalThis.fetch=async()=>({ok:true,json:async()=>data});require('./workbench/reactor/source-adapter.js');globalThis.ReactorSourceAdapter.loadIndex().then(x=>console.log(JSON.stringify({n:x.entries.length,verified:x.verifiedBodies}))).catch(e=>{console.error(e);process.exit(1)});"
   self.assertEqual(self.node(js),{'n':91,'verified':0})
+
+ def test_historical_identity_rejected_by_current_adapter(self):
+  data=json.loads((ROOT/'workbench/data/entry_identity_index.json').read_text())
+  js="const data="+json.dumps(data)+";globalThis.fetch=async()=>({ok:true,json:async()=>data});require('./workbench/reactor/source-adapter.js');globalThis.ReactorSourceAdapter.loadIndex().then(()=>console.log(JSON.stringify('UNSAFE_ACCEPT'))).catch(e=>console.log(JSON.stringify(e.message)));"
+  self.assertEqual(self.node(js),'INVALID_SOURCE_INDEX')

@@ -8,7 +8,7 @@ def card(t):
  return parse_cards('<article class="manual-page-card" id="manual-page-001"><pre>'+t+'</pre></article>')
 class TestDeclarationDiscovery(unittest.TestCase):
  def test_real_source_91_unique(self):
-  d=discover(ROOT/'index.html',ROOT/'workbench/data/entry_identity_index.json')
+  d=discover(ROOT/'index.html',ROOT/'workbench/data/current_entry_identity_index.json')
   self.assertEqual(d['status'],'DECLARATIONS_COMPLETE_CANDIDATE_ONLY')
   self.assertEqual(d['counts']['declarationCandidates'],91)
   self.assertEqual(d['counts']['verifiedEntryBodies'],0)
