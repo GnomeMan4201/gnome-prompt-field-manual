@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d",
+  "sourceIndexSha256": "1562471af6710a1a4c46e7409131abf7e55d2953262e88f652a2fb0167b73061",
   "counts": {
     "pending": 10,
     "drafted": 81,
@@ -1599,6 +1599,7 @@
       "draftingBrief": false,
       "occurrencePages": [
         152,
+        161,
         169,
         186,
         196,
@@ -1626,6 +1627,7 @@
       "draftingBrief": false,
       "occurrencePages": [
         111,
+        161,
         205,
         260,
         261,

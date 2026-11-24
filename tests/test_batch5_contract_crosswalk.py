@@ -9,6 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from batch6_baseline import baseline_bytes
 from tools.audit_editorial_lineage import audit, canonical_surface
 from tools.reconcile_entry_lineage import reconcile
 
@@ -40,7 +41,7 @@ class Batch5ContractCrosswalkTests(unittest.TestCase):
         x = self.crosswalk
         self.assertEqual(x["schemaVersion"], "gnome.batch5.crosswalk.v1")
         digest = hashlib.sha256(INDEX.read_bytes()).hexdigest()
-        self.assertEqual(x["sourceIndexSha256"], digest)
+        self.assertEqual(x["sourceIndexSha256"], hashlib.sha256(baseline_bytes("index.html")).hexdigest())
         self.assertEqual(self.index["sourceIndexSha256"], digest)
         self.assertEqual(x["disposition"], "SUBSUMED_BY_CANONICAL_S07_NOT_NEW_BODY")
         self.assertEqual(x["planned"], {

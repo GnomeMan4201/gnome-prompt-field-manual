@@ -11,6 +11,7 @@ import re
 import unittest
 from pathlib import Path
 
+from batch6_baseline import CURRENT_SOURCE_SHA, baseline_bytes
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +22,7 @@ HISTORICAL_QUEUE = ROOT / "workbench/data/adjudication_queue.json"
 HISTORICAL_INDEX = ROOT / "workbench/data/entry_identity_index.json"
 HISTORICAL_HTML = ROOT / "tests/fixtures/batch3-canonical-1f06445e.html"
 
-CURRENT_SHA = "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d"
+BATCH5_POST_STATE_SHA = "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d"
 BASELINE_SHA = "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
 BATCH4_PAGE_SHA = "145b5fe00fedfa43d2a098f3bca1e59e6a9d7ffef8e4a378bc0852626a2d9a1a"
 ALL_PAGE_SHA = "e4019358cb80de25706f983ab1eb2fb66e71dfcded70b94a8bddfe80c5eb14eb"
@@ -59,13 +60,14 @@ class Batch4DispositionTests(unittest.TestCase):
         cls.cards = cards(cls.source)
 
     def test_current_source_hash_and_frozen_batch4_doc_binding(self):
-        self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), CURRENT_SHA)
+        self.assertEqual(hashlib.sha256(baseline_bytes("index.html")).hexdigest(), BATCH5_POST_STATE_SHA)
+        self.assertEqual(hashlib.sha256(INDEX.read_bytes()).hexdigest(), CURRENT_SOURCE_SHA)
         self.assertIn("Final `index.html` SHA-256: `8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd`", DOC.read_text())
 
     def test_315_canonical_pages_and_frozen_batch4_pages(self):
         self.assertEqual(len(self.cards), 315)
         self.assertEqual(sorted(self.cards), list(range(1, 316)))
-        self.assertEqual(fingerprint(self.cards, list(range(1, 316))), ALL_PAGE_SHA)
+        self.assertEqual(fingerprint(cards(baseline_bytes("index.html").decode()), list(range(1, 316))), ALL_PAGE_SHA)
         self.assertEqual(fingerprint(self.cards, range(107, 122)), BATCH4_PAGE_SHA)
 
     def test_reconciles_11_80_91_315_without_missing_inventory(self):
@@ -106,7 +108,7 @@ class Batch4DispositionTests(unittest.TestCase):
     def test_identity_is_current_but_historical_review_queue_is_not_rewritten(self):
         identity = json.loads(IDENTITY.read_text())
         queue = json.loads(HISTORICAL_QUEUE.read_text())
-        self.assertEqual(identity["sourceIndexSha256"], CURRENT_SHA)
+        self.assertEqual(identity["sourceIndexSha256"], CURRENT_SOURCE_SHA)
         self.assertEqual(identity["counts"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
         self.assertEqual(identity["bodyCoverage"], 0)
         self.assertEqual(queue["sourceHtmlSha256"], BASELINE_SHA)

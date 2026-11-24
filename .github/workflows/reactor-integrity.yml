@@ -50,6 +50,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -76,7 +77,7 @@ jobs:
           current = json.loads(Path("workbench/data/current_entry_identity_index.json").read_text())
           actual = hashlib.sha256(current_path.read_bytes()).hexdigest()
           assert actual == current["sourceIndexSha256"], "current identity source mismatch"
-          assert actual == "d5c0f82c33ab228166225972d7de0945b819c7d9a424451916fb5c2efca97e7d"
+          assert actual == "1562471af6710a1a4c46e7409131abf7e55d2953262e88f652a2fb0167b73061"
           assert current == build_inventory(current_path), "current identity inventory not reproducible"
           assert current["counts"] == {"pending": 10, "drafted": 81, "total": 91, "pages": 315}
           assert current["bodyCoverage"] == 0

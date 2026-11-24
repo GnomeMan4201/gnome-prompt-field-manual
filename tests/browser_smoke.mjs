@@ -9,6 +9,16 @@ const engines = { chromium, firefox, webkit };
 assert.ok(engines[browserName], `Unsupported browser: ${browserName}`);
 
 const manualUrl = pathToFileURL(resolve('index.html')).href;
+const standaloneUrl = pathToFileURL(resolve('GNOME-Field-Manual.html')).href;
+const batch6Pages = [
+  [133, 'SCHEMA/CONTRACT,'],
+  [157, 'ALERT THRESHOLDS'],
+  [158, 'SAFE DEGRADATION'],
+  [159, 'eight structured sections'],
+  [161, 'Indirect Injection Tracer, page 203'],
+  [182, 'EDT-00: Use'],
+  [184, 'seven cases'],
+];
 const browser = await engines[browserName].launch({ headless: true });
 
 const scenarios = [
@@ -33,6 +43,7 @@ try {
     await assertSearch(page);
     await assertTabInteractions(page);
     await assertReflow(page, scenario);
+    await assertBatch6Pages(page, scenario);
     assert.deepEqual(pageErrors, [], `${scenario.name}: page errors`);
 
     console.log(`PASS ${browserName} ${scenario.name}`);
@@ -181,6 +192,76 @@ async function assertBatch5MigrationPage() {
       await page.close();
     }
   }
+}
+
+async function assertBatch6Pages(canonical, scenario) {
+  const dynamic = await browser.newPage({ viewport: scenario.viewport });
+  const offline = await browser.newPage({ javaScriptEnabled: false, viewport: scenario.viewport });
+  const errors = [];
+  dynamic.on('pageerror', error => errors.push(String(error)));
+  try {
+    await dynamic.goto(standaloneUrl + '#book/page-133');
+    await offline.goto(standaloneUrl + '#page-directory');
+    const staticDirectory = offline.locator('#page-directory');
+
+    for (const [number, phrase] of batch6Pages) {
+      const scope = `${scenario.name} page ${number}`;
+      const card = canonical.locator('#manual-page-' + number);
+      await canonical.getByLabel('Search manual text', { exact: true }).fill(phrase.toLowerCase());
+      assert.ok(await card.isVisible(), `${scope}: canonical search`);
+      await canonical.goto(manualUrl + '#manual-page-' + number);
+      assert.ok(canonical.url().endsWith('#manual-page-' + number));
+      assert.ok(await card.evaluate(element => element.matches(':target')), `${scope}: canonical anchor`);
+      await assertPageBody(card.locator('pre'), phrase, `${scope}: canonical`);
+
+      const directory = dynamic.locator('#book-contents');
+      if (await directory.getAttribute('open') === null) {
+        await directory.locator('summary').click();
+      }
+      await directory.locator('#book-search').fill(phrase);
+      await directory.locator(`[data-pnum="${number}"]`).click();
+      assert.ok(dynamic.url().endsWith('#book/page-' + number), `${scope}: standalone search navigation`);
+      const dynamicCard = dynamic.locator('#main-root .book-page');
+      assert.match(await dynamicCard.locator('h2').innerText(), new RegExp(`^Page ${number}\\b`));
+      await assertPageBody(dynamicCard.locator('.book-prose'), phrase, `${scope}: standalone dynamic`);
+
+      const pageLink = offline.locator(`nav a[href="#page-${number}"]`);
+      const chapter = staticDirectory.locator('details').filter({ has: pageLink });
+      for (const section of [staticDirectory, chapter]) {
+        if (await section.getAttribute('open') === null) {
+          await section.locator(':scope > summary').click();
+        }
+      }
+      await chapter.locator(pageLink).click();
+      const staticCard = offline.locator(`#page-${number}:target`);
+      const staticBody = staticCard.locator('.book-prose');
+      await assertPageBody(staticBody, phrase, `${scope}: standalone static`);
+      assert.equal(normalize(await dynamicCard.locator('.book-prose').innerText()),
+        normalize(await staticBody.innerText()), `${scope}: standalone presentation parity`);
+      await staticCard.getByRole('link', { name: 'Page directory', exact: true }).click();
+    }
+    assert.deepEqual(errors, [], `${scenario.name}: standalone page errors`);
+  } finally {
+    await dynamic.close();
+    await offline.close();
+  }
+}
+
+async function assertPageBody(body, phrase, scope) {
+  assert.ok(await body.isVisible(), scope);
+  assert.ok(normalize(await body.innerText()).includes(phrase), `${scope}: missing ${phrase}`);
+  const geometry = await body.evaluate(element => {
+    const box = element.getBoundingClientRect();
+    const clipped = [element, ...element.children].some(node =>
+      node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1
+    );
+    return {
+      left: box.left, right: box.right, viewport: innerWidth,
+      documentWidth: document.documentElement.scrollWidth, clipped,
+    };
+  });
+  assert.ok(!geometry.clipped && geometry.left >= -1 && geometry.right <= geometry.viewport + 1
+    && geometry.documentWidth <= geometry.viewport + 1, `${scope}: clipping ${JSON.stringify(geometry)}`);
 }
 
 function normalize(value) {
