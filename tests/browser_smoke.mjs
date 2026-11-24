@@ -20,6 +20,7 @@ const scenarios = [
 
 try {
   await assertReaderPublication();
+  await assertBatch5MigrationPage();
   await assertPromptCopy();
   for (const scenario of scenarios) {
     const page = await browser.newPage({ viewport: scenario.viewport });
@@ -118,6 +119,51 @@ async function assertReflow(page, scenario) {
   );
   assert.ok(metrics.toolbarWidth <= metrics.viewportWidth + 1);
   assert.ok(metrics.readerWidth <= metrics.viewportWidth + 1);
+}
+
+async function assertBatch5MigrationPage() {
+  const url = pathToFileURL(resolve('GNOME-Field-Manual.html')).href;
+  const layouts = [
+    { name: 'desktop', viewport: { width: 1365, height: 936 } },
+    { name: 'mobile', viewport: { width: 390, height: 844 } },
+    { name: 'zoom-200-reflow-equivalent', viewport: { width: 683, height: 468 } },
+  ];
+
+  for (const layout of layouts) {
+    const page = await browser.newPage({ viewport: layout.viewport });
+    const pageErrors = [];
+    page.on('pageerror', error => pageErrors.push(String(error)));
+    try {
+      await page.goto(url + '#book/page-133');
+      const rendered = page.locator('#main-root .book-page');
+      await rendered.waitFor();
+
+      const pageText = normalize(await rendered.innerText()).toUpperCase();
+      for (const required of [
+        'ROLLBACK TRIGGER CONDITIONS',
+        'OBSERVABLE FAILURE SIGNAL',
+        'EVALUATION WINDOW',
+        'IMMEDIATE HALT OR ROLLBACK ACTION',
+        'ESCALATION PROCEDURE',
+        'DOES NOT MONITOR PRODUCTION',
+      ]) {
+        assert.ok(pageText.includes(required), `${layout.name}: page 133 missing ${required}`);
+      }
+
+      const metrics = await page.evaluate(() => {
+        const card = document.querySelector('#main-root .book-page').getBoundingClientRect();
+        return { viewport: innerWidth, scroll: document.documentElement.scrollWidth,
+          cardLeft: card.left, cardRight: card.right };
+      });
+      assert.ok(metrics.scroll <= metrics.viewport + 1,
+        `${layout.name}: page 133 horizontal overflow ${JSON.stringify(metrics)}`);
+      assert.ok(metrics.cardLeft >= -1 && metrics.cardRight <= metrics.viewport + 1,
+        `${layout.name}: page 133 clipped horizontally ${JSON.stringify(metrics)}`);
+      assert.deepEqual(pageErrors, [], `${layout.name}: page 133 script errors`);
+    } finally {
+      await page.close();
+    }
+  }
 }
 
 function normalize(value) {

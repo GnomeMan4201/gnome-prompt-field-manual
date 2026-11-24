@@ -8635,7 +8635,7 @@ has not been tested; state written to the target cannot be unwound
 
 132</pre>
 </article>
-<article class="manual-page-card" id="manual-page-133" data-manual-text=" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━migration verdict ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━low risk: all dimensions at low or moderate. proceed with standard migration runbook. monitoring in place. moderate risk: one or more dimensions at high. proceed only with specific mitigations listed above confirmed complete. dry run required. high risk: one or more dimensions at critical. do not migrate until critical dimensions are reduced. redesign may be required. do not migrate yet: fundamental preconditions are unmet — rollback is untested, observability is absent, or consumer impact is uncharacterized. the migration window must be rescheduled. state the verdict and list the top three conditions that must be confirmed true before migration proceeds. inputs needed source system description, target system description, and an ac- count of the state or data being migrated. the more specific the input, the more specific the risk dimensions. at minimum: what is moving, what it currently connects to, and whether rollback has been tested. for schema migrations: the current and target schema or the delta. for service migrations: the api surface and known consumers. expected output eight risk dimension assessments (compatibility, schema/contract dependency, ordering/sequencing, rollback, observ- ability, user/downstream impact, detectability), each with risk level, evidence, and required mitigation. a required test or dry run specification. a migration verdict at one of four levels with conditions that must be confirmed before proceeding. the output is a migration gate document. a mod- erate risk or higher verdict with unaddressed conditions is a block on the migration window, not an advisory. 133">
+<article class="manual-page-card" id="manual-page-133" data-manual-text="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━migration verdict ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━low risk: all dimensions at low or moderate. proceed with standard migration runbook. monitoring in place. moderate risk: one or more dimensions at high. proceed only with specific mitigations listed above confirmed complete. dry run required. high risk: one or more dimensions at critical. do not migrate until critical dimensions are reduced. redesign may be required. do not migrate yet: fundamental preconditions are unmet — rollback is untested, observability is absent, or consumer impact is uncharacterized. the migration window must be rescheduled. state the verdict and list the top three conditions that must be confirmed true before migration proceeds. rollback trigger conditions for each material failure mode specify: observable failure signal; measurable threshold or condition (a number or unambiguous state); evaluation window (time or sample count); evidence source or monitoring mechanism (metric, log, probe, or reconciliation check); responsible decision owner (authorized on-call role); immediate halt or rollback action with safety preconditions; and escalation procedure. mark unknown thresholds [requires operational confirmation], never invent them. treat missing or untested rollback conditions as blockers, not implied approval. this prompt defines pre-agreed decision criteria: it does not monitor production or execute rollback. inputs needed source system description, target system description, and an account of the state or data being migrated. the more specific the input, the more specific the risk dimensions. at minimum: what is moving, what it currently connects to, and whether rollback has been tested. for schema migrations: the current and target schema or the delta. for service migrations: the api surface and known consumers. expected output eight risk dimension assessments (compatibility, schema/contract dependency, ordering/sequencing, rollback, observability, user/downstream impact, detectability), each with risk level, evidence, and required mitigation. a required test or dry run specification. a migration verdict at one of four levels with conditions that must be confirmed before proceeding. a rollback trigger conditions section stating each signal, threshold or confirmation gap, evaluation window, evidence source, decision owner, immediate halt/rollback action, and escalation procedure. the output is a migration gate document. a moderate risk or higher verdict with unaddressed conditions is a block on the migration window, not an advisory. 133">
   <div class="manual-page-head"><span>Page 133</span><em>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━MIGRATION VERDICT</em></div>
   <pre>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━MIGRATION VERDICT
 
@@ -8661,6 +8661,21 @@ has not been tested; state written to the target cannot be unwound
 
    confirmed true before migration proceeds.
 
+   ROLLBACK TRIGGER CONDITIONS
+
+   For each material failure mode specify: OBSERVABLE FAILURE SIGNAL;
+   MEASURABLE THRESHOLD OR CONDITION (a number or unambiguous state);
+   EVALUATION WINDOW (time or sample count); EVIDENCE SOURCE OR
+   MONITORING MECHANISM (metric, log, probe, or reconciliation check);
+   RESPONSIBLE DECISION OWNER (authorized on-call role); IMMEDIATE
+   HALT OR ROLLBACK ACTION with safety preconditions; and ESCALATION
+   PROCEDURE. Mark unknown thresholds [REQUIRES OPERATIONAL
+   CONFIRMATION], never invent them. Treat missing or untested
+   rollback conditions as blockers, not implied approval. This prompt
+   defines pre-agreed decision criteria: it does not monitor production
+   or execute rollback.
+
+
 
 
 
@@ -8685,7 +8700,10 @@ ABILITY, USER/DOWNSTREAM IMPACT, DETECTABILITY), each
 with risk level, evidence, and required mitigation. A REQUIRED
 TEST OR DRY RUN specification. A MIGRATION VERDICT at
 one of four levels with conditions that must be confirmed before
-proceeding. The output is a migration gate document. A MOD-
+proceeding. A ROLLBACK TRIGGER CONDITIONS section stating each signal, threshold
+or confirmation gap, evaluation window, evidence source, decision
+owner, immediate halt/rollback action, and escalation procedure.
+The output is a migration gate document. A MOD-
 ERATE RISK or higher verdict with unaddressed conditions is a
 block on the migration window, not an advisory.
 

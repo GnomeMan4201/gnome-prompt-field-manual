@@ -3,6 +3,10 @@ name: Reactor Integrity
 on:
   pull_request:
     paths:
+      - 'index.html'
+      - 'workbench/data/current_entry_identity_index.json'
+      - 'tools/export_entry_identity_index.py'
+      - 'tests/test_batch*.py'
       - '.github/workflows/reactor-integrity.yml'
       - 'workbench/reactor/**'
       - 'workbench/data/entry_identity_index.json'
@@ -15,6 +19,10 @@ on:
   push:
     branches: [main]
     paths:
+      - 'index.html'
+      - 'workbench/data/current_entry_identity_index.json'
+      - 'tools/export_entry_identity_index.py'
+      - 'tests/test_batch*.py'
       - '.github/workflows/reactor-integrity.yml'
       - 'workbench/reactor/**'
       - 'workbench/data/entry_identity_index.json'
@@ -68,7 +76,7 @@ jobs:
           current = json.loads(Path("workbench/data/current_entry_identity_index.json").read_text())
           actual = hashlib.sha256(current_path.read_bytes()).hexdigest()
           assert actual == current["sourceIndexSha256"], "current identity source mismatch"
-          assert actual == "8c7a56dc0687809e691ee09030f2a028c290c3ab81a64e63f4b58b6d809df3bd"
+          assert actual == "ee9537a51a407a5fcb2931468a54d0a3a31e37afea54549d4c0397336f1975ab"
           assert current == build_inventory(current_path), "current identity inventory not reproducible"
           assert current["counts"] == {"pending": 11, "drafted": 80, "total": 91, "pages": 315}
           assert current["bodyCoverage"] == 0

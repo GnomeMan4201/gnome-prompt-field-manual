@@ -69,6 +69,14 @@ For the current `1.0.0-rc.1` release candidate:
 
 The repository uses a **combined product** boundary: PTSP remains visible as production state, corrected searchable text is the canonical/default manual reader, and the historical v9 PDF remains available as a separately labelled provenance artifact with an independent hash.
 
+## Batch 5 manuscript-correction candidate
+
+The frozen PTSP brief b-s10 plans **S-10 Migration Risk Classifier**. The canonical reader identifies the substantive entry as **S-07 Migration Risk Classifier** (pages 129–135). Canonical **S-10 Architecture Decision Record Generator** begins on page 140, is distinct, and is unchanged. Inventory occurrences alone do not establish independently verified body ownership.
+
+Page 133 now includes mandatory **ROLLBACK TRIGGER CONDITIONS**: observable signal, threshold or operational-confirmation marker, evaluation window, evidence source, decision owner, immediate halt or rollback action, and escalation. Defining criteria is **not** live monitoring or automatic rollback. Canonical MODERATE corresponds to the frozen brief's MEDIUM label; the original four-level scale is retained.
+
+This is a **candidate correction**, not a Batch 5 PASS or promotion. The inventory remains **11 pending / 80 drafted** until a separate reviewed disposition is recorded. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
+
 ## Remaining release blockers
 
 Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 11 pending entries remain after the 2026-11-23 Batch 4 disposition.
