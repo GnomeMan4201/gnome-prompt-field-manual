@@ -6,6 +6,9 @@ All material changes to the GNOME Prompt Field Manual production workspace are r
 
 ### Corrected
 
+- Revised SEC-08 (pages 200–202) to audit source support and coverage. The previous edition inferred authorship from specificity and hedge density. SEC-08 and AP-06 now require inspectable supplied evidence for claims, record unknown authorship without provenance, and refer exclusions to human review.
+- Identified SEC-05 as pending at its entry, in its referring workflows, in the field index and alongside the historical KEEP decision. Page 7 records the release candidate and independent body count. The post-incident field card now distinguishes reporting (S-09) from the rollback decision (S-08).
+
 - 2026-11-24, PR #53. Page 7 previously claimed these prompts work where generic prompts fail. The revised introduction describes inspectable outputs and identifies comparative effectiveness as an open research question. It also describes Part IX as an entry lookup aid.
 - AP-06 (pages 275, 283–284) previously allowed exclusion based on inferred authorship. The revised instruction requires passage-level evidence and a human decision against a stated quality criterion. SEC-08 (pages 200–202) still uses style-based authorship labels and needs separate editorial correction.
 - Corrected the destinations for architecture decisions (page 260, S-10), incident reports (pages 262 and 265, S-09), and RFC drafts (page 273, P-07) in both reader versions.

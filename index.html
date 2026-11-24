@@ -992,7 +992,7 @@ right but isn’t.
 
 6</pre>
 </article>
-<article class="manual-page-card" id="manual-page-007" data-manual-text="why this book is not a prompt dump the chains in part vii are multi-prompt workflows. the prompts in a chain are designed to feed each other. running them out of sequence or skipping steps degrades the output in specific ways that are documented in each chain. part ix lists prompt ids for common situations. look up the entry for the full prompt, its failure mode and the action to take. these prompts ask for artifacts you can inspect, such as an assumption ledger or a decision record. whether that structure improves results over a plain-language request is an open research question. 7">
+<article class="manual-page-card" id="manual-page-007" data-manual-text="why this book is not a prompt dump the chains in part vii are multi-prompt workflows. the prompts in a chain are designed to feed each other. running them out of sequence or skipping steps degrades the output in specific ways that are documented in each chain. part ix lists prompt ids for common situations. look up the entry for the full prompt, its failure mode and the action to take. release candidate 1.0.0-rc.1. independent body verification: 0 of 91. sec-05 is pending independent behavioral evidence. these prompts ask for inspectable artifacts. whether they improve results over a plain-language request is an open research question. 7">
   <div class="manual-page-head"><span>Page 007</span><em>Why This Book Is Not a Prompt Dump</em></div>
   <pre>                              Why This Book Is Not a Prompt Dump
 
@@ -1004,7 +1004,7 @@ that are documented in each chain.
 
 Part IX lists prompt IDs for common situations. Look up the entry for the full prompt, its failure mode and the action to take.
 
-These prompts ask for artifacts you can inspect, such as an assumption ledger or a decision record. Whether that structure improves results over a plain-language request is an open research question.
+Release candidate 1.0.0-rc.1. Independent body verification: 0 of 91. SEC-05 is pending independent behavioral evidence. These prompts ask for inspectable artifacts. Whether they improve results over a plain-language request is an open research question.
 
 
 
@@ -11256,7 +11256,7 @@ it.
 
 178</pre>
 </article>
-<article class="manual-page-card" id="manual-page-179" data-manual-text=" sec-05 command/data separator (refactor) criteria: 5, 7, 9 — protect system from bad inputs + expose trust boundary + ship safer what it does identifies command/data confusion in a prompt, template, tool call, or code-like ai workflow and produces a refactored version where instruction text and untrusted data are physically sepa- rated. not a description of what to do — a refactored artifact. the output is the corrected structure itself, annotated with the separation decisions made, the delimiter or escaping policy ap- plied, and explicit test cases for escaped delimiter edge cases. command/data confusion is the structural precondition for most prompt injection. it occurs when instruction text and data text appear in the same string context without a boundary that the model or parser treats as authoritative — allowing data to be interpreted as instruction. the refactor installs that boundary and tests it. distinct from s-04 (command/data boundary audit): s-04 audits an existing design at the architecture level and identifies where command/data boundaries are violated or absent. sec-05 takes an identified violation — a specific prompt, template, or structure — and produces the corrected version with test coverage for the new boundary. 179">
+<article class="manual-page-card" id="manual-page-179" data-manual-text="sec-05 command/data separator (refactor) criteria: 5, 7, 9 — protect system from bad inputs + expose trust boundary + ship safer what it does status: pending independent behavioral evidence. treat the refactor as a proposal until its behavior is verified. this entry identifies command/data confusion in a prompt, template, tool call, or code-like ai workflow and produces a refactored version where instruction text and untrusted data are physically sepa- rated. not a description of what to do — a refactored artifact. the output is the corrected structure itself, annotated with the separation decisions made, the delimiter or escaping policy ap- plied, and explicit test cases for escaped delimiter edge cases. command/data confusion is the structural precondition for most prompt injection. it occurs when instruction text and data text appear in the same string context without a boundary that the model or parser treats as authoritative — allowing data to be interpreted as instruction. the refactor installs that boundary and tests it. distinct from s-04 (command/data boundary audit): s-04 audits an existing design at the architecture level and identifies where command/data boundaries are violated or absent. sec-05 takes an identified violation — a specific prompt, template, or structure — and produces the corrected version with test coverage for the new boundary. 179">
   <div class="manual-page-head"><span>Page 179</span><em>SEC-05 Command/Data Separator (Refactor)</em></div>
   <pre>  SEC-05 Command/Data Separator (Refactor)
 
@@ -11269,7 +11269,7 @@ it.
 WHAT IT DOES
 
 
-Identifies command/data confusion in a prompt, template, tool
+Status: PENDING independent behavioral evidence. Treat the refactor as a proposal until its behavior is verified. This entry identifies command/data confusion in a prompt, template, tool
 call, or code-like AI workflow and produces a refactored version
 where instruction text and untrusted data are physically sepa-
 rated. Not a description of what to do — a refactored artifact.
@@ -12083,7 +12083,7 @@ retry.
 
 195</pre>
 </article>
-<article class="manual-page-card" id="manual-page-196" data-manual-text="gnome prompt field manual follow-up — after evaluation use sec-02 (prompt firewall designer) to design system-level controls for verified input or output boundary gaps. route command/data structure issues to sec-05, command/data separator (refactor). structural separation tests are evidence of the boundary they exercise, with runtime and model behavior evaluated independently. use sec-07 (human confirmation gate designer) for every high-severity finding. require an enforced human confirmation gate that covers the affected action path. if coverage is absent, keep the finding open for a security decision. retain other necessary controls and verify gate behavior in scoped tests. use sec-09 (indirect injection tracer) to review the data path when evidence points to a tool-output trust crossing. use s-06 (observability gap finder) when a verdict rests on missing, untrustworthy or stale telemetry. send every finding to the named human security reviewer before deploying remediation. record the review decision, remediation owner, and scoped retest evidence. keep preliminary reports and sensitive records access-controlled. 196">
+<article class="manual-page-card" id="manual-page-196" data-manual-text="gnome prompt field manual follow-up — after evaluation use sec-02 (prompt firewall designer) to design system-level controls for verified input or output boundary gaps. route command/data structure issues to sec-05, command/data separator (refactor), pending independent behavioral evidence. structural separation tests are evidence of the boundary they exercise, with runtime and model behavior evaluated independently. use sec-07 (human confirmation gate designer) for every high-severity finding. require an enforced human confirmation gate that covers the affected action path. if coverage is absent, keep the finding open for a security decision. retain other necessary controls and verify gate behavior in scoped tests. use sec-09 (indirect injection tracer) to review the data path when evidence points to a tool-output trust crossing. use s-06 (observability gap finder) when a verdict rests on missing, untrustworthy or stale telemetry. send every finding to the named human security reviewer before deploying remediation. record the review decision, remediation owner, and scoped retest evidence. keep preliminary reports and sensitive records access-controlled. 196">
   <div class="manual-page-head"><span>Page 196</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -12091,7 +12091,7 @@ FOLLOW-UP — AFTER EVALUATION
 
 Use SEC-02 (Prompt Firewall Designer) to design system-level controls for
 verified input or output boundary gaps. Route command/data structure
-issues to SEC-05, Command/Data Separator (Refactor). Structural
+issues to SEC-05, Command/Data Separator (Refactor), pending independent behavioral evidence. Structural
 separation tests are evidence of the boundary they exercise, with runtime
 and model behavior evaluated independently.
 
@@ -12301,7 +12301,7 @@ force information design constraints.
 
                                                       199</pre>
 </article>
-<article class="manual-page-card" id="manual-page-200" data-manual-text="gnome prompt field manual failure mode will design gates that are too frequent (alert fatigue, users ap- prove without reading) or too infrequent (high-risk actions pro- ceed without review). the test is: would a reasonable person, given the displayed information and 30 seconds, make the right decision? follow-up implement the gates. run them with a test user who is not on your team. observe what they approve without reading carefully — those are your over-trusted gates. safety notes human confirmation gates are only as good as the confirmers’ un- derstanding. a gate that displays a wall of json and gets clicked through is theater, not safety. sec-08 generated junk detector criteria: 3, 5 — signal/noise + protect from bad input what it does audits a document, dataset, or content collection for ai-generated content that has been included without sufficient quality con- trol — specifically content that is plausible-sounding but factually thin, structurally correct but semantically empty, or statistically average in ways that degrade the value of the collection. when to use before using a dataset for training, fine-tuning, or rag. when reviewing contributed content to a knowledge base or corpus. 200">
+<article class="manual-page-card" id="manual-page-200" data-manual-text="gnome prompt field manual failure mode will design gates that are too frequent (alert fatigue, users ap- prove without reading) or too infrequent (high-risk actions pro- ceed without review). the test is: would a reasonable person, given the displayed information and 30 seconds, make the right decision? follow-up implement the gates. run them with a test user who is not on your team. observe what they approve without reading carefully — those are your over-trusted gates. safety notes human confirmation gates are only as good as the confirmers’ un- derstanding. a gate that displays a wall of json and gets clicked through is theater, not safety. sec-08 generated junk detector criteria: 3, 5 — signal/noise + protect from bad input what it does checks whether material proposed for a collection answers its intended question and whether consequential claims can be traced to evidence. review quality and document provenance separately. when to use before using a dataset for training, fine-tuning, or rag. when reviewing contributed content to a knowledge base or corpus. 200">
   <div class="manual-page-head"><span>Page 200</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -12343,11 +12343,7 @@ through is theater, not safety.
 WHAT IT DOES
 
 
-Audits a document, dataset, or content collection for AI-generated
-content that has been included without sufficient quality con-
-trol — specifically content that is plausible-sounding but factually
-thin, structurally correct but semantically empty, or statistically
-average in ways that degrade the value of the collection.
+Checks whether material proposed for a collection answers its intended question and whether consequential claims can be traced to evidence. Review quality and document provenance separately.
 
 
 WHEN TO USE
@@ -12359,7 +12355,7 @@ reviewing contributed content to a knowledge base or corpus.
 
 200</pre>
 </article>
-<article class="manual-page-card" id="manual-page-201" data-manual-text="when a collection that should be expert-quality seems to have di- luted over time. when evaluating ai-assisted work for inclusion in a publication. the prompt audit the following content for generated junk. generated junk is content that: (a) is structurally correct but semantically thin — says things that sound right but contain no specific, verifiable claims (b) answers the surface question while avoiding the hard parts (c) uses the vocabulary of expertise without the specificity of expertise (d) could have been written without any knowledge of the specific topic — only knowledge of what writing about this topic sounds like check for: 1. specificity test: count concrete specifics — numbers, dates, named entities, specific mechanisms. compare to the ratio expected for this type of content. low specificity is a signal. 2. verifiability test: how many claims could be independently verified? how many are unfalsifiable? (&#x27;this is an important consideration&#x27; — unfalsifiable.) 3. hedge density: count hedges per 100 words. compare to domain baseline. high hedge density combined with low specificity is a strong signal. 4. expertise signal: does the content make the kind of mistake that only an expert would know to avoid — or the kind of mistake that reveals no underlying model of the domain? 5. topic evasion: does the content address the hard, specific parts of the topic — or does it describe the shape of an answer without filling it in? verdict: authentic / possibly generated / likely generated / confident generated confidence: high / medium / low content: [text] 201">
+<article class="manual-page-card" id="manual-page-201" data-manual-text="when a collection that should be expert-quality seems to have di- luted over time. when evaluating ai-assisted work for inclusion in a publication. the prompt review each supplied item for its intended use. inputs: task or acceptance criterion, item id and text, and available source records. quote each consequential claim. assign supported only when a supplied, inspectable source supports that claim; give its locator and the supporting detail. assign needs revision when a supplied source contradicts the claim or the item misses a required part of the task. assign insufficient evidence when a necessary source is missing. name the next check. record authorship as unknown unless separately documented. send unresolved findings to a human reviewer before exclusion. for a collection, report items examined and omitted, with reasons. 201">
   <div class="manual-page-head"><span>Page 201</span><em>When a collection that should be expert-quality seems to have di-</em></div>
   <pre>When a collection that should be expert-quality seems to have di-
 luted over time. When evaluating AI-assisted work for inclusion
@@ -12372,61 +12368,7 @@ THE PROMPT
 
 
 
-   Audit the following content for generated junk.
-
-   Generated junk is content that: (a) Is structurally correct but
-
-   semantically thin — says things that sound right but contain no
-
-   specific, verifiable claims (b) Answers the surface question while
-
-   avoiding the hard parts (c) Uses the vocabulary of expertise without
-
-   the specificity of expertise (d) Could have been written without
-
-   any knowledge of the specific topic — only knowledge of what writing
-
-   about this topic sounds like
-
-   Check for:
-
-   1. SPECIFICITY TEST: Count concrete specifics — numbers, dates, named
-
-   entities, specific mechanisms. Compare to the ratio expected for this
-
-   type of content. Low specificity is a signal.
-
-   2. VERIFIABILITY TEST: How many claims could be independently
-
-   verified? How many are unfalsifiable? (&#x27;This is an important
-
-   consideration&#x27; — unfalsifiable.)
-
-   3. HEDGE DENSITY: Count hedges per 100 words. Compare to domain
-
-   baseline. High hedge density combined with low specificity is a
-
-   strong signal.
-
-   4. EXPERTISE SIGNAL: Does the content make the kind of mistake that
-
-   only an expert would know to avoid — or the kind of mistake that
-
-   reveals no underlying model of the domain?
-
-   5. TOPIC EVASION: Does the content address the hard, specific parts
-
-   of the topic — or does it describe the shape of an answer without
-
-   filling it in?
-
-   VERDICT: AUTHENTIC / POSSIBLY GENERATED / LIKELY GENERATED /
-
-   CONFIDENT GENERATED
-
-   CONFIDENCE: HIGH / MEDIUM / LOW
-
-   Content: [TEXT]
+   Review each supplied item for its intended use. Inputs: task or acceptance criterion, item ID and text, and available source records. Quote each consequential claim. Assign SUPPORTED only when a supplied, inspectable source supports that claim; give its locator and the supporting detail. Assign NEEDS REVISION when a supplied source contradicts the claim or the item misses a required part of the task. Assign INSUFFICIENT EVIDENCE when a necessary source is missing. Name the next check. Record authorship as unknown unless separately documented. Send unresolved findings to a human reviewer before exclusion. For a collection, report items examined and omitted, with reasons.
 
 
 
@@ -12434,7 +12376,7 @@ THE PROMPT
 
                                                       201</pre>
 </article>
-<article class="manual-page-card" id="manual-page-202" data-manual-text="gnome prompt field manual inputs needed any content for quality audit — document, article, dataset entry, knowledge base contribution. expected output five-check audit with per-check findings and a verdict with con- fidence level. knobs add ‘compare to known-authentic samples from this domain’ for calibrated detection. add ‘high stakes: flag anything below au- thentic confidence for human review.’ add ‘focus on: [factual accuracy / style markers / structural patterns]’. failure mode will produce false positives on thin topics where specificity is in- herently low. will produce false negatives on generated content that includes specific facts. this is a filter, not a detector — all flagged content requires human review. follow-up for each likely generated or confident generated ver- dict: verify specific claims against primary sources. include the provenance of any content that passes review in the corpus meta- data. safety notes generated junk detection is an arms race. junk that passes this detector exists. use multiple signals, not just one audit. 202">
+<article class="manual-page-card" id="manual-page-202" data-manual-text="gnome prompt field manual inputs needed supply each item, its intended use, and available source records. identify inaccessible items or sources. expected output a claim ledger with item id, quoted claim, finding, source locator or missing evidence, and next action. summarize coverage for the collection. knobs select the collection, sampling rule and acceptance criteria before review. record the denominator and any items outside the sample. failure mode detailed prose can still contain an unsupported claim. a short answer can satisfy the task. check each claim against the supplied sources. follow-up have a reviewer check disputed claims against the cited source and request missing evidence. record the unmet criterion and supporting evidence before excluding an item. safety notes keep authorship unknown when provenance records are absent. preserve the reason for each quality decision, including reversals. 202">
   <div class="manual-page-head"><span>Page 202</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -12443,49 +12385,37 @@ THE PROMPT
 INPUTS NEEDED
 
 
-Any content for quality audit — document, article, dataset entry,
-knowledge base contribution.
+Supply each item, its intended use, and available source records. Identify inaccessible items or sources.
 
 
 EXPECTED OUTPUT
 
 
-Five-check audit with per-check findings and a verdict with con-
-fidence level.
+A claim ledger with item ID, quoted claim, finding, source locator or missing evidence, and next action. Summarize coverage for the collection.
 
 
 KNOBS
 
 
-Add ‘compare to known-authentic samples from this domain’ for
-calibrated detection. Add ‘high stakes: flag anything below AU-
-THENTIC confidence for human review.’ Add ‘focus on: [factual
-accuracy / style markers / structural patterns]’.
+Select the collection, sampling rule and acceptance criteria before review. Record the denominator and any items outside the sample.
 
 
 FAILURE MODE
 
 
-Will produce false positives on thin topics where specificity is in-
-herently low. Will produce false negatives on generated content
-that includes specific facts. This is a filter, not a detector — all
-flagged content requires human review.
+Detailed prose can still contain an unsupported claim. A short answer can satisfy the task. Check each claim against the supplied sources.
 
 
 FOLLOW-UP
 
 
-For each LIKELY GENERATED or CONFIDENT GENERATED ver-
-dict: verify specific claims against primary sources. Include the
-provenance of any content that passes review in the corpus meta-
-data.
+Have a reviewer check disputed claims against the cited source and request missing evidence. Record the unmet criterion and supporting evidence before excluding an item.
 
 
 SAFETY NOTES
 
 
-Generated junk detection is an arms race. Junk that passes this
-detector exists. Use multiple signals, not just one audit.
+Keep authorship unknown when provenance records are absent. Preserve the reason for each quality decision, including reversals.
 
 
 
@@ -15078,7 +15008,7 @@ find before coordinating with stakeholders.
 
 260</pre>
 </article>
-<article class="manual-page-card" id="manual-page-261" data-manual-text=" ch-04 security audit-to-patch chain criteria: 2, 5, 9 purpose takes a security finding from identification through understand- ing to validated patch, without losing the security context that would allow regression. when after a security audit finding. after a responsible disclosure re- port. after discovering a vulnerability yourself. chain step 1 →sec-01 (injection recognizer) or sec-10 (trust boundary mapper): characterize the finding precisely. what type of attack does this enable? what is the trust boundary violation? output: characterized vulnerability. step 2 →s-04 (command/data boundary audit): map the full scope of the vulnerability in the codebase. is this one instance or a pattern? output: scope map. step 3 →human gate: security engineer reviews scope map. determines severity and disclosure timeline. no code changes before this gate. step 4 →sec-06 (tool-agent offense probe) or equivalent: generate test cases that exercise the vulnerability. these will become your regression tests. output: test cases. step 5 →patch: implement fix. use test cases from step 4 to verify fix works. step 6 →sec-05 (command/data separator): after patching, review the changed code for the command/data separation principle. does the patch introduce a new surface? output: post-patch review. 261">
+<article class="manual-page-card" id="manual-page-261" data-manual-text="ch-04 security audit-to-patch chain criteria: 2, 5, 9 purpose takes a security finding from identification through understand- ing to validated patch, without losing the security context that would allow regression. when after a security audit finding. after a responsible disclosure re- port. after discovering a vulnerability yourself. chain step 1 →sec-01 (injection recognizer) or sec-10 (trust boundary mapper): characterize the finding precisely. what type of attack does this enable? what is the trust boundary violation? output: characterized vulnerability. step 2 →s-04 (command/data boundary audit): map the full scope of the vulnerability in the codebase. is this one instance or a pattern? output: scope map. step 3 →human gate: security engineer reviews scope map. determines severity and disclosure timeline. no code changes before this gate. step 4 →sec-06 (tool-agent offense probe) or equivalent: generate test cases that exercise the vulnerability. these will become your regression tests. output: test cases. step 5 →patch: implement fix. use test cases from step 4 to verify fix works. step 6 →sec-05 (command/data separator), pending independent behavioral evidence: after patching, review the changed code for the command/data separation principle. does the patch introduce a new surface? output: post-patch review. 261">
   <div class="manual-page-head"><span>Page 261</span><em>CH-04 Security Audit-to-Patch Chain</em></div>
   <pre>  CH-04 Security Audit-to-Patch Chain
 
@@ -15136,7 +15066,7 @@ CHAIN
 
    fix works.
 
-   STEP 6 →SEC-05 (Command/Data Separator): After patching, review the
+   STEP 6 →SEC-05 (Command/Data Separator), pending independent behavioral evidence: After patching, review the
 
    changed code for the command/data separation principle. Does the
 
@@ -15703,7 +15633,7 @@ world or adversarial conditions.
 
 270</pre>
 </article>
-<article class="manual-page-card" id="manual-page-271" data-manual-text="when before deploying any ai agent with tool access, external integra- tions, or real-world consequences. chain step 1 →sec-10 (trust boundary mapper): map trust boundaries before writing code. where will untrusted data enter? what is the maximum trust any component will receive? output: trust boundary map. step 2 →sec-05 (command/data separator): design the prompt architecture with separation from the start. output: hardened prompt architecture. step 3 →s-03 (failure mode inventory): enumerate all failure modes before deployment. focus on adversarial failures. output: failure mode inventory. step 4 →sec-07 (human confirmation gate designer): design the confirmation gates for all irreversible actions. output: gate designs. step 5 →sec-06 (tool-agent offense probe): generate attack test cases for the agent. execute them. output: attack test results. step 6 →sec-09 (indirect injection tracer): trace all indirect injection paths for any external data the agent retrieves. output: injection trace with severity ratings. step 7 →sec-02 (prompt firewall designer): design the full defensive architecture from steps 1–6 findings. output: firewall design. step 8 →deployment gate: security review of steps 5, 6, and 7 outputs. no deployment until critical findings resolved. 271">
+<article class="manual-page-card" id="manual-page-271" data-manual-text="when before deploying any ai agent with tool access, external integra- tions, or real-world consequences. chain step 1 →sec-10 (trust boundary mapper): map trust boundaries before writing code. where will untrusted data enter? what is the maximum trust any component will receive? output: trust boundary map. step 2 →sec-05 (command/data separator), pending independent behavioral evidence: design the prompt architecture with separation from the start. output: hardened prompt architecture. step 3 →s-03 (failure mode inventory): enumerate all failure modes before deployment. focus on adversarial failures. output: failure mode inventory. step 4 →sec-07 (human confirmation gate designer): design the confirmation gates for all irreversible actions. output: gate designs. step 5 →sec-06 (tool-agent offense probe): generate attack test cases for the agent. execute them. output: attack test results. step 6 →sec-09 (indirect injection tracer): trace all indirect injection paths for any external data the agent retrieves. output: injection trace with severity ratings. step 7 →sec-02 (prompt firewall designer): design the full defensive architecture from steps 1–6 findings. output: firewall design. step 8 →deployment gate: security review of steps 5, 6, and 7 outputs. no deployment until critical findings resolved. 271">
   <div class="manual-page-head"><span>Page 271</span><em>WHEN</em></div>
   <pre>WHEN
 
@@ -15724,7 +15654,7 @@ CHAIN
 
    trust any component will receive? Output: trust boundary map.
 
-   STEP 2 →SEC-05 (Command/Data Separator): Design the prompt
+   STEP 2 →SEC-05 (Command/Data Separator), pending independent behavioral evidence: Design the prompt
 
    architecture with separation from the start. Output: hardened prompt
 
@@ -16395,7 +16325,7 @@ to find real weaknesses — get a human adversarial review.
 
 282</pre>
 </article>
-<article class="manual-page-card" id="manual-page-283" data-manual-text="notes sycophancy is not a model character defect — it is a training artifact. assume it is present and design prompts to counteract it. never use ai agreement as confirmation of quality. ap-06 generated junk classifier criteria: 3, 5 what it detects passages that leave the central question unanswered or make consequential claims without enough evidence to check them. when to run when deciding whether a contribution is ready for a corpus, knowledge base or publication. apply the same criteria regardless of who wrote it. the anti-prompt read the task, submission and available sources. state the question the submission must answer. quote the passage that answers it, or identify what is missing. for each consequential claim, cite supporting evidence, quote conflicting evidence, or identify the source needed to check it. record authorship as unknown unless documented separately. 283">
+<article class="manual-page-card" id="manual-page-283" data-manual-text="notes sycophancy is not a model character defect — it is a training artifact. assume it is present and design prompts to counteract it. never use ai agreement as confirmation of quality. ap-06 generated junk classifier criteria: 3, 5 what it detects passages that leave the central question unanswered or make consequential claims without enough evidence to check them. when to run when deciding whether a contribution is ready for a corpus, knowledge base or publication. apply the same criteria regardless of who wrote it. the anti-prompt read the task, submission and available sources. state the question the submission must answer. quote the passage that answers it, or identify what is missing. for each consequential claim, use only supplied, inspectable sources. cite a source locator and its supporting detail, quote conflicting evidence, or identify the missing source. record authorship as unknown unless documented separately. 283">
   <div class="manual-page-head"><span>Page 283</span><em>NOTES</em></div>
   <pre>NOTES
 
@@ -16432,7 +16362,7 @@ THE ANTI-PROMPT
 
 
 
-   Read the task, submission and available sources. State the question the submission must answer. Quote the passage that answers it, or identify what is missing. For each consequential claim, cite supporting evidence, quote conflicting evidence, or identify the source needed to check it. Record authorship as unknown unless documented separately.
+   Read the task, submission and available sources. State the question the submission must answer. Quote the passage that answers it, or identify what is missing. For each consequential claim, use only supplied, inspectable sources. Cite a source locator and its supporting detail, quote conflicting evidence, or identify the missing source. Record authorship as unknown unless documented separately.
 
 
 
@@ -17797,7 +17727,7 @@ Budget time for the verification step before drawing conclusions.
 
 306</pre>
 </article>
-<article class="manual-page-card" id="manual-page-307" data-manual-text="part ix — field cards quick-reference index organized by operational trigger. find your situation, get the entry id, go to the full entry. • trigger | reach for these entries • starting a new idea or project | t-01 · t-03 · t-04 · t-05 · ch-01 • about to make a significant decision | t-05 · t-06 · t-08 · t-10 · ch-07 • something went wrong / post-incident | s-08 · r-05 · ch-06 · s-07 • writing / editing something to publish | w-01 · w-03 · w-04 · w-07 · w-08 · ch-08 • reviewing ai-generated or ai-assisted work | ap-01 · ap-02 · ap-06 · ap-09 · ap-17 • security review of a system or agent | sec-01 · sec-02 · sec- 05 · sec-09 · sec-10 · ch-04 · ch-09 • inheriting a codebase | s-02 · s-01 · s-04 · s-06 · ch-03 • turning notes into publishable work | r-08 · p-04 · p-05 · ch- 02 · ch-10 • research / building an argument | r-01 · r-02 · w-09 · w-06 · ch-05 • auditing a document someone else wrote | t-02 · t-03 · w-05 · w-06 · r-09 · ap-03 • model output seems off | ap-01 · ap-05 · ap-08 · ap-13 · ap-14 • need to summarize technical material without losing load- bearing details | w-11 • something failed but still taught something | r-11 · r-05 • external content may contain instructions | sec-01 · sec-09 · sec-10 • rag corpus may be poisoned, stale, or drifting | sec-03 · sec- 01 · sec-09 307">
+<article class="manual-page-card" id="manual-page-307" data-manual-text="part ix — field cards quick-reference index organized by operational trigger. find your situation, get the entry id, go to the full entry. • trigger | reach for these entries • starting a new idea or project | t-01 · t-03 · t-04 · t-05 · ch-01 • about to make a significant decision | t-05 · t-06 · t-08 · t-10 · ch-07 • something went wrong / post-incident | s-09 (incident report) · s-08 (rollback decision) · r-05 · ch-06 · s-07 • writing / editing something to publish | w-01 · w-03 · w-04 · w-07 · w-08 · ch-08 • reviewing ai-generated or ai-assisted work | ap-01 · ap-02 · ap-06 · ap-09 · ap-17 • security review of a system or agent | sec-01 · sec-02 · sec-05 (pending independent behavioral evidence) · sec-09 · sec-10 · ch-04 · ch-09 • inheriting a codebase | s-02 · s-01 · s-04 · s-06 · ch-03 • turning notes into publishable work | r-08 · p-04 · p-05 · ch- 02 · ch-10 • research / building an argument | r-01 · r-02 · w-09 · w-06 · ch-05 • auditing a document someone else wrote | t-02 · t-03 · w-05 · w-06 · r-09 · ap-03 • model output seems off | ap-01 · ap-05 · ap-08 · ap-13 · ap-14 • need to summarize technical material without losing load- bearing details | w-11 • something failed but still taught something | r-11 · r-05 • external content may contain instructions | sec-01 · sec-09 · sec-10 • rag corpus may be poisoned, stale, or drifting | sec-03 · sec- 01 · sec-09 307">
   <div class="manual-page-head"><span>Page 307</span><em>Part IX — Field Cards</em></div>
   <pre>Part IX — Field Cards
 
@@ -17812,14 +17742,13 @@ your situation, get the entry ID, go to the full entry.
  • Starting a new idea or project | T-01 · T-03 · T-04 · T-05 · CH-01
  • About to make a significant decision | T-05 · T-06 · T-08 · T-10
      · CH-07
- • Something went wrong / post-incident | S-08 · R-05 · CH-06 ·
+ • Something went wrong / post-incident | S-09 (incident report) · S-08 (rollback decision) · R-05 · CH-06 ·
    S-07
  • Writing / editing something to publish | W-01 · W-03 · W-04 ·
   W-07 · W-08 · CH-08
  • Reviewing AI-generated or AI-assisted work | AP-01 · AP-02 ·
   AP-06 · AP-09 · AP-17
- • Security review of a system or agent | SEC-01 · SEC-02 · SEC-
-  05 · SEC-09 · SEC-10 · CH-04 · CH-09
+ • Security review of a system or agent | SEC-01 · SEC-02 · SEC-05 (pending independent behavioral evidence) · SEC-09 · SEC-10 · CH-04 · CH-09
  • Inheriting a codebase | S-02 · S-01 · S-04 · S-06 · CH-03
  • Turning notes into publishable work | R-08 · P-04 · P-05 · CH-
   02 · CH-10
@@ -18218,11 +18147,13 @@ SEC-04   Evaluator Hard-  KEEP     4,5     Evaluator   capture
 
 314</pre>
 </article>
-<article class="manual-page-card" id="manual-page-315" data-manual-text=" audit summary id name verdict crit. reason sec-05 command/data keep 5,7,9 interpolation elimi- separator nation is the right prescription. an- notated refactor output is genuinely useful. sec-06 tool-agent keep 2,7,9 chained tool attacks offense probe and loop induction are specific. dual- use framing is hon- est. p-01 build-in-public upgrade6,10 the rule ’include post gen one thing that didn’t work’ is good. but ’no call to action’ is a style preference, not an operational rule. output format too loosely specified. p-02 learning log upgrade3,6 separating actual extractor new understanding from activity log is right. but ’dis- proven assumptions’ needs more force — currently sounds like a suggestion. audit summary 14 prompts: keep. 6 prompts: upgrade (all upgraded in the new draft). 2 prompts: cut (w-04 field journal scaffolder cut as too open-ended; p-01 and p-02 fully rewritten). 0 prompts: merge or flag in this round. the upgrades are not cosmetic. each upgraded prompt has a specific deficiency listed and a specific fix applied. if the fix isn’t visible in the new version, the upgrade didn’t happen. 315">
+<article class="manual-page-card" id="manual-page-315" data-manual-text="audit summary current status: sec-05 is pending independent behavioral evidence. keep below records an earlier editorial decision. id name verdict crit. reason sec-05 command/data keep 5,7,9 interpolation elimi- separator nation is the right prescription. an- notated refactor output is genuinely useful. sec-06 tool-agent keep 2,7,9 chained tool attacks offense probe and loop induction are specific. dual- use framing is hon- est. p-01 build-in-public upgrade6,10 the rule ’include post gen one thing that didn’t work’ is good. but ’no call to action’ is a style preference, not an operational rule. output format too loosely specified. p-02 learning log upgrade3,6 separating actual extractor new understanding from activity log is right. but ’dis- proven assumptions’ needs more force — currently sounds like a suggestion. audit summary 14 prompts: keep. 6 prompts: upgrade (all upgraded in the new draft). 2 prompts: cut (w-04 field journal scaffolder cut as too open-ended; p-01 and p-02 fully rewritten). 0 prompts: merge or flag in this round. the upgrades are not cosmetic. each upgraded prompt has a specific deficiency listed and a specific fix applied. if the fix isn’t visible in the new version, the upgrade didn’t happen. 315">
   <div class="manual-page-head"><span>Page 315</span><em>Audit Summary</em></div>
   <pre>                                                               Audit Summary
 
 
+
+Current status: SEC-05 is pending independent behavioral evidence. KEEP below records an earlier editorial decision.
 
 ID     Name           Verdict   Crit.  Reason
 

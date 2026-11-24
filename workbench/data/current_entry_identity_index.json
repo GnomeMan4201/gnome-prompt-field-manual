@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "095681f4b0e32b293230dcba0454a0638814e32c0c9a7ae719ce0bec0bd88b94",
+  "sourceIndexSha256": "fef4f9812014d1970d67151db49ee0aff82b03ea19dafc5a70a579b90a624625",
   "counts": {
     "pending": 1,
     "drafted": 90,
@@ -1349,7 +1349,8 @@
         138,
         252,
         262,
-        265
+        265,
+        307
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
@@ -1503,6 +1504,7 @@
       "pendingInventory": true,
       "draftingBrief": true,
       "occurrencePages": [
+        7,
         179,
         180,
         185,
@@ -1510,6 +1512,7 @@
         196,
         261,
         271,
+        307,
         315
       ],
       "canonicalBody": null,

@@ -10,7 +10,7 @@ from test_batch6_correction import (
 )
 
 BASE = "03285ac8c57bfa8c40bddd2b2c53c0692927f8d3"
-CHANGED = {7, 260, 262, 265, 273, 275, 283, 284}
+CHANGED = {7, 179, 196, 200, 201, 202, 260, 261, 262, 265, 271, 273, 275, 283, 284, 307, 315}
 
 
 def previous(path):
@@ -76,6 +76,25 @@ class ReaderDecisionContracts(unittest.TestCase):
             self.assertIn(phrase, action)
         self.assertNotIn("CONFIDENT GENERATED", action)
         self.assertIn("an open research question", visible(self.pages[7]))
+
+    def test_collection_and_passage_evidence_rules(self):
+        collection = visible(self.pages[201])
+        passage = visible(self.pages[283]) + visible(self.pages[284])
+        for prompt in (collection, passage):
+            self.assertIn("authorship as unknown", prompt)
+            self.assertIn("supplied, inspectable source", prompt)
+            for finding in ("SUPPORTED", "NEEDS REVISION", "INSUFFICIENT EVIDENCE"):
+                self.assertIn(finding, prompt)
+        for n in (200, 201, 202):
+            self.assertNotIn("CONFIDENT GENERATED", visible(self.pages[n]))
+        self.assertIn("before excluding an item", visible(self.pages[202]))
+
+    def test_pending_status_at_point_of_use(self):
+        for n in (7, 179, 196, 261, 271, 307, 315):
+            text = " ".join(visible(self.pages[n]).lower().split())
+            self.assertIn("pending independent behavioral evidence", text)
+        self.assertIn("S-09 (incident report)", visible(self.pages[307]))
+        self.assertIn("S-08 (rollback decision)", visible(self.pages[307]))
 
     def test_reactor_binds_the_current_source(self):
         adapter = (ROOT / "workbench/reactor/source-adapter.js").read_text()
