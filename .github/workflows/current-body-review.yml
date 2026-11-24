@@ -1,0 +1,42 @@
+name: Current Body Review
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'GNOME-Field-Manual.html'
+      - 'workbench/data/**'
+      - 'workbench/adjudication/**'
+      - 'tools/*entry*.py'
+      - 'tools/*body*.py'
+      - 'tests/test_current_body_review.py'
+      - '.github/workflows/current-body-review.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'GNOME-Field-Manual.html'
+      - 'workbench/data/**'
+      - 'workbench/adjudication/**'
+      - 'tools/*entry*.py'
+      - 'tools/*body*.py'
+      - 'tests/test_current_body_review.py'
+      - '.github/workflows/current-body-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Reproduce candidate inventory without promotion
+        run: python tools/build_current_body_review.py --verify
+      - name: Check source-bound negative controls and history
+        run: python -m unittest discover -s tests -p 'test_current_body_review.py' -v
