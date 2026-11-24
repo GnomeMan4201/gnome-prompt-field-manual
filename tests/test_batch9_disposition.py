@@ -1,4 +1,5 @@
 """Verify the approved identity dispositions without promoting canonical bodies."""
+from pathlib import Path
 import base64
 from collections import Counter
 import json
@@ -14,6 +15,8 @@ from test_batch6_correction import ADAPTER_PATH, EXPECTED_PDF_SHA256, HISTORICAL
 from test_batch6_partial_disposition import UNRESOLVED, extract_brief
 from tools.reconcile_entry_lineage import TreeParser, field_text, reconcile, validate_expectations
 
+from batch10_baseline import batch10_base_bytes
+
 SOURCE = ROOT / "index.html"
 READER = "GNOME-Field-Manual.html"
 APPROVED_HEAD = "d286682a4c78e58f74d99e9f285e837a95cc6325"
@@ -25,11 +28,15 @@ SCHEDULE = {6: ("SEC-05",), 10: ("P-08", "P-09", "P-10")}
 class Batch9DispositionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = SOURCE.read_bytes()
+        cls.raw = batch10_base_bytes("index.html")
         cls.approved = batch9_correction_bytes("index.html")
         cls.pages = cards(cls.raw)
-        cls.lineage = reconcile(SOURCE)
-        cls.identity = json.loads((ROOT / INDEX_PATH).read_bytes())
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            source = Path(d) / "index.html"
+            source.write_bytes(cls.raw)
+            cls.lineage = reconcile(source)
+        cls.identity = json.loads(batch10_base_bytes(INDEX_PATH))
         cls.crosswalk = json.loads((ROOT / CROSSWALK).read_bytes())
         parser = TreeParser()
         parser.feed(cls.raw.decode())
@@ -82,7 +89,7 @@ class Batch9DispositionTests(unittest.TestCase):
         previous = json.loads(batch9_correction_bytes(INDEX_PATH))
         self.assertEqual(digest(self.approved), BATCH9_SOURCE_SHA)
         self.assertEqual(digest(self.raw), BATCH9_DISPOSITION_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH9_DISPOSITION_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH9_DISPOSITION_SOURCE_SHA}';", batch10_base_bytes(ADAPTER_PATH).decode())
         previous["sourceIndexSha256"] = BATCH9_DISPOSITION_SOURCE_SHA
         previous["counts"].update(pending=4, drafted=87)
         candidates = {"P-06": "Changelog Curation Engine", "P-07": "RFC Draft Generator"}
@@ -164,7 +171,7 @@ class Batch9DispositionTests(unittest.TestCase):
         self.assertEqual(self.pages, cards(self.approved))
         self.assertEqual(digest(b"\0".join(self.pages.values())),
                          "9f1b71b85eeb4b3021f039bb4713ae398e37f2fa8580a64e33cff64734321a71")
-        self.assertEqual((ROOT / READER).read_bytes(), batch9_correction_bytes(READER))
+        self.assertEqual(batch10_base_bytes(READER), batch9_correction_bytes(READER))
         pdf = re.search(rb'data="data:application/pdf;base64,([^"]+)"', self.raw)[1]
         self.assertEqual(digest(base64.b64decode(pdf, validate=True)), EXPECTED_PDF_SHA256)
         paths = subprocess.check_output(
