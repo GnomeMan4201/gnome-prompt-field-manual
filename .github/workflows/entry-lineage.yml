@@ -73,8 +73,8 @@ jobs:
             --input index.html \
             --json entry-lineage.json \
             --markdown entry-lineage.md \
-            --expect-pending 4 \
-            --expect-drafted 87 \
+            --expect-pending 1 \
+            --expect-drafted 90 \
             --expect-total 91 \
             --expect-pages 315 \
             --enforce
