@@ -15146,14 +15146,14 @@ CHAIN
 
                                                       261</pre>
 </article>
-<article class="manual-page-card" id="manual-page-262" data-manual-text="gnome prompt field manual step 7 →s-08 (incident report scaffold): document the vulnerability, patch, and lessons. this is your security changelog entry and potentially your disclosure document. link logic the test cases in step 4 must exist before the patch in step 5. this is non-negotiable. a patch without a test is a patch that will regress. break on break at the human gate if the scope map reveals the vulnera- bility is more widespread than expected. escalate before patch- ing. output characterized vulnerability + scope map + regression test suite + patch + post-patch review + security changelog entry. safety this chain handles real vulnerabilities. every step should be con- ducted in a secure environment with limited access. coordinate disclosure before publishing anything. ch-05 claim-to-citation-to-publication chain criteria: 1, 3, 8 262">
+<article class="manual-page-card" id="manual-page-262" data-manual-text="gnome prompt field manual step 7 →s-09 (incident report scaffold): document the vulnerability, patch, and lessons. this is your security changelog entry and potentially your disclosure document. link logic the test cases in step 4 must exist before the patch in step 5. this is non-negotiable. a patch without a test is a patch that will regress. break on break at the human gate if the scope map reveals the vulnera- bility is more widespread than expected. escalate before patch- ing. output characterized vulnerability + scope map + regression test suite + patch + post-patch review + security changelog entry. safety this chain handles real vulnerabilities. every step should be con- ducted in a secure environment with limited access. coordinate disclosure before publishing anything. ch-05 claim-to-citation-to-publication chain criteria: 1, 3, 8 262">
   <div class="manual-page-head"><span>Page 262</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
 
 
 
-    STEP 7 →S-08 (Incident Report Scaffold): Document the vulnerability,
+    STEP 7 →S-09 (Incident Report Scaffold): Document the vulnerability,
 
     patch, and lessons. This is your security changelog entry and
 
@@ -15327,7 +15327,7 @@ errors of process, not errors of fact.
 
 264</pre>
 </article>
-<article class="manual-page-card" id="manual-page-265" data-manual-text="purpose converts the knowledge produced during an incident — what worked, what didn’t, what the correct sequence was — into a runbook that codifies that knowledge for the next operator who faces the same situation. when during or immediately after an incident that required non-obvious diagnostic or remediation steps. when an incident revealed a gap in existing runbooks. when a specific expert’s knowledge needs to be institutionalized. chain step 1 →s-08 (incident report scaffold): document the incident completely while memory is fresh. output: incident report. step 2 →r-05 (failure-to-test converter): convert each contributing factor into a test specification. what test would detect this failure earlier next time? output: test specifications. step 3 →s-06 (observability gap finder): feed the incident timeline into the gap finder. what monitoring would have detected this earlier? output: instrumentation backlog. step 4 →runbook generation prompt: given: [incident report] + [test specifications] + [observability gaps] generate a runbook for the failure mode that caused this incident. runbook structure: trigger: the specific condition that activates this runbook - initial assessment (2 minutes): what to check first and why diagnostic sequence: ordered steps to confirm the diagnosis remediation options: ordered by speed vs. risk tradeoff rollback decision point: when to stop mitigation and roll back verification: how to confirm resolution escalation path: when to escalate and to whom step 5 →validation: have someone who was not in the incident read 265">
+<article class="manual-page-card" id="manual-page-265" data-manual-text="purpose converts the knowledge produced during an incident — what worked, what didn’t, what the correct sequence was — into a runbook that codifies that knowledge for the next operator who faces the same situation. when during or immediately after an incident that required non-obvious diagnostic or remediation steps. when an incident revealed a gap in existing runbooks. when a specific expert’s knowledge needs to be institutionalized. chain step 1 →s-09 (incident report scaffold): document the incident completely while memory is fresh. output: incident report. step 2 →r-05 (failure-to-test converter): convert each contributing factor into a test specification. what test would detect this failure earlier next time? output: test specifications. step 3 →s-06 (observability gap finder): feed the incident timeline into the gap finder. what monitoring would have detected this earlier? output: instrumentation backlog. step 4 →runbook generation prompt: given: [incident report] + [test specifications] + [observability gaps] generate a runbook for the failure mode that caused this incident. runbook structure: trigger: the specific condition that activates this runbook - initial assessment (2 minutes): what to check first and why diagnostic sequence: ordered steps to confirm the diagnosis remediation options: ordered by speed vs. risk tradeoff rollback decision point: when to stop mitigation and roll back verification: how to confirm resolution escalation path: when to escalate and to whom step 5 →validation: have someone who was not in the incident read 265">
   <div class="manual-page-head"><span>Page 265</span><em>PURPOSE</em></div>
   <pre>PURPOSE
 
@@ -15353,7 +15353,7 @@ CHAIN
 
 
 
-   STEP 1 →S-08 (Incident Report Scaffold): Document the incident
+   STEP 1 →S-09 (Incident Report Scaffold): Document the incident
 
    completely while memory is fresh. Output: incident report.
 

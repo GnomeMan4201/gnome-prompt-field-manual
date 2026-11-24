@@ -10,7 +10,7 @@ from test_batch6_correction import (
 )
 
 BASE = "03285ac8c57bfa8c40bddd2b2c53c0692927f8d3"
-CHANGED = {7, 273, 275, 283, 284}
+CHANGED = {7, 262, 265, 273, 275, 283, 284}
 
 
 def previous(path):
@@ -45,6 +45,23 @@ class ReaderDecisionContracts(unittest.TestCase):
         route = re.search(r"or (P-\d+) \(RFC Draft Generator\)", visible(self.pages[273]))
         self.assertIsNotNone(route)
         self.assertRegex(visible(self.pages[232]), rf"(?m)^\s*{route[1]} RFC Draft Generator\s*$")
+
+    def test_exact_title_references_match_a_canonical_heading(self):
+        packet = json.loads((ROOT / "workbench/data/current_body_review.json").read_text())
+        def normalize(title):
+            return " ".join(re.findall(r"[a-z0-9]+", title.lower()))
+        titles = {}
+        for entry in packet["entries"]:
+            titles.setdefault(normalize(entry["canonicalHeadingCandidate"]), set()).add(entry["entryId"])
+        for n, card in self.pages.items():
+            refs = re.findall(r"\b([A-Z]+-\d{2})\s*\(([^()]{3,85})\)", visible(card))
+            for ref, label in refs:
+                matches = titles.get(normalize(label))
+                if matches:
+                    with self.subTest(page=n, reference=ref, label=label):
+                        self.assertIn(ref, matches)
+        for n in (262, 265):
+            self.assertIn("S-09 (Incident Report Scaffold)", visible(self.pages[n]))
 
     def test_quality_action_and_evidence_boundary(self):
         self.assertIn("AP-06 flags passages for a human", visible(self.pages[275]))

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "gnome.manual.current-body-review.v1",
-  "sourceHtmlSha256": "1c7e3c4719612b3bcdb6f0b8754db1ef36c0f594ad6106d7ef5b7936c9f26bf0",
-  "identityIndexSha256": "b81e9234f077a7fec000af00e20923331f2ede366888a01f271f0db1103af460",
+  "sourceHtmlSha256": "f8c7d6543086ca8e78e5964477328f6596a4e6b1baf93a6ea51f378d8210ec22",
+  "identityIndexSha256": "de7743317e64fe68f516b3cba5acc8bfa2a18e05af488f9c7dc2535c9806d76a",
   "historicalBindings": {
     "workbench/data/entry_identity_index.json": "b9c760567f678fa7599ebb2e0de8527e2d875cd3ec72ca58c307905b9acf7a40",
     "workbench/data/entry_declaration_candidates.json": "00d4fa9dbdcda884de79ec5d8c4f53e501481f316468d1d01840564264b33cb7",
@@ -35,7 +35,7 @@
     "S-10"
   ],
   "offsetConvention": "Half-open Unicode codepoint offsets in decoded page <pre> text; end may point to next page offset zero.",
-  "reviewQueueManifestSha256": "cff8f5977673d49ecca2a128d0da1154461a1d375e02cecce991e4c0071f62b2",
+  "reviewQueueManifestSha256": "62433c20de89b575b54781e56845464a4923e070d37ea2e49ee44f232cb0b8f9",
   "entries": [
     {
       "entryId": "T-01",
@@ -10536,8 +10536,8 @@
       "boundaryReason": [
         "NEXT_DECLARATION"
       ],
-      "rawSpanSha256": "8ddf5afc1fb0d9d0c5653f2ba9888dc10c2bcf4633f6e908f17345bb03156e3e",
-      "proposedCleanTextSha256": "4e73f0b72b3a423eab5ad0059b01b6dc3f9f0031325dddc9a4227cf2d0fa4c84",
+      "rawSpanSha256": "6944099887ac969e2208810332231cc58e659e65040d532db1104631e3588c43",
+      "proposedCleanTextSha256": "28d70f63ce61a70a1cd0dcc06c704adc94c685488fc33ca384dc92119d885c86",
       "proposedCleanTextLength": 2192,
       "pageSlices": [
         [
@@ -10550,7 +10550,7 @@
           262,
           0,
           829,
-          "52dbe4c017bc1cef46a5f62d8bfa03a0b5a8448323e51644028eba6b4da2929b"
+          "48ed4a12c076678e0b982db4ba8445a3cccb6693390ad60d47123867a848923b"
         ]
       ],
       "sectionMarkers": [
@@ -10756,8 +10756,8 @@
       "boundaryReason": [
         "NEXT_DECLARATION"
       ],
-      "rawSpanSha256": "9a47bf37a2d937db036113168032338a831c41b9209dfd49a0e38870c395becd",
-      "proposedCleanTextSha256": "5986d972d1ac12017f88f2cce12f30f2ca64cec0b4fd9c33f97563205b16ad67",
+      "rawSpanSha256": "c0a8aba825bae30964b40be6db653202df6eda427214ef5aba0597ea9d734032",
+      "proposedCleanTextSha256": "8f4482465762f3c5a9c7cf9f2798d58838b7c5264869e638320c26af8ee93aab",
       "proposedCleanTextLength": 2377,
       "pageSlices": [
         [
@@ -10770,7 +10770,7 @@
           265,
           0,
           1719,
-          "7efc2940af5e48c83a25ea8d73e39dc0d88f3911411030abbfb453234b9f5f7c"
+          "2d83a62259da6c44cb4d22ab2e409ec25da5d350369b5c312e4a1f1a52d7e0c9"
         ],
         [
           266,

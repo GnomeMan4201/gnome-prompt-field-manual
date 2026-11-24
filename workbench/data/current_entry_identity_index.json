@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "1c7e3c4719612b3bcdb6f0b8754db1ef36c0f594ad6106d7ef5b7936c9f26bf0",
+  "sourceIndexSha256": "f8c7d6543086ca8e78e5964477328f6596a4e6b1baf93a6ea51f378d8210ec22",
   "counts": {
     "pending": 1,
     "drafted": 90,
@@ -1324,8 +1324,6 @@
         121,
         135,
         136,
-        262,
-        265,
         307
       ],
       "canonicalBody": null,
@@ -1350,7 +1348,9 @@
         135,
         138,
         252,
-        260
+        260,
+        262,
+        265
       ],
       "canonicalBody": null,
       "bodyStatus": "UNRESOLVED_BOUNDARIES",
