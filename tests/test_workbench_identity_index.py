@@ -15,13 +15,13 @@ class IdentityIndexTests(unittest.TestCase):
 
     def test_counts_and_preserved_w04(self):
         out = self.result
-        self.assertEqual(out["counts"], {"pending": 8, "drafted": 83, "total": 91, "pages": 315})
+        self.assertEqual(out["counts"], {"pending": 6, "drafted": 85, "total": 91, "pages": 315})
         idx = {e["id"]: e for e in out["entries"]}
         self.assertIn("W-04", idx)
         self.assertIn("R-07", idx)
         self.assertIn("R-10", idx)
         self.assertEqual(len(idx), 91)
-        self.assertEqual(sum(e["status"] == "PENDING" for e in idx.values()), 8)
+        self.assertEqual(sum(e["status"] == "PENDING" for e in idx.values()), 6)
 
     def test_no_phantom_from_cross_reference(self):
         out = self.result

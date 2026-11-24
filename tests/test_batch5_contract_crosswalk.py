@@ -99,8 +99,8 @@ class Batch5ContractCrosswalkTests(unittest.TestCase):
         x = self.crosswalk
         self.assertEqual(x["countsAfter"], {"pending": 10, "drafted": 81, "total": 91, "pages": 315})
         r = reconcile(INDEX)
-        self.assertEqual(r.summary.pending_inventory_rows, 8)
-        self.assertEqual(r.summary.drafting_briefs, 8)
+        self.assertEqual(r.summary.pending_inventory_rows, 6)
+        self.assertEqual(r.summary.drafting_briefs, 6)
         self.assertNotIn("S-10", {e.entry_id for e in r.pending_entries})
         self.assertEqual(self.index["bodyCoverage"], 0)
         self.assertEqual(sorted(self.cards), list(range(1, 316)))

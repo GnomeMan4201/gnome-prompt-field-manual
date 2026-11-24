@@ -5,7 +5,7 @@ import subprocess
 import unittest
 
 from batch7_baseline import BATCH7_DISPOSITION_SOURCE_SHA
-from batch8_baseline import BATCH8_SOURCE_SHA, PR43_MERGE, ROOT, batch8_base_bytes
+from batch8_baseline import BATCH8_SOURCE_SHA, PR43_MERGE, ROOT, batch8_base_bytes, corrected_batch8_bytes
 from test_batch6_correction import (
     ADAPTER_PATH, CANONICAL, DATASET, HISTORICAL_ROOTS, INDEX_PATH, STATIC,
     canonical_surface, cards, changed_pages, dataset_rows, digest, parity_errors, visible,
@@ -71,8 +71,8 @@ def contract_errors(text):
 class Batch8ContractsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / "index.html").read_bytes()
-        cls.reader = (ROOT / "GNOME-Field-Manual.html").read_bytes()
+        cls.raw = corrected_batch8_bytes("index.html")
+        cls.reader = corrected_batch8_bytes("GNOME-Field-Manual.html")
         cls.base = batch8_base_bytes("index.html")
         cls.base_reader = batch8_base_bytes("GNOME-Field-Manual.html")
         cls.pages = cards(cls.raw)
@@ -169,11 +169,11 @@ class Batch8ContractsTests(unittest.TestCase):
                 self.assertEqual((ROOT / path).read_bytes(), batch8_base_bytes(path))
 
     def test_current_identity_binding_and_status(self):
-        current = json.loads((ROOT / INDEX_PATH).read_bytes())
+        current = json.loads(corrected_batch8_bytes(INDEX_PATH))
         prior = json.loads(batch8_base_bytes(INDEX_PATH))
         self.assertEqual(digest(self.raw), BATCH8_SOURCE_SHA)
         self.assertEqual(current["sourceIndexSha256"], BATCH8_SOURCE_SHA)
-        self.assertIn(f"const EXPECTED_SOURCE='{BATCH8_SOURCE_SHA}';", (ROOT / ADAPTER_PATH).read_text())
+        self.assertIn(f"const EXPECTED_SOURCE='{BATCH8_SOURCE_SHA}';", corrected_batch8_bytes(ADAPTER_PATH).decode())
         self.assertEqual(current["counts"], {"pending": 8, "drafted": 83, "total": 91, "pages": 315})
         self.assertEqual(current["bodyCoverage"], 0)
         for old, new in zip(prior["entries"], current["entries"], strict=True):

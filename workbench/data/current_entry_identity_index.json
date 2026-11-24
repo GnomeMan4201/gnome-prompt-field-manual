@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "bf6e9a6ee4c32d4ae517c4f8a5d9eebadc0e0a2da3d2bf2398667c1525353e25",
+  "sourceIndexSha256": "108d443e3f39e745bddbcbb030de1876f36f328180308a32eae2cb107d133f80",
   "counts": {
-    "pending": 8,
-    "drafted": 83,
+    "pending": 6,
+    "drafted": 85,
     "total": 91,
     "pages": 315
   },
@@ -661,9 +661,9 @@
       "id": "P-01",
       "titleCandidate": "Build-in-Public Post (Structured)",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         209,
         212,
@@ -687,9 +687,9 @@
       "id": "P-02",
       "titleCandidate": "Learning Log Extractor",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
-      "status": "PENDING",
-      "pendingInventory": true,
-      "draftingBrief": true,
+      "status": "NON_PENDING",
+      "pendingInventory": false,
+      "draftingBrief": false,
       "occurrencePages": [
         213,
         216,

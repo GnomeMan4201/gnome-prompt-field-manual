@@ -77,9 +77,9 @@ jobs:
           current = json.loads(Path("workbench/data/current_entry_identity_index.json").read_text())
           actual = hashlib.sha256(current_path.read_bytes()).hexdigest()
           assert actual == current["sourceIndexSha256"], "current identity source mismatch"
-          assert actual == "bf6e9a6ee4c32d4ae517c4f8a5d9eebadc0e0a2da3d2bf2398667c1525353e25"
+          assert actual == "108d443e3f39e745bddbcbb030de1876f36f328180308a32eae2cb107d133f80"
           assert current == build_inventory(current_path), "current identity inventory not reproducible"
-          assert current["counts"] == {"pending": 8, "drafted": 83, "total": 91, "pages": 315}
+          assert current["counts"] == {"pending": 6, "drafted": 85, "total": 91, "pages": 315}
           assert current["bodyCoverage"] == 0
 
           frozen = Path("tests/fixtures/batch3-canonical-1f06445e.html").read_bytes()
@@ -89,7 +89,7 @@ jobs:
           assert old_sha == "1f06445eb18295fce20ef0bf350d0237ead9d8713005ea2177e1281854210c19"
           assert historical["counts"] == {"pending": 14, "drafted": 77, "total": 91, "pages": 315}
           assert historical["bodyCoverage"] == 0
-          print("Current 8/83 identity reproducible; historical 14/77 SHA-256 preserved; 0 verified bodies.")
+          print("Current 6/85 identity reproducible; historical 14/77 SHA-256 preserved; 0 verified bodies.")
           PYVERIFY
 
       - name: Python and JavaScript syntax
@@ -111,5 +111,5 @@ jobs:
       - name: Editorial source regression gates
         run: |
           python tools/validate_manual.py --input index.html --strict-warnings
-          python tools/reconcile_entry_lineage.py --input index.html --expect-pending 8 --expect-drafted 83 --expect-total 91 --expect-pages 315 --enforce
+          python tools/reconcile_entry_lineage.py --input index.html --expect-pending 6 --expect-drafted 85 --expect-total 91 --expect-pages 315 --enforce
           python tools/audit_editorial_lineage.py --input index.html

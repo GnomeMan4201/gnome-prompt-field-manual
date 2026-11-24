@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 from batch6_baseline import baseline_bytes
-from batch8_baseline import BATCH8_SOURCE_SHA
+from batch8_baseline import BATCH8_DISPOSITION_SOURCE_SHA
 from tools.reconcile_entry_lineage import reconcile, validate_expectations
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,14 +65,14 @@ class Batch5DispositionTests(unittest.TestCase):
     def test_counts_and_next_active_brief(self):
         r = reconcile(SOURCE)
         self.assertEqual(validate_expectations(
-            r, expected_pending=8, expected_drafted=83,
+            r, expected_pending=6, expected_drafted=85,
             expected_total=91, expected_pages=315
         ), [])
-        self.assertEqual(r.summary.drafting_briefs, 8)
-        self.assertEqual(r.summary.source_counts.batches, 4)
+        self.assertEqual(r.summary.drafting_briefs, 6)
+        self.assertEqual(r.summary.source_counts.batches, 3)
         self.assertEqual(r.summary.source_counts.caution, 5)
-        self.assertEqual(self.identity["counts"], {"pending": 8, "drafted": 83, "total": 91, "pages": 315})
-        self.assertEqual(self.identity["sourceIndexSha256"], BATCH8_SOURCE_SHA)
+        self.assertEqual(self.identity["counts"], {"pending": 6, "drafted": 85, "total": 91, "pages": 315})
+        self.assertEqual(self.identity["sourceIndexSha256"], BATCH8_DISPOSITION_SOURCE_SHA)
         self.assertEqual(self.identity["bodyCoverage"], 0)
         self.assertNotIn("document.getElementById('b-sec02').classList.add('open');", self.source)
         self.assertIn("document.getElementById('b-sec05').classList.add('open');", self.source)
