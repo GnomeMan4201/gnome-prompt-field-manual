@@ -1,7 +1,7 @@
 /* Current-source decisions are not canonical body certifications. */
 (function(root){'use strict';
 const SCHEMA='gnome.manual.current-review-session.v1';
-const PACKET_SHA='db6e1a5e0380be3b791e89d68aab60d5fc50ec735d60c4ec142b0900b0c1133b';
+const PACKET_SHA='8ecc775891e780766be2027198e152203de623e599a99442383e3ede82353b04';
 const CHOICES=['NEEDS_REVIEW','ACCEPT','REJECT'];
 const cp=(s,a,b)=>Array.from(s).slice(a,b).join('');
 const pos=x=>`${x.page}:${x.offset}`;

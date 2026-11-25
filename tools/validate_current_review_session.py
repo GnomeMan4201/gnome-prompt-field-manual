@@ -11,7 +11,7 @@ from build_current_body_review import build, dump, OUTPUT
 from adjudicate_entry_regions import validate as validate_queue
 
 SCHEMA = 'gnome.manual.current-review-session.v1'
-PACKET_SHA = 'db6e1a5e0380be3b791e89d68aab60d5fc50ec735d60c4ec142b0900b0c1133b'
+PACKET_SHA = '8ecc775891e780766be2027198e152203de623e599a99442383e3ede82353b04'
 CHOICES = {'NEEDS_REVIEW', 'ACCEPT', 'REJECT'}
 RECORD_FIELDS = {'key', 'decision', 'reviewer', 'rationale', 'evidence', 'reviewedAt'}
 SESSION_FIELDS = {'schemaVersion', 'sourceHtmlSha256', 'packetSha256', 'reviewQueueManifestSha256', 'records'}

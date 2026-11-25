@@ -933,7 +933,7 @@ A prompt is a request. That part is obvious. It is also:
 
                                                         5</pre>
 </article>
-<article class="manual-page-card" id="manual-page-006" data-manual-text="gnome prompt field manual • a quality filter. a well-constructed prompt raises the floor of what you’ll accept as output. parts vii and viii — the chains and the anti-prompts — are explicitly about detecting when a model has given you something that sounds right but isn’t. the admission criteria every prompt in this manual was tested against ten inclusion criteria before being included. a prompt must do at least one of these things: • reveal a hidden assumption • convert failure into a test • separate signal from noise • harden an idea against attack • protect a system from bad inputs • turn messy work into a reusable artifact • expose a trust boundary • improve decision quality under uncertainty • help a builder ship safer or cleaner • produce output that can be reused, tested, cited, published, or committed ‘it’s useful’ is not on the list. ‘it’s interesting’ is not on the list. a prompt that just gets you a better answer to a question you already knew how to ask is a fine prompt — it belongs somewhere else. how to use this manual open it to the section that matches your current operational prob- lem. read the entry completely before running the prompt — the failure mode and safety notes are not boilerplate. they describe real things that will go wrong. the anti-prompts in part viii are not regular prompts. they are diagnostic tools run on the output of other prompts. run them when you suspect a model has given you something that looks right but isn’t. 6">
+<article class="manual-page-card" id="manual-page-006" data-manual-text="gnome prompt field manual • a quality filter. a well-constructed prompt raises the floor of what you’ll accept as output. parts vii and viii — the chains and the anti-prompts — are explicitly about detecting when a model has given you something that sounds right but isn’t. the admission criteria the criteria line under each entry heading names the numbered editorial criteria below that the entry is meant to meet. an entry must meet at least one: 1. reveal a hidden assumption 2. convert failure into a test 3. separate signal from noise 4. harden an idea against attack 5. protect a system from bad inputs 6. turn messy work into a reusable artifact 7. expose a trust boundary 8. improve decision quality under uncertainty 9. help a builder ship safer or cleaner 10. produce output that can be reused, tested, cited, published, or committed these are editorial selection criteria. meeting one is a judgment about what an entry asks a model to produce. it does not show how a model responds to the entry. appendix a records criteria and verdicts for the 22 prompts in an earlier draft. the manual has no comparable record for its other entries or for later revisions. a model trial, where one exists, covers only the entry and revision it tested. ‘it’s useful’ is not on the list. ‘it’s interesting’ is not on the list. a prompt that just gets you a better answer to a question you already knew how to ask is a fine prompt — it belongs somewhere else. how to use this manual open it to the section that matches your current operational prob- lem. read the entry completely before running the prompt — the failure mode and safety notes are not boilerplate. they describe real things that will go wrong. the anti-prompts in part viii are not regular prompts. they are diagnostic tools run on the output of other prompts. run them when you suspect a model has given you something that looks right but isn’t. 6">
   <div class="manual-page-head"><span>Page 006</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -945,30 +945,38 @@ A prompt is a request. That part is obvious. It is also:
 
 The Admission Criteria
 
-Every prompt in this manual was tested against ten inclusion
-criteria before being included. A prompt must do at least one of
-these things:
+The Criteria line under each entry heading names the numbered
+editorial criteria below that the entry is meant to meet. An entry
+must meet at least one:
 
- • Reveal a hidden assumption
+ 1. Reveal a hidden assumption
 
- • Convert failure into a test
+ 2. Convert failure into a test
 
- • Separate signal from noise
+ 3. Separate signal from noise
 
- • Harden an idea against attack
+ 4. Harden an idea against attack
 
- • Protect a system from bad inputs
+ 5. Protect a system from bad inputs
 
- • Turn messy work into a reusable artifact
+ 6. Turn messy work into a reusable artifact
 
- • Expose a trust boundary
+ 7. Expose a trust boundary
 
- • Improve decision quality under uncertainty
+ 8. Improve decision quality under uncertainty
 
- • Help a builder ship safer or cleaner
+ 9. Help a builder ship safer or cleaner
 
- • Produce output that can be reused, tested, cited, published,
+10. Produce output that can be reused, tested, cited, published,
    or committed
+
+These are editorial selection criteria. Meeting one is a judgment
+about what an entry asks a model to produce. It does not show how
+a model responds to the entry. Appendix A records criteria and
+verdicts for the 22 prompts in an earlier draft. The manual has no
+comparable record for its other entries or for later revisions. A
+model trial, where one exists, covers only the entry and revision
+it tested.
 
 ‘It’s useful’ is not on the list.  ‘It’s interesting’ is not on the list.
 A prompt that just gets you a better answer to a question you
@@ -9646,7 +9654,7 @@ The six classification framework describes real attack patterns
 
 152</pre>
 </article>
-<article class="manual-page-card" id="manual-page-153" data-manual-text="against real production ai systems. using this knowledge to harden your defenses is the intent. the classification descrip- tions are operationally detailed because detection requires oper- ational detail — evasion variants must be named to be caught. classification 6 model limitation: llms tokenize and normalize text before analysis. unicode homoglyphs (characters from other scripts that look like ascii), fullwidth unicode variants, and zero- width characters may be normalized or stripped by the model before it reasons about them — making them invisible to this classification. this prompt’s classification 6 is reliable for: standard base64 with padding, rot13, hexadecimal encoding, and obvious char- acter substitution patterns. this prompt’s classification 6 is not reliable for: homoglyph at- tacks (e.g., cyrillic “а” substituted for latin “a”), fullwidth uni- code ( ), zero-width character injection, or partial encod- ing where only key tokens are encoded. any deployment handling non-ascii content must supplement with the programmatic pre-scan described in inputs needed. treat classification 6 results without a pre-scan as “partial signal — confirm with programmatic check.” 153">
+<article class="manual-page-card" id="manual-page-153" data-manual-text="against real production ai systems. using this knowledge to harden your defenses is the intent. the classification descrip- tions are operationally detailed because detection requires oper- ational detail — evasion variants must be named to be caught. classification 6 model limitation: llms tokenize and normalize text before analysis. unicode homoglyphs (characters from other scripts that look like ascii), fullwidth unicode variants, and zero-width characters may be normalized or stripped by the model before it reasons about them — making them invisible to this classification. no test in this manual measures how accurately a model decodes base64, rot13, hexadecimal or character substitution. treat a decode reported by the model as an unverified interpretation until a tool reproduces it. check each candidate string with a deterministic tool, such as a standard-library base64, hexadecimal or rot13 decoder. harmless examples: the base64 string dghpcybpcybhighhcm1szxnzigv4yw1wbgu= decodes to “this is a harmless example”, and the rot13 text “uryyb” decodes to “hello”. under markers found, record the string, the tool and the decoded output, and label the result tool-checked. a tool-checked decode that contains instructions supports a yes signal. if no tool reproduces the decode, label it model interpretation — unverified. quote the original string, name the encoding the model suggested and state the check still needed. keep classification 6 at possible for that string. an unverified decode is not a confirmed encoded payload. route the string to the manual sandboxed decode or inspection described in inputs needed. a model may also miss homoglyph substitution (e.g., cyrillic “а” for latin “a”), fullwidth characters, zero-width characters and partial encoding where only key tokens are encoded. run the programmatic pre-scan described in inputs needed on all content, not only non-ascii content: base64 and hexadecimal strings are ascii. treat classification 6 results without a pre-scan as “partial signal — confirm with programmatic check.” 153">
   <div class="manual-page-head"><span>Page 153</span><em>against real production AI systems.  Using this knowledge to</em></div>
   <pre>against real production AI systems.  Using this knowledge to
 harden your defenses is the intent. The classification descrip-
@@ -9655,24 +9663,40 @@ ational detail — evasion variants must be named to be caught.
 
 Classification 6 model limitation: LLMs tokenize and normalize
 text before analysis. Unicode homoglyphs (characters from other
-scripts that look like ASCII), fullwidth Unicode variants, and zero-
-width characters may be normalized or stripped by the model
+scripts that look like ASCII), fullwidth Unicode variants, and zero-width
+characters may be normalized or stripped by the model
 before it reasons about them — making them invisible to this
 classification.
 
-This prompt’s Classification 6 is reliable for: standard Base64
-with padding, ROT13, hexadecimal encoding, and obvious char-
-acter substitution patterns.
+No test in this manual measures how accurately a model decodes
+Base64, ROT13, hexadecimal or character substitution. Treat a
+decode reported by the model as an unverified interpretation until
+a tool reproduces it.
 
-This prompt’s Classification 6 is not reliable for: homoglyph at-
-tacks (e.g., Cyrillic “а” substituted for Latin “a”), fullwidth Uni-
-code (          ), zero-width character injection, or partial encod-
-ing where only key tokens are encoded.
+Check each candidate string with a deterministic tool, such as a
+standard-library Base64, hexadecimal or ROT13 decoder. Harmless
+examples: the Base64 string dGhpcyBpcyBhIGhhcm1sZXNzIGV4YW1wbGU=
+decodes to “this is a harmless example”, and the ROT13 text
+“uryyb” decodes to “hello”. Under MARKERS FOUND, record the
+string, the tool and the decoded output, and label the result
+TOOL-CHECKED. A TOOL-CHECKED decode that contains instructions
+supports a YES signal.
 
-Any deployment handling non-ASCII content must supplement
-with the programmatic pre-scan described in INPUTS NEEDED.
-Treat Classification 6 results without a pre-scan as “partial signal
-— confirm with programmatic check.”
+If no tool reproduces the decode, label it MODEL INTERPRETATION —
+UNVERIFIED. Quote the original string, name the encoding the model
+suggested and state the check still needed. Keep Classification 6
+at POSSIBLE for that string. An unverified decode is not a
+confirmed encoded payload. Route the string to the manual
+sandboxed decode or inspection described in INPUTS NEEDED.
+
+A model may also miss homoglyph substitution (e.g., Cyrillic “а”
+for Latin “a”), fullwidth characters, zero-width characters and
+partial encoding where only key tokens are encoded.
+
+Run the programmatic pre-scan described in INPUTS NEEDED on all
+content, not only non-ASCII content: Base64 and hexadecimal
+strings are ASCII. Treat Classification 6 results without a
+pre-scan as “partial signal — confirm with programmatic check.”
 
 
 
@@ -12301,7 +12325,7 @@ force information design constraints.
 
                                                       199</pre>
 </article>
-<article class="manual-page-card" id="manual-page-200" data-manual-text="gnome prompt field manual failure mode will design gates that are too frequent (alert fatigue, users ap- prove without reading) or too infrequent (high-risk actions pro- ceed without review). the test is: would a reasonable person, given the displayed information and 30 seconds, make the right decision? follow-up implement the gates. run them with a test user who is not on your team. observe what they approve without reading carefully — those are your over-trusted gates. safety notes human confirmation gates are only as good as the confirmers’ un- derstanding. a gate that displays a wall of json and gets clicked through is theater, not safety. sec-08 generated junk detector criteria: 3, 5 — signal/noise + protect from bad input what it does checks whether material proposed for a collection answers its intended question and whether consequential claims can be traced to evidence. review quality and document provenance separately. when to use before using a dataset for training, fine-tuning, or rag. when reviewing contributed content to a knowledge base or corpus. 200">
+<article class="manual-page-card" id="manual-page-200" data-manual-text="gnome prompt field manual failure mode will design gates that are too frequent (alert fatigue, users ap- prove without reading) or too infrequent (high-risk actions pro- ceed without review). the test is: would a reasonable person, given the displayed information and 30 seconds, make the right decision? follow-up implement the gates. run them with a test user who is not on your team. observe what they approve without reading carefully — those are your over-trusted gates. safety notes human confirmation gates are only as good as the confirmers’ un- derstanding. a gate that displays a wall of json and gets clicked through is theater, not safety. sec-08 collection evidence audit criteria: 3, 5 — signal/noise + protect from bad input what it does checks whether material proposed for a collection answers its intended question and whether consequential claims can be traced to evidence. review quality and document provenance separately. returns a finding for each claim in each item, plus an account of which items were examined or omitted and why. for a single submission, use ap-06 (passage evidence review). when to use before using a dataset for training, fine-tuning, or rag. when reviewing contributed content to a knowledge base or corpus. 200">
   <div class="manual-page-head"><span>Page 200</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -12334,7 +12358,7 @@ through is theater, not safety.
 
 
 
-  SEC-08 Generated Junk Detector
+  SEC-08 Collection Evidence Audit
 
    Criteria: 3, 5 — signal/noise + protect from bad input
 
@@ -12343,7 +12367,7 @@ through is theater, not safety.
 WHAT IT DOES
 
 
-Checks whether material proposed for a collection answers its intended question and whether consequential claims can be traced to evidence. Review quality and document provenance separately.
+Checks whether material proposed for a collection answers its intended question and whether consequential claims can be traced to evidence. Review quality and document provenance separately. Returns a finding for each claim in each item, plus an account of which items were examined or omitted and why. For a single submission, use AP-06 (Passage Evidence Review).
 
 
 WHEN TO USE
@@ -13536,7 +13560,7 @@ withhold a complete public sample.
 
 226</pre>
 </article>
-<article class="manual-page-card" id="manual-page-227" data-manual-text="follow-up run p-03 (readme quality auditor) when the sample is a code project or library with a readme. use p-04 (technical post-mortem publisher) for incident context when this annotation accompanies a post-mortem. keep the original work and its point-specific notes available for review. run w-09 (claim-evidence separator) on consequential technical and attribution claims. use ap-02 (confidence laundering probe) for inflated confidence and w-04 (over-smoothing detector) for softened limitations. use r-08 (artifact extraction protocol) first if the material does not yet identify a stable artifact. use p-01 (build-in-public post) for a work-in-progress update. use ap-06 (generated junk classifier) when vague material yields generic claims. safety notes review credentials, internal identifiers, screenshots, client material, private links and third-party permissions before sharing. if the original cannot be cleared, preserve it only in the authorized review environment and hold publication. private repository links, internal ticket numbers, and client-identifying details must be removed or generalized be- 227">
+<article class="manual-page-card" id="manual-page-227" data-manual-text="follow-up run p-03 (readme quality auditor) when the sample is a code project or library with a readme. use p-04 (technical post-mortem publisher) for incident context when this annotation accompanies a post-mortem. keep the original work and its point-specific notes available for review. run w-09 (claim-evidence separator) on consequential technical and attribution claims. use ap-02 (confidence laundering probe) for inflated confidence and w-04 (over-smoothing detector) for softened limitations. use r-08 (artifact extraction protocol) first if the material does not yet identify a stable artifact. use p-01 (build-in-public post) for a work-in-progress update. use ap-06 (passage evidence review) when an annotation makes claims the supplied work does not support. safety notes review credentials, internal identifiers, screenshots, client material, private links and third-party permissions before sharing. if the original cannot be cleared, preserve it only in the authorized review environment and hold publication. private repository links, internal ticket numbers, and client-identifying details must be removed or generalized be- 227">
   <div class="manual-page-head"><span>Page 227</span><em>FOLLOW-UP</em></div>
   <pre>FOLLOW-UP
 
@@ -13550,8 +13574,8 @@ attribution claims. Use AP-02 (Confidence Laundering Probe) for inflated
 confidence and W-04 (Over-Smoothing Detector) for softened limitations.
 Use R-08 (Artifact Extraction Protocol) first if the material does not
 yet identify a stable artifact. Use P-01 (Build-in-Public Post) for a
-work-in-progress update. Use AP-06 (Generated Junk Classifier) when
-vague material yields generic claims.
+work-in-progress update. Use AP-06 (Passage Evidence Review) when
+an annotation makes claims the supplied work does not support.
 
 SAFETY NOTES
 
@@ -13709,7 +13733,7 @@ before publishing anything as a complete release record.
 
 231</pre>
 </article>
-<article class="manual-page-card" id="manual-page-232" data-manual-text="gnome prompt field manual follow-up use s-10 (architecture decision record generator) for a decision&#x27;s rationale. an adr supplies reasoning evidence; independent release membership still determines whether the change shipped. use p-04 (technical post-mortem publisher) for incident-related changes and link the approved records where disclosure permits. run w-09 (claim-evidence separator) on the final changelog. use ap-06 (generated junk classifier) when weak inputs lead to generic rows. use r-08 (artifact extraction protocol) for a substantial capability that needs a reusable evidence record. use p-03 (readme quality auditor) when the release changes the documented way users get started. safety notes have a technical lead review any security or safety entry before publication. use authorized disclosure channels and the approved timing. keep sensitive implementation detail out of the public record. record a withheld entry as a disclosure limit in the authorized review material. p-07 rfc draft generator criteria: 6, 8, 10 — reusable artifact + decision quality + reusable output 232">
+<article class="manual-page-card" id="manual-page-232" data-manual-text="gnome prompt field manual follow-up use s-10 (architecture decision record generator) for a decision&#x27;s rationale. an adr supplies reasoning evidence; independent release membership still determines whether the change shipped. use p-04 (technical post-mortem publisher) for incident-related changes and link the approved records where disclosure permits. run w-09 (claim-evidence separator) on the final changelog. use ap-06 (passage evidence review) when a row makes a claim the supplied records do not support. use r-08 (artifact extraction protocol) for a substantial capability that needs a reusable evidence record. use p-03 (readme quality auditor) when the release changes the documented way users get started. safety notes have a technical lead review any security or safety entry before publication. use authorized disclosure channels and the approved timing. keep sensitive implementation detail out of the public record. record a withheld entry as a disclosure limit in the authorized review material. p-07 rfc draft generator criteria: 6, 8, 10 — reusable artifact + decision quality + reusable output 232">
   <div class="manual-page-head"><span>Page 232</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -13722,7 +13746,7 @@ membership still determines whether the change shipped. Use P-04
 the approved records where disclosure permits.
 
 Run W-09 (Claim-Evidence Separator) on the final changelog. Use AP-06
-(Generated Junk Classifier) when weak inputs lead to generic rows. Use
+(Passage Evidence Review) when a row makes a claim the supplied records do not support. Use
 R-08 (Artifact Extraction Protocol) for a substantial capability that
 needs a reusable evidence record. Use P-03 (README Quality Auditor) when
 the release changes the documented way users get started.
@@ -14579,7 +14603,7 @@ mandatory sections, source links and missing-information gates.
 
 251</pre>
 </article>
-<article class="manual-page-card" id="manual-page-252" data-manual-text="gnome prompt field manual failure mode reject generic git tutorials, invented installation or test commands, undocumented branch or approval rules, unsupported platform claims, and unverified private reporting channels. reject a first contribution path with no real issue or approved task, or acceptance criteria that cannot be checked. a guide that could fit another repository unchanged has failed. a provisional guide may still be useful but must expose missing evidence, command execution status, and decisions requiring maintainer approval. follow-up run p-03 (readme quality auditor) first; resolve its relevant failures before treating the guide as ready. use s-02 (code archaeology) for hidden setup dependencies. use s-10 (architecture decision record generator) for missing major decision context; the historical planned s-09 adr label refers to this subject, not canonical s-09 incident report scaffold. run sec-10 (trust boundary mapper (security)) when the project handles sensitive data or external integrations. run ap-06 (generated junk classifier) to detect generic sections. verify project-specific references against the actual repository revision. 252">
+<article class="manual-page-card" id="manual-page-252" data-manual-text="gnome prompt field manual failure mode reject generic git tutorials, invented installation or test commands, undocumented branch or approval rules, unsupported platform claims, and unverified private reporting channels. reject a first contribution path with no real issue or approved task, or acceptance criteria that cannot be checked. a guide that could fit another repository unchanged has failed. a provisional guide may still be useful but must expose missing evidence, command execution status, and decisions requiring maintainer approval. follow-up run p-03 (readme quality auditor) first; resolve its relevant failures before treating the guide as ready. use s-02 (code archaeology) for hidden setup dependencies. use s-10 (architecture decision record generator) for missing major decision context; the historical planned s-09 adr label refers to this subject, not canonical s-09 incident report scaffold. run sec-10 (trust boundary mapper (security)) when the project handles sensitive data or external integrations. run ap-06 (passage evidence review) to check each section against the repository and supplied records. verify project-specific references against the actual repository revision. 252">
   <div class="manual-page-head"><span>Page 252</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -14601,8 +14625,8 @@ setup dependencies. Use S-10 (Architecture Decision Record Generator) for
 missing major decision context; the historical planned S-09 ADR label
 refers to this subject, not canonical S-09 Incident Report Scaffold. Run
 SEC-10 (Trust Boundary Mapper (Security)) when the project handles
-sensitive data or external integrations. Run AP-06 (Generated Junk
-Classifier) to detect generic sections. Verify project-specific references
+sensitive data or external integrations. Run AP-06 (Passage Evidence Review) to check
+each section against the repository and supplied records. Verify project-specific references
 against the actual repository revision.
 
 252</pre>
@@ -16325,7 +16349,7 @@ to find real weaknesses — get a human adversarial review.
 
 282</pre>
 </article>
-<article class="manual-page-card" id="manual-page-283" data-manual-text="notes sycophancy is not a model character defect — it is a training artifact. assume it is present and design prompts to counteract it. never use ai agreement as confirmation of quality. ap-06 generated junk classifier criteria: 3, 5 what it detects passages that leave the central question unanswered or make consequential claims without enough evidence to check them. when to run when deciding whether a contribution is ready for a corpus, knowledge base or publication. apply the same criteria regardless of who wrote it. the anti-prompt read the task, submission and available sources. state the question the submission must answer. quote the passage that answers it, or identify what is missing. for each consequential claim, use only supplied, inspectable sources. cite a source locator and its supporting detail, quote conflicting evidence, or identify the missing source. record authorship as unknown unless documented separately. 283">
+<article class="manual-page-card" id="manual-page-283" data-manual-text="notes sycophancy is not a model character defect — it is a training artifact. assume it is present and design prompts to counteract it. never use ai agreement as confirmation of quality. ap-06 passage evidence review criteria: 3, 5 what it detects passages that leave the central question unanswered or make consequential claims without enough evidence to check them. use it for one submission. for a collection, use sec-08 (collection evidence audit), which also records which items were examined or omitted. when to run when deciding whether a contribution is ready for a corpus, knowledge base or publication. apply the same criteria regardless of who wrote it. the anti-prompt read the task, submission and available sources. state the question the submission must answer. quote the passage that answers it, or identify what is missing. for each consequential claim, use only supplied, inspectable sources. cite a source locator and its supporting detail, quote conflicting evidence, or identify the missing source. record authorship as unknown unless documented separately. 283">
   <div class="manual-page-head"><span>Page 283</span><em>NOTES</em></div>
   <pre>NOTES
 
@@ -16336,7 +16360,7 @@ it. Never use AI agreement as confirmation of quality.
 
 
 
- AP-06 Generated Junk Classifier
+ AP-06 Passage Evidence Review
 
   Criteria: 3, 5
 
@@ -16347,7 +16371,7 @@ it. Never use AI agreement as confirmation of quality.
 WHAT IT DETECTS
 
 
-Passages that leave the central question unanswered or make consequential claims without enough evidence to check them.
+Passages that leave the central question unanswered or make consequential claims without enough evidence to check them. Use it for one submission. For a collection, use SEC-08 (Collection Evidence Audit), which also records which items were examined or omitted.
 
 
 WHEN TO RUN
@@ -17727,7 +17751,7 @@ Budget time for the verification step before drawing conclusions.
 
 306</pre>
 </article>
-<article class="manual-page-card" id="manual-page-307" data-manual-text="part ix — field cards quick-reference index organized by operational trigger. find your situation, get the entry id, go to the full entry. • trigger | reach for these entries • starting a new idea or project | t-01 · t-03 · t-04 · t-05 · ch-01 • about to make a significant decision | t-05 · t-06 · t-08 · t-10 · ch-07 • something went wrong / post-incident | s-09 (incident report) · s-08 (rollback decision) · r-05 · ch-06 · s-07 • writing / editing something to publish | w-01 · w-03 · w-04 · w-07 · w-08 · ch-08 • reviewing ai-generated or ai-assisted work | ap-01 · ap-02 · ap-06 · ap-09 · ap-17 • security review of a system or agent | sec-01 · sec-02 · sec-05 (pending independent behavioral evidence) · sec-09 · sec-10 · ch-04 · ch-09 • inheriting a codebase | s-02 · s-01 · s-04 · s-06 · ch-03 • turning notes into publishable work | r-08 · p-04 · p-05 · ch- 02 · ch-10 • research / building an argument | r-01 · r-02 · w-09 · w-06 · ch-05 • auditing a document someone else wrote | t-02 · t-03 · w-05 · w-06 · r-09 · ap-03 • model output seems off | ap-01 · ap-05 · ap-08 · ap-13 · ap-14 • need to summarize technical material without losing load- bearing details | w-11 • something failed but still taught something | r-11 · r-05 • external content may contain instructions | sec-01 · sec-09 · sec-10 • rag corpus may be poisoned, stale, or drifting | sec-03 · sec- 01 · sec-09 307">
+<article class="manual-page-card" id="manual-page-307" data-manual-text="part ix — field cards quick-reference index organized by operational trigger. find your situation, get the entry id, go to the full entry. • trigger | reach for these entries • starting a new idea or project | t-01 · t-03 · t-04 · t-05 · ch-01 • about to make a significant decision | t-05 · t-06 · t-08 · t-10 · ch-07 • something went wrong / post-incident | s-09 (incident report) · s-08 (rollback decision) · r-05 · ch-06 · s-07 • writing / editing something to publish | w-01 · w-03 · w-04 · w-07 · w-08 · ch-08 • reviewing ai-generated or ai-assisted work | ap-01 · ap-02 · ap-06 (passage evidence review) · sec-08 (collection evidence audit) · ap-09 · ap-17 • security review of a system or agent | sec-01 · sec-02 · sec-05 (pending independent behavioral evidence) · sec-09 · sec-10 · ch-04 · ch-09 • inheriting a codebase | s-02 · s-01 · s-04 · s-06 · ch-03 • turning notes into publishable work | r-08 · p-04 · p-05 · ch- 02 · ch-10 • research / building an argument | r-01 · r-02 · w-09 · w-06 · ch-05 • auditing a document someone else wrote | t-02 · t-03 · w-05 · w-06 · r-09 · ap-03 • model output seems off | ap-01 · ap-05 · ap-08 · ap-13 · ap-14 • need to summarize technical material without losing load- bearing details | w-11 • something failed but still taught something | r-11 · r-05 • external content may contain instructions | sec-01 · sec-09 · sec-10 • rag corpus may be poisoned, stale, or drifting | sec-03 · sec- 01 · sec-09 307">
   <div class="manual-page-head"><span>Page 307</span><em>Part IX — Field Cards</em></div>
   <pre>Part IX — Field Cards
 
@@ -17747,7 +17771,7 @@ your situation, get the entry ID, go to the full entry.
  • Writing / editing something to publish | W-01 · W-03 · W-04 ·
   W-07 · W-08 · CH-08
  • Reviewing AI-generated or AI-assisted work | AP-01 · AP-02 ·
-  AP-06 · AP-09 · AP-17
+  AP-06 (passage evidence review) · SEC-08 (collection evidence audit) · AP-09 · AP-17
  • Security review of a system or agent | SEC-01 · SEC-02 · SEC-05 (pending independent behavioral evidence) · SEC-09 · SEC-10 · CH-04 · CH-09
  • Inheriting a codebase | S-02 · S-01 · S-04 · S-06 · CH-03
  • Turning notes into publishable work | R-08 · P-04 · P-05 · CH-
