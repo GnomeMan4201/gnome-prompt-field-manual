@@ -5,6 +5,7 @@ on:
     paths:
       - 'index.html'
       - 'workbench/data/current_entry_identity_index.json'
+      - 'workbench/data/current_body_review.json'
       - 'workbench/data/batch9_identity_crosswalk.json'
       - 'tools/export_entry_identity_index.py'
       - 'tests/test_batch*.py'
@@ -23,6 +24,7 @@ on:
     paths:
       - 'index.html'
       - 'workbench/data/current_entry_identity_index.json'
+      - 'workbench/data/current_body_review.json'
       - 'workbench/data/batch9_identity_crosswalk.json'
       - 'tools/export_entry_identity_index.py'
       - 'tests/test_batch*.py'

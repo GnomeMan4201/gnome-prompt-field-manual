@@ -7,6 +7,10 @@ on:
       - GNOME-Field-Manual.html
       - tests/fixtures/reader-prompts/**
       - tests/browser_smoke.mjs
+      - tests/reactor_titles_browser.mjs
+      - workbench/reactor/**
+      - workbench/data/current_body_review.json
+      - workbench/data/current_entry_identity_index.json
       - package.json
       - package-lock.json
       - .github/workflows/reader-browser-smoke.yml
@@ -17,6 +21,10 @@ on:
       - GNOME-Field-Manual.html
       - tests/fixtures/reader-prompts/**
       - tests/browser_smoke.mjs
+      - tests/reactor_titles_browser.mjs
+      - workbench/reactor/**
+      - workbench/data/current_body_review.json
+      - workbench/data/current_entry_identity_index.json
       - package.json
       - package-lock.json
       - .github/workflows/reader-browser-smoke.yml
@@ -43,3 +51,4 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps ${{ matrix.browser }}
       - run: node tests/browser_smoke.mjs ${{ matrix.browser }}
+      - run: node tests/reactor_titles_browser.mjs ${{ matrix.browser }}

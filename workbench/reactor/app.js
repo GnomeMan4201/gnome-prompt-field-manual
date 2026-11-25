@@ -58,10 +58,11 @@
       if (state.mode === 'm1') {
         body = '<h2 style="font-family:var(--serif);font-weight:400;margin:0 0 8px;">Mode 01 — Method Selector (Domain A: Source Truth)</h2>' +
           '<p style="color:var(--text-dim);font-size:0.88rem;">Select a source-linked method from the 91-entry baseline (<code>0/91</code> canonical bodies independently verified; raw candidates only), or explore with a clearly marked synthetic onboarding experiment.</p>' +
+          (baseline.headingStatus === 'BOUND' ? '' : '<div class="callout-err" role="alert" id="heading-source-status"><strong>Entry headings unavailable:</strong> ' + esc(baseline.headingStatus) + '. Labels show unverified advisory identity candidates. Entry IDs remain source-bound.</div>') +
           '<div style="margin-bottom:12px;"><button type="button" class="btn btn-primary" id="load-demo-btn">Load Synthetic Onboarding Demo</button></div>' +
           baseline.entries.map(function (e) {
             return '<button type="button" class="btn" data-sel-entry="' + e.id + '" style="display:block;width:100%;text-align:left;margin-bottom:8px;' + (state.selectedEntry.id === e.id ? 'border-color:var(--amber);' : '') + '">' +
-              '<strong>' + esc(e.id) + '</strong> — ' + esc(e.title) + ' <span class="pill pill-amber">' + esc(e.bodyStatus) + '</span>' +
+              '<strong>' + esc(e.id) + '</strong> — ' + esc(Src.displayTitle(e)) + ' <span class="pill pill-amber">' + esc(e.bodyStatus) + '</span>' +
             '</button>';
           }).join('');
       } else if (state.mode === 'm2') {
