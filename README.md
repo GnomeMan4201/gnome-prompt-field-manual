@@ -96,6 +96,10 @@ Authoritative records:
 - `docs/IDENTITY_AND_SCOPE.md` — canonical identity and remaining release boundaries.
 - `docs/QUALITY_GATE.md` — stable release criteria.
 
+## Prompt reliability evidence
+
+A paired pilot compared AP-06 with a plain-language review instruction on six synthetic cases using Qwen2.5-0.5B-Instruct. A blinded AI reviewer found both claims correctly assessed in one of six cases for each prompt. The original operator scored AP-06 at one of six and the control at zero of six. Both readings used the same twelve captured responses. Human scoring and separate-operator replication remain open. [Protocol, raw outputs, scoring sheets and reproduction commands](research/ap06-paired-pilot/README.md)
+
 ## Source-bound research history
 
 The live editorial inventory now records **1 pending / 90 non-pending IDs**, with **0/91 independently verified canonical bodies**. The Reactor identity adapter uses `workbench/data/current_entry_identity_index.json`, deterministically derived from the current `index.html`.
