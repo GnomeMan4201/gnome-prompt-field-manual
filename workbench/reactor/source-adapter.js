@@ -1,5 +1,5 @@
 (function(root){'use strict';
-const EXPECTED_SOURCE='33fa2e969ea76969a2c82964d2c0289ec8836953e69275a5d29034b9e893b871';
+const EXPECTED_SOURCE='bc6f03db9ac336cbfabd1df66d3e9555566c7003b9f7935643ce26025e5ce8d9';
 const PACKET_SCHEMA='gnome.manual.current-body-review.v1';
 // Display headings come from the candidate packet's source-bound declaration headings.
 // They name entries; they do not verify bodies. The identity index title remains advisory.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gnome.manual.identity-index.v1",
-  "sourceIndexSha256": "33fa2e969ea76969a2c82964d2c0289ec8836953e69275a5d29034b9e893b871",
+  "sourceIndexSha256": "bc6f03db9ac336cbfabd1df66d3e9555566c7003b9f7935643ce26025e5ce8d9",
   "counts": {
     "pending": 1,
     "drafted": 90,
@@ -22,7 +22,7 @@
   "entries": [
     {
       "id": "AP-01",
-      "titleCandidate": "Over-Smoothing Detector",
+      "titleCandidate": "Over-Smoothing Publication Gate",
       "titleAuthority": "reconciler-candidate-not-verified-heading",
       "status": "NON_PENDING",
       "pendingInventory": false,
@@ -1996,6 +1996,7 @@
         227,
         257,
         269,
+        275,
         307,
         313,
         315
