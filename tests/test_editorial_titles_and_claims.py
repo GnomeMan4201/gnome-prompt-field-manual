@@ -18,6 +18,9 @@ from test_batch6_correction import (
 from tools.audit_editorial_lineage import EXPECTED_PDF_SHA256, canonical_surface
 
 BASE = "71bcdb7926f33c3288ba7cdc5ad8ef6e823baca6"
+# Last revision of both readers produced by this correction (PR #57). Later
+# corrections have their own scoped tests; this scope is checked historically.
+RESULT = "e2ce370e4485a5285868fb621d8a6b5b0d46efcc"
 CHANGED = {6, 153, 200, 227, 232, 252, 283, 307}
 TITLES = {"AP-06": "Passage Evidence Review", "SEC-08": "Collection Evidence Audit"}
 OBSOLETE = {"AP-06": "Generated Junk Classifier", "SEC-08": "Generated Junk Detector"}
@@ -38,8 +41,8 @@ UNSUPPORTED_CLAIMS = [
 PILOT = "research/ap06-paired-pilot"
 
 
-def previous(path):
-    return subprocess.check_output(["git", "show", f"{BASE}:{path}"], cwd=ROOT)
+def previous(path, revision=BASE):
+    return subprocess.check_output(["git", "show", f"{revision}:{path}"], cwd=ROOT)
 
 
 def surface(text):
@@ -77,13 +80,16 @@ class EditorialTitlesAndClaims(unittest.TestCase):
     def test_edit_scope_and_parity(self):
         old_source = previous("index.html")
         old_reader = previous("GNOME-Field-Manual.html")
-        for old, new in [(cards(old_source), self.pages),
-                         (cards(old_reader, STATIC), self.static),
-                         (dataset_rows(old_reader)[1], self.serialized)]:
+        new_source = previous("index.html", RESULT)
+        new_reader = previous("GNOME-Field-Manual.html", RESULT)
+        for old, new in [(cards(old_source), cards(new_source)),
+                         (cards(old_reader, STATIC), cards(new_reader, STATIC)),
+                         (dataset_rows(old_reader)[1], dataset_rows(new_reader)[1])]:
             self.assertEqual(changed_pages(old, new), CHANGED)
-        self.assertEqual(CANONICAL.sub(b"", self.raw), CANONICAL.sub(b"", old_source))
+        self.assertEqual(CANONICAL.sub(b"", new_source), CANONICAL.sub(b"", old_source))
         outside = lambda raw: DATASET.sub(b"", STATIC.sub(b"", raw))
-        self.assertEqual(outside(self.reader), outside(old_reader))
+        self.assertEqual(outside(new_reader), outside(old_reader))
+        # Live files: every page this correction touched must still agree across surfaces.
         for n in CHANGED:
             with self.subTest(page=n):
                 self.assertEqual(parity_errors(n, self.pages[n], self.rows[n], self.static[n]), set())

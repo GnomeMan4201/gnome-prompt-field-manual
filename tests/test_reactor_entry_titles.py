@@ -71,13 +71,18 @@ class ReactorEntryTitles(unittest.TestCase):
         errors = heading_errors(self.expected, self.packet["entries"])
         self.assertFalse(errors, f"packet heading differs from the manuscript for {sorted(errors)}: {errors}")
 
-    def test_named_entries_and_shared_title(self):
+    def test_named_entries_and_distinct_titles(self):
         want = {"AP-04": "Scope Inflation Catch", "R-07": "Competing Hypotheses Table",
                 "AP-06": "Passage Evidence Review", "SEC-08": "Collection Evidence Audit",
-                "W-04": "Over-Smoothing Detector", "AP-01": "Over-Smoothing Detector"}
+                "W-04": "Over-Smoothing Detector", "AP-01": "Over-Smoothing Publication Gate"}
         self.assertEqual({k: self.expected[k][0][1] for k in want}, want)
-        # Two entries legitimately share a heading; the IDs and pages keep them distinct.
-        self.assertNotEqual(self.expected["W-04"][0][0], self.expected["AP-01"][0][0])
+        # Every entry now has its own heading, so a title identifies one ID.
+        by_title = {}
+        for entry_id, [(page, title)] in self.expected.items():
+            if entry_id in self.ids:
+                by_title.setdefault(title, []).append(entry_id)
+        shared = {t: ids for t, ids in by_title.items() if len(ids) > 1}
+        self.assertFalse(shared, f"entries sharing a heading: {shared}")
 
     def test_adapter_displays_the_bound_heading_for_every_id(self):
         result = run_adapter(self.identity, self.packet, LOAD)

@@ -11,6 +11,7 @@ on:
       - 'tests/test_current_body_review.py'
       - 'tests/test_reader_decision_contracts.py'
       - 'tests/test_editorial_titles_and_claims.py'
+      - 'tests/test_over_smoothing_entries.py'
       - '.github/workflows/current-body-review.yml'
   push:
     branches: [main]
@@ -24,6 +25,7 @@ on:
       - 'tests/test_current_body_review.py'
       - 'tests/test_reader_decision_contracts.py'
       - 'tests/test_editorial_titles_and_claims.py'
+      - 'tests/test_over_smoothing_entries.py'
       - '.github/workflows/current-body-review.yml'
   workflow_dispatch:
 permissions:
@@ -48,3 +50,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_reader_decision_contracts.py' -v
       - name: Check title and claim corrections at content level
         run: python -m unittest discover -s tests -p 'test_editorial_titles_and_claims.py' -v
+      - name: Check W-04 and AP-01 titles and no-source contract
+        run: python -m unittest discover -s tests -p 'test_over_smoothing_entries.py' -v

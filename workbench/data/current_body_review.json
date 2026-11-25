@@ -1,7 +1,7 @@
 {
   "schemaVersion": "gnome.manual.current-body-review.v1",
-  "sourceHtmlSha256": "33fa2e969ea76969a2c82964d2c0289ec8836953e69275a5d29034b9e893b871",
-  "identityIndexSha256": "2f3a714d25a87d111af46dfd7edf621ef18ba8df2f9b3ea80c6f5b6de9058e86",
+  "sourceHtmlSha256": "bc6f03db9ac336cbfabd1df66d3e9555566c7003b9f7935643ce26025e5ce8d9",
+  "identityIndexSha256": "0c823b099d6363481259ae48f1be5975971182af7dcdcb30a34025ec5d9ff108",
   "historicalBindings": {
     "workbench/data/entry_identity_index.json": "b9c760567f678fa7599ebb2e0de8527e2d875cd3ec72ca58c307905b9acf7a40",
     "workbench/data/entry_declaration_candidates.json": "00d4fa9dbdcda884de79ec5d8c4f53e501481f316468d1d01840564264b33cb7",
@@ -35,7 +35,7 @@
     "S-10"
   ],
   "offsetConvention": "Half-open Unicode codepoint offsets in decoded page <pre> text; end may point to next page offset zero.",
-  "reviewQueueManifestSha256": "2524fd899448b8680aa7d5b46651c4325b5d709649072a4a4721138d639a6fb5",
+  "reviewQueueManifestSha256": "24b0291e1d0b50570c13853857f8228a661284c3cae7a74827877c98c23c542a",
   "entries": [
     {
       "entryId": "T-01",
@@ -2019,16 +2019,16 @@
       },
       "endExclusive": {
         "page": 50,
-        "offset": 1060
+        "offset": 1144
       },
       "previousEntry": "W-03",
       "nextEntry": "W-05",
       "boundaryReason": [
         "NEXT_DECLARATION"
       ],
-      "rawSpanSha256": "7dd51b8bdd056789bd18b99b27ea38dc36387da892302c5713548035714b4adb",
-      "proposedCleanTextSha256": "c4d8f8d6a24dc9de9f8a89459a5aafd9213fefb3f5590d2ade2f11a9a74e9ff2",
-      "proposedCleanTextLength": 3134,
+      "rawSpanSha256": "504fb7da92092e8b699e6cd3376745b7d341ad6ad5c4c8a09fa549ddf1277114",
+      "proposedCleanTextSha256": "a2273692edd7bd25b70937448593e3fbc294cdcce2776882157f6412004e5369",
+      "proposedCleanTextLength": 3539,
       "pageSlices": [
         [
           48,
@@ -2039,14 +2039,14 @@
         [
           49,
           0,
-          1560,
-          "3e29466dbb0f6bf9f3a1c859282cf12f87d1e29e4a1041ebd16b3e62a4477c8b"
+          1881,
+          "8bf5421f4f9d47ab9733c6f7f9d9ca5a41dd4755dfedd6add5f191a2f5adb874"
         ],
         [
           50,
           0,
-          1060,
-          "cdd29f2ecd4fa58cf6c65b979c8b0a25ae08c5b9d787c85569cf0828db89c238"
+          1144,
+          "aa2d2af36ea0b3fbe89d8da3c4333bac3bb3a6e204a9941743869637fd7a62c6"
         ]
       ],
       "sectionMarkers": [
@@ -2071,14 +2071,14 @@
         [
           "INPUTS NEEDED",
           49,
-          1316,
-          1330
+          1637,
+          1651
         ],
         [
           "EXPECTED OUTPUT",
           49,
-          1401,
-          1417
+          1722,
+          1738
         ],
         [
           "KNOBS",
@@ -2101,8 +2101,8 @@
         [
           "SAFETY NOTES",
           50,
-          886,
-          899
+          885,
+          898
         ]
       ],
       "expectedSectionLabels": [
@@ -2127,8 +2127,8 @@
         ],
         [
           49,
-          1503,
-          1560,
+          1824,
+          1881,
           "PAGE_FOOTER"
         ],
         [
@@ -2152,7 +2152,7 @@
       "reviewRequired": true,
       "start": {
         "page": 50,
-        "offset": 1060
+        "offset": 1144
       },
       "endExclusive": {
         "page": 53,
@@ -2169,8 +2169,8 @@
       "pageSlices": [
         [
           50,
-          1060,
-          1141,
+          1144,
+          1225,
           "3229073a9b3f5a7259dd71805e5ff76e541d891faef218d1e4a79fdb0447d09d"
         ],
         [
@@ -2258,8 +2258,8 @@
       "proposedExclusions": [
         [
           50,
-          1139,
-          1141,
+          1223,
+          1225,
           "PAGE_FOOTER"
         ],
         [
@@ -11322,10 +11322,10 @@
     },
     {
       "entryId": "AP-01",
-      "canonicalHeadingCandidate": "Over-Smoothing Detector",
-      "headingRaw": " AP-01 Over-Smoothing Detector",
+      "canonicalHeadingCandidate": "Over-Smoothing Publication Gate",
+      "headingRaw": " AP-01 Over-Smoothing Publication Gate",
       "editorialStatus": "NON_PENDING",
-      "advisoryIdentityTitle": "Over-Smoothing Detector",
+      "advisoryIdentityTitle": "Over-Smoothing Publication Gate",
       "titleMismatch": false,
       "bodyStatus": "PARTIAL",
       "reviewRequired": true,
@@ -11342,21 +11342,21 @@
       "boundaryReason": [
         "NEXT_DECLARATION"
       ],
-      "rawSpanSha256": "bb37382a8bb4259f9b3be3bbacc577adb0f7b64696e185d7302a5efb0e22c11e",
-      "proposedCleanTextSha256": "bd3cf04177b82f9b4acee78d6ba01e8457cc72417c270d1d5fc750e66325215a",
-      "proposedCleanTextLength": 1845,
+      "rawSpanSha256": "d90320e70303661976f052073770da516177fca9efcfe0e12f8d552bfc6ee8aa",
+      "proposedCleanTextSha256": "6713b32beb2250acf756c7497ba9763f90aa1af8ef23c686fa95d29b441b12c0",
+      "proposedCleanTextLength": 2373,
       "pageSlices": [
         [
           275,
           739,
-          1008,
-          "916125bbddededff17762c01b976d50a69c98f2f8999c5970ac930178c87dc0c"
+          1152,
+          "608d77e9a02131a3b93cbaee917cb5e84f863470243e1341e643959862312a03"
         ],
         [
           276,
           0,
-          1069,
-          "237582c244d804aa4474cf746fb1371c0c0c9eea81702d891c683aea11ad7aa3"
+          1453,
+          "824afdbb7579121ef9fe8e8e86cd5875d2d056a44537f7bc4dadc6ac85a71e31"
         ],
         [
           277,
@@ -11369,8 +11369,8 @@
         [
           "WHAT IT DETECTS",
           275,
-          803,
-          819
+          811,
+          827
         ],
         [
           "WHEN TO RUN",
@@ -11387,8 +11387,8 @@
         [
           "SIGNAL OF FAILURE",
           276,
-          904,
-          922
+          1127,
+          1145
         ],
         [
           "WHAT TO DO ON HIT",
@@ -11416,8 +11416,8 @@
       "proposedExclusions": [
         [
           275,
-          951,
-          1008,
+          1095,
+          1152,
           "PAGE_FOOTER"
         ],
         [
@@ -11428,8 +11428,8 @@
         ],
         [
           276,
-          1066,
-          1069,
+          1450,
+          1453,
           "PAGE_FOOTER"
         ]
       ],

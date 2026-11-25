@@ -3411,7 +3411,7 @@ material. Before publishing anything AI-assisted.
 
 48</pre>
 </article>
-<article class="manual-page-card" id="manual-page-049" data-manual-text="the prompt audit the following ai-processed text for over-smoothing. compare the original and the output if both are provided. if only the output is provided, audit it against its stated purpose. check for: 1. specificity loss: were any specific numbers, names, dates, technical terms, or concrete examples replaced with vague language? list each instance. 2. friction removal: did the original have rough edges, qualifications, or uncomfortable conclusions that the output softened or removed? what were they? 3. tone flattening: does the output sound like the source material&#x27;s author, or does it sound like a corporate memo? identify phrases that feel like they were inserted to smooth rather than clarify. 4. claim weakening: were strong claims weakened? were certain conclusions made conditional? find instances where &#x27;x causes y&#x27; became &#x27;x may contribute to y in certain contexts.&#x27; 5. missing content: is there anything present in the stated purpose or topic that a rigorous treatment would include but the output omits? verdict: on a scale of preserved / slightly smoothed / significantly smoothed / gutted, how much did the processing cost the original? original (if available): [original] output to audit: [output] inputs needed ai-processed text, and ideally the original it was processed from. expected output five-point audit with specific instances of smoothing and an over- all verdict. 49">
+<article class="manual-page-card" id="manual-page-049" data-manual-text="the prompt audit the following ai-processed text for over-smoothing. compare the original and the output if both are provided. if only the output is provided, do not infer what an original contained. for checks 1–4, quote the output passage, state what the stated purpose requires that it omits or weakens, and mark the claimed loss unverified — no original. answer check 5 against the stated purpose. check for: 1. specificity loss: were any specific numbers, names, dates, technical terms, or concrete examples replaced with vague language? list each instance. 2. friction removal: did the original have rough edges, qualifications, or uncomfortable conclusions that the output softened or removed? what were they? 3. tone flattening: does the output sound like the source material&#x27;s author, or does it sound like a corporate memo? identify phrases that feel like they were inserted to smooth rather than clarify. 4. claim weakening: were strong claims weakened? were certain conclusions made conditional? find instances where &#x27;x causes y&#x27; became &#x27;x may contribute to y in certain contexts.&#x27; 5. missing content: is there anything present in the stated purpose or topic that a rigorous treatment would include but the output omits? verdict: on a scale of preserved / slightly smoothed / significantly smoothed / gutted, how much did the processing cost the original? if no original was provided, report not rated — no original and list the purpose gaps instead. original (if available): [original] output to audit: [output] inputs needed ai-processed text, and ideally the original it was processed from. expected output five-point audit with specific instances of smoothing and an over- all verdict. 49">
   <div class="manual-page-head"><span>Page 049</span><em>THE PROMPT</em></div>
   <pre>THE PROMPT
 
@@ -3423,7 +3423,13 @@ material. Before publishing anything AI-assisted.
 
    Compare the ORIGINAL and the OUTPUT if both are provided. If only the
 
-   output is provided, audit it against its stated purpose.
+   output is provided, do not infer what an original contained. For checks
+
+   1–4, quote the output passage, state what the stated purpose requires
+
+   that it omits or weakens, and mark the claimed loss
+
+   UNVERIFIED — NO ORIGINAL. Answer check 5 against the stated purpose.
 
    Check for: 1. SPECIFICITY LOSS: Were any specific numbers, names,
 
@@ -3459,6 +3465,10 @@ material. Before publishing anything AI-assisted.
 
    SMOOTHED / GUTTED, how much did the processing cost the original?
 
+   If no original was provided, report NOT RATED — NO ORIGINAL and list
+
+   the purpose gaps instead.
+
    Original (if available): [ORIGINAL] Output to audit: [OUTPUT]
 
 
@@ -3481,7 +3491,7 @@ all verdict.
 
                                                        49</pre>
 </article>
-<article class="manual-page-card" id="manual-page-050" data-manual-text="gnome prompt field manual knobs add ‘compare to the stated purpose: [x]’ to check if the output actually serves its goal. add ‘focus on: [technical precision / ar- gumentative force / voice]’ to prioritize. add ‘identify recover- able vs unrecoverable losses’ to triage the rework. failure mode will itself over-smooth the audit findings. the detector is a guide — read it critically. follow-up for each significant smoothing instance, manually restore the original phrasing and assess whether it was smoothed for le- gitimate clarity reasons or illegitimate comfort reasons. cross- reference: if the content should not be summarized at all — be- cause the specifics are the value — run w-11 (the anti-summary) before or instead of this prompt. w-04 audits what was lost after smoothing. w-11 catches cases where the lossy transformation should not have happened at all. safety notes over-smoothing detection requires access to the original mate- rial. if you don’t have the original, the audit is less reliable — flag this in the output. w-05 hedge auditor criteria: 3, 8 — signal/noise + decision quality 50">
+<article class="manual-page-card" id="manual-page-050" data-manual-text="gnome prompt field manual knobs add ‘compare to the stated purpose: [x]’ to check if the output actually serves its goal. add ‘focus on: [technical precision / ar- gumentative force / voice]’ to prioritize. add ‘identify recover- able vs unrecoverable losses’ to triage the rework. failure mode will itself over-smooth the audit findings. the detector is a guide — read it critically. follow-up for each significant smoothing instance, manually restore the original phrasing and assess whether it was smoothed for le- gitimate clarity reasons or illegitimate comfort reasons. cross-reference: if the content should not be summarized at all — be- cause the specifics are the value — run w-11 (the anti-summary) before or instead of this prompt. w-04 audits what was lost after smoothing. w-11 catches cases where the lossy transformation should not have happened at all. safety notes over-smoothing detection requires access to the original material. without it, the audit can show what the output fails to deliver for its stated purpose, but it cannot confirm what was lost. mark each claimed loss unverified — no original. w-05 hedge auditor criteria: 3, 8 — signal/noise + decision quality 50">
   <div class="manual-page-head"><span>Page 050</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -3508,8 +3518,8 @@ FOLLOW-UP
 
 For each significant smoothing instance, manually restore the
 original phrasing and assess whether it was smoothed for le-
-gitimate clarity reasons or illegitimate comfort reasons. Cross-
-reference: If the content should not be summarized at all — be-
+gitimate clarity reasons or illegitimate comfort reasons. Cross-reference:
+If the content should not be summarized at all — be-
 cause the specifics are the value — run W-11 (The Anti-Summary)
 before or instead of this prompt. W-04 audits what was lost after
 smoothing. W-11 catches cases where the lossy transformation
@@ -3519,9 +3529,10 @@ should not have happened at all.
 SAFETY NOTES
 
 
-Over-smoothing detection requires access to the original mate-
-rial.  If you don’t have the original, the audit is less reliable —
-flag this in the output.
+Over-smoothing detection requires access to the original material.
+Without it, the audit can show what the output fails to deliver for
+its stated purpose, but it cannot confirm what was lost. Mark each
+claimed loss UNVERIFIED — NO ORIGINAL.
 
 
 
@@ -15884,7 +15895,7 @@ systems — before making it public.
 
 274</pre>
 </article>
-<article class="manual-page-card" id="manual-page-275" data-manual-text="part viii — anti-prompts and failure modes anti-prompts are diagnostic tools, not generation tools. they are run on model output to detect specific failure modes: over- smoothing, confidence laundering, sycophancy, hallucinated struc- ture, and injection residue. when to run an anti-prompt run an anti-prompt when: (1) output sounds right but doesn’t feel right, (2) you are about to use model output in a high-stakes context, (3) output was generated from external input that could have been manipulated, (4) you are evaluating a model for use in an automated pipeline. ap-06 flags passages for a human to check against the task and sources. record the evidence before deciding whether a passage needs revision or exclusion. ap-01 over-smoothing detector criteria: 3 — signal/noise what it detects ai-assisted text that has averaged away specific, rough, or un- comfortable content — replacing precision with palatability. 275">
+<article class="manual-page-card" id="manual-page-275" data-manual-text="part viii — anti-prompts and failure modes anti-prompts are diagnostic tools, not generation tools. they are run on model output to detect specific failure modes: over- smoothing, confidence laundering, sycophancy, hallucinated struc- ture, and injection residue. when to run an anti-prompt run an anti-prompt when: (1) output sounds right but doesn’t feel right, (2) you are about to use model output in a high-stakes context, (3) output was generated from external input that could have been manipulated, (4) you are evaluating a model for use in an automated pipeline. ap-06 flags passages for a human to check against the task and sources. record the evidence before deciding whether a passage needs revision or exclusion. ap-01 over-smoothing publication gate criteria: 3 — signal/noise what it detects ai-assisted text that has averaged away specific, rough, or un- comfortable content — replacing precision with palatability. use it to decide whether a draft can be published. for a five-part audit of what a rewrite changed, use w-04 (over-smoothing detector). 275">
   <div class="manual-page-head"><span>Page 275</span><em>Part VIII — Anti-Prompts and Failure</em></div>
   <pre>Part VIII — Anti-Prompts and Failure
 Modes
@@ -15910,7 +15921,7 @@ AP-06 flags passages for a human to check against the task and sources. Record t
 
 
 
- AP-01 Over-Smoothing Detector
+ AP-01 Over-Smoothing Publication Gate
 
   Criteria: 3 — signal/noise
 
@@ -15920,7 +15931,9 @@ WHAT IT DETECTS
 
 
 AI-assisted text that has averaged away specific, rough, or un-
-comfortable content — replacing precision with palatability.
+comfortable content — replacing precision with palatability. Use it to
+decide whether a draft can be published. For a five-part audit of
+what a rewrite changed, use W-04 (Over-Smoothing Detector).
 
 
 
@@ -15928,7 +15941,7 @@ comfortable content — replacing precision with palatability.
 
                                                       275</pre>
 </article>
-<article class="manual-page-card" id="manual-page-276" data-manual-text="gnome prompt field manual when to run after any ai editing or summarization pass. before publishing ai-assisted work. when output feels correct but useless. the anti-prompt run the following ai output against its source (or against its stated purpose if no source is available). identify every instance where: - a specific number, name, or technical term was replaced with a vague descriptor - a strong claim was weakened with a hedge - an uncomfortable conclusion was softened or removed - a distinctive voice was replaced with neutral corporate register - a rough edge that carried meaning was polished away for each instance: quote the original and the smoothed version. classify the loss: precision loss / claim weakening / voice drift / conclusion removal. rate overall: preserved / slightly smoothed / significantly smoothed / gutted. signal of failure output is significantly smoothed or gutted. any con- clusion removal finding. more than 3 claim weakening findings in a single document. 276">
+<article class="manual-page-card" id="manual-page-276" data-manual-text="gnome prompt field manual when to run after any ai editing or summarization pass. before publishing ai-assisted work. when output feels correct but useless. the anti-prompt run the following ai output against its source (or against its stated purpose if no source is available). identify every instance where: - a specific number, name, or technical term was replaced with a vague descriptor - a strong claim was weakened with a hedge - an uncomfortable conclusion was softened or removed - a distinctive voice was replaced with neutral corporate register - a rough edge that carried meaning was polished away for each instance: quote the original and the smoothed version. if no source is available, quote the output passage instead, state what the stated purpose requires that it lacks, and mark the claimed loss unverified — no source. classify the loss: precision loss / claim weakening / voice drift / conclusion removal. rate overall: preserved / slightly smoothed / significantly smoothed / gutted. without a source, rate not rated — no source. signal of failure output is significantly smoothed or gutted. any con- clusion removal finding. more than 3 claim weakening findings in a single document. these signals require findings checked against the source. an unverified — no source finding is not a hit: obtain the source before deciding whether to publish. 276">
   <div class="manual-page-head"><span>Page 276</span><em>GNOME Prompt Field Manual</em></div>
   <pre>GNOME Prompt Field Manual
 
@@ -15963,13 +15976,19 @@ THE ANTI-PROMPT
 
    For each instance: quote the original and the smoothed version.
 
+   If no source is available, quote the output passage instead, state
+
+   what the stated purpose requires that it lacks, and mark the claimed
+
+   loss UNVERIFIED — NO SOURCE.
+
    Classify the loss: PRECISION LOSS / CLAIM WEAKENING / VOICE DRIFT
 
    / CONCLUSION REMOVAL.
 
    Rate overall: PRESERVED / SLIGHTLY SMOOTHED / SIGNIFICANTLY SMOOTHED
 
-   / GUTTED.
+   / GUTTED. Without a source, rate NOT RATED — NO SOURCE.
 
 
 
@@ -15980,6 +15999,9 @@ SIGNAL OF FAILURE
 Output is SIGNIFICANTLY SMOOTHED or GUTTED. Any CON-
 CLUSION REMOVAL finding. More than 3 CLAIM WEAKENING
 findings in a single document.
+These signals require findings checked against the source. An
+UNVERIFIED — NO SOURCE finding is not a hit: obtain the source
+before deciding whether to publish.
 
 
 
