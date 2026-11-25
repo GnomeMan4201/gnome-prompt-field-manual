@@ -1,6 +1,6 @@
 # AP-06 paired pilot
 
-**Independent scoring is pending.** To score blind, open only REVIEWER.md, run-02/blind.json and review-sheet.csv until you have locked your sheet. The key, arm mapping and provisional operator interpretation are elsewhere in this directory. A separate reviewer should receive just those three files.
+**A blinded AI second reading found one fully correct case per arm.** Independent human scoring and separate-operator replication remain open. To score blind, open only REVIEWER.md, run-02/blind.json and review-sheet.csv until you have locked your sheet. The key, arm mapping and provisional operator interpretation are elsewhere in this directory. A separate reviewer should receive just those three files.
 
 ## Collection
 
@@ -19,6 +19,21 @@ One paired win, zero losses, five ties on the primary endpoint. An operator who 
 
 This is a descriptive pilot of a single 0.5B quantized model, fixed decoding and one task. The two prompts differ in length. No comparative claim about the manual as a whole or change to its release rating follows.
 
+## Blinded AI second reading
+
+A fresh AI reviewer (Codex-blind-second-reader) received only the reviewer guide, anonymized run-02 outputs, and blank sheet. The reviewer reported no prior exposure to the labeled outputs, key, mapping, or operator interpretations. Repeated headings and answer structures could have revealed the two instruction styles. This was a separate AI context under the same orchestration.
+
+The [completed sheet](blind-ai-second-read.csv) was locked at commit `da791e5fef44271f6fa85e2aa6a33c084a09e587` before the scoring script applied the arm mapping and gold key. Sheet SHA-256: `58798ae3c1b0a9b4e43143d20e7cf68a9bec7264d36064958fd4ba731b2d86d0`.
+
+| Second reading, run 02 | Plain-language control | AP-06 |
+| --- | ---: | ---: |
+| Fully correct cases | 1/6 | 1/6 |
+| Correct individual findings | 4/12 | 3/12 |
+
+Both arms passed case E alone. All six pairs tied on the primary endpoint. Across both arms, the two readers assigned the same label to 20 of 24 findings. All four differences were on control outputs. In case E the second reader credited the control for implicitly expressing uncertainty about shelter causation by giving alternative explanations. The operator had treated its diversion into counting methods as a missing finding. In case C the second reader also credited rejection of the obsolete opening time. Different interpretations in B and F earned zero under both readings. The AP-06 scores were identical across readers.
+
+The initial operator advantage did not persist. These six synthetic pairs on a single quantized model provide no demonstrated improvement in fully correct cases. Human review and independent model execution remain separate evidence requirements.
+
 ## Reproduction
 
 Use the model file and llama.cpp build named in protocol.json. Place the shared libraries next to the executable. With Python 3.11 or newer, run the following from this directory, using a fresh directory for each collection.
@@ -26,6 +41,7 @@ Use the model file and llama.cpp build named in protocol.json. Place the shared 
 ```sh
 python collect.py /path/to/llama-cli /path/to/model.gguf new-run
 python score.py run-02 operator-provisional.csv
+python score.py run-02 blind-ai-second-read.csv
 ```
 
 The historical collector from the first protocol commit reproduces the original logging settings. Fresh blinded runs generate new opaque IDs, so use a matching scoring sheet. Each JSON transcript includes the complete prompt, stdout, stderr, exit code and elapsed time. The model and runtime binaries are external dependencies.
