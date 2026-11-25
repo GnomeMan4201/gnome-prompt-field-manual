@@ -34,15 +34,15 @@ The validator regenerates the candidate basis using the existing current-source 
 
 Pre-correction baseline main: `03285ac8c57bfa8c40bddd2b2c53c0692927f8d3`, tree `b655aca7f0e0fc6ccc192016165ed7a73cba47c5` (merged PR #51).
 
-Reader and packet for the SEC-08 and SEC-05 status correction. These hashes identify the exact inputs used by the current workbench.
+Current inputs after the title and claim correction (base `71bcdb7`). The workbench, Reactor adapter, session validator and CI use these values. The previous column records the SEC-08 and SEC-05 status correction; sessions bound to it are rejected.
 
-| Artifact | SHA-256 |
-| --- | --- |
-| Canonical HTML | `fef4f9812014d1970d67151db49ee0aff82b03ea19dafc5a70a579b90a624625` |
-| Standalone reader | `1b33983d0d5346f0f140cc4558641374c8305e91d60315b52f825ce183b9b9b8` |
-| Historical PDF | `97482787a2471cbea5a837a0023a0aa5d0317eb149d8dd6c47e6924222b7f1e9` |
-| Current candidate packet | `db6e1a5e0380be3b791e89d68aab60d5fc50ec735d60c4ec142b0900b0c1133b` |
-| Live identity index | `55a6f03bdab55a57248fcce54df424ee3d4ff7656328af694fc101d9e8c4efd4` |
+| Artifact | Current SHA-256 | Previous SHA-256 |
+| --- | --- | --- |
+| Canonical HTML | `33fa2e969ea76969a2c82964d2c0289ec8836953e69275a5d29034b9e893b871` | `fef4f9812014d1970d67151db49ee0aff82b03ea19dafc5a70a579b90a624625` |
+| Standalone reader | `18e638910e24fd086d19885d76092c56a8e698ea5de83084d304961b3bc412f3` | `1b33983d0d5346f0f140cc4558641374c8305e91d60315b52f825ce183b9b9b8` |
+| Historical PDF | `97482787a2471cbea5a837a0023a0aa5d0317eb149d8dd6c47e6924222b7f1e9` | unchanged |
+| Current candidate packet | `8ecc775891e780766be2027198e152203de623e599a99442383e3ede82353b04` | `db6e1a5e0380be3b791e89d68aab60d5fc50ec735d60c4ec142b0900b0c1133b` |
+| Live identity index | `2f3a714d25a87d111af46dfd7edf621ef18ba8df2f9b3ea80c6f5b6de9058e86` | `55a6f03bdab55a57248fcce54df424ee3d4ff7656328af694fc101d9e8c4efd4` |
 
 The workbench binds each session to its source packet. After a manuscript correction, reproduce the packet and update the pins before collecting decisions. Retain exports against the original source. A stale tab must reload before saving over a newer session.
 
@@ -50,6 +50,6 @@ The workbench binds each session to its source packet. After a manuscript correc
 
 At `7d6c5a8`, 336 Python tests passed. All seven GitHub Actions workflows passed, including reader and review-workbench tests in Chromium, Firefox and WebKit. The two-tab test verifies that a stale save preserves the draft and the first tab’s recorded decision. See the [revision checks](https://github.com/GnomeMan4201/gnome-prompt-field-manual/commit/7d6c5a8e13f480ddd9fa86109ecd18910f2c40df/checks).
 
-The SEC-08 and SEC-05 status revision passed 338 local Python tests. The [paired walkthrough](AP06_SEC08_PAIRED_WALKTHROUGH.md) exercises the two reading instructions with the same supplied evidence.
+The SEC-08 and SEC-05 status revision passed 338 local Python tests. The title and claim correction passed 346. The [paired walkthrough](AP06_SEC08_PAIRED_WALKTHROUGH.md) exercises the two reading instructions with the same supplied evidence.
 
 The source packet reproduces with 91 candidate bodies and zero independently verified bodies. Screen-reader acceptance, independent adjudication and SEC-05 remain open.

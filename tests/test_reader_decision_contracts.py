@@ -10,11 +10,14 @@ from test_batch6_correction import (
 )
 
 BASE = "03285ac8c57bfa8c40bddd2b2c53c0692927f8d3"
+# Last revision of both readers produced by this correction (PR #53). Later
+# corrections have their own scoped tests; this scope is checked historically.
+RESULT = "f592c6a6d3d1dfaaaa87b39112555497cc94478a"
 CHANGED = {7, 179, 196, 200, 201, 202, 260, 261, 262, 265, 271, 273, 275, 283, 284, 307, 315}
 
 
-def previous(path):
-    return subprocess.check_output(["git", "show", f"{BASE}:{path}"], cwd=ROOT)
+def previous(path, revision=BASE):
+    return subprocess.check_output(["git", "show", f"{revision}:{path}"], cwd=ROOT)
 
 
 class ReaderDecisionContracts(unittest.TestCase):
@@ -27,15 +30,19 @@ class ReaderDecisionContracts(unittest.TestCase):
     def test_edit_scope_and_reader_parity(self):
         old_source = previous("index.html")
         old_reader = previous("GNOME-Field-Manual.html")
-        static = cards(self.reader, STATIC)
-        rows, serialized = dataset_rows(self.reader)
-        for old, new in [(cards(old_source), self.pages), (cards(old_reader, STATIC), static),
-                         (dataset_rows(old_reader)[1], serialized)]:
+        new_source = previous("index.html", RESULT)
+        new_reader = previous("GNOME-Field-Manual.html", RESULT)
+        for old, new in [(cards(old_source), cards(new_source)),
+                         (cards(old_reader, STATIC), cards(new_reader, STATIC)),
+                         (dataset_rows(old_reader)[1], dataset_rows(new_reader)[1])]:
             self.assertEqual(changed_pages(old, new), CHANGED)
-        self.assertEqual(CANONICAL.sub(b"", self.raw), CANONICAL.sub(b"", old_source))
+        self.assertEqual(CANONICAL.sub(b"", new_source), CANONICAL.sub(b"", old_source))
         def outside_reader_pages(raw):
             return DATASET.sub(b"", STATIC.sub(b"", raw))
-        self.assertEqual(outside_reader_pages(self.reader), outside_reader_pages(old_reader))
+        self.assertEqual(outside_reader_pages(new_reader), outside_reader_pages(old_reader))
+        # Live files: every page this correction touched must still agree across surfaces.
+        static = cards(self.reader, STATIC)
+        rows, serialized = dataset_rows(self.reader)
         for n in CHANGED:
             self.assertEqual(parity_errors(n, self.pages[n], rows[n], static[n]), set())
         self.assertIn("P-07", rows[273]["idTokens"])
