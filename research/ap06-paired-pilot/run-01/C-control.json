@@ -1,0 +1,9 @@
+{
+  "case": "C",
+  "arm": "control",
+  "prompt": "<|im_start|>user\nReview the submission for accuracy using the supplied sources. For each claim, explain your finding and what the reviewer should do next.\n\nTask: Check each numbered claim for the editor. For each number give one finding: SUPPORTED, NEEDS REVISION (contradicted), or INSUFFICIENT EVIDENCE. Give a short reason.\n\nC1: The Tuesday bulletin replaced Monday's 09:00 opening with 11:00 for Wednesday. C2: The bulletin gives no closing hour.\n\n1. Wednesday opening remains 09:00. 2. Wednesday closing is 16:00.<|im_end|>\n<|im_start|>assistant\n",
+  "exit_code": 0,
+  "elapsed_seconds": 5.906,
+  "stdout": "",
+  "stderr": ""
+}

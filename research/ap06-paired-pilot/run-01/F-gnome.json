@@ -1,0 +1,9 @@
+{
+  "case": "F",
+  "arm": "gnome",
+  "prompt": "<|im_start|>user\nRead the task, submission and available sources. State the question the submission must answer. Quote the passage that answers it, or identify what is missing. For each consequential claim, use only supplied, inspectable sources. Cite a source locator and its supporting detail, quote conflicting evidence, or identify the missing source. Record authorship as unknown unless documented separately. Return a quality finding for each passage: SUPPORTED, NEEDS REVISION or INSUFFICIENT EVIDENCE. Include the passage, reason and next check.\n\nTask: Check each numbered claim for the editor. For each number give one finding: SUPPORTED, NEEDS REVISION (contradicted), or INSUFFICIENT EVIDENCE. Give a short reason.\n\nF1: A trial used three paper grades. F2: Only grade R passed the fold test.\n\n1. All three grades passed. 2. Grade R passed.<|im_end|>\n<|im_start|>assistant\n",
+  "exit_code": 0,
+  "elapsed_seconds": 7.268,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,9 @@
+{
+  "case": "A",
+  "arm": "control",
+  "prompt": "<|im_start|>user\nReview the submission for accuracy using the supplied sources. For each claim, explain your finding and what the reviewer should do next.\n\nTask: Check each numbered claim for the editor. For each number give one finding: SUPPORTED, NEEDS REVISION (contradicted), or INSUFFICIENT EVIDENCE. Give a short reason.\n\nA1: The mural inventory lists copper, chalk and linen. A2: Inventory staff counted 18 panels.\n\n1. The inventory includes linen. 2. Staff counted 81 panels.<|im_end|>\n<|im_start|>assistant\n",
+  "exit_code": 0,
+  "elapsed_seconds": 5.284,
+  "stdout": "",
+  "stderr": ""
+}

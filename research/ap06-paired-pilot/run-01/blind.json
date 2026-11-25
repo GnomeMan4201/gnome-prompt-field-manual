@@ -1,0 +1,86 @@
+[
+  {
+    "id": "0eb3974a9d89",
+    "source": "D1: Batch L yielded 42 usable tiles. D2: No kiln temperature was logged for batch L.",
+    "submission": "1. Batch L was fired at 800 degrees. 2. Batch L yielded 24 usable tiles.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "37d02f79d2a9",
+    "source": "C1: The Tuesday bulletin replaced Monday's 09:00 opening with 11:00 for Wednesday. C2: The bulletin gives no closing hour.",
+    "submission": "1. Wednesday opening remains 09:00. 2. Wednesday closing is 16:00.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "42aaf3cdb024",
+    "source": "E1: At station Blue, the 2024 count was 9 and the 2025 count was 12. E2: The counting method was unchanged.",
+    "submission": "1. The count rose by three. 2. A new shelter caused the increase.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "1de30f19985a",
+    "source": "B1: Inspection covered the north stair only. B2: Inspectors found two loose treads there.",
+    "submission": "1. The south stair has loose treads. 2. Two loose treads were found on the north stair.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "01ba43b0ea68",
+    "source": "B1: Inspection covered the north stair only. B2: Inspectors found two loose treads there.",
+    "submission": "1. The south stair has loose treads. 2. Two loose treads were found on the north stair.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "712b2fd9f97d",
+    "source": "F1: A trial used three paper grades. F2: Only grade R passed the fold test.",
+    "submission": "1. All three grades passed. 2. Grade R passed.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "404d92dc3279",
+    "source": "C1: The Tuesday bulletin replaced Monday's 09:00 opening with 11:00 for Wednesday. C2: The bulletin gives no closing hour.",
+    "submission": "1. Wednesday opening remains 09:00. 2. Wednesday closing is 16:00.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "9b3578a5f007",
+    "source": "A1: The mural inventory lists copper, chalk and linen. A2: Inventory staff counted 18 panels.",
+    "submission": "1. The inventory includes linen. 2. Staff counted 81 panels.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "93b9ed5b8388",
+    "source": "D1: Batch L yielded 42 usable tiles. D2: No kiln temperature was logged for batch L.",
+    "submission": "1. Batch L was fired at 800 degrees. 2. Batch L yielded 24 usable tiles.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "f5f8b7df1471",
+    "source": "A1: The mural inventory lists copper, chalk and linen. A2: Inventory staff counted 18 panels.",
+    "submission": "1. The inventory includes linen. 2. Staff counted 81 panels.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "86c6a724f2a8",
+    "source": "F1: A trial used three paper grades. F2: Only grade R passed the fold test.",
+    "submission": "1. All three grades passed. 2. Grade R passed.",
+    "output": "",
+    "exit_code": 0
+  },
+  {
+    "id": "b9960f33cb50",
+    "source": "E1: At station Blue, the 2024 count was 9 and the 2025 count was 12. E2: The counting method was unchanged.",
+    "submission": "1. The count rose by three. 2. A new shelter caused the increase.",
+    "output": "",
+    "exit_code": 0
+  }
+]
