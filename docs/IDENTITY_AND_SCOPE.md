@@ -17,17 +17,15 @@ It is not yet a final stable manual release.
 
 The deterministic entry-lineage baseline confirms:
 
-- 1 pending inventory ID (`SEC-05`);
-- 1 matching drafting brief;
-- 90 embedded non-pending entry IDs;
+- 10 pending inventory IDs;
+- 10 matching drafting briefs;
+- 81 embedded non-pending entry IDs;
 - 91 reconciled semantic manual entries;
-- 1 remaining nonempty production batch (Batch 6);
+- 5 remaining production batches;
 - 5 special-caution entries;
 - 315 embedded reader page cards.
 
-Nine additional ID-shaped tokens are templates or embedded test-case identifiers: `AP-00`, `X-00`, and `EDT-00` through `EDT-06`.
-
-Editorial inventory status does not establish independent body verification: the current identity index has 0/91 verified bodies and records occurrences, not authoritative body ownership.
+Eight additional ID-shaped tokens are templates or embedded test-case identifiers: `AP-00`, `X-00`, and `EDT-01` through `EDT-06`.
 
 ## Resolved version roles
 
@@ -77,7 +75,7 @@ The frozen PTSP brief b-s10 plans **S-10 Migration Risk Classifier**. The canoni
 
 Page 133 now includes mandatory **ROLLBACK TRIGGER CONDITIONS**: observable signal, threshold or operational-confirmation marker, evaluation window, evidence source, decision owner, immediate halt or rollback action, and escalation. Defining criteria is **not** live monitoring or automatic rollback. Canonical MODERATE corresponds to the frozen brief's MEDIUM label; the original four-level scale is retained.
 
-This was a **candidate correction**, not itself a Batch 5 PASS or new-body promotion. The subsequent source-bound SUBSUMED disposition closed the planned brief without creating an additional canonical entry, leaving **10 pending / 81 non-pending IDs** at that stage. The current state is **1 pending / 90 non-pending IDs**. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
+This was a **candidate correction**, not itself a Batch 5 PASS or new-body promotion. The subsequent source-bound SUBSUMED disposition closes the planned brief without creating an additional canonical entry. Current state: **10 pending / 81 non-pending IDs**. See [Batch 5 correction candidate](BATCH5_CORRECTION_CANDIDATE_2026-11-23.md).
 
 ## Batch 5 four-category contract and SUBSUMED disposition
 
@@ -94,11 +92,11 @@ records its own historical source hash and has not been overwritten.
 
 ## Remaining release blockers
 
-Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 10 pending entries remained after the 2026-11-23 Batch 5 disposition. Subsequent dispositions leave only SEC-05 pending in Batch 6.
+Issue #1 is the umbrella stable-release closeout. Batches 1 through 3 promoted T-01/T-02, W-01/W-02/W-03, and R-01/R-03 on 2026-08-24; 10 pending entries remain after the 2026-11-23 Batch 5 disposition.
 
 Remaining blockers:
 
-- editorial disposition of SEC-05, pending independent behavioral evidence;
+- editorial disposition of the 10 remaining pending entries;
 - regression browser/accessibility validation after the final content mutation;
 - stable-release versioning, independent or documented-equivalent editorial review, and publication evidence.
 
